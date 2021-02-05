@@ -103,6 +103,26 @@ class ajaxSystem extends eqLogic {
       $eqLogic->setConfiguration('firmware', $hub_info['firmware']['version']);
       $eqLogic->setLogicalId($hub['hubId']);
       $eqLogic->save();
+      
+      $devices = self::request('/user/{userId}/hubs/'.$hub['hubId'].'/devices');
+      foreach ($devices as $device) {
+        $device_info = self::request('/user/{userId}/hubs/'.$hub['hubId'].'/devices/'.$device['id']);
+        $eqLogic = eqLogic::byLogicalId($device['id'], 'ajaxSystem');
+        if (!is_object($eqLogic)) {
+          $eqLogic = new ajaxSystem();
+          $eqLogic->setEqType_name('ajaxSystem');
+          $eqLogic->setIsEnable(1);
+          $eqLogic->setName($device_info['deviceName']);
+          $eqLogic->setCategory('security', 1);
+          $eqLogic->setIsVisible(1);
+        }
+        $eqLogic->setConfiguration('hub_id', $hub['hubId']);
+        $eqLogic->setConfiguration('type', 'device');
+        $eqLogic->setConfiguration('device', $device_info['deviceType']);
+        $eqLogic->setConfiguration('firmware', $device_info['firmwareVersion']);
+        $eqLogic->setLogicalId($device['id']);
+        $eqLogic->save();
+      }
     }
   }
   
@@ -168,6 +188,9 @@ class ajaxSystem extends eqLogic {
     if($this->getConfiguration('type') == 'hub'){
       $datas = self::request('/user/{userId}/hubs/'.$this->getLogicalId());
     }
+    if($this->getConfiguration('type') == 'device'){
+      $datas = self::request('/user/{userId}/hubs/'.$this->getConfiguration('hub_id').'/devices/'.$this->getLogicalId());
+    }
     foreach ($this->getCmd('info') as $cmd) {
       $paths = explode('::',$cmd->getLogicalId());
       $value = $datas;
@@ -175,6 +198,9 @@ class ajaxSystem extends eqLogic {
         $value = $value[$key];
       }
       $this->checkAndUpdateCmd($cmd,$value);
+    }
+    if(isset($datas['batteryChargeLevelPercentage'])){
+      $this->batteryStatus($datas['batteryChargeLevelPercentage']);
     }
   }
   

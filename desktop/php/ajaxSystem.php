@@ -121,6 +121,11 @@ $eqLogics = eqLogic::byType($plugin->getId());
 									<div class="col-sm-6">
 										<select disabled class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="device" disabled>
 											<option value="HUB_2">{{Hub 2}}</option>
+											
+											<option value="DoorProtect">{{Detecteur d'ouverture}}</option>
+											<option value="Keypad">{{Clavier}}</option>
+											<option value="MotionCam">{{Decteur de mouvement + camera}}</option>
+											<option value="SpaceControl">{{Télécommande}}</option>
 										</select>
 									</div>
 								</div>
@@ -145,7 +150,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								<div class="form-group">
 									<label class="col-sm-4 control-label">{{Firmware}}</label>
 									<div class="col-sm-6">
-										<span class="eqLogicAttr label label-info" style="font-size:1em;" data-l1key="logicalId" data-l1key="configuration" data-l2key="firmware"></span>
+										<span class="eqLogicAttr label label-info" style="font-size:1em;" data-l1key="configuration" data-l2key="firmware"></span>
 									</div>
 								</div>
 							</fieldset>
