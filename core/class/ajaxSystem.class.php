@@ -43,15 +43,39 @@ class ajaxSystem extends eqLogic {
     $return = json_decode($request_http->exec(30,1),true);
     $return = is_json($return,$return);
     if(isset($return['state']) && $return['state'] != 'ok'){
-      throw new \Exception(__('Erreur lors de la requete à Netatmo : ',__FILE__).json_encode($return));
+      throw new \Exception(__('Erreur lors de la requete à Ajax System : ',__FILE__).json_encode($return));
     }
     if(isset($return['error'])){
-      throw new \Exception(__('Erreur lors de la requete à Netatmo : ',__FILE__).json_encode($return));
+      throw new \Exception(__('Erreur lors de la requete à Ajax System : ',__FILE__).json_encode($return));
+    }
+    if(isset($return['errors'])){
+      throw new \Exception(__('Erreur lors de la requete à Ajax System : ',__FILE__).json_encode($return));
     }
     if(isset($return['body'])){
       return $return['body'];
     }
     return $return;
+  }
+  
+  
+  public static function login($_username,$_password){
+    $data = self::request('/login',array(
+      'login' => $_username,
+      'passwordHash' => $_password,
+      'userRole' => 'USER',
+    ),'POST');
+    config::save('refreshToken', $data['refreshToken'], 'ajaxSystem');
+    config::save('userId', $data['userId'], 'ajaxSystem');
+    cache::set('ajaxSystem::sessionToken', $data['userId'],60*14);
+  }
+  
+  public static function refreshToken(){
+    $data = self::request('/refresh',array(
+      'userId' => config::byKey('userId', 'ajaxSystem'),
+      'refreshToken' => config::byKey('refreshToken', 'ajaxSystem')
+    ),'POST');
+    config::save('refreshToken', $data['refreshToken'], 'ajaxSystem');
+    cache::set('ajaxSystem::sessionToken', $data['userId'],60*14);
   }
   
   

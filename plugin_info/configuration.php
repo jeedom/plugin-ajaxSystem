@@ -25,10 +25,16 @@ if (!isConnect()) {
 <form class="form-horizontal">
   <fieldset>
     <div class="form-group">
-      <label class="col-sm-3 control-label">{{Se connecter}}</label>
+      <label class="col-sm-3 control-label">{{Connection}}</label>
       <div class="col-sm-7">
-        <input class="configKey form-control" data-l1key="param1"/>
+        <a class="btn btn-default" id="bt_loginToAjaxSystem" >{{Se connecter}}</a>
       </div>
     </div>
   </fieldset>
 </form>
+
+<script>
+$('#bt_loginToAjaxSystem').off('click').on('click',function(){
+  $('#md_modal').dialog({title: "{{Connexion à Ajax Systeme}}"}).load('index.php?v=d&modal=login&plugin=ajaxSystem').dialog('open')
+})
+</script>
