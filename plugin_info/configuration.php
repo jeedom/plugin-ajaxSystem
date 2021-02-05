@@ -30,6 +30,12 @@ if (!isConnect()) {
         <a class="btn btn-default" id="bt_loginToAjaxSystem" >{{Se connecter}}</a>
       </div>
     </div>
+    <div class="form-group">
+      <label class="col-lg-3 control-label">{{Synchronisation}}</label>
+      <div class="col-lg-4">
+        <a class="btn btn-default" id="bt_syncWithAjaxSystem"><i class="fas fa-sync"></i> {{Synchroniser mes équipements}}</a>
+      </div>
+    </div>
   </fieldset>
 </form>
 
@@ -37,4 +43,25 @@ if (!isConnect()) {
 $('#bt_loginToAjaxSystem').off('click').on('click',function(){
   $('#md_modal').dialog({title: "{{Connexion à Ajax Systeme}}"}).load('index.php?v=d&modal=login&plugin=ajaxSystem').dialog('open')
 })
+
+$('#bt_syncWithAjaxSystem').on('click', function () {
+  $.ajax({
+    type: "POST",
+    url: "plugins/ajaxSystem/core/ajax/ajaxSystem.ajax.php",
+    data: {
+      action: "sync",
+    },
+    dataType: 'json',
+    error: function (request, status, error) {
+      handleAjaxError(request, status, error);
+    },
+    success: function (data) {
+      if (data.state != 'ok') {
+        $('#div_alert').showAlert({message: data.result, level: 'danger'});
+        return;
+      }
+      $('#div_alert').showAlert({message: '{{Synchronisation réussie}}', level: 'success'});
+    }
+  });
+});
 </script>

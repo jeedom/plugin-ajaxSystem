@@ -1,0 +1,37 @@
+{
+  "name" : "Hub 2",
+  "commands" : [
+    {
+      "name": "Etat",
+      "type": "info",
+      "subtype": "string",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "state"
+    },
+    {
+      "name": "Trafiqué",
+      "type": "info",
+      "subtype": "binary",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "tampered"
+    },
+    {
+      "name": "GSM",
+      "type": "info",
+      "subtype": "numeric",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "gsm::activeSimCard"
+    },
+    {
+      "name": "Ethernet",
+      "type": "info",
+      "subtype": "numeric",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "ethernet::enabled"
+    }
+  ]
+}
