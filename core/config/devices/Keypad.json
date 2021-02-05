@@ -10,6 +10,16 @@
       "logicalId": "state"
     },
     {
+      "name": "Température",
+      "type": "info",
+      "subtype": "numeric",
+      "isVisible": 1,
+      "isHistorized": 1,
+      "logicalId": "temperature",
+      "generic_type": "TEMPERATURE",
+      "unite" : "°C"
+    },
+    {
       "name": "Trafiqué",
       "type": "info",
       "subtype": "binary",

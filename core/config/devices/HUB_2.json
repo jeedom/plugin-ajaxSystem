@@ -32,6 +32,54 @@
       "isVisible": 1,
       "isHistorized": 0,
       "logicalId": "ethernet::enabled"
+    },
+    {
+      "name": "Alimentation secteur",
+      "type": "info",
+      "subtype": "binary",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "externallyPowered"
+    },
+    {
+      "name": "Armement",
+      "type": "action",
+      "subtype": "other",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "ARM"
+    },
+    {
+      "name": "Mode nuit",
+      "type": "action",
+      "subtype": "other",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "NIGHT_MODE"
+    }, 
+    {
+      "name": "Desarmement",
+      "type": "action",
+      "subtype": "other",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "DISARM"
+    },
+    {
+      "name": "Panic",
+      "type": "action",
+      "subtype": "other",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "PANIC"
+    },
+    {
+      "name": "Arret detection incendie",
+      "type": "action",
+      "subtype": "other",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "muteFireDetectors"
     }
   ]
 }

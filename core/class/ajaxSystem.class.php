@@ -48,6 +48,9 @@ class ajaxSystem extends eqLogic {
     if($_type == 'POST'){
       $request_http->setPost(json_encode($_data));
     }
+    if($_type == 'PUT'){
+      $request_http->setPut(json_encode($_data));
+    }
     $return = json_decode($request_http->exec(30,1),true);
     $return = is_json($return,$return);
     if(isset($return['error'])){
@@ -60,6 +63,17 @@ class ajaxSystem extends eqLogic {
       return $return['body'];
     }
     return $return;
+  }
+  
+  public static function cron15(){
+    foreach (eqLogic::byType('ajaxSystem',true) as $eqLogic) {
+      try {
+        $eqLogic->refreshData();
+      } catch (\Exception $e) {
+        log::add('ajaxSystem','error',__('Erreur lors de la mise à jour des données de :',__FILE__).' '.$eqLogic->getHumanName().' => '.json_encode($e));
+      }
+      
+    }
   }
   
   
@@ -202,6 +216,9 @@ class ajaxSystem extends eqLogic {
     if(isset($datas['batteryChargeLevelPercentage'])){
       $this->batteryStatus($datas['batteryChargeLevelPercentage']);
     }
+    if(isset($datas['battery']) && isset($datas['battery']['chargeLevelPercentage'])){
+      $this->batteryStatus($datas['battery']['chargeLevelPercentage']);
+    }
   }
   
   /*     * **********************Getteur Setteur*************************** */
@@ -210,23 +227,37 @@ class ajaxSystem extends eqLogic {
 class ajaxSystemCmd extends cmd {
   /*     * *************************Attributs****************************** */
   
-  /*
-  public static $_widgetPossibility = array();
-  */
   
   /*     * ***********************Methode static*************************** */
   
   
   /*     * *********************Methode d'instance************************* */
   
-  
-  
-  // Exécution d'une commande  
   public function execute($_options = array()) {
     $eqLogic = $this->getEqLogic();
-    if($this->getLogicalId() == 'refresh'){
-      $eqLogic->refreshData();
+    if($eqLogic->getConfiguration('type') == 'hub'){
+      if($this->getLogicalId() == 'ARM'){
+        ajaxSystem::request('/user/{userId}/hubs/'.$eqLogic->getLogicalId().'/commands/arming',array('command' => 'ARM','ignoreProblems' => true),'PUT');
+        sleep(1);
+      }
+      if($this->getLogicalId() == 'DISARM'){
+        ajaxSystem::request('/user/{userId}/hubs/'.$eqLogic->getLogicalId().'/commands/arming',array('command' => 'DISARM','ignoreProblems' => true),'PUT');
+        sleep(1);
+      }
+      if($this->getLogicalId() == 'NIGHT_MODE'){
+        ajaxSystem::request('/user/{userId}/hubs/'.$eqLogic->getLogicalId().'/commands/arming',array('command' => 'NIGHT_MODE_ON','ignoreProblems' => true),'PUT');
+        sleep(1);
+      }
+      if($this->getLogicalId() == 'PANIC'){
+        ajaxSystem::request('/user/{userId}/hubs/'.$eqLogic->getLogicalId().'/commands/panic',array('location' => array('latitude' => 0,'longitude' => 0,'accuracy' => 0,'speed' => 0,'timestamp' => 0)),'PUT');
+        sleep(1);
+      }
+      if($this->getLogicalId() == 'muteFireDetectors'){
+        ajaxSystem::request('/user/{userId}/hubs/'.$eqLogic->getLogicalId().'/commands/muteFireDetectors',array('muteType'=>'ALL_FIRE_DETECTORS'),'PUT');
+        sleep(1);
+      }
     }
+    $eqLogic->refreshData();
   }
   
   /*     * **********************Getteur Setteur*************************** */
