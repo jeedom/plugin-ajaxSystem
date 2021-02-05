@@ -26,7 +26,33 @@ class ajaxSystem extends eqLogic {
   
   /*     * ***********************Methode static*************************** */
   
-  
+  public static function request($_path,$_data = null,$_type='GET'){
+    $url = config::byKey('service::cloud::url').'/service/ajaxSystem';
+    $url .='?path='.urlencode($_path);
+    if($_data !== null && $_type == 'GET'){
+      $url .='&options='.urlencode(json_encode($_data));
+    }
+    $request_http = new com_http($url);
+    $request_http->setHeader(array(
+      'Content-Type: application/json',
+      'Autorization: '.sha512(mb_strtolower(config::byKey('market::username')).':'.config::byKey('market::password'))
+    ));
+    if($_type == 'POST'){
+      $request_http->setPost(json_encode($_data));
+    }
+    $return = json_decode($request_http->exec(30,1),true);
+    $return = is_json($return,$return);
+    if(isset($return['state']) && $return['state'] != 'ok'){
+      throw new \Exception(__('Erreur lors de la requete à Netatmo : ',__FILE__).json_encode($return));
+    }
+    if(isset($return['error'])){
+      throw new \Exception(__('Erreur lors de la requete à Netatmo : ',__FILE__).json_encode($return));
+    }
+    if(isset($return['body'])){
+      return $return['body'];
+    }
+    return $return;
+  }
   
   
   /*     * *********************Méthodes d'instance************************* */
