@@ -27,9 +27,25 @@ if (init('apikey') != '') {
   }
 }
 header('Content-type: application/json');
-$data = json_decode(file_get_contents('php://input'), true);
-if (!isset($data['apikey']) || !jeedom::apiAccess($data['apikey'], 'ajaxSystem')) {
+$datas = json_decode(file_get_contents('php://input'), true);
+if (!isset($datas['apikey']) || !jeedom::apiAccess($datas['apikey'], 'ajaxSystem')) {
   die();
 }
 
-log::add('ajaxSystem', 'debug','Received : '. json_encode($data));
+log::add('ajaxSystem', 'debug','Received : '. json_encode($datas));
+
+
+foreach ($datas['data'] as $data) {
+  if(!isset($data['id'])){
+    continue;
+  }
+  $ajaxSystem = ajaxSystem::byLogicalId($data['id'], 'ajaxSystem');
+  if(!is_object($ajaxSystem)){
+    continue;
+  }
+  if(isset($data['updates'])){
+    foreach ($data['updates'] as $key => $value) {
+      $ajaxSystem->checkAndUpdateCmd($key,$value);
+    }
+  }
+}
