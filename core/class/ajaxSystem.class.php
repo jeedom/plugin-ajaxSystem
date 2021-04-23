@@ -76,12 +76,13 @@ class ajaxSystem extends eqLogic {
     }
   }
   
-  
   public static function login($_username,$_password){
     $data = self::request('/login',array(
       'login' => $_username,
       'passwordHash' => $_password,
       'userRole' => 'USER',
+      'apikey' => jeedom::getApiKey('ajaxSystem'),
+      'url' => network::getNetworkAccess('external')
     ),'POST');
     config::save('refreshToken', $data['refreshToken'], 'ajaxSystem');
     config::save('userId', $data['userId'], 'ajaxSystem');
