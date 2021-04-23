@@ -34,18 +34,35 @@ if (!isset($datas['apikey']) || !jeedom::apiAccess($datas['apikey'], 'ajaxSystem
 
 log::add('ajaxSystem', 'debug','Received : '. json_encode($datas));
 
-
 foreach ($datas['data'] as $data) {
-  if(!isset($data['id'])){
-    continue;
-  }
-  $ajaxSystem = ajaxSystem::byLogicalId($data['id'], 'ajaxSystem');
-  if(!is_object($ajaxSystem)){
-    continue;
-  }
   if(isset($data['updates'])){
+    if(!isset($data['id'])){
+      continue;
+    }
+    $ajaxSystem = ajaxSystem::byLogicalId($data['id'], 'ajaxSystem');
+    if(!is_object($ajaxSystem)){
+      continue;
+    }
     foreach ($data['updates'] as $key => $value) {
+      if($data['type'] == 'HUB' && $key == 'state'){
+        if($value == 0){
+          $value = 'DISARMED';
+        }elseif($value == 1){
+          $value = 'ARMED';
+        }elseif($value == 2){
+          $value = 'NIGHT_MODE';
+        }
+      }
       $ajaxSystem->checkAndUpdateCmd($key,$value);
     }
+  }else if(isset($data['event'])){
+    if(!isset($data['event']['sourceObjectId'])){
+      continue;
+    }
+    $ajaxSystem = ajaxSystem::byLogicalId($data['event']['sourceObjectId'], 'ajaxSystem');
+    if(!is_object($ajaxSystem)){
+      continue;
+    }
+    $ajaxSystem->checkAndUpdateCmd('event',$data['event']['eventType']);
   }
 }
