@@ -25,5 +25,14 @@ Il faut depuis l'application Ajax aller sur le hub puis dans parametres (petite 
 
 ## Equipement 
 
-Une fois la configuration sur "Plugin" -> "Gestion de plugin" -> "Ajax Systeme" il vous suffit de faire synchroniser, Jeeodm va automatiquement creer tous les équipements ajax reliée à votre compte
+Une fois la configuration sur "Plugin" -> "Gestion de plugin" -> "Ajax Systeme" il vous suffit de faire synchroniser, Jeeodm va automatiquement creer tous les équipements ajax reliée à votre compte Ajax. 
+
+
+# FAQ 
+
+>**J'ai la remontée en temps réel des capteur d'ouverture mais pour les detecteurs de mouvement je n'ai l'information que si l'alarme est arméee**
+>
+>C'est normale c'est un choix du fabricant il n'y a aucune possibilitée de changer ce comportement.
+
+
 
