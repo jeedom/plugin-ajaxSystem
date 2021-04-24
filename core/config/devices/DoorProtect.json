@@ -18,6 +18,14 @@
       "logicalId": "event"
     },
     {
+      "name": "Code evenement",
+      "type": "info",
+      "subtype": "string",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "eventCode"
+    },
+    {
       "name": "Ouverture",
       "type": "info",
       "subtype": "binary",

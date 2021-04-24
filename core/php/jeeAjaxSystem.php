@@ -63,6 +63,7 @@ foreach ($datas['data'] as $data) {
     if(!is_object($ajaxSystem)){
       continue;
     }
-    $ajaxSystem->checkAndUpdateCmd('event',$data['event']['eventType']);
+    $ajaxSystem->checkAndUpdateCmd('event',$data['event']['eventType'],date('Y-m-d H:i:s',$data['event']['timestamp']/1000));
+    $ajaxSystem->checkAndUpdateCmd('eventCode',$data['event']['eventCode'],date('Y-m-d H:i:s',$data['event']['timestamp']/1000));
   }
 }
