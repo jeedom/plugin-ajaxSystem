@@ -101,6 +101,7 @@ class ajaxSystem extends eqLogic {
   
   public static function sync(){
     $hubs = self::request('/user/{userId}/hubs');
+    log::add('ajaxSystem','debug',json_encode($hubs));
     foreach ($hubs as $hub) {
       $hub_info = self::request('/user/{userId}/hubs/'.$hub['hubId']);
       $eqLogic = eqLogic::byLogicalId($hub['hubId'], 'ajaxSystem');
@@ -120,6 +121,7 @@ class ajaxSystem extends eqLogic {
       $eqLogic->save();
       
       $devices = self::request('/user/{userId}/hubs/'.$hub['hubId'].'/devices');
+      log::add('ajaxSystem','debug',json_encode($devices));
       foreach ($devices as $device) {
         $device_info = self::request('/user/{userId}/hubs/'.$hub['hubId'].'/devices/'.$device['id']);
         $eqLogic = eqLogic::byLogicalId($device['id'], 'ajaxSystem');
