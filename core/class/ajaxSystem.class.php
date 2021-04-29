@@ -70,7 +70,7 @@ class ajaxSystem extends eqLogic {
       try {
         $eqLogic->refreshData();
       } catch (\Exception $e) {
-        log::add('ajaxSystem','error',__('Erreur lors de la mise à jour des données de :',__FILE__).' '.$eqLogic->getHumanName().' => '.json_encode($e));
+        log::add('ajaxSystem','error',__('Erreur lors de la mise à jour des données de :',__FILE__).' '.$eqLogic->getHumanName().' => '.$e->getMessage());
       }
       
     }
