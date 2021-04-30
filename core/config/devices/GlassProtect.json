@@ -1,0 +1,53 @@
+{
+  "name" : "Door Protect",
+  "commands" : [
+    {
+      "name": "Etat",
+      "type": "info",
+      "subtype": "string",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "state"
+    },
+    {
+      "name": "Evenement",
+      "type": "info",
+      "subtype": "string",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "event"
+    },
+    {
+      "name": "Code evenement",
+      "type": "info",
+      "subtype": "string",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "eventCode"
+    },
+    {
+      "name": "Trafiqué",
+      "type": "info",
+      "subtype": "binary",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "tampered"
+    },
+    {
+      "name": "En ligne",
+      "type": "info",
+      "subtype": "binary",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "online"
+    },
+    {
+      "name": "Signal",
+      "type": "info",
+      "subtype": "string",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "signalLevel"
+    }
+  ]
+}
