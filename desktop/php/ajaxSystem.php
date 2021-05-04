@@ -119,13 +119,12 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								<div class="form-group">
 									<label class="col-sm-3 control-label">{{Type}}</label>
 									<div class="col-sm-6">
-										<select disabled class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="device" disabled>
-											<option value="HUB_2">{{Hub 2}}</option>
-											
-											<option value="DoorProtect">{{Detecteur d'ouverture}}</option>
-											<option value="Keypad">{{Clavier}}</option>
-											<option value="MotionCam">{{Decteur de mouvement + camera}}</option>
-											<option value="SpaceControl">{{Télécommande}}</option>
+										<select disabled class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="device" >
+											<?php 
+											foreach (ajaxSystem::devicesParameters() as $key => $device) {
+												echo '<option value="'.$key.'">'.$device['name'].'</option>';
+											}
+											?>
 										</select>
 									</div>
 								</div>
