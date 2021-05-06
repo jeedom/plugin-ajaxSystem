@@ -1,0 +1,37 @@
+{
+  "name" : "Relay",
+  "commands" : [
+    {
+      "name": "Evenement",
+      "type": "info",
+      "subtype": "string",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "event"
+    },
+    {
+      "name": "Code evenement",
+      "type": "info",
+      "subtype": "string",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "eventCode"
+    },
+    {
+      "name": "En ligne",
+      "type": "info",
+      "subtype": "binary",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "online"
+    },
+    {
+      "name": "Signal",
+      "type": "info",
+      "subtype": "string",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "signalLevel"
+    }
+  ]
+}
