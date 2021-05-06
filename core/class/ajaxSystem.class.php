@@ -65,9 +65,10 @@ class ajaxSystem extends eqLogic {
     return $return;
   }
   
-  public static function cron15(){
+  public static function cronHourly(){
     foreach (eqLogic::byType('ajaxSystem',true) as $eqLogic) {
       try {
+        sleep(rand(0,120));
         $eqLogic->refreshData();
       } catch (\Exception $e) {
         log::add('ajaxSystem','error',__('Erreur lors de la mise à jour des données de :',__FILE__).' '.$eqLogic->getHumanName().' => '.$e->getMessage());
@@ -169,16 +170,6 @@ class ajaxSystem extends eqLogic {
     if ($this->getConfiguration('applyDevice') != $this->getConfiguration('device')) {
       $this->applyModuleConfiguration();
     }
-    $cmd = $this->getCmd(null, 'refresh');
-    if (!is_object($cmd)) {
-      $cmd = new ajaxSystemCmd();
-      $cmd->setName(__('Rafraichir', __FILE__));
-    }
-    $cmd->setEqLogic_id($this->getId());
-    $cmd->setLogicalId('refresh');
-    $cmd->setType('action');
-    $cmd->setSubType('other');
-    $cmd->save();
   }
   
   public function applyModuleConfiguration() {
@@ -260,7 +251,6 @@ class ajaxSystemCmd extends cmd {
         sleep(1);
       }
     }
-    $eqLogic->refreshData();
   }
   
   /*     * **********************Getteur Setteur*************************** */

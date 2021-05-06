@@ -25,7 +25,12 @@ function ajaxSystem_install() {
 
 // Fonction exécutée automatiquement après la mise à jour du plugin
 function ajaxSystem_update() {
-  
+  foreach (eqLogic::byType('ajaxSystem') as $eqLogic) {
+    $cmd = $eqLogic->getCm('action','refresh');
+    if(is_object($cmd)){
+      $cmd->remove();
+    }
+  }
 }
 
 // Fonction exécutée automatiquement après la suppression du plugin
