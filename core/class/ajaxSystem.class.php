@@ -105,6 +105,7 @@ class ajaxSystem extends eqLogic {
     log::add('ajaxSystem','debug',json_encode($hubs));
     foreach ($hubs as $hub) {
       $hub_info = self::request('/user/{userId}/hubs/'.$hub['hubId']);
+      log::add('ajaxSystem','debug',json_encode($hub_info));
       $eqLogic = eqLogic::byLogicalId($hub['hubId'], 'ajaxSystem');
       if (!is_object($eqLogic)) {
         $eqLogic = new ajaxSystem();
