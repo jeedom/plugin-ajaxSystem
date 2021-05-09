@@ -10,6 +10,14 @@
       "logicalId": "temperature",
       "generic_type": "TEMPERATURE",
       "unite" : "°C"
+    },
+    {
+      "name": "Etat",
+      "type": "info",
+      "subtype": "binary",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "buzzerState"
     }
   ]
 }
