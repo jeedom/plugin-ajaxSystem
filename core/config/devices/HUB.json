@@ -1,0 +1,101 @@
+{
+  "name" : "Hub 2",
+  "commands" : [
+    {
+      "name": "Etat",
+      "type": "info",
+      "subtype": "string",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "state"
+    },
+    {
+      "name": "Evenement",
+      "type": "info",
+      "subtype": "string",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "event"
+    },
+    {
+      "name": "Code evenement",
+      "type": "info",
+      "subtype": "string",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "eventCode"
+    },
+    {
+      "name": "Trafiqué",
+      "type": "info",
+      "subtype": "binary",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "tampered"
+    },
+    {
+      "name": "GSM",
+      "type": "info",
+      "subtype": "numeric",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "gsm::activeSimCard"
+    },
+    {
+      "name": "Ethernet",
+      "type": "info",
+      "subtype": "numeric",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "ethernet::enabled"
+    },
+    {
+      "name": "Alimentation secteur",
+      "type": "info",
+      "subtype": "binary",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "externallyPowered"
+    },
+    {
+      "name": "Armement",
+      "type": "action",
+      "subtype": "other",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "ARM"
+    },
+    {
+      "name": "Mode nuit",
+      "type": "action",
+      "subtype": "other",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "NIGHT_MODE"
+    }, 
+    {
+      "name": "Desarmement",
+      "type": "action",
+      "subtype": "other",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "DISARM"
+    },
+    {
+      "name": "Panic",
+      "type": "action",
+      "subtype": "other",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "PANIC"
+    },
+    {
+      "name": "Arret detection incendie",
+      "type": "action",
+      "subtype": "other",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "muteFireDetectors"
+    }
+  ]
+}
