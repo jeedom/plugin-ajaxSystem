@@ -120,7 +120,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 									<label class="col-sm-3 control-label">{{Type}}</label>
 									<div class="col-sm-6">
 										<select disabled class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="device" >
-											<?php 
+											<option value="">{{Inconnu}}</option>
+                                                                                        <?php 
 											foreach (ajaxSystem::devicesParameters() as $key => $device) {
 												echo '<option value="'.$key.'">'.$device['name'].'</option>';
 											}
