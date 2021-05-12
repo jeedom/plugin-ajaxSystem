@@ -200,6 +200,10 @@ class ajaxSystem extends eqLogic {
     if($this->getConfiguration('type') == 'device'){
       $datas = self::request('/user/{userId}/hubs/'.$this->getConfiguration('hub_id').'/devices/'.$this->getLogicalId());
     }
+    if(isset($datas['firmwareVersion']) && $datas['firmwareVersion'] != $this->getConfiguration('firmware')){
+      $this->setConfiguration('firmware', $datas['firmwareVersion']);
+      $this->save();
+    }
     foreach ($this->getCmd('info') as $cmd) {
       $paths = explode('::',$cmd->getLogicalId());
       $value = $datas;
