@@ -36,7 +36,7 @@
     {
       "name": "GSM",
       "type": "info",
-      "subtype": "numeric",
+      "subtype": "binary",
       "isVisible": 1,
       "isHistorized": 0,
       "logicalId": "gsm::activeSimCard"
@@ -44,7 +44,7 @@
     {
       "name": "Ethernet",
       "type": "info",
-      "subtype": "numeric",
+      "subtype": "binary",
       "isVisible": 1,
       "isHistorized": 0,
       "logicalId": "ethernet::enabled"
