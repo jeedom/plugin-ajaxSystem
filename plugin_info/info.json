@@ -2,7 +2,7 @@
 	"id" : "ajaxSystem",
 	"name" : "Ajax Systeme",
 	"description" : {
-		"fr_FR": "Plugin servant a se connecter a une alarme Ajax"
+		"fr_FR": "Plugin servant à se connecter à une alarme Ajax"
 	},
 	"licence" : "AGPL",
 	"author" : "Jeedom SAS",
