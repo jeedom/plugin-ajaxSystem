@@ -42,6 +42,14 @@
       "logicalId": "gsm::activeSimCard"
     },
     {
+      "name": "Wifi",
+      "type": "info",
+      "subtype": "binary",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "wifi::enabled"
+    },
+    {
       "name": "Ethernet",
       "type": "info",
       "subtype": "binary",
