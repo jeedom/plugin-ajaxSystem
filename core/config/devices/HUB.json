@@ -39,10 +39,7 @@
       "subtype": "binary",
       "isVisible": 1,
       "isHistorized": 0,
-      "logicalId": "gsm::activeSimCard",
-      "display": {
-        "invertBinary" : 1
-      }
+      "logicalId": "gsm::activeSimCard"
     },
     {
       "name": "Ethernet",
@@ -50,10 +47,7 @@
       "subtype": "binary",
       "isVisible": 1,
       "isHistorized": 0,
-      "logicalId": "ethernet::enabled",
-      "display": {
-        "invertBinary" : 1
-      }
+      "logicalId": "ethernet::enabled"
     },
     {
       "name": "Alimentation secteur",
