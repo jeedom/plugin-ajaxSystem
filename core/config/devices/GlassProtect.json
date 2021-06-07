@@ -31,7 +31,10 @@
       "subtype": "binary",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "tampered"
+      "logicalId": "tampered",
+      "configuration": {
+        "repeatEventManagement": "always"
+      }
     },
     {
       "name": "En ligne",

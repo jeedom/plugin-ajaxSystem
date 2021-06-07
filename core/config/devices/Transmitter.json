@@ -23,7 +23,10 @@
       "subtype": "binary",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "online"
+      "logicalId": "online",
+      "configuration": {
+        "repeatEventManagement": "always"
+      }
     },
     {
       "name": "Signal",

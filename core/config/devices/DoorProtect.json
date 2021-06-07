@@ -36,6 +36,9 @@
       "template" : {
         "dashboard" : "door",
         "mobile" : "door"
+      },
+      "configuration": {
+        "repeatEventManagement": "always"
       }
     },
     {
@@ -44,7 +47,10 @@
       "subtype": "binary",
       "isVisible": 1,
       "isHistorized": 0,
-      "logicalId": "reedContactAware"
+      "logicalId": "reedContactAware",
+      "configuration": {
+        "repeatEventManagement": "always"
+      }
     },
     {
       "name": "Température",
@@ -62,7 +68,10 @@
       "subtype": "binary",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "tampered"
+      "logicalId": "tampered",
+      "configuration": {
+        "repeatEventManagement": "always"
+      }
     },
     {
       "name": "En ligne",
@@ -70,7 +79,10 @@
       "subtype": "binary",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "online"
+      "logicalId": "online",
+      "configuration": {
+        "repeatEventManagement": "always"
+      }
     },
     {
       "name": "Signal",

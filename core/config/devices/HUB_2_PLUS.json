@@ -31,7 +31,10 @@
       "subtype": "binary",
       "isVisible": 1,
       "isHistorized": 0,
-      "logicalId": "tampered"
+      "logicalId": "tampered",
+      "configuration": {
+        "repeatEventManagement": "always"
+      }
     },
     {
       "name": "GSM",
@@ -39,7 +42,10 @@
       "subtype": "binary",
       "isVisible": 1,
       "isHistorized": 0,
-      "logicalId": "gsm::activeSimCard"
+      "logicalId": "gsm::activeSimCard",
+      "configuration": {
+        "repeatEventManagement": "always"
+      }
     },
     {
       "name": "Wifi",
@@ -47,7 +53,10 @@
       "subtype": "binary",
       "isVisible": 1,
       "isHistorized": 0,
-      "logicalId": "wifi::enabled"
+      "logicalId": "wifi::enabled",
+      "configuration": {
+        "repeatEventManagement": "always"
+      }
     },
     {
       "name": "Ethernet",
@@ -55,7 +64,10 @@
       "subtype": "binary",
       "isVisible": 1,
       "isHistorized": 0,
-      "logicalId": "ethernet::enabled"
+      "logicalId": "ethernet::enabled",
+      "configuration": {
+        "repeatEventManagement": "always"
+      }
     },
     {
       "name": "Alimentation secteur",
@@ -63,7 +75,10 @@
       "subtype": "binary",
       "isVisible": 1,
       "isHistorized": 0,
-      "logicalId": "externallyPowered"
+      "logicalId": "externallyPowered",
+      "configuration": {
+        "repeatEventManagement": "always"
+      }
     },
     {
       "name": "Armement",
