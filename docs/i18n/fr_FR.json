@@ -1,0 +1,27 @@
+{
+    "changelog.md": {
+        "Changelog Ajax Systeme": "Changelog Ajax Systeme"
+    },
+    "index.md": {
+        "Ajax System": "Ajax System",
+        "Configuration": "Configuration",
+        "La configuration du plugin est très simple et ce deroule en 2 étapes": "La configuration du plugin est très simple et ce deroule en 2 étapes",
+        "mise en place du lien entre votre jeedom et votre alarme": "mise en place du lien entre votre jeedom et votre alarme",
+        "ajout d'un partage par mail pour la remontée des évenements": "ajout d'un partage par mail pour la remontée des évenements",
+        "Configuration du lien": "Configuration du lien",
+        "Pour la mise en place du lien entre votre Jeedom et votre alarme Ajax il faut aller dans \"Plugin\" -> \"Gestion de plugin\" -> \"Ajax Systeme\" puis cliquer sur \"Se connecter\", la vous rentrez vos identifiants Ajax et cliquez sur \"Valider": "Pour la mise en place du lien entre votre Jeedom et votre alarme Ajax il faut aller dans \"Plugin\" -> \"Gestion de plugin\" -> \"Ajax Systeme\" puis cliquer sur \"Se connecter\", la vous rentrez vos identifiants Ajax et cliquez sur \"Valider",
+        "NOTE": "NOTE",
+        "Jeedom ne sauvegarde absolument pas vos identifiants Ajax c'est juste une utilisé pour la premiere requete à Ajax et avoir le token d'accès et le refresh token": "Jeedom ne sauvegarde absolument pas vos identifiants Ajax c'est juste une utilisé pour la premiere requete à Ajax et avoir le token d'accès et le refresh token",
+        "Le refresh token permet de recuperer un nouveau token d'accès qui à une durée de vie de quelques heures seulement": "Le refresh token permet de recuperer un nouveau token d'accès qui à une durée de vie de quelques heures seulement",
+        "Une fois le lien fait toute les requetes passent par notre cloud mais à aucun moment le cloud ne stock votre token d'accès, il n'est donc pas possible avec seulement le cloud jeedom d'agir sur votre alarme": "Une fois le lien fait toute les requetes passent par notre cloud mais à aucun moment le cloud ne stock votre token d'accès, il n'est donc pas possible avec seulement le cloud jeedom d'agir sur votre alarme",
+        "Pour toute action sur celle-ci il faut absolument la combinaison du token d'accès de votre Jeedom et d'une clef connu uniquement de notre cloud": "Pour toute action sur celle-ci il faut absolument la combinaison du token d'accès de votre Jeedom et d'une clef connu uniquement de notre cloud",
+        "Configuration de la remontée d'evenements": "Configuration de la remontée d'evenements",
+        "Il faut depuis l'application Ajax aller sur le hub puis dans parametres (petite roue crantée en haut à droite) aller sur utilisateur et la rajouter l'utilisateur": "Il faut depuis l'application Ajax aller sur le hub puis dans parametres (petite roue crantée en haut à droite) aller sur utilisateur et la rajouter l'utilisateur",
+        "ajax@jeedom.com": "ajax@jeedom.com",
+        "Equipement": "Equipement",
+        "Une fois la configuration sur \"Plugin\" -> \"Gestion de plugin\" -> \"Ajax Systeme\" il vous suffit de faire synchroniser, Jeeodm va automatiquement creer tous les équipements ajax reliée à votre compte Ajax": "Une fois la configuration sur \"Plugin\" -> \"Gestion de plugin\" -> \"Ajax Systeme\" il vous suffit de faire synchroniser, Jeeodm va automatiquement creer tous les équipements ajax reliée à votre compte Ajax",
+        "FAQ": "FAQ",
+        "J'ai la remontée en temps réel des capteur d'ouverture mais pour les detecteurs de mouvement je n'ai l'information que si l'alarme est arméee": "J'ai la remontée en temps réel des capteur d'ouverture mais pour les detecteurs de mouvement je n'ai l'information que si l'alarme est arméee",
+        "C'est normale c'est un choix du fabricant il n'y a aucune possibilitée de changer ce comportement": "C'est normale c'est un choix du fabricant il n'y a aucune possibilitée de changer ce comportement"
+    }
+}

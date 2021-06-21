@@ -1,0 +1,73 @@
+{
+    "plugins\/ajaxSystem\/plugin_info\/configuration.php": {
+        "Connection": "Connection",
+        "Se connecter": "Se connecter",
+        "Synchronisation": "Synchronisation",
+        "Synchroniser mes équipements": "Synchroniser mes équipements",
+        "Connexion à Ajax Systeme": "Connexion à Ajax Systeme",
+        "Synchronisation réussie": "Synchronisation réussie"
+    },
+    "plugins\/ajaxSystem\/desktop\/modal\/login.php": {
+        "401 - Accès non autorisé": "401 - Accès non autorisé",
+        "Nom d'utilisateur": "Nom d'utilisateur",
+        "Mot de passe": "Mot de passe",
+        "Valider": "Valider",
+        "Connexion réussie": "Connexion réussie"
+    },
+    "plugins\/ajaxSystem\/desktop\/php\/ajaxSystem.php": {
+        "401 - Accès non autorisé": "401 - Accès non autorisé",
+        "Gestion": "Gestion",
+        "Configuration": "Configuration",
+        "Mes équipement Ajax System": "Mes équipement Ajax System",
+        "Rechercher": "Rechercher",
+        "Configuration avancée": "Configuration avancée",
+        "Sauvegarder": "Sauvegarder",
+        "Supprimer": "Supprimer",
+        "Équipement": "Équipement",
+        "Commandes": "Commandes",
+        "Général": "Général",
+        "Nom de l'équipement": "Nom de l'équipement",
+        "Objet parent": "Objet parent",
+        "Aucun": "Aucun",
+        "Catégorie": "Catégorie",
+        "Options": "Options",
+        "Activer": "Activer",
+        "Visible": "Visible",
+        "Type": "Type",
+        "Inconnu": "Inconnu",
+        "Identifiant": "Identifiant",
+        "IP": "IP",
+        "Firmware": "Firmware",
+        "Id": "Id",
+        "Nom": "Nom",
+        "Paramètres": "Paramètres",
+        "Action": "Action"
+    },
+    "plugins\/ajaxSystem\/desktop\/js\/ajaxSystem.js": {
+        "Nom de la commande": "Nom de la commande",
+        "Commande information liée": "Commande information liée",
+        "Aucune": "Aucune",
+        "Icône": "Icône",
+        "Afficher": "Afficher",
+        "Historiser": "Historiser",
+        "Inverser": "Inverser",
+        "Min.": "Min.",
+        "Max.": "Max.",
+        "Unité": "Unité"
+    },
+    "plugins\/ajaxSystem\/core\/php\/jeeAjaxSystem.php": {
+        "Vous n\\'etes pas autorisé à effectuer cette action. Clef API invalide.": "Vous n\\'etes pas autorisé à effectuer cette action. Clef API invalide.",
+        "Configuration OK": "Configuration OK"
+    },
+    "plugins\/ajaxSystem\/core\/ajax\/ajaxSystem.ajax.php": {
+        "401 - Accès non autorisé": "401 - Accès non autorisé",
+        "Aucune méthode correspondante à : ": "Aucune méthode correspondante à : "
+    },
+    "plugins\/ajaxSystem\/core\/class\/ajaxSystem.class.php": {
+        "Erreur lors de la requete à Ajax System : ": "Erreur lors de la requete à Ajax System : ",
+        "Erreur lors de la mise à jour des données de :": "Erreur lors de la mise à jour des données de :"
+    },
+    "info.json": {
+        "Plugin servant à se connecter à une alarme Ajax": "Plugin servant à se connecter à une alarme Ajax"
+    }
+}

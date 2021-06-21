@@ -1,0 +1,73 @@
+{
+    "plugins\/ajaxSystem\/plugin_info\/configuration.php": {
+        "Connection": "Conexión",
+        "Se connecter": "Conectarse",
+        "Synchronisation": "Sincronización",
+        "Synchroniser mes équipements": "Sincronizar mi equipo",
+        "Connexion à Ajax Systeme": "Conexión a Ajax Systeme",
+        "Synchronisation réussie": "Sincronización exitosa"
+    },
+    "plugins\/ajaxSystem\/desktop\/modal\/login.php": {
+        "401 - Accès non autorisé": "401 - Acceso no autorizado",
+        "Nom d'utilisateur": "Nombre del usuario",
+        "Mot de passe": "Contraseña",
+        "Valider": "Validar",
+        "Connexion réussie": "Conexión exitosa"
+    },
+    "plugins\/ajaxSystem\/desktop\/php\/ajaxSystem.php": {
+        "401 - Accès non autorisé": "401 - Acceso no autorizado",
+        "Gestion": "Gestión",
+        "Configuration": "Configuración",
+        "Mes équipement Ajax System": "Mi equipo del sistema Ajax",
+        "Rechercher": "Buscar",
+        "Configuration avancée": "Configuración avanzada",
+        "Sauvegarder": "Ahorrar",
+        "Supprimer": "Eliminar",
+        "Équipement": "Equipo",
+        "Commandes": "Pedidos",
+        "Général": "General",
+        "Nom de l'équipement": "Nombre del equipo",
+        "Objet parent": "Objeto padre",
+        "Aucun": "No",
+        "Catégorie": "Categoría",
+        "Options": "Opciones",
+        "Activer": "Activar",
+        "Visible": "Visible",
+        "Type": "Tipo",
+        "Inconnu": "Desconocido",
+        "Identifiant": "Nombre de usuario",
+        "IP": "IP",
+        "Firmware": "Firmware",
+        "Id": "Identificación",
+        "Nom": "Apellido",
+        "Paramètres": "Configuraciones",
+        "Action": "Acción"
+    },
+    "plugins\/ajaxSystem\/desktop\/js\/ajaxSystem.js": {
+        "Nom de la commande": "Nombre de la orden",
+        "Commande information liée": "Información relacionada con el comando",
+        "Aucune": "Alguna",
+        "Icône": "Icono",
+        "Afficher": "Monitor",
+        "Historiser": "Historizar",
+        "Inverser": "Contrarrestar",
+        "Min.": "Min.",
+        "Max.": "Max.",
+        "Unité": "Unidad"
+    },
+    "plugins\/ajaxSystem\/core\/php\/jeeAjaxSystem.php": {
+        "Vous n\\'etes pas autorisé à effectuer cette action. Clef API invalide.": "No está autorizado para realizar esta acción. Clave de API no válida",
+        "Configuration OK": "Configuración OK"
+    },
+    "plugins\/ajaxSystem\/core\/ajax\/ajaxSystem.ajax.php": {
+        "401 - Accès non autorisé": "401 - Acceso no autorizado",
+        "Aucune méthode correspondante à : ": "Ningún método correspondiente a:"
+    },
+    "plugins\/ajaxSystem\/core\/class\/ajaxSystem.class.php": {
+        "Erreur lors de la requete à Ajax System : ": "Error al solicitar el sistema Ajax:",
+        "Erreur lors de la mise à jour des données de :": "Error al actualizar datos de:"
+    },
+    "info.json": {
+        "Plugin servant à se connecter à une alarme Ajax": "Complemento utilizado para conectarse a una alarma Ajax"
+    }
+}
