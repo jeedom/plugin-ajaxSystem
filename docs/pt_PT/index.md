@@ -7,6 +7,10 @@ A configuração do plugin é muito simples e ocorre em 2 passos :
 - Configurando o link entre seu jeedom e seu alarme
 - adição de um compartilhamento de e-mail para relatar eventos 
 
+>**IMPORTANTE**
+>
+>Um ponto importante Ajax não emite um alerta global quando um alarme é acionado, mas levanta o status no detector que acionou o alarme (comando de eventos)
+
 ### Configuração de link 
 
 Para configurar o link entre seu Jeedom e seu alarme Ajax, vá para "Plugin" -> "Gerenciamento de Plugin" -> "Sistema Ajax" e clique em "Conectar", insira seus identificadores Ajax e clique em "Validar".
@@ -27,12 +31,10 @@ No aplicativo Ajax, vá para o hub e, em seguida, nas configurações (pequena e
 
 Uma vez que a configuração está em "Plugin" -> "Gerenciamento de Plugin" -> "Sistema Ajax" você apenas tem que sincronizar, Jeeodm irá criar automaticamente todo o equipamento Ajax vinculado à sua conta Ajax. 
 
+### Detector de movimento
 
-# Perguntas frequentes 
+Pequena especificidade para o detector de movimento, não vai até a detecção de movimento de forma permanente. Na verdade, só sobe quando o alarme está ativo e pelo comando do evento
 
->**Eu tenho o feedback em tempo real dos sensores de abertura, mas para os detectores de movimento eu só tenho a informação se o alarme estiver armado**
->
->Isso é normal é uma escolha do fabricante, não há possibilidade de alterar este comportamento.
+### Detector de abertura
 
-
-
+Para ele não se preocupe você tem todo o tempo e em tempo real as informações da janela aberta ou não.

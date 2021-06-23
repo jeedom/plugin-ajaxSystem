@@ -7,6 +7,10 @@ Die Konfiguration des Plugins ist sehr einfach und erfolgt in 2 Schritten :
 - Herstellen der Verbindung zwischen Ihrer Freiheit und Ihrem Alarm
 - Hinzufügen einer E-Mail-Freigabe zum Melden von Ereignissen 
 
+>**WICHTIG**
+>
+>Ein wichtiger Punkt Ajax löst keinen globalen Alarm aus, wenn ein Alarm ausgelöst wird, sondern erhöht den Status des Melders, der den Alarm ausgelöst hat (Ereignisbefehl)
+
 ### Link-Konfiguration 
 
 Um die Verbindung zwischen Ihrem Jeedom und Ihrem Ajax-Alarm herzustellen, gehen Sie zu "Plugin" -> "Plugin-Verwaltung" -> "Ajax-System", klicken Sie auf "Verbinden", geben Sie Ihre Ajax-Kennungen ein und klicken Sie auf "Validieren"".
@@ -27,12 +31,10 @@ Gehen Sie in der Ajax-Anwendung zum Hub und dann in den Einstellungen (kleines Z
 
 Sobald die Konfiguration auf "Plugin" -> "Plugin-Verwaltung" -> "Ajax-System" eingestellt ist, müssen Sie nur noch synchronisieren. Jeeodm erstellt automatisch alle Ajax-Geräte, die mit Ihrem Ajax-Konto verknüpft sind. 
 
+### Bewegungsmelder
 
-# FAQ 
+Kleine Besonderheit beim Bewegungsmelder, es geht nicht um die permanente Bewegungserkennung. Tatsächlich geht es nur auf, wenn der Alarm aktiv ist und durch den Ereignisbefehl
 
->**Ich habe die Echtzeit-Rückmeldung der Öffnungssensoren, aber für die Bewegungsmelder habe ich nur die Informationen, wenn der Alarm aktiviert ist**
->
->Dies ist normal, es ist eine Wahl des Herstellers, es gibt keine Möglichkeit, dieses Verhalten zu ändern.
+### Öffnungsmelder
 
-
-
+Für ihn keine Sorge, Sie haben die ganze Zeit und in Echtzeit die Informationen über offenes Fenster oder nicht or.

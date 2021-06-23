@@ -7,6 +7,10 @@ The configuration of the plugin is very simple and it takes place in 2 steps :
 - setting up the link between your jeedom and your alarm
 - addition of an email sharing for reporting events 
 
+>**IMPORTANT**
+>
+>An important point Ajax does not raise a global alert when an alarm is triggered but does raise the status on the detector which triggered the alarm (events command)
+
 ### Link configuration 
 
 To set up the link between your Jeedom and your Ajax alarm, go to "Plugin" -> "Plugin management" -> "Ajax System" then click on "Connect", you enter your Ajax identifiers and click on "Validate".
@@ -27,12 +31,10 @@ From the Ajax application, go to the hub then in settings (small cogwheel at the
 
 Once the configuration is on "Plugin" -> "Plugin management" -> "Ajax System" you just have to synchronize, Jeeodm will automatically create all the ajax equipment linked to your Ajax account. 
 
+### Movement detector
 
-# Faq 
+Small specificity for the motion detector, it does not go up to the detection of movement permanently. In fact, it only goes up when the alarm is active and by the event command
 
->**I have the real-time feedback of the opening sensors but for the motion detectors I only have the information if the alarm is armed**
->
->This is normal it is a choice of the manufacturer there is no possibility to change this behavior.
+### Opening detector
 
-
-
+For him no worries you have all the time and in real time the information of open window or not.
