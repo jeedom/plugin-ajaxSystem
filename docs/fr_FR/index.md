@@ -38,12 +38,3 @@ Petit specificité pour le detecteur de mouvement celui-ci ne remonte pas la det
 ### Detecteur d'ouverture
 
 Pour lui pas de soucis vous avez tout le temps et en temps réel l'information de fenetre ouverte ou non.
-
-# FAQ 
-
->**J'ai la remontée en temps réel des capteur d'ouverture mais pour les detecteurs de mouvement je n'ai l'information que si l'alarme est arméee**
->
->C'est normale c'est un choix du fabricant il n'y a aucune possibilitée de changer ce comportement.
-
-
-
