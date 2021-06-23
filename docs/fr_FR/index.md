@@ -7,6 +7,10 @@ La configuration du plugin est très simple et ce deroule en 2 étapes :
 - mise en place du lien entre votre jeedom et votre alarme
 - ajout d'un partage par mail pour la remontée des évenements 
 
+>**IMPORTANT**
+>
+>Un point important Ajax ne remonte pas d'alerte globale lors d'un déclenchement d'alarme mais remonte le status sur le detecteur qui a déclenché l'alarme (commande evenements)
+
 ### Configuration du lien 
 
 Pour la mise en place du lien entre votre Jeedom et votre alarme Ajax il faut aller dans "Plugin" -> "Gestion de plugin" -> "Ajax Systeme" puis cliquer sur "Se connecter", la vous rentrez vos identifiants Ajax et cliquez sur "Valider".
@@ -27,6 +31,13 @@ Il faut depuis l'application Ajax aller sur le hub puis dans parametres (petite 
 
 Une fois la configuration sur "Plugin" -> "Gestion de plugin" -> "Ajax Systeme" il vous suffit de faire synchroniser, Jeeodm va automatiquement creer tous les équipements ajax reliée à votre compte Ajax. 
 
+### Detecteur de mouvement
+
+Petit specificité pour le detecteur de mouvement celui-ci ne remonte pas la detection de mouvement en permanance. En effet il ne le remonte que lorsque l'alarme est active et par la commande évenement
+
+### Detecteur d'ouverture
+
+Pour lui pas de soucis vous avez tout le temps et en temps réel l'information de fenetre ouverte ou non.
 
 # FAQ 
 
