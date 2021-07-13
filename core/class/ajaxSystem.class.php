@@ -21,91 +21,90 @@ require_once __DIR__  . '/../../../../core/php/core.inc.php';
 
 class ajaxSystem extends eqLogic {
   /*     * *************************Attributs****************************** */
-  
-  
-  
+
+
+
   /*     * ***********************Methode static*************************** */
-  
-  public static function request($_path,$_data = null,$_type='GET'){
-    $url = config::byKey('service::cloud::url').'/service/ajaxSystem';
-    $url .='?path='.urlencode(str_replace('{userId}',config::byKey('userId', 'ajaxSystem'),$_path));
-    if($_path != '/login' && $_path != '/refresh'){
+
+  public static function request($_path, $_data = null, $_type = 'GET') {
+    $url = config::byKey('service::cloud::url') . '/service/ajaxSystem';
+    $url .= '?path=' . urlencode(str_replace('{userId}', config::byKey('userId', 'ajaxSystem'), $_path));
+    if ($_path != '/login' && $_path != '/refresh') {
       $mc = cache::byKey('ajaxSystem::sessionToken');
       $sessionToken = $mc->getValue();
-      if(trim($mc->getValue()) == ''){
+      if (trim($mc->getValue()) == '') {
         $sessionToken = self::refreshToken();
       }
-      $url .= '&session_token='.$sessionToken;
+      $url .= '&session_token=' . $sessionToken;
     }
-    if($_data !== null && $_type == 'GET'){
-      $url .='&options='.urlencode(json_encode($_data));
+    if ($_data !== null && $_type == 'GET') {
+      $url .= '&options=' . urlencode(json_encode($_data));
     }
     $request_http = new com_http($url);
     $request_http->setHeader(array(
       'Content-Type: application/json',
-      'Autorization: '.sha512(mb_strtolower(config::byKey('market::username')).':'.config::byKey('market::password'))
+      'Autorization: ' . sha512(mb_strtolower(config::byKey('market::username')) . ':' . config::byKey('market::password'))
     ));
-    if($_type == 'POST'){
+    if ($_type == 'POST') {
       $request_http->setPost(json_encode($_data));
     }
-    if($_type == 'PUT'){
+    if ($_type == 'PUT') {
       $request_http->setPut(json_encode($_data));
     }
-    $return = json_decode($request_http->exec(30,1),true);
-    $return = is_json($return,$return);
-    if(isset($return['error'])){
-      throw new \Exception(__('Erreur lors de la requete à Ajax System : ',__FILE__).json_encode($return));
+    $return = json_decode($request_http->exec(30, 1), true);
+    $return = is_json($return, $return);
+    if (isset($return['error'])) {
+      throw new \Exception(__('Erreur lors de la requete à Ajax System : ', __FILE__) . json_encode($return));
     }
-    if(isset($return['errors'])){
-      throw new \Exception(__('Erreur lors de la requete à Ajax System : ',__FILE__).json_encode($return));
+    if (isset($return['errors'])) {
+      throw new \Exception(__('Erreur lors de la requete à Ajax System : ', __FILE__) . json_encode($return));
     }
-    if(isset($return['body'])){
+    if (isset($return['body'])) {
       return $return['body'];
     }
     return $return;
   }
-  
-  public static function cronHourly(){
-    foreach (eqLogic::byType('ajaxSystem',true) as $eqLogic) {
+
+  public static function cronHourly() {
+    foreach (eqLogic::byType('ajaxSystem', true) as $eqLogic) {
       try {
-        sleep(rand(0,120));
+        sleep(rand(0, 120));
         $eqLogic->refreshData();
       } catch (\Exception $e) {
-        log::add('ajaxSystem','error',__('Erreur lors de la mise à jour des données de :',__FILE__).' '.$eqLogic->getHumanName().' => '.$e->getMessage());
+        log::add('ajaxSystem', 'error', __('Erreur lors de la mise à jour des données de :', __FILE__) . ' ' . $eqLogic->getHumanName() . ' => ' . $e->getMessage(), 'ajaxSystem::failedGetData' . $eqLogic->getId());
       }
-      
     }
   }
-  
-  public static function login($_username,$_password){
-    $data = self::request('/login',array(
+
+  public static function login($_username, $_password) {
+    $data = self::request('/login', array(
       'login' => $_username,
       'passwordHash' => $_password,
       'userRole' => 'USER',
       'apikey' => jeedom::getApiKey('ajaxSystem'),
       'url' => network::getNetworkAccess('external')
-    ),'POST');
+    ), 'POST');
     config::save('refreshToken', $data['refreshToken'], 'ajaxSystem');
     config::save('userId', $data['userId'], 'ajaxSystem');
-    cache::set('ajaxSystem::sessionToken', $data['sessionToken'],60*14);
+    cache::set('ajaxSystem::sessionToken', $data['sessionToken'], 60 * 14);
   }
-  
-  public static function refreshToken(){
-    $data = self::request('/refresh',array(
+
+  public static function refreshToken() {
+    $data = self::request('/refresh', array(
       'userId' => config::byKey('userId', 'ajaxSystem'),
       'refreshToken' => config::byKey('refreshToken', 'ajaxSystem')
-    ),'POST');
+    ), 'POST');
     config::save('refreshToken', $data['refreshToken'], 'ajaxSystem');
-    cache::set('ajaxSystem::sessionToken', $data['sessionToken'],60*14);
+    cache::set('ajaxSystem::sessionToken', $data['sessionToken'], 60 * 14);
     return $data['sessionToken'];
   }
-  
-  public static function sync(){
+
+  public static function sync() {
     $hubs = self::request('/user/{userId}/hubs');
-    log::add('ajaxSystem','debug',json_encode($hubs));
+    log::add('ajaxSystem', 'debug', json_encode($hubs));
     foreach ($hubs as $hub) {
-      $hub_info = self::request('/user/{userId}/hubs/'.$hub['hubId']);
-      log::add('ajaxSystem','debug',json_encode($hub_info));
+      $hub_info = self::request('/user/{userId}/hubs/' . $hub['hubId']);
+      log::add('ajaxSystem', 'debug', json_encode($hub_info));
       $eqLogic = eqLogic::byLogicalId($hub['hubId'], 'ajaxSystem');
       if (!is_object($eqLogic)) {
         $eqLogic = new ajaxSystem();
@@ -121,11 +120,11 @@ class ajaxSystem extends eqLogic {
       $eqLogic->setConfiguration('firmware', $hub_info['firmware']['version']);
       $eqLogic->setLogicalId($hub['hubId']);
       $eqLogic->save();
-      
-      $devices = self::request('/user/{userId}/hubs/'.$hub['hubId'].'/devices');
-      log::add('ajaxSystem','debug',json_encode($devices));
+
+      $devices = self::request('/user/{userId}/hubs/' . $hub['hubId'] . '/devices');
+      log::add('ajaxSystem', 'debug', json_encode($devices));
       foreach ($devices as $device) {
-        $device_info = self::request('/user/{userId}/hubs/'.$hub['hubId'].'/devices/'.$device['id']);
+        $device_info = self::request('/user/{userId}/hubs/' . $hub['hubId'] . '/devices/' . $device['id']);
         $eqLogic = eqLogic::byLogicalId($device['id'], 'ajaxSystem');
         if (!is_object($eqLogic)) {
           $eqLogic = new ajaxSystem();
@@ -144,16 +143,15 @@ class ajaxSystem extends eqLogic {
       }
     }
   }
-  
-  
+
+
   public static function devicesParameters($_device = '') {
     $return = array();
-    $files = ls(__DIR__.'/../config/devices', '*.json', false, array('files', 'quiet'));
+    $files = ls(__DIR__ . '/../config/devices', '*.json', false, array('files', 'quiet'));
     foreach ($files as $file) {
       try {
-        $return[str_replace('.json','',$file)] = is_json(file_get_contents(__DIR__.'/../config/devices/'. $file),false);
+        $return[str_replace('.json', '', $file)] = is_json(file_get_contents(__DIR__ . '/../config/devices/' . $file), false);
       } catch (Exception $e) {
-        
       }
     }
     if (isset($_device) && $_device != '') {
@@ -164,15 +162,15 @@ class ajaxSystem extends eqLogic {
     }
     return $return;
   }
-  
+
   /*     * *********************Méthodes d'instance************************* */
-  
+
   public function postSave() {
     if ($this->getConfiguration('applyDevice') != $this->getConfiguration('device')) {
       $this->applyModuleConfiguration();
     }
   }
-  
+
   public function applyModuleConfiguration() {
     $this->setConfiguration('applyDevice', $this->getConfiguration('device'));
     $this->save();
@@ -183,82 +181,80 @@ class ajaxSystem extends eqLogic {
     if (!is_array($device)) {
       return true;
     }
-    $this->import($device,true);
+    $this->import($device, true);
   }
-  
+
   public function getImage() {
-    if(file_exists(__DIR__.'/../config/devices/'.  $this->getConfiguration('device').'.png')){
-      return 'plugins/ajaxSystem/core/config/devices/'.  $this->getConfiguration('device').'.png';
+    if (file_exists(__DIR__ . '/../config/devices/' .  $this->getConfiguration('device') . '.png')) {
+      return 'plugins/ajaxSystem/core/config/devices/' .  $this->getConfiguration('device') . '.png';
     }
     return false;
   }
-  
-  public function refreshData(){
-    if($this->getConfiguration('type') == 'hub'){
-      $datas = self::request('/user/{userId}/hubs/'.$this->getLogicalId());
+
+  public function refreshData() {
+    if ($this->getConfiguration('type') == 'hub') {
+      $datas = self::request('/user/{userId}/hubs/' . $this->getLogicalId());
     }
-    if($this->getConfiguration('type') == 'device'){
-      $datas = self::request('/user/{userId}/hubs/'.$this->getConfiguration('hub_id').'/devices/'.$this->getLogicalId());
+    if ($this->getConfiguration('type') == 'device') {
+      $datas = self::request('/user/{userId}/hubs/' . $this->getConfiguration('hub_id') . '/devices/' . $this->getLogicalId());
     }
-    if(isset($datas['firmwareVersion']) && $datas['firmwareVersion'] != $this->getConfiguration('firmware')){
+    if (isset($datas['firmwareVersion']) && $datas['firmwareVersion'] != $this->getConfiguration('firmware')) {
       $this->setConfiguration('firmware', $datas['firmwareVersion']);
       $this->save();
     }
     foreach ($this->getCmd('info') as $cmd) {
-      $paths = explode('::',$cmd->getLogicalId());
+      $paths = explode('::', $cmd->getLogicalId());
       $value = $datas;
       foreach ($paths as $key) {
         $value = $value[$key];
       }
-      $this->checkAndUpdateCmd($cmd,$value);
+      $this->checkAndUpdateCmd($cmd, $value);
     }
-    if(isset($datas['batteryChargeLevelPercentage'])){
+    if (isset($datas['batteryChargeLevelPercentage'])) {
       $this->batteryStatus($datas['batteryChargeLevelPercentage']);
     }
-    if(isset($datas['battery']) && isset($datas['battery']['chargeLevelPercentage'])){
+    if (isset($datas['battery']) && isset($datas['battery']['chargeLevelPercentage'])) {
       $this->batteryStatus($datas['battery']['chargeLevelPercentage']);
     }
   }
-  
+
   /*     * **********************Getteur Setteur*************************** */
 }
 
 class ajaxSystemCmd extends cmd {
   /*     * *************************Attributs****************************** */
-  
-  
+
+
   /*     * ***********************Methode static*************************** */
-  
-  
+
+
   /*     * *********************Methode d'instance************************* */
-  
+
   public function execute($_options = array()) {
     $eqLogic = $this->getEqLogic();
-    if($eqLogic->getConfiguration('type') == 'hub'){
-      if($this->getLogicalId() == 'ARM'){
-        ajaxSystem::request('/user/{userId}/hubs/'.$eqLogic->getLogicalId().'/commands/arming',array('command' => 'ARM','ignoreProblems' => true),'PUT');
+    if ($eqLogic->getConfiguration('type') == 'hub') {
+      if ($this->getLogicalId() == 'ARM') {
+        ajaxSystem::request('/user/{userId}/hubs/' . $eqLogic->getLogicalId() . '/commands/arming', array('command' => 'ARM', 'ignoreProblems' => true), 'PUT');
         sleep(1);
       }
-      if($this->getLogicalId() == 'DISARM'){
-        ajaxSystem::request('/user/{userId}/hubs/'.$eqLogic->getLogicalId().'/commands/arming',array('command' => 'DISARM','ignoreProblems' => true),'PUT');
+      if ($this->getLogicalId() == 'DISARM') {
+        ajaxSystem::request('/user/{userId}/hubs/' . $eqLogic->getLogicalId() . '/commands/arming', array('command' => 'DISARM', 'ignoreProblems' => true), 'PUT');
         sleep(1);
       }
-      if($this->getLogicalId() == 'NIGHT_MODE'){
-        ajaxSystem::request('/user/{userId}/hubs/'.$eqLogic->getLogicalId().'/commands/arming',array('command' => 'NIGHT_MODE_ON','ignoreProblems' => true),'PUT');
+      if ($this->getLogicalId() == 'NIGHT_MODE') {
+        ajaxSystem::request('/user/{userId}/hubs/' . $eqLogic->getLogicalId() . '/commands/arming', array('command' => 'NIGHT_MODE_ON', 'ignoreProblems' => true), 'PUT');
         sleep(1);
       }
-      if($this->getLogicalId() == 'PANIC'){
-        ajaxSystem::request('/user/{userId}/hubs/'.$eqLogic->getLogicalId().'/commands/panic',array('location' => array('latitude' => 0,'longitude' => 0,'accuracy' => 0,'speed' => 0,'timestamp' => 0)),'PUT');
+      if ($this->getLogicalId() == 'PANIC') {
+        ajaxSystem::request('/user/{userId}/hubs/' . $eqLogic->getLogicalId() . '/commands/panic', array('location' => array('latitude' => 0, 'longitude' => 0, 'accuracy' => 0, 'speed' => 0, 'timestamp' => 0)), 'PUT');
         sleep(1);
       }
-      if($this->getLogicalId() == 'muteFireDetectors'){
-        ajaxSystem::request('/user/{userId}/hubs/'.$eqLogic->getLogicalId().'/commands/muteFireDetectors',array('muteType'=>'ALL_FIRE_DETECTORS'),'PUT');
+      if ($this->getLogicalId() == 'muteFireDetectors') {
+        ajaxSystem::request('/user/{userId}/hubs/' . $eqLogic->getLogicalId() . '/commands/muteFireDetectors', array('muteType' => 'ALL_FIRE_DETECTORS'), 'PUT');
         sleep(1);
       }
     }
   }
-  
+
   /*     * **********************Getteur Setteur*************************** */
 }
-
-
