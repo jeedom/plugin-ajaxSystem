@@ -20,12 +20,20 @@
     {
       "name": "Etat",
       "type": "info",
-      "subtype": "binary",
+      "subtype": "numeric",
       "isVisible": 1,
       "isHistorized": 1,
-      "logicalId": "realState",
-      "configuration": {
-        "repeatEventManagement": "always"
+      "logicalId": "realState"
+    },
+    {
+      "name": "Voltage",
+      "type": "info",
+      "subtype": "numeric",
+      "isVisible": 1,
+      "isHistorized": 1,
+      "logicalId": "voltage",
+      "configuration" : {
+        "calculValueOffset":"#value# / 100"
       }
     },
     {
