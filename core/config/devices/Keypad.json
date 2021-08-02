@@ -1,5 +1,8 @@
 {
   "name" : "Keypad",
+  "configuration" : {
+    "battery_type" : "4xAAA"
+  },
   "commands" : [
     {
       "name": "Etat",

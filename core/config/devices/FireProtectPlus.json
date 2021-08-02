@@ -1,5 +1,8 @@
 {
   "name" : "Détecteur de fumée, température et monoxyde de carbone",
+  "configuration" : {
+    "battery_type" : "1xCR2 + CR032 (secours)"
+  },
   "commands" : [
     {
       "name": "Etat",

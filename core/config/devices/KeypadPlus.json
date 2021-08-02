@@ -1,5 +1,8 @@
 {
   "name" : "Keypad Plus",
+  "configuration" : {
+    "battery_type" : "4xAA Lithium (FR6)"
+  },
   "commands" : [
     {
       "name": "Etat",

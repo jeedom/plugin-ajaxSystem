@@ -1,5 +1,8 @@
 {
   "name" : "Motion Protect Plus",
+  "configuration" : {
+    "battery_type" : "1xCR123A"
+  },
   "commands" : [
     {
       "name": "Etat",

@@ -1,5 +1,8 @@
 {
   "name" : "Motion Cam",
+  "configuration" : {
+    "battery_type" : "2xCR123A"
+  },
   "commands" : [
     {
       "name": "Etat",

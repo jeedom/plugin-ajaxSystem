@@ -1,5 +1,8 @@
 {
   "name" : "Détecteur de fuites d'eau",
+  "configuration" : {
+    "battery_type" : "1xAAA"
+  },
   "commands" : [
     {
       "name": "Etat",

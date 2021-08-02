@@ -1,5 +1,8 @@
 {
   "name" : "Space Control",
+  "configuration" : {
+    "battery_type" : "1xCR2032A"
+  },
   "commands" : [
     
   ]
