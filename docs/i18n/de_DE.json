@@ -4,6 +4,7 @@
     },
     "index.md": {
         "Ajax System": "Ajax-System",
+        "Pour avoir une remontée en temps réel il faut ABSOLUMENT que votre Jeedom soit accessible de l'extérieure (URL d'accès externe utilisée": "Um ein Echtzeit-Feedback zu erhalten, ist es UNBEDINGT notwendig, dass Ihr Jeedom von außen zugänglich ist (externe Zugriffs-URL verwendet .)",
         "La configuration du plugin est très simple et ce deroule en 2 étapes": "Die Konfiguration des Plugins ist sehr einfach und erfolgt in 2 Schritten",
         "mise en place du lien entre votre jeedom et votre alarme": "Herstellen der Verbindung zwischen Ihrer Freiheit und Ihrem Alarm",
         "ajout d'un partage par mail pour la remontée des évenements": "Hinzufügen einer E-Mail-Freigabe zum Melden von Ereignissen",

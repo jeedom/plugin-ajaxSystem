@@ -4,6 +4,7 @@
     },
     "index.md": {
         "Ajax System": "Ajax System",
+        "Pour avoir une remontée en temps réel il faut ABSOLUMENT que votre Jeedom soit accessible de l'extérieure (URL d'accès externe utilisée": "To have a real-time feedback, it is ABSOLUTELY necessary that your Jeedom be accessible from the outside (external access URL used",
         "La configuration du plugin est très simple et ce deroule en 2 étapes": "The configuration of the plugin is very simple and it takes place in 2 steps",
         "mise en place du lien entre votre jeedom et votre alarme": "setting up the link between your jeedom and your alarm",
         "ajout d'un partage par mail pour la remontée des évenements": "addition of an email sharing for reporting events",

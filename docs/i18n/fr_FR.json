@@ -5,10 +5,11 @@
     "index.md": {
         "Ajax System": "Ajax System",
         "Configuration": "Configuration",
+        "IMPORTANT": "IMPORTANT",
+        "Pour avoir une remontée en temps réel il faut ABSOLUMENT que votre Jeedom soit accessible de l'extérieure (URL d'accès externe utilisée": "Pour avoir une remontée en temps réel il faut ABSOLUMENT que votre Jeedom soit accessible de l'extérieure (URL d'accès externe utilisée",
         "La configuration du plugin est très simple et ce deroule en 2 étapes": "La configuration du plugin est très simple et ce deroule en 2 étapes",
         "mise en place du lien entre votre jeedom et votre alarme": "mise en place du lien entre votre jeedom et votre alarme",
         "ajout d'un partage par mail pour la remontée des évenements": "ajout d'un partage par mail pour la remontée des évenements",
-        "IMPORTANT": "IMPORTANT",
         "Un point important Ajax ne remonte pas d'alerte globale lors d'un déclenchement d'alarme mais remonte le status sur le detecteur qui a déclenché l'alarme (commande evenements": "Un point important Ajax ne remonte pas d'alerte globale lors d'un déclenchement d'alarme mais remonte le status sur le detecteur qui a déclenché l'alarme (commande evenements",
         "Configuration du lien": "Configuration du lien",
         "Pour la mise en place du lien entre votre Jeedom et votre alarme Ajax il faut aller dans \"Plugin\" -> \"Gestion de plugin\" -> \"Ajax Systeme\" puis cliquer sur \"Se connecter\", la vous rentrez vos identifiants Ajax et cliquez sur \"Valider": "Pour la mise en place du lien entre votre Jeedom et votre alarme Ajax il faut aller dans \"Plugin\" -> \"Gestion de plugin\" -> \"Ajax Systeme\" puis cliquer sur \"Se connecter\", la vous rentrez vos identifiants Ajax et cliquez sur \"Valider",

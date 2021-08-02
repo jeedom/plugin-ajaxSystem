@@ -4,6 +4,7 @@
     },
     "index.md": {
         "Ajax System": "Sistema Ajax",
+        "Pour avoir une remontée en temps réel il faut ABSOLUMENT que votre Jeedom soit accessible de l'extérieure (URL d'accès externe utilisée": "Para tener una retroalimentación en tiempo real, es ABSOLUTAMENTE necesario que su Jeedom sea accesible desde el exterior (URL de acceso externo utilizada",
         "La configuration du plugin est très simple et ce deroule en 2 étapes": "La configuración del plugin es muy sencilla y se realiza en 2 pasos",
         "mise en place du lien entre votre jeedom et votre alarme": "configurando el enlace entre tu libertad y tu alarma",
         "ajout d'un partage par mail pour la remontée des évenements": "adición de un correo electrónico para compartir para informar eventos",
