@@ -2,6 +2,10 @@
 
 ## Configuration
 
+>**IMPORTANT**
+>
+>Pour avoir une remontée en temps réel il faut ABSOLUMENT que votre Jeedom soit accessible de l'extérieure (URL d'accès externe utilisée)
+
 La configuration du plugin est très simple et ce deroule en 2 étapes : 
 
 - mise en place du lien entre votre jeedom et votre alarme
