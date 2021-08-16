@@ -2,6 +2,10 @@
 
 ## Configuration
 
+>**WICHTIG**
+>
+>Um ein Echtzeit-Feedback zu erhalten, ist es UNBEDINGT notwendig, dass Ihr Jeedom von außen zugänglich ist (externe Zugriffs-URL verwendet .))
+
 Die Konfiguration des Plugins ist sehr einfach und erfolgt in 2 Schritten : 
 
 - Herstellen der Verbindung zwischen Ihrer Freiheit und Ihrem Alarm
@@ -14,6 +18,10 @@ Die Konfiguration des Plugins ist sehr einfach und erfolgt in 2 Schritten :
 ### Link-Konfiguration 
 
 Um die Verbindung zwischen Ihrem Jeedom und Ihrem Ajax-Alarm herzustellen, gehen Sie zu "Plugin" -> "Plugin-Verwaltung" -> "Ajax-System", klicken Sie auf "Verbinden", geben Sie Ihre Ajax-Kennungen ein und klicken Sie auf "Validieren"".
+
+>**WICHTIG**
+>
+>Wenn Sie ein professionelles Konto haben, sollten Sie es hier nicht verwenden, Sie müssen unbedingt ein einfaches Benutzerkonto verwenden
 
 >**HINWEIS**
 >

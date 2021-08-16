@@ -2,6 +2,10 @@
 
 ## Configuration
 
+>**IMPORTANT**
+>
+>To have a real-time feedback, it is ABSOLUTELY necessary that your Jeedom be accessible from the outside (external access URL used)
+
 The configuration of the plugin is very simple and it takes place in 2 steps : 
 
 - setting up the link between your jeedom and your alarm
@@ -14,6 +18,10 @@ The configuration of the plugin is very simple and it takes place in 2 steps :
 ### Link configuration 
 
 To set up the link between your Jeedom and your Ajax alarm, go to "Plugin" -> "Plugin management" -> "Ajax System" then click on "Connect", you enter your Ajax identifiers and click on "Validate".
+
+>**IMPORTANT**
+>
+>If you have a professional account, you shouldn't use it here, you absolutely have to use a simple user account
 
 >**NOTE**
 >

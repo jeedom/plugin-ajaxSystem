@@ -2,6 +2,10 @@
 
 ## Configuration
 
+>**IMPORTANTE**
+>
+>Para tener una retroalimentación en tiempo real, es ABSOLUTAMENTE necesario que su Jeedom sea accesible desde el exterior (URL de acceso externo utilizada)
+
 La configuración del plugin es muy sencilla y se realiza en 2 pasos : 
 
 - configurando el enlace entre tu libertad y tu alarma
@@ -14,6 +18,10 @@ La configuración del plugin es muy sencilla y se realiza en 2 pasos :
 ### Configuración de enlaces 
 
 Para configurar el enlace entre su Jeedom y su alarma Ajax, vaya a "Complemento" -> "Administración de complementos" -> "Sistema Ajax", luego haga clic en "Conectar", ingrese sus identificadores Ajax y haga clic en "Validar".
+
+>**IMPORTANTE**
+>
+>Si tiene una cuenta profesional, no debe usarla aquí, es absolutamente necesario que use una cuenta de usuario simple
 
 >**NOTA**
 >
