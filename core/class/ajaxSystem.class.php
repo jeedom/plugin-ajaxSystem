@@ -206,6 +206,9 @@ class ajaxSystem extends eqLogic {
       $paths = explode('::', $cmd->getLogicalId());
       $value = $datas;
       foreach ($paths as $key) {
+        if (!isset($value[$key])) {
+          continue 2;
+        }
         $value = $value[$key];
       }
       $this->checkAndUpdateCmd($cmd, $value);
