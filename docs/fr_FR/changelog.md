@@ -6,4 +6,4 @@
 
 # 19/08/2021
 
-- Decalage aléatoire du cron de refresh de 0 à 10min pour essayer de corriger le soucis "You have exceeded the limit in 100 requests per minute"
+- Decalage aléatoire du cron de refresh pour essayer de corriger le soucis "You have exceeded the limit in 100 requests per minute"
