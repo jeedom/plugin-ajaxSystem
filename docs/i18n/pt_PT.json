@@ -1,6 +1,16 @@
 {
     "changelog.md": {
-        "Changelog Ajax Systeme": "Sistema Changelog Ajax"
+        "Changelog Ajax Systeme": "Sistema Changelog Ajax",
+        "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Recorde-se que, se não existe informação sobre a atualização, é porque se trata apenas de atualização de documentação, tradução ou texto",
+        "19\/08\/2021": "19\/08\/2021",
+        "Decalage aléatoire du cron de refresh pour essayer de corriger le soucis \"You have exceeded the limit in 100 requests per minute": "Mudança aleatória do cron de atualização para tentar corrigir o problema \"Você excedeu o limite em 100 solicitações por minuto",
+        " IMPORTANT.": " IMPORTANTE.",
+        " IMPORTANT?": " IMPORTANTE?",
+        "IMPORTANT ": "IMPORTANTE ",
+        " IMPORTANT]": " IMPORTANTE]",
+        "[IMPORTANT]": "[IMPORTANTE]",
+        "*IMPORTANT*": "*IMPORTANTE*",
+        " IMPORTANT*": " IMPORTANTE*"
     },
     "index.md": {
         "Ajax System": "Sistema Ajax",
