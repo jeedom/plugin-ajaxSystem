@@ -68,7 +68,7 @@ class ajaxSystem extends eqLogic {
   public static function cronHourly() {
     foreach (eqLogic::byType('ajaxSystem', true) as $eqLogic) {
       try {
-        sleep(rand(0, 120));
+        sleep(rand(0, 600));
         $eqLogic->refreshData();
       } catch (\Exception $e) {
         log::add('ajaxSystem', 'error', __('Erreur lors de la mise à jour des données de :', __FILE__) . ' ' . $eqLogic->getHumanName() . ' => ' . $e->getMessage(), 'ajaxSystem::failedGetData' . $eqLogic->getId());
