@@ -42,5 +42,7 @@
         "v4"
     ],
     "changelog": "https:\/\/doc.jeedom.com\/#language#\/plugins\/security\/ajaxSystem\/changelog",
-    "documentation": "https:\/\/doc.jeedom.com\/#language#\/plugins\/security\/ajaxSystem\/"
+    "documentation": "https:\/\/doc.jeedom.com\/#language#\/plugins\/security\/ajaxSystem\/",
+    "changelog_beta": "https:\/\/doc.jeedom.com\/#language#\/plugins\/security\/ajaxSystem\/beta\/changelog",
+    "documentation_beta": "https:\/\/doc.jeedom.com\/#language#\/plugins\/security\/ajaxSystem\/beta"
 }
