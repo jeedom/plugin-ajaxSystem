@@ -15,6 +15,10 @@ La configuration du plugin est très simple et ce deroule en 2 étapes :
 >
 >Un point important Ajax ne remonte pas d'alerte globale lors d'un déclenchement d'alarme mais remonte le status sur le detecteur qui a déclenché l'alarme (commande evenements)
 
+## Compatibilité
+
+Vous pouvez trouver [ici](https://compatibility.jeedom.com/index.php?v=d&p=home&plugin=ajaxSystem) la liste des modules compatible avec le plugin
+
 ### Configuration du lien 
 
 Pour la mise en place du lien entre votre Jeedom et votre alarme Ajax il faut aller dans "Plugin" -> "Gestion de plugin" -> "Ajax Systeme" puis cliquer sur "Se connecter", la vous rentrez vos identifiants Ajax et cliquez sur "Valider".
