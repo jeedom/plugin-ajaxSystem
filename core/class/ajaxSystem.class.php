@@ -238,24 +238,23 @@ class ajaxSystemCmd extends cmd {
     if ($eqLogic->getConfiguration('type') == 'hub') {
       if ($this->getLogicalId() == 'ARM') {
         ajaxSystem::request('/user/{userId}/hubs/' . $eqLogic->getLogicalId() . '/commands/arming', array('command' => 'ARM', 'ignoreProblems' => true), 'PUT');
-        sleep(1);
-      }
-      if ($this->getLogicalId() == 'DISARM') {
+      } else if ($this->getLogicalId() == 'DISARM') {
         ajaxSystem::request('/user/{userId}/hubs/' . $eqLogic->getLogicalId() . '/commands/arming', array('command' => 'DISARM', 'ignoreProblems' => true), 'PUT');
-        sleep(1);
-      }
-      if ($this->getLogicalId() == 'NIGHT_MODE') {
+      } else if ($this->getLogicalId() == 'NIGHT_MODE') {
         ajaxSystem::request('/user/{userId}/hubs/' . $eqLogic->getLogicalId() . '/commands/arming', array('command' => 'NIGHT_MODE_ON', 'ignoreProblems' => true), 'PUT');
-        sleep(1);
-      }
-      if ($this->getLogicalId() == 'PANIC') {
+      } else if ($this->getLogicalId() == 'PANIC') {
         ajaxSystem::request('/user/{userId}/hubs/' . $eqLogic->getLogicalId() . '/commands/panic', array('location' => array('latitude' => 0, 'longitude' => 0, 'accuracy' => 0, 'speed' => 0, 'timestamp' => 0)), 'PUT');
-        sleep(1);
-      }
-      if ($this->getLogicalId() == 'muteFireDetectors') {
+      } else if ($this->getLogicalId() == 'muteFireDetectors') {
         ajaxSystem::request('/user/{userId}/hubs/' . $eqLogic->getLogicalId() . '/commands/muteFireDetectors', array('muteType' => 'ALL_FIRE_DETECTORS'), 'PUT');
-        sleep(1);
       }
+      sleep(1);
+    } else if ($eqLogic->getConfiguration('type') == 'device') {
+      $command = array(
+        'command' => $this->getLogicalId(),
+        'deviceType' => $this->getConfiguration('device')
+      );
+      ajaxSystem::request('/user/{userId}/hubs/' . $eqLogic->getConfiguration('hub_id') . '/devices/' . $eqLogic->getLogicalId() . '/command', $command, 'POST');
+      sleep(1);
     }
   }
 
