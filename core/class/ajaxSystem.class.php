@@ -251,7 +251,7 @@ class ajaxSystemCmd extends cmd {
     } else if ($eqLogic->getConfiguration('type') == 'device') {
       $command = array(
         'command' => $this->getLogicalId(),
-        'deviceType' => $this->getConfiguration('device')
+        'deviceType' => $eqLogic->getConfiguration('device')
       );
       ajaxSystem::request('/user/{userId}/hubs/' . $eqLogic->getConfiguration('hub_id') . '/devices/' . $eqLogic->getLogicalId() . '/command', $command, 'POST');
       sleep(1);
