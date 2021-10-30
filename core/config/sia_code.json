@@ -1,0 +1,19 @@
+{
+    "CL" : {"value" : "ARMED","global" : true},
+    "CA" : {"value" : "ARMED","global" : true},
+    "CB" : {"value" : "ARMED","global" : true},
+    "CG" : {"value" : "ARMED","global" : true},
+    "CP" : {"value" : "ARMED","global" : true},
+    "CQ" : {"value" : "ARMED","global" : true},
+    "CS" : {"value" : "ARMED","global" : true},
+    "OA" : {"value" : "DISARMED","global" : true},
+    "OB" : {"value" : "DISARMED","global" : true},
+    "OG" : {"value" : "DISARMED","global" : true},
+    "OP" : {"value" : "DISARMED","global" : true},
+    "OQ" : {"value" : "DISARMED","global" : true},
+    "OR" : {"value" : "DISARMED","global" : true},
+    "OS" : {"value" : "DISARMED","global" : true},
+    "NL" : {"value" : "NIGHT_MODE","global" : true},
+    "NC" : {"value" : "NIGHT_MODE","global" : true},
+    "BA" : {"value" : "ALERT","global" : false}
+}

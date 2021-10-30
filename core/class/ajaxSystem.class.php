@@ -56,7 +56,7 @@ class ajaxSystem extends eqLogic {
     $cmd .= ' --siaport ' . config::byKey('sia::port', 'ajaxSystem');
     $cmd .= ' --account ' . config::byKey('sia::account', 'ajaxSystem');
     $cmd .= ' --key ' . config::byKey('sia::key', 'ajaxSystem');
-    $cmd .= ' --callback ' . network::getNetworkAccess('internal', 'proto:127.0.0.1:port:comp') . '/plugins/ajaxSystem/core/php/jeeAjaxSystem.php';
+    $cmd .= ' --callback ' . network::getNetworkAccess('internal', 'proto:127.0.0.1:port:comp') . '/plugins/ajaxSystem/core/php/jeeAjaxSystemSia.php';
     $cmd .= ' --apikey ' . jeedom::getApiKey('ajaxSystem');
     $cmd .= ' --cycle ' . config::byKey('cycle', 'ajaxSystem');
     $cmd .= ' --pid ' . jeedom::getTmpFolder('ajaxSystem') . '/deamon.pid';
@@ -232,6 +232,56 @@ class ajaxSystem extends eqLogic {
     if ($this->getConfiguration('applyDevice') != $this->getConfiguration('device')) {
       $this->applyModuleConfiguration();
     }
+    $cmd = $this->getCmd(null, 'sia_code');
+    if (!is_object($cmd)) {
+      $cmd = new docker2Cmd();
+      $cmd->setLogicalId('sia_code');
+      $cmd->setName(__('SIA code', __FILE__));
+    }
+    $cmd->setType('info');
+    $cmd->setSubType('string');
+    $cmd->setConfiguration('repeatEventManagement', 'always');
+    $cmd->setEqLogic_id($this->getId());
+    $cmd->save();
+
+
+    $cmd = $this->getCmd(null, 'sia_type');
+    if (!is_object($cmd)) {
+      $cmd = new docker2Cmd();
+      $cmd->setLogicalId('sia_type');
+      $cmd->setName(__('SIA Type', __FILE__));
+    }
+    $cmd->setType('info');
+    $cmd->setSubType('string');
+    $cmd->setConfiguration('repeatEventManagement', 'always');
+    $cmd->setEqLogic_id($this->getId());
+    $cmd->save();
+
+
+    $cmd = $this->getCmd(null, 'sia_description');
+    if (!is_object($cmd)) {
+      $cmd = new docker2Cmd();
+      $cmd->setLogicalId('sia_description');
+      $cmd->setName(__('SIA description', __FILE__));
+    }
+    $cmd->setType('info');
+    $cmd->setSubType('string');
+    $cmd->setConfiguration('repeatEventManagement', 'always');
+    $cmd->setEqLogic_id($this->getId());
+    $cmd->save();
+
+
+    $cmd = $this->getCmd(null, 'sia_concerns');
+    if (!is_object($cmd)) {
+      $cmd = new docker2Cmd();
+      $cmd->setLogicalId('sia_concerns');
+      $cmd->setName(__('SIA concerns', __FILE__));
+    }
+    $cmd->setType('info');
+    $cmd->setSubType('string');
+    $cmd->setConfiguration('repeatEventManagement', 'always');
+    $cmd->setEqLogic_id($this->getId());
+    $cmd->save();
   }
 
   public function applyModuleConfiguration() {

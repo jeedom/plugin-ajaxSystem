@@ -52,7 +52,7 @@ if (!isConnect()) {
       </div>
     </div>
     <div class="form-group">
-      <label class="col-lg-3 control-label">{{Clé de cryptage}}</label>
+      <label class="col-lg-3 control-label">{{Clé de cryptage (longueur : 16,24 ou 32)}}</label>
       <div class="col-md-2">
         <input class="configKey form-control" data-l1key="sia::key" />
       </div>

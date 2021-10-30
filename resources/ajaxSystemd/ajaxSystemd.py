@@ -42,6 +42,7 @@ def func(event: SIAEvent):
     if(info['code'] == 'RP'):
         return
     logging.debug('Got an event : ' + str(json.dumps(info)))
+    shared.JEEDOM_COM.add_changes('devices::'+str(info['message']), info)
 
 
 def listen():
