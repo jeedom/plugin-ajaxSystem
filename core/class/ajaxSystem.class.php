@@ -49,6 +49,12 @@ class ajaxSystem extends eqLogic {
     if ($deamon_info['launchable'] != 'ok') {
       throw new Exception(__('Veuillez vérifier la configuration', __FILE__));
     }
+    if (config::byKey('sia::key', 'ajaxSystem') == '') {
+      config::save('sia::key', mb_strtolower(config::genKey(16)), 'ajaxSystem');
+    }
+    if (config::byKey('sia::account', 'ajaxSystem') == '') {
+      config::save('sia::account', rand(11111, 99999), 'ajaxSystem');
+    }
     $ajaxSystem_path = realpath(dirname(__FILE__) . '/../../resources/ajaxSystemd');
     chdir($ajaxSystem_path);
     $cmd = '/usr/bin/python3 ' . $ajaxSystem_path . '/ajaxSystemd.py';
