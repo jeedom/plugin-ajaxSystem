@@ -26,6 +26,67 @@ class ajaxSystem extends eqLogic {
 
   /*     * ***********************Methode static*************************** */
 
+  public static function deamon_info() {
+    $return = array();
+    $return['log'] = 'ajaxSystem';
+    $return['state'] = 'nok';
+    $pid_file = jeedom::getTmpFolder('ajaxSystem') . '/deamon.pid';
+    if (file_exists($pid_file)) {
+      if (@posix_getsid(trim(file_get_contents($pid_file)))) {
+        $return['state'] = 'ok';
+      } else {
+        shell_exec(system::getCmdSudo() . 'rm -rf ' . $pid_file . ' 2>&1 > /dev/null');
+      }
+    }
+    $return['launchable'] = 'ok';
+    return $return;
+  }
+
+  public static function deamon_start() {
+    log::remove(__CLASS__ . '_update');
+    self::deamon_stop();
+    $deamon_info = self::deamon_info();
+    if ($deamon_info['launchable'] != 'ok') {
+      throw new Exception(__('Veuillez vérifier la configuration', __FILE__));
+    }
+    $ajaxSystem_path = realpath(dirname(__FILE__) . '/../../resources/ajaxSystemd');
+    chdir($ajaxSystem_path);
+    $cmd = '/usr/bin/python3 ' . $ajaxSystem_path . '/ajaxSystemd.py';
+    $cmd .= ' --loglevel ' . log::convertLogLevel(log::getLogLevel('ajaxSystem'));
+    $cmd .= ' --siaport ' . config::byKey('sia::port', 'ajaxSystem');
+    $cmd .= ' --callback ' . network::getNetworkAccess('internal', 'proto:127.0.0.1:port:comp') . '/plugins/ajaxSystem/core/php/jeeAjaxSystem.php';
+    $cmd .= ' --apikey ' . jeedom::getApiKey('ajaxSystem');
+    $cmd .= ' --cycle ' . config::byKey('cycle', 'ajaxSystem');
+    $cmd .= ' --pid ' . jeedom::getTmpFolder('ajaxSystem') . '/deamon.pid';
+    log::add('ajaxSystem', 'info', 'Lancement démon ajaxSystem : ' . $cmd);
+    $result = exec($cmd . ' >> ' . log::getPathToLog('ajaxSystemd') . ' 2>&1 &');
+    $i = 0;
+    while ($i < 30) {
+      $deamon_info = self::deamon_info();
+      if ($deamon_info['state'] == 'ok') {
+        break;
+      }
+      sleep(1);
+      $i++;
+    }
+    if ($i >= 30) {
+      log::add('ajaxSystem', 'error', 'Impossible de lancer le démon ajaxSystemd, vérifiez le log', 'unableStartDeamon');
+      return false;
+    }
+    message::removeAll('ajaxSystem', 'unableStartDeamon');
+    return true;
+  }
+
+  public static function deamon_stop() {
+    $pid_file = jeedom::getTmpFolder('ajaxSystem') . '/deamon.pid';
+    if (file_exists($pid_file)) {
+      $pid = intval(trim(file_get_contents($pid_file)));
+      system::kill($pid);
+    }
+    system::kill('ajaxSystemd.py');
+    system::fuserk(config::byKey('socketport', 'ajaxSystem'));
+  }
+
   public static function request($_path, $_data = null, $_type = 'GET') {
     $url = config::byKey('service::cloud::url') . '/service/ajaxSystem';
     $url .= '?path=' . urlencode(str_replace('{userId}', config::byKey('userId', 'ajaxSystem'), $_path));
