@@ -32,8 +32,19 @@ if (!isset($results['devices'])) {
 
 $eqLogics = ajaxSystem::byType('ajaxSystem');
 
+$globals = array('CL', 'OP', 'NL');
+
 foreach ($results['devices'] as $id => $info) {
     foreach ($eqLogics as $eqLogic) {
+        if (in_array($info['code'], $globals)) {
+            $eqLogic->checkAndUpdateCmd('sia_code', $info['code']);
+            if (isset($info['sia_code'])) {
+                $eqLogic->checkAndUpdateCmd('sia_type', $info['sia_code']['type']);
+                $eqLogic->checkAndUpdateCmd('sia_description', $info['sia_code']['description']);
+                $eqLogic->checkAndUpdateCmd('sia_concerns', $info['sia_code']['concerns']);
+            }
+            continue;
+        }
         if ($eqLogic->getConfiguration('device_number') != $id) {
             continue;
         }
