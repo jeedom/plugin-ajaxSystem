@@ -24,10 +24,11 @@ if (!isConnect()) {
 ?>
 <form class="form-horizontal">
   <fieldset>
+    <legend>{{Configuration connection cloud}}</legend>
     <div class="form-group">
       <label class="col-sm-3 control-label">{{Connection}}</label>
       <div class="col-sm-7">
-        <a class="btn btn-default" id="bt_loginToAjaxSystem" >{{Se connecter}}</a>
+        <a class="btn btn-default" id="bt_loginToAjaxSystem">{{Se connecter}}</a>
       </div>
     </div>
     <div class="form-group">
@@ -36,32 +37,60 @@ if (!isConnect()) {
         <a class="btn btn-default" id="bt_syncWithAjaxSystem"><i class="fas fa-sync"></i> {{Synchroniser mes équipements}}</a>
       </div>
     </div>
+
+    <legend>{{Configuration SIA}}</legend>
+    <div class="form-group">
+      <label class="col-lg-3 control-label">{{Port}}</label>
+      <div class="col-md-2">
+        <input class="configKey form-control" data-l1key="sia::port" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-lg-3 control-label">{{Compte}}</label>
+      <div class="col-md-2">
+        <input class="configKey form-control" data-l1key="sia::account" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-lg-3 control-label">{{Clé de cryptage}}</label>
+      <div class="col-md-2">
+        <input class="configKey form-control" data-l1key="sia::key" />
+      </div>
+    </div>
   </fieldset>
 </form>
 
 <script>
-$('#bt_loginToAjaxSystem').off('click').on('click',function(){
-  $('#md_modal').dialog({title: "{{Connexion à Ajax Systeme}}"}).load('index.php?v=d&modal=login&plugin=ajaxSystem').dialog('open')
-})
+  $('#bt_loginToAjaxSystem').off('click').on('click', function() {
+    $('#md_modal').dialog({
+      title: "{{Connexion à Ajax Systeme}}"
+    }).load('index.php?v=d&modal=login&plugin=ajaxSystem').dialog('open')
+  })
 
-$('#bt_syncWithAjaxSystem').on('click', function () {
-  $.ajax({
-    type: "POST",
-    url: "plugins/ajaxSystem/core/ajax/ajaxSystem.ajax.php",
-    data: {
-      action: "sync",
-    },
-    dataType: 'json',
-    error: function (request, status, error) {
-      handleAjaxError(request, status, error);
-    },
-    success: function (data) {
-      if (data.state != 'ok') {
-        $('#div_alert').showAlert({message: data.result, level: 'danger'});
-        return;
+  $('#bt_syncWithAjaxSystem').on('click', function() {
+    $.ajax({
+      type: "POST",
+      url: "plugins/ajaxSystem/core/ajax/ajaxSystem.ajax.php",
+      data: {
+        action: "sync",
+      },
+      dataType: 'json',
+      error: function(request, status, error) {
+        handleAjaxError(request, status, error);
+      },
+      success: function(data) {
+        if (data.state != 'ok') {
+          $('#div_alert').showAlert({
+            message: data.result,
+            level: 'danger'
+          });
+          return;
+        }
+        $('#div_alert').showAlert({
+          message: '{{Synchronisation réussie}}',
+          level: 'success'
+        });
       }
-      $('#div_alert').showAlert({message: '{{Synchronisation réussie}}', level: 'success'});
-    }
+    });
   });
-});
 </script>

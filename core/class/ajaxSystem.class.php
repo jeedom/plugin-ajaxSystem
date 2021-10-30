@@ -54,6 +54,8 @@ class ajaxSystem extends eqLogic {
     $cmd = '/usr/bin/python3 ' . $ajaxSystem_path . '/ajaxSystemd.py';
     $cmd .= ' --loglevel ' . log::convertLogLevel(log::getLogLevel('ajaxSystem'));
     $cmd .= ' --siaport ' . config::byKey('sia::port', 'ajaxSystem');
+    $cmd .= ' --account ' . config::byKey('sia::account', 'ajaxSystem');
+    $cmd .= ' --key ' . config::byKey('sia::key', 'ajaxSystem');
     $cmd .= ' --callback ' . network::getNetworkAccess('internal', 'proto:127.0.0.1:port:comp') . '/plugins/ajaxSystem/core/php/jeeAjaxSystem.php';
     $cmd .= ' --apikey ' . jeedom::getApiKey('ajaxSystem');
     $cmd .= ' --cycle ' . config::byKey('cycle', 'ajaxSystem');
