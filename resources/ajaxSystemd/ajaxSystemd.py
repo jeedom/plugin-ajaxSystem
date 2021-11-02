@@ -39,7 +39,7 @@ except ImportError:
 
 def func(event: SIAEvent):
     info = get_event_data_from_sia_event(event)
-    if(info['code'] == 'RP'):
+    if info['code'] == 'RP' or info['code'] == 'YG' :
         return
     logging.debug('Got an event : ' + str(json.dumps(info)))
     shared.JEEDOM_COM.add_changes('devices::'+str(info['message']), info)
