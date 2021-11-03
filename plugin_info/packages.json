@@ -1,5 +1,12 @@
 {
+  "apt" : {
+    "python3" : {},
+    "python3-pip" : {}
+  },
   "pip3" : {
     "pySIAAlarm"  : {}
+  },
+  "post-install" : {
+    "script" : "plugins/ajaxSystem/resources/post-install.sh"
   }
 }
