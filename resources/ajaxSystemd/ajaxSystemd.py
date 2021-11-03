@@ -52,7 +52,7 @@ def listen():
     sia_client.start()
 
 
-def get_event_data_from_sia_event(event: SIAEvent) -> dict[str, Any]:
+def get_event_data_from_sia_event(event: SIAEvent):
     return {
         "message_type": event.message_type.value,
         "receiver": event.receiver,
