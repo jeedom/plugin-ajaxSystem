@@ -43,6 +43,22 @@
       "isVisible": 0,
       "isHistorized": 0,
       "logicalId": "currentMA"
+    },
+    {
+      "name": "On",
+      "type": "action",
+      "subtype": "other",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "SWITCH_ON"
+    },
+    {
+      "name": "Off",
+      "type": "action",
+      "subtype": "other",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "SWITCH_OFF"
     }
   ]
 }
