@@ -83,6 +83,10 @@
       "generic_type": "FLOOD",
       "configuration": {
         "repeatEventManagement": "always"
+      },
+      "template":{
+        "dashboard" : "flood",
+        "mobile" : "flood"
       }
     }
   ]
