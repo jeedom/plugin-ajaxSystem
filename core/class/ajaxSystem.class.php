@@ -81,7 +81,7 @@ class ajaxSystem extends eqLogic {
     $cmd .= ' --cycle ' . config::byKey('cycle', 'ajaxSystem');
     $cmd .= ' --pid ' . jeedom::getTmpFolder('ajaxSystem') . '/deamon.pid';
     log::add('ajaxSystem', 'info', 'Lancement démon ajaxSystem : ' . $cmd);
-    $result = exec($cmd . ' >> ' . log::getPathToLog('ajaxSystemd') . ' 2>&1 &');
+    exec($cmd . ' >> ' . log::getPathToLog('ajaxSystemd') . ' 2>&1 &');
     $i = 0;
     while ($i < 30) {
       $deamon_info = self::deamon_info();
