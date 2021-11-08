@@ -26,6 +26,20 @@ class ajaxSystem extends eqLogic {
 
   /*     * ***********************Methode static*************************** */
 
+  public static function templateWidget() {
+    $return = array('info' => array('string' => array()));
+    $return['info']['string']['state'] = array(
+      'template' => 'tmplmultistate',
+      'test' => array(
+        array('operation' => '#value# == "ARMED"', 'state_light' => '<i class="fas fa-lock"></i>'),
+        array('operation' => '#value# == "DISARMED"', 'state_light' => '<i class="fas fa-lock-open"></i>'),
+        array('operation' => '#value# == "NIGHT_MODE"', 'state_light' => '<i class="fas fa-moon"></i>'),
+        array('operation' => '#value# == "PANIC"', 'state_light' => '<i class="fas fa-exclamation-circle"></i>')
+      )
+    );
+    return $return;
+  }
+
   public static function deamon_info() {
     $return = array();
     $return['log'] = 'ajaxSystem';

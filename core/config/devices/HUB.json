@@ -8,7 +8,11 @@
       "isVisible": 1,
       "isHistorized": 0,
       "generic_type": "ALARM_MODE",
-      "logicalId": "state"
+      "logicalId": "state",
+      "template":{
+        "dashboard":"ajaxSystem::state",
+        "mobile":"ajaxSystem::state"
+      }
     },
     {
       "name": "Evenement",
