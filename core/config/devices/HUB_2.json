@@ -33,7 +33,7 @@
       "name": "Trafiqué",
       "type": "info",
       "subtype": "binary",
-      "isVisible": 1,
+      "isVisible": 0,
       "isHistorized": 0,
       "logicalId": "tampered",
       "configuration": {
@@ -44,7 +44,7 @@
       "name": "GSM",
       "type": "info",
       "subtype": "binary",
-      "isVisible": 1,
+      "isVisible": 0,
       "isHistorized": 0,
       "logicalId": "gsm::activeSimCard",
       "configuration": {
@@ -55,7 +55,7 @@
       "name": "Ethernet",
       "type": "info",
       "subtype": "binary",
-      "isVisible": 1,
+      "isVisible": 0,
       "isHistorized": 0,
       "logicalId": "ethernet::enabled",
       "configuration": {
@@ -101,7 +101,7 @@
       "name": "Panic",
       "type": "action",
       "subtype": "other",
-      "isVisible": 1,
+      "isVisible": 0,
       "isHistorized": 0,
       "logicalId": "PANIC"
     },
@@ -109,7 +109,7 @@
       "name": "Arret detection incendie",
       "type": "action",
       "subtype": "other",
-      "isVisible": 1,
+      "isVisible": 0,
       "isHistorized": 0,
       "logicalId": "muteFireDetectors"
     }
