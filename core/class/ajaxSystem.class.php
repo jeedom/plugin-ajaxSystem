@@ -26,6 +26,22 @@ class ajaxSystem extends eqLogic {
 
   /*     * ***********************Methode static*************************** */
 
+  public static function dependancy_info() {
+    $return = array();
+    $return['log'] = 'ajaxSystem_update';
+    $return['progress_file'] = '/tmp/dependancy_ajaxSystem_in_progress';
+    $return['state'] = 'ok';
+    if (exec(system::getCmdSudo() . 'pip3 list | grep -E "pysiaalarm" | wc -l') < 1) {
+      $return['state'] = 'nok';
+    }
+    return $return;
+  }
+
+  public static function dependancy_install() {
+    log::remove(__CLASS__ . '_update');
+    return array('script' => dirname(__FILE__) . '/../../resources/install_#stype#.sh ' . jeedom::getTmpFolder('ajaxSystem') . '/dependance', 'log' => log::getPathToLog(__CLASS__ . '_update'));
+  }
+
   public static function deamon_info() {
     $return = array();
     $return['log'] = 'ajaxSystem';
