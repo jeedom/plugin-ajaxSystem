@@ -26,6 +26,7 @@ class ajaxSystem extends eqLogic {
 
   /*     * ***********************Methode static*************************** */
 
+
   public static function dependancy_info() {
     $return = array();
     $return['log'] = 'ajaxSystem_update';
@@ -40,6 +41,20 @@ class ajaxSystem extends eqLogic {
   public static function dependancy_install() {
     log::remove(__CLASS__ . '_update');
     return array('script' => dirname(__FILE__) . '/../../resources/install_#stype#.sh ' . jeedom::getTmpFolder('ajaxSystem') . '/dependance', 'log' => log::getPathToLog(__CLASS__ . '_update'));
+  }
+
+  public static function templateWidget() {
+    $return = array('info' => array('string' => array()));
+    $return['info']['string']['state'] = array(
+      'template' => 'tmplmultistate',
+      'test' => array(
+        array('operation' => '#value# == "ARMED"', 'state_light' => '<i class="fas fa-lock"></i>'),
+        array('operation' => '#value# == "DISARMED"', 'state_light' => '<i class="fas fa-lock-open"></i>'),
+        array('operation' => '#value# == "NIGHT_MODE"', 'state_light' => '<i class="fas fa-moon"></i>'),
+        array('operation' => '#value# == "PANIC"', 'state_light' => '<i class="fas fa-exclamation-circle"></i>')
+      )
+    );
+    return $return;
   }
 
   public static function deamon_info() {
@@ -83,7 +98,7 @@ class ajaxSystem extends eqLogic {
     $cmd .= ' --cycle ' . config::byKey('cycle', 'ajaxSystem');
     $cmd .= ' --pid ' . jeedom::getTmpFolder('ajaxSystem') . '/deamon.pid';
     log::add('ajaxSystem', 'info', 'Lancement démon ajaxSystem : ' . $cmd);
-    $result = exec($cmd . ' >> ' . log::getPathToLog('ajaxSystemd') . ' 2>&1 &');
+    exec($cmd . ' >> ' . log::getPathToLog('ajaxSystemd') . ' 2>&1 &');
     $i = 0;
     while ($i < 30) {
       $deamon_info = self::deamon_info();

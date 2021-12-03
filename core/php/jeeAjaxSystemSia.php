@@ -32,7 +32,7 @@ if (!isset($results['devices'])) {
 
 $eqLogics = ajaxSystem::byType('ajaxSystem');
 
-$globals = array('CL', 'OP', 'NL');
+$SIA_GLOBALS = array('CL', 'OP', 'NL', 'BR', 'BA');
 
 $SIA_CONVERT = array(
     'CL' => array(array('cmd' => 'state', 'value' => 'ARMED', 'hubOnly' => true)),
@@ -40,10 +40,10 @@ $SIA_CONVERT = array(
     'NL' => array(array('cmd' => 'state', 'value' => 'NIGHT_MODE', 'hubOnly' => true)),
     'PA' => array(array('cmd' => 'state', 'value' => 'PANIC', 'hubOnly' => true)),
     'CF' => array(array('cmd' => 'state', 'value' => 'ARMED', 'hubOnly' => true)),
-    'BA' => array(array('cmd' => 'sia_state', 'value' => 1), array('cmd' => 'reedClosed', 'value' => 1)),
+    'BA' => array(array('cmd' => 'sia_state', 'value' => 1), array('cmd' => 'reedClosed', 'value' => 1)), array('cmd' => 'sia_state_intrusion', 'value' => 1),
     'TA' => array(array('cmd' => 'sia_state_masking', 'value' => 1)),
     'TR' => array(array('cmd' => 'sia_state_masking', 'value' => 0)),
-    'BR' => array(array('cmd' => 'sia_state', 'value' => 0), array('cmd' => 'reedClosed', 'value' => 1)),
+    'BR' => array(array('cmd' => 'sia_state', 'value' => 0), array('cmd' => 'reedClosed', 'value' => 1), array('cmd' => 'sia_state_intrusion', 'value' => 1)),
     'HA' => array(array('cmd' => 'sia_state', 'value' => 1)),
     'FA' => array(array('cmd' => 'sia_state', 'value' => 1)),
     'MA' => array(array('cmd' => 'sia_state', 'value' => 1)),
@@ -64,7 +64,7 @@ $SIA_CONVERT = array(
 
 foreach ($results['devices'] as $id => $info) {
     foreach ($eqLogics as $eqLogic) {
-        if ($eqLogic->getConfiguration('device_number') != $id && (!in_array($info['code'], $globals) || $eqLogic->getConfiguration('type') != 'hub')) {
+        if ($eqLogic->getConfiguration('device_number') != $id && (!in_array($info['code'], $SIA_GLOBALS) || $eqLogic->getConfiguration('type') != 'hub')) {
             continue;
         }
         $eqLogic->checkAndUpdateCmd('sia_code', $info['code']);

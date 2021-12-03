@@ -1,5 +1,5 @@
 {
-  "name" : "Street Siren",
+  "name" : "Home Siren",
   "commands" : [
     {
       "name": "Température",
