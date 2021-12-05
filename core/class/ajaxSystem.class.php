@@ -271,7 +271,7 @@ class ajaxSystem extends eqLogic {
     }
     $cmd = $this->getCmd(null, 'sia_code');
     if (!is_object($cmd)) {
-      $cmd = new docker2Cmd();
+      $cmd = new ajaxSystemCmd();
       $cmd->setLogicalId('sia_code');
       $cmd->setName(__('SIA code', __FILE__));
     }
@@ -284,7 +284,7 @@ class ajaxSystem extends eqLogic {
 
     $cmd = $this->getCmd(null, 'sia_type');
     if (!is_object($cmd)) {
-      $cmd = new docker2Cmd();
+      $cmd = new ajaxSystemCmd();
       $cmd->setLogicalId('sia_type');
       $cmd->setName(__('SIA Type', __FILE__));
     }
@@ -297,7 +297,7 @@ class ajaxSystem extends eqLogic {
 
     $cmd = $this->getCmd(null, 'sia_description');
     if (!is_object($cmd)) {
-      $cmd = new docker2Cmd();
+      $cmd = new ajaxSystemCmd();
       $cmd->setLogicalId('sia_description');
       $cmd->setName(__('SIA description', __FILE__));
     }
@@ -310,7 +310,7 @@ class ajaxSystem extends eqLogic {
 
     $cmd = $this->getCmd(null, 'sia_concerns');
     if (!is_object($cmd)) {
-      $cmd = new docker2Cmd();
+      $cmd = new ajaxSystemCmd();
       $cmd->setLogicalId('sia_concerns');
       $cmd->setName(__('SIA concerns', __FILE__));
     }
