@@ -215,6 +215,7 @@ class ajaxSystem extends eqLogic {
         $eqLogic->setIsVisible(1);
       }
       $eqLogic->setConfiguration('type', 'hub');
+      $eqLogic->setConfiguration('color', $hub_info['color']);
       $eqLogic->setConfiguration('device', $hub_info['hubSubtype']);
       $eqLogic->setConfiguration('ip', $hub_info['ethernet']['ip']);
       $eqLogic->setConfiguration('firmware', $hub_info['firmware']['version']);
@@ -236,6 +237,7 @@ class ajaxSystem extends eqLogic {
         }
         $eqLogic->setConfiguration('hub_id', $hub['hubId']);
         $eqLogic->setConfiguration('type', 'device');
+        $eqLogic->setConfiguration('color', $device_info['color']);
         $eqLogic->setConfiguration('device', $device_info['deviceType']);
         $eqLogic->setConfiguration('firmware', $device_info['firmwareVersion']);
         $eqLogic->setLogicalId($device['id']);
@@ -335,6 +337,9 @@ class ajaxSystem extends eqLogic {
   }
 
   public function getImage() {
+    if (file_exists(__DIR__ . '/../config/devices/' .  $this->getConfiguration('device') . '_' . strtolower($this->getConfiguration('color')) . '.png')) {
+      return 'plugins/ajaxSystem/core/config/devices/' .  $this->getConfiguration('device') . '_' . strtolower($this->getConfiguration('color')) . '.png';
+    }
     if (file_exists(__DIR__ . '/../config/devices/' .  $this->getConfiguration('device') . '.png')) {
       return 'plugins/ajaxSystem/core/config/devices/' .  $this->getConfiguration('device') . '.png';
     }
