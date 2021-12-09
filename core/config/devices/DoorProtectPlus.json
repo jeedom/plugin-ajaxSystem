@@ -50,7 +50,7 @@
       "subtype": "binary",
       "isVisible": 1,
       "isHistorized": 0,
-      "logicalId": "reedContactAware",
+      "logicalId": "extraContactClosed",
       "configuration": {
         "repeatEventManagement": "always"
       }
