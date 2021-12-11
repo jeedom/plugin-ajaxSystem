@@ -4,7 +4,10 @@
     "python3-pip" : {}
   },
   "pip3" : {
-    "pySIAAlarm"  : {}
+    "pySIAAlarm"  : {},
+    "pyserial" : {},
+    "pyudev" : {},
+    "requests" : {}
   },
   "post-install" : {
     "script" : "plugins/ajaxSystem/resources/post-install.sh"

@@ -19,6 +19,11 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				<br>
 				<span>{{Configuration}}</span>
 			</div>
+			<div class="cursor eqLogicAction logoSecondary" id="bt_syncEqLogic">
+				<i class="fas fa-sync-alt"></i>
+				<br>
+				<span>{{Synchronisation}}</span>
+			</div>
 		</div>
 		<legend><i class="fas fa-table"></i> {{Mes équipement Ajax System}}</legend>
 		<!-- Champ de recherche -->
@@ -178,6 +183,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								<th>{{Id}}</th>
 								<th>{{Nom}}</th>
 								<th>{{Type}}</th>
+								<th>{{Logical ID}}</th>
 								<th>{{Options}}</th>
 								<th>{{Paramètres}}</th>
 								<th>{{Action}}</th>

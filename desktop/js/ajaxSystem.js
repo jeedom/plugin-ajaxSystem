@@ -19,6 +19,34 @@ $('.eqLogicAttr[data-l1key=configuration][data-l2key=device]').on('change',funct
   $('#img_ajaxSystemModel').attr('src','plugins/ajaxSystem/core/config/devices/'+$(this).value()+'.png');
 });
 
+$('#bt_syncEqLogic').off('click').on('click', function () {
+  $.ajax({
+    type: "POST",
+    url: "plugins/ajaxSystem/core/ajax/ajaxSystem.ajax.php",
+    data: {
+      action: "sync",
+    },
+    dataType: 'json',
+    error: function(request, status, error) {
+      handleAjaxError(request, status, error);
+    },
+    success: function(data) {
+      if (data.state != 'ok') {
+        $('#div_alert').showAlert({
+          message: data.result,
+          level: 'danger'
+        });
+        return;
+      }
+      $('#div_alert').showAlert({
+        message: '{{Synchronisation réussie}}',
+        level: 'success'
+      });
+      window.location.reload();
+    }
+  });
+});
+
 /*
 * Permet la réorganisation des commandes dans l'équipement
 */
@@ -55,6 +83,9 @@ function addCmdToTable(_cmd) {
   tr += '<td>';
   tr += '<span class="type" type="' + init(_cmd.type) + '">' + jeedom.cmd.availableType() + '</span>';
   tr += '<span class="subType" subType="' + init(_cmd.subType) + '"></span>';
+  tr += '</td>';
+  tr += '<td style="min-width:120px;width:140px;">';
+  tr += '<input class="cmdAttr form-control input-sm" data-l1key="logicalId">';
   tr += '</td>';
   tr += '<td style="min-width:120px;width:140px;">';
   tr += '<div><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="isVisible" checked/>{{Afficher}}</label></div> ';

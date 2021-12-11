@@ -11,7 +11,7 @@ BASEDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 sudo apt-get clean
 echo 30 > ${PROGRESS_FILE}
 sudo apt-get update
-sudo apt-get install -y python3 python3-pip python3-pyudev python3-requests python3-setuptools python3-dev
+sudo apt-get install -y python3 python3-pip python3-serial python3-pyudev python3-requests python3-setuptools python3-dev
 echo 60 > ${PROGRESS_FILE}
 
 ver=$(python3 -V 2>&1 | sed 's/.* \([0-9]\).\([0-9]\).*/\1\2/')
