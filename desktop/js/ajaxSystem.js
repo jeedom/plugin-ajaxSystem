@@ -16,7 +16,15 @@
 */
 
 $('.eqLogicAttr[data-l1key=configuration][data-l2key=device]').on('change',function(){
-  $('#img_ajaxSystemModel').attr('src','plugins/ajaxSystem/core/config/devices/'+$(this).value()+'.png');
+  let color = $('.eqLogicAttr[data-l1key=configuration][data-l2key=color]').value().toLowerCase();
+  let device = $('.eqLogicAttr[data-l1key=configuration][data-l2key=device]').value();
+  $('#img_ajaxSystemModel').attr('src','plugins/ajaxSystem/core/config/devices/'+device+'_'+color+'.png');
+});
+
+$('.eqLogicAttr[data-l1key=configuration][data-l2key=color]').on('change',function(){
+  let color = $('.eqLogicAttr[data-l1key=configuration][data-l2key=color]').value().toLowerCase();
+  let device = $('.eqLogicAttr[data-l1key=configuration][data-l2key=device]').value();
+  $('#img_ajaxSystemModel').attr('src','plugins/ajaxSystem/core/config/devices/'+device+'_'+color+'.png');
 });
 
 $('#bt_syncEqLogic').off('click').on('click', function () {
