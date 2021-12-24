@@ -52,6 +52,9 @@ foreach ($datas['data'] as $data) {
           $value = 'NIGHT_MODE';
         }
       }
+      if ($key == 'hubPowered') {
+        $key = 'externallyPowered';
+      }
       $ajaxSystem->checkAndUpdateCmd($key, $value);
     }
   } else if (isset($data['event'])) {
