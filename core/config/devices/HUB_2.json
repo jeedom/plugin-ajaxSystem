@@ -68,7 +68,7 @@
       "subtype": "binary",
       "isVisible": 1,
       "isHistorized": 0,
-      "logicalId": "externallyPowered",
+      "logicalId": "hubPowered",
       "configuration": {
         "repeatEventManagement": "always"
       }
