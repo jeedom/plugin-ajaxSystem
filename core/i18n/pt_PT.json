@@ -1,9 +1,14 @@
 {
     "plugins\/ajaxSystem\/plugin_info\/configuration.php": {
+        "Configuration connection cloud": "Configuração de conexão de nuvem",
         "Connection": "Conexão",
         "Se connecter": "Entrar",
         "Synchronisation": "Sincronização",
         "Synchroniser mes équipements": "Sincronizar meu equipamento",
+        "Configuration SIA": "Configuração SIA",
+        "Port": "Porto",
+        "Compte": "Conta",
+        "Clé de cryptage (longueur : 16)": "Chave de criptografia (comprimento: 16)",
         "Connexion à Ajax Systeme": "Conexão com Ajax Systeme",
         "Synchronisation réussie": "Sincronização bem sucedida"
     },
@@ -18,6 +23,7 @@
         "401 - Accès non autorisé": "401 - Acesso não autorizado",
         "Gestion": "Gestão",
         "Configuration": "Configuração",
+        "Synchronisation": "Sincronização",
         "Mes équipement Ajax System": "Meu equipamento Ajax System",
         "Rechercher": "Procurar",
         "Configuration avancée": "Configuração avançada",
@@ -35,15 +41,21 @@
         "Visible": "Visível",
         "Type": "Modelo",
         "Inconnu": "Desconhecido",
+        "Couleur": "Cor",
+        "Blanc": "Branco",
+        "Noir": "Noir",
+        "Numéro de l'équipement": "Número do equipamento",
         "Identifiant": "Nome do usuário",
         "IP": "IP",
         "Firmware": "Firmware",
         "Id": "Identidade",
         "Nom": "Sobrenome",
+        "Logical ID": "ID lógico",
         "Paramètres": "Definições",
         "Action": "Açao"
     },
     "plugins\/ajaxSystem\/desktop\/js\/ajaxSystem.js": {
+        "Synchronisation réussie": "Sincronização bem sucedida",
         "Nom de la commande": "Nome do pedido",
         "Commande information liée": "Informações relacionadas ao comando",
         "Aucune": "Algum",
@@ -59,13 +71,21 @@
         "Vous n\\'etes pas autorisé à effectuer cette action. Clef API invalide.": "Você não está autorizado a realizar esta ação. Chave de API inválida",
         "Configuration OK": "Configuração OK"
     },
+    "plugins\/ajaxSystem\/core\/php\/jeeAjaxSystemSia.php": {
+        "Vous n\\'etes pas autorisé à effectuer cette action": "Você não está autorizado a realizar esta ação"
+    },
     "plugins\/ajaxSystem\/core\/ajax\/ajaxSystem.ajax.php": {
         "401 - Accès non autorisé": "401 - Acesso não autorizado",
         "Aucune méthode correspondante à : ": "Nenhum método correspondente a:"
     },
     "plugins\/ajaxSystem\/core\/class\/ajaxSystem.class.php": {
+        "Veuillez vérifier la configuration": "Por favor, verifique a configuração",
         "Erreur lors de la requete à Ajax System : ": "Erro ao solicitar Sistema Ajax:",
-        "Erreur lors de la mise à jour des données de :": "Erro ao atualizar dados de:"
+        "Erreur lors de la mise à jour des données de :": "Erro ao atualizar dados de:",
+        "SIA code": "Código SIA",
+        "SIA Type": "Tipo SIA",
+        "SIA description": "Descrição SIA",
+        "SIA concerns": "Preocupações da SIA"
     },
     "info.json": {
         "Plugin servant à se connecter à une alarme Ajax": "Plugin usado para conectar a um alarme Ajax"
