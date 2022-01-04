@@ -14,6 +14,7 @@ sudo apt-get update
 sudo apt-get install -y python3 python3-pip python3-serial python3-pyudev python3-requests python3-setuptools python3-dev
 echo 60 > ${PROGRESS_FILE}
 
+sudo pip3 uninstall pysiaalarm
 sudo pip3 install pysiaalarm
 
 if [ $(sudo pip3 list | grep -E "pysiaalarm" | wc -l) -gt 0 ]; then
