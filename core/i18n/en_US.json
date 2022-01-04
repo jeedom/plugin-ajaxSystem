@@ -1,9 +1,14 @@
 {
     "plugins\/ajaxSystem\/plugin_info\/configuration.php": {
+        "Configuration connection cloud": "Cloud connection configuration",
         "Connection": "Connection",
         "Se connecter": "To log in",
         "Synchronisation": "Synchronization",
         "Synchroniser mes équipements": "Synchronize my equipment",
+        "Configuration SIA": "SIA configuration",
+        "Port": "Harbor",
+        "Compte": "Account",
+        "Clé de cryptage (longueur : 16)": "Encryption key (length: 16)",
         "Connexion à Ajax Systeme": "Connection to Ajax Systeme",
         "Synchronisation réussie": "Synchronization successful"
     },
@@ -18,6 +23,7 @@
         "401 - Accès non autorisé": "401 - Unauthorized Access",
         "Gestion": "Management",
         "Configuration": "Configuration",
+        "Synchronisation": "Synchronization",
         "Mes équipement Ajax System": "My Ajax System equipment",
         "Rechercher": "Search",
         "Configuration avancée": "Advanced configuration",
@@ -35,15 +41,21 @@
         "Visible": "Visible",
         "Type": "Type",
         "Inconnu": "Unknown",
+        "Couleur": "Color",
+        "Blanc": "White",
+        "Noir": "Noir",
+        "Numéro de l'équipement": "Equipment number",
         "Identifiant": "Username",
         "IP": "IP",
         "Firmware": "Firmware",
         "Id": "Id",
         "Nom": "Last name",
+        "Logical ID": "Logical ID",
         "Paramètres": "Settings",
         "Action": "Action"
     },
     "plugins\/ajaxSystem\/desktop\/js\/ajaxSystem.js": {
+        "Synchronisation réussie": "Synchronization successful",
         "Nom de la commande": "Order name",
         "Commande information liée": "Command related information",
         "Aucune": "Any",
@@ -59,13 +71,21 @@
         "Vous n\\'etes pas autorisé à effectuer cette action. Clef API invalide.": "You are not authorized to perform this action. Invalid API key",
         "Configuration OK": "Configuration OK"
     },
+    "plugins\/ajaxSystem\/core\/php\/jeeAjaxSystemSia.php": {
+        "Vous n\\'etes pas autorisé à effectuer cette action": "You are not authorized to perform this action"
+    },
     "plugins\/ajaxSystem\/core\/ajax\/ajaxSystem.ajax.php": {
         "401 - Accès non autorisé": "401 - Unauthorized Access",
         "Aucune méthode correspondante à : ": "No method corresponding to:"
     },
     "plugins\/ajaxSystem\/core\/class\/ajaxSystem.class.php": {
+        "Veuillez vérifier la configuration": "Please check the configuration",
         "Erreur lors de la requete à Ajax System : ": "Error when requesting Ajax System:",
-        "Erreur lors de la mise à jour des données de :": "Error updating data from:"
+        "Erreur lors de la mise à jour des données de :": "Error updating data from:",
+        "SIA code": "SIA code",
+        "SIA Type": "SIA Type",
+        "SIA description": "SIA description",
+        "SIA concerns": "SIA concerns"
     },
     "info.json": {
         "Plugin servant à se connecter à une alarme Ajax": "Plugin used to connect to an Ajax alarm"

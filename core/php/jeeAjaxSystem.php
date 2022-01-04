@@ -42,7 +42,7 @@ foreach ($datas['data'] as $data) {
     if (!is_object($ajaxSystem)) {
       continue;
     }
-    foreach ($data['updates'] as $key => $value) {
+    foreach ($data['updates'] as $key => &$value) {
       if ($data['type'] == 'HUB' && $key == 'state') {
         if ($value == 0) {
           $value = 'DISARMED';
@@ -52,7 +52,11 @@ foreach ($datas['data'] as $data) {
           $value = 'NIGHT_MODE';
         }
       }
-      $ajaxSystem->checkAndUpdateCmd($key, $value);
+      $convert_key = $key;
+      if ($convert_key == 'hubPowered') {
+        $convert_key = 'externallyPowered';
+      }
+      $ajaxSystem->checkAndUpdateCmd($convert_key, $value);
     }
   } else if (isset($data['event'])) {
     if (!isset($data['event']['sourceObjectId'])) {

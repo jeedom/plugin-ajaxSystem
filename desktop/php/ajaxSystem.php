@@ -135,6 +135,15 @@ $eqLogics = eqLogic::byType($plugin->getId());
 									</div>
 								</div>
 								<div class="form-group">
+									<label class="col-sm-3 control-label">{{Couleur}}</label>
+									<div class="col-sm-6">
+										<select disabled class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="color">
+											<option value="WHITE">{{Blanc}}</option>
+											<option value="BLACK">{{Noir}}</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
 									<label class="col-sm-3 control-label">{{Numéro de l'équipement}}</label>
 									<div class="col-sm-1">
 										<input type="number" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="device_number" />
