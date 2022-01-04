@@ -9,6 +9,7 @@
 - Optimisation de l'installation des dépendances
 - Correction de la gestion des couleurs de l'équipements
 - Ajout du Dual Curtain Outdoor
+- Ajout Wall Switch
 
 # 11/12/2021
 
