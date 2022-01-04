@@ -14,11 +14,10 @@ sudo apt-get update
 sudo apt-get install -y python3 python3-pip python3-serial python3-pyudev python3-requests python3-setuptools python3-dev
 echo 60 > ${PROGRESS_FILE}
 
-ver=$(python3 -V 2>&1 | sed 's/.* \([0-9]\).\([0-9]\).*/\1\2/')
-if [ "$ver" -lt "38" ]; then
+sudo pip3 install pysiaalarm
+
+if [ $(sudo pip3 list | grep -E "pysiaalarm" | wc -l) -gt 0 ]; then
    sudo pip3 install pysiaalarm==3.0.0b9
-else
-   sudo pip3 install pysiaalarm
 fi
 
 rm ${PROGRESS_FILE}
