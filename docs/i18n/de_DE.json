@@ -2,7 +2,11 @@
     "changelog.md": {
         "Changelog Ajax Systems": "Änderungsprotokoll Ajax-Systeme",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Zur Erinnerung: Wenn keine Informationen zur Aktualisierung vorliegen, liegt dies daran, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt",
+        "04\/01\/2022": "01.04.2022",
+        "Optimisation de l'installation des dépendances": "Optimierung der Installation von Abhängigkeiten",
         "Correction de la gestion des couleurs de l'équipements": "Korrektur des Farbmanagements der Geräte",
+        "Ajout du Dual Curtain Outdoor": "Ergänzung des Dual Curtain Outdoor",
+        "Ajout Wall Switch": "Wandschalter hinzufügen",
         "11\/12\/2021": "12.11.2021",
         "Gestion de la couleur des modules pour afficher la bonne image (necessite de refaire une synchronisation": "Farbmanagement der Module, um das richtige Bild anzuzeigen (eine Synchronisierung muss erneut durchgeführt werden",
         "Correction d'un soucis sur les entrées externe des DoorProtect (une supression des équipements et resynchronisation est necessaire": "Behebung eines Problems an den externen Eingängen von DoorProtect (ein Ausbau des Gerätes und Neusynchronisation ist notwendig",
