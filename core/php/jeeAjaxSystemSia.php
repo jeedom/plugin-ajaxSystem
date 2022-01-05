@@ -56,8 +56,8 @@ $SIA_CONVERT = array(
     'YQ' => array(array('cmd' => 'externallyPowered', 'value' => 0)),
     'WA' => array(array('cmd' => 'leakDetected', 'value' => 1)),
     'WH' => array(array('cmd' => 'leakDetected', 'value' => 1)),
-    'AT' => array(array('cmd' => 'externallyPowered', 'value' => 1)),
-    'AR' => array(array('cmd' => 'externallyPowered', 'value' => 0)),
+    'AT' => array(array('cmd' => 'externallyPowered', 'value' => 0)),
+    'AR' => array(array('cmd' => 'externallyPowered', 'value' => 1)),
     'BV' => array(array('cmd' => 'sia_state_intrusion', 'value' => 1)),
     'HV' => array(array('cmd' => 'sia_state_intrusion', 'value' => 1))
 );
