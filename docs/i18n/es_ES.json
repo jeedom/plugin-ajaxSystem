@@ -2,6 +2,8 @@
     "changelog.md": {
         "Changelog Ajax Systems": "Registro de cambios de sistemas Ajax",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Como recordatorio, si no hay información sobre la actualización es porque se trata solo de la actualización de la documentación, la traducción o el texto",
+        "05\/01\/2021": "01\/05\/2021",
+        "Correction d'un soucis pour Socket": "Se solucionó un problema para Socket",
         "04\/01\/2022": "01\/04\/2022",
         "Optimisation de l'installation des dépendances": "Optimización de la instalación de dependencias",
         "Correction de la gestion des couleurs de l'équipements": "Corrección de la gestión del color del equipo",
