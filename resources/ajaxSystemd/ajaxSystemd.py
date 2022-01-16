@@ -46,7 +46,7 @@ def func(event: SIAEvent):
 
 
 def listen():
-    account = [SIAAccount(_account, _key)]
+    account = [SIAAccount(_account, _key,(3600,3600))]
     sia_client = SIAClient('', _siaport, account, function=func,
                            protocol=CommunicationsProtocol('TCP'))
     sia_client.start()
