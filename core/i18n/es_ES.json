@@ -43,7 +43,7 @@
         "Inconnu": "Desconocido",
         "Couleur": "Color",
         "Blanc": "Blanco, Blanca",
-        "Noir": "Noir",
+        "Noir": "Negro",
         "Numéro de l'équipement": "Número de equipo",
         "Identifiant": "Nombre de usuario",
         "IP": "IP",
@@ -63,8 +63,8 @@
         "Afficher": "Monitor",
         "Historiser": "Historizar",
         "Inverser": "Contrarrestar",
-        "Min.": "Min.",
-        "Max.": "Max.",
+        "Min.": "Mín.",
+        "Max.": "Máx.",
         "Unité": "Unidad"
     },
     "plugins\/ajaxSystem\/core\/php\/jeeAjaxSystem.php": {
