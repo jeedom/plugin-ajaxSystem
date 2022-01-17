@@ -84,6 +84,9 @@
       "configuration": {
         "repeatEventManagement": "always"
       },
+      "display": {
+        "invertBinary" : 1
+      },
       "template":{
         "dashboard" : "flood",
         "mobile" : "flood"
