@@ -168,10 +168,16 @@ class ajaxSystem extends eqLogic {
   public static function refreshAllData() {
     foreach (eqLogic::byType('ajaxSystem', true) as $eqLogic) {
       try {
-        sleep(rand(0, 120));
+        sleep(rand(0, 10));
         $eqLogic->refreshData();
+        if ($eqLogic->getCache('failedAjaxRequest', 0) > 0) {
+          $eqLogic->setCache('failedAjaxRequest', 0);
+        }
       } catch (\Exception $e) {
-        log::add('ajaxSystem', 'error', __('Erreur lors de la mise à jour des données de :', __FILE__) . ' ' . $eqLogic->getHumanName() . ' => ' . $e->getMessage(), 'ajaxSystem::failedGetData' . $eqLogic->getId());
+        $eqLogic->setCache('failedAjaxRequest', $eqLogic->getCache('failedAjaxRequest', 0) + 1);
+        if ($eqLogic->getCache('failedAjaxRequest', 0) > 3) {
+          log::add('ajaxSystem', 'error', __('Erreur lors de la mise à jour des données de :', __FILE__) . ' ' . $eqLogic->getHumanName() . ' => ' . $e->getMessage(), 'ajaxSystem::failedGetData' . $eqLogic->getId());
+        }
       }
     }
   }
