@@ -47,7 +47,7 @@
       "subtype": "binary",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "gsm::activeSimCard",
+      "logicalId": "gsmNetworkStatus",
       "configuration": {
         "repeatEventManagement": "always"
       }
