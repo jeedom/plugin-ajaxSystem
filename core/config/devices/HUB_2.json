@@ -51,6 +51,39 @@
         "repeatEventManagement": "always"
       }
     },
+	{
+      "name": "Intensité du signal cellulaire",
+      "type": "info",
+      "subtype": "binary",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "gsm::signalLevel",
+      "configuration": {
+        "repeatEventManagement": "always"
+      }
+    },
+	{
+      "name": "Type réseau GSM",
+      "type": "info",
+      "subtype": "string",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "gsm::networkStatus",
+      "configuration": {
+        "repeatEventManagement": "always"
+      }
+    },
+	{
+      "name": "Données cellulaires actives",
+      "type": "info",
+      "subtype": "binary",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "gsm::gprsEnabled",
+      "configuration": {
+        "repeatEventManagement": "always"
+      }
+    },
     {
       "name": "Ethernet",
       "type": "info",
@@ -69,6 +102,28 @@
       "isVisible": 1,
       "isHistorized": 0,
       "logicalId": "externallyPowered",
+      "configuration": {
+        "repeatEventManagement": "always"
+      }
+    },
+	{
+      "name": "Etat de la batterie",
+      "type": "info",
+      "subtype": "string",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "battery::state",
+      "configuration": {
+        "repeatEventManagement": "always"
+      }
+    },
+	{
+      "name": "Batterie",
+      "type": "info",
+      "subtype": "numeric",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "battery::chargeLevelPercentage",
       "configuration": {
         "repeatEventManagement": "always"
       }
