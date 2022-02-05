@@ -14,7 +14,7 @@
     },
     "plugins\/ajaxSystem\/desktop\/modal\/login.php": {
         "401 - Accès non autorisé": "401 - Unauthorized Access",
-        "Nom d'utilisateur": "Username",
+        "Nom d'utilisateur (email)": "Username (email)",
         "Mot de passe": "Password",
         "Valider": "Validate",
         "Connexion réussie": "Successful connection"
