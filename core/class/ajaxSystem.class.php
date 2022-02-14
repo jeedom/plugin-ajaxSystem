@@ -145,6 +145,7 @@ class ajaxSystem extends eqLogic {
       'Content-Type: application/json',
       'Autorization: ' . sha512(mb_strtolower(config::byKey('market::username')) . ':' . config::byKey('market::password'))
     ));
+    log::add('ajaxSystem', 'debug', '[request] ' . $url . ' => ' . json_encode($_data));
     if ($_type == 'POST') {
       $request_http->setPost(json_encode($_data));
     }
@@ -190,6 +191,7 @@ class ajaxSystem extends eqLogic {
       'apikey' => jeedom::getApiKey('ajaxSystem'),
       'url' => network::getNetworkAccess('external')
     ), 'POST');
+    log::add('ajaxSystem', 'debug', '[login] ' . json_encode($data));
     config::save('refreshToken', $data['refreshToken'], 'ajaxSystem');
     config::save('userId', $data['userId'], 'ajaxSystem');
     cache::set('ajaxSystem::sessionToken', $data['sessionToken'], 60 * 14);
@@ -200,6 +202,7 @@ class ajaxSystem extends eqLogic {
       'userId' => config::byKey('userId', 'ajaxSystem'),
       'refreshToken' => config::byKey('refreshToken', 'ajaxSystem')
     ), 'POST');
+    log::add('ajaxSystem', 'debug', '[refreshToken] ' . json_encode($data));
     config::save('refreshToken', $data['refreshToken'], 'ajaxSystem');
     cache::set('ajaxSystem::sessionToken', $data['sessionToken'], 60 * 14);
     return $data['sessionToken'];
