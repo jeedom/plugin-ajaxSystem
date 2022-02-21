@@ -1,5 +1,8 @@
 {
-  "name" : "Home Siren",
+  "name" : "Street Siren",
+      "configuration" : {
+		"battery_type" : "4xCR123A"
+  },
   "commands" : [
     {
       "name": "Température",
@@ -10,6 +13,17 @@
       "logicalId": "temperature",
       "generic_type": "TEMPERATURE",
       "unite" : "°C"
+    },
+    {
+      "name": "Etat",
+      "type": "info",
+      "subtype": "binary",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "buzzerState",
+      "configuration": {
+        "repeatEventManagement": "always"
+      }
     }
   ]
 }

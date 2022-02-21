@@ -14,7 +14,7 @@
     },
     "plugins\/ajaxSystem\/desktop\/modal\/login.php": {
         "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
-        "Nom d'utilisateur": "Nutzername",
+        "Nom d'utilisateur (email)": "Benutzername (E-Mail)",
         "Mot de passe": "Passwort",
         "Valider": "Bestätigen",
         "Connexion réussie": "Erfolgreiche Verbindung"
@@ -43,10 +43,10 @@
         "Inconnu": "Unbekannt",
         "Couleur": "Farbe",
         "Blanc": "Weiß",
-        "Noir": "Noir",
+        "Noir": "Schwarz",
         "Numéro de l'équipement": "Gerätenummer",
         "Identifiant": "Nutzername",
-        "IP": "IP",
+        "IP": "IPs",
         "Firmware": "Firmware",
         "Id": "Ich würde",
         "Nom": "Nachname",

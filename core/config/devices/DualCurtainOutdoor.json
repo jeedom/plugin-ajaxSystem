@@ -1,5 +1,8 @@
 {
   "name" : "DualCurtain Outdoor",
+        "configuration" : {
+		"battery_type" : "2xCR123A"
+  },
   "commands" : [
     {
       "name": "Etat",

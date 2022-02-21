@@ -14,7 +14,7 @@
     },
     "plugins\/ajaxSystem\/desktop\/modal\/login.php": {
         "401 - Accès non autorisé": "401 - Acceso no autorizado",
-        "Nom d'utilisateur": "Nombre del usuario",
+        "Nom d'utilisateur (email)": "Nombre de usuario (correo electrónico)",
         "Mot de passe": "Contraseña",
         "Valider": "Validar",
         "Connexion réussie": "Conexión exitosa"
@@ -43,7 +43,7 @@
         "Inconnu": "Desconocido",
         "Couleur": "Color",
         "Blanc": "Blanco, Blanca",
-        "Noir": "Noir",
+        "Noir": "Negro",
         "Numéro de l'équipement": "Número de equipo",
         "Identifiant": "Nombre de usuario",
         "IP": "IP",
@@ -63,8 +63,8 @@
         "Afficher": "Monitor",
         "Historiser": "Historizar",
         "Inverser": "Contrarrestar",
-        "Min.": "Min.",
-        "Max.": "Max.",
+        "Min.": "Mín.",
+        "Max.": "Máx.",
         "Unité": "Unidad"
     },
     "plugins\/ajaxSystem\/core\/php\/jeeAjaxSystem.php": {

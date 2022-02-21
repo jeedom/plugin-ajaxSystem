@@ -25,47 +25,53 @@ if (!isConnect('admin')) {
 <form class="form-horizontal">
   <fieldset>
     <div class="form-group netatmomode internal">
-      <label class="col-sm-2 control-label">{{Nom d'utilisateur}}</label>
+      <label class="col-sm-2 control-label">{{Nom d'utilisateur (email)}}</label>
       <div class="col-sm-3">
-        <input type="text" class="form-control" id="in_ajaxSystemLogin_username" placeholder="{{Nom d'utilisateur}}"/>
+        <input type="text" class="form-control" id="in_ajaxSystemLogin_username" placeholder="{{Nom d'utilisateur (email)}}" />
       </div>
     </div>
     <div class="form-group netatmomode internal">
       <label class="col-sm-2 control-label">{{Mot de passe}}</label>
       <div class="col-sm-3">
-        <input type="password" class="form-control" id="in_ajaxSystemLogin_password" placeholder="{{Mot de passe}}"/>
+        <input type="password" class="form-control" id="in_ajaxSystemLogin_password" placeholder="{{Mot de passe}}" />
       </div>
     </div>
     <div class="form-group">
       <label class="col-sm-2 control-label"></label>
       <div class="col-sm-7">
-        <a class="btn btn-success" id="bt_validateLoginToAjaxSystem" >{{Valider}}</a>
+        <a class="btn btn-success" id="bt_validateLoginToAjaxSystem">{{Valider}}</a>
       </div>
     </div>
   </fieldset>
 </form>
 
 <script>
-$('#bt_validateLoginToAjaxSystem').off('click').on('click',function(){
-  $.ajax({
-    type: "POST",
-    url: "plugins/ajaxSystem/core/ajax/ajaxSystem.ajax.php",
-    data: {
-      action: "login",
-      username : $('#in_ajaxSystemLogin_username').value(),
-      password : $('#in_ajaxSystemLogin_password').value()
-    },
-    dataType: 'json',
-    error: function (request, status, error) {
-      handleAjaxError(request, status, error);
-    },
-    success: function (data) {
-      if (data.state != 'ok') {
-        $('#div_ajaxSystemLoginAlert').showAlert({message: data.result, level: 'danger'});
-        return;
+  $('#bt_validateLoginToAjaxSystem').off('click').on('click', function() {
+    $.ajax({
+      type: "POST",
+      url: "plugins/ajaxSystem/core/ajax/ajaxSystem.ajax.php",
+      data: {
+        action: "login",
+        username: $('#in_ajaxSystemLogin_username').value(),
+        password: $('#in_ajaxSystemLogin_password').value()
+      },
+      dataType: 'json',
+      error: function(request, status, error) {
+        handleAjaxError(request, status, error);
+      },
+      success: function(data) {
+        if (data.state != 'ok') {
+          $('#div_ajaxSystemLoginAlert').showAlert({
+            message: data.result,
+            level: 'danger'
+          });
+          return;
+        }
+        $('#div_ajaxSystemLoginAlert').showAlert({
+          message: '{{Connexion réussie}}',
+          level: 'success'
+        });
       }
-      $('#div_ajaxSystemLoginAlert').showAlert({message: '{{Connexion réussie}}', level: 'success'});
-    }
-  });
-})
+    });
+  })
 </script>

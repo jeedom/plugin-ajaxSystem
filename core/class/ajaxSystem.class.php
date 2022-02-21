@@ -145,6 +145,7 @@ class ajaxSystem extends eqLogic {
       'Content-Type: application/json',
       'Autorization: ' . sha512(mb_strtolower(config::byKey('market::username')) . ':' . config::byKey('market::password'))
     ));
+    log::add('ajaxSystem', 'debug', '[request] ' . $url . ' => ' . json_encode($_data));
     if ($_type == 'POST') {
       $request_http->setPost(json_encode($_data));
     }
@@ -168,10 +169,16 @@ class ajaxSystem extends eqLogic {
   public static function refreshAllData() {
     foreach (eqLogic::byType('ajaxSystem', true) as $eqLogic) {
       try {
-        sleep(rand(0, 120));
+        sleep(rand(0, 10));
         $eqLogic->refreshData();
+        if ($eqLogic->getCache('failedAjaxRequest', 0) > 0) {
+          $eqLogic->setCache('failedAjaxRequest', 0);
+        }
       } catch (\Exception $e) {
-        log::add('ajaxSystem', 'error', __('Erreur lors de la mise à jour des données de :', __FILE__) . ' ' . $eqLogic->getHumanName() . ' => ' . $e->getMessage(), 'ajaxSystem::failedGetData' . $eqLogic->getId());
+        $eqLogic->setCache('failedAjaxRequest', $eqLogic->getCache('failedAjaxRequest', 0) + 1);
+        if ($eqLogic->getCache('failedAjaxRequest', 0) > 3) {
+          log::add('ajaxSystem', 'error', __('Erreur lors de la mise à jour des données de :', __FILE__) . ' ' . $eqLogic->getHumanName() . ' => ' . $e->getMessage(), 'ajaxSystem::failedGetData' . $eqLogic->getId());
+        }
       }
     }
   }
@@ -184,6 +191,7 @@ class ajaxSystem extends eqLogic {
       'apikey' => jeedom::getApiKey('ajaxSystem'),
       'url' => network::getNetworkAccess('external')
     ), 'POST');
+    log::add('ajaxSystem', 'debug', '[login] ' . json_encode($data));
     config::save('refreshToken', $data['refreshToken'], 'ajaxSystem');
     config::save('userId', $data['userId'], 'ajaxSystem');
     cache::set('ajaxSystem::sessionToken', $data['sessionToken'], 60 * 14);
@@ -194,6 +202,7 @@ class ajaxSystem extends eqLogic {
       'userId' => config::byKey('userId', 'ajaxSystem'),
       'refreshToken' => config::byKey('refreshToken', 'ajaxSystem')
     ), 'POST');
+    log::add('ajaxSystem', 'debug', '[refreshToken] ' . json_encode($data));
     config::save('refreshToken', $data['refreshToken'], 'ajaxSystem');
     cache::set('ajaxSystem::sessionToken', $data['sessionToken'], 60 * 14);
     return $data['sessionToken'];
