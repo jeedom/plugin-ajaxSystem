@@ -173,7 +173,7 @@ class ajaxSystem extends eqLogic {
   public static function refreshAllData() {
     foreach (eqLogic::byType('ajaxSystem', true) as $eqLogic) {
       try {
-        sleep(rand(0, 10));
+        sleep(rand(10, 60));
         $eqLogic->refreshData();
         if ($eqLogic->getCache('failedAjaxRequest', 0) > 0) {
           $eqLogic->setCache('failedAjaxRequest', 0);
