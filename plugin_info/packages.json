@@ -8,7 +8,7 @@
     "pyserial" : {},
     "pyudev" : {},
     "requests" : {},
-    "pycrypto" : {}
+    "pycryptodome" : {}
   },
   "post-install" : {
     "script" : "plugins/ajaxSystem/resources/post-install.sh"
