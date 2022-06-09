@@ -20,31 +20,14 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
 
 // Fonction exécutée automatiquement après l'installation du plugin
 function ajaxSystem_install() {
-  $cron = cron::byClassAndFunction('ajaxSystem', 'refreshAllData');
-  if (!is_object($cron)) {
-    $cron = new cron();
-    $cron->setClass('ajaxSystem');
-    $cron->setFunction('refreshAllData');
-    $cron->setSchedule(rand(10, 59) . ' '.rand(0, 23).' * * *');
-    $cron->setEnable(1);
-    $cron->setDeamon(0);
-    $cron->setTimeout(60);
-    $cron->save();
-  }
+  
 }
 
 // Fonction exécutée automatiquement après la mise à jour du plugin
 function ajaxSystem_update() {
   $cron = cron::byClassAndFunction('ajaxSystem', 'refreshAllData');
-  if (!is_object($cron)) {
-    $cron = new cron();
-    $cron->setClass('ajaxSystem');
-    $cron->setFunction('refreshAllData');
-    $cron->setSchedule(rand(10, 59) . ' '.rand(0, 23).' * * *');
-    $cron->setEnable(1);
-    $cron->setDeamon(0);
-    $cron->setTimeout(60);
-    $cron->save();
+  if (is_object($cron)) {
+    $cron->remove();
   }
   foreach (eqLogic::byType('ajaxSystem') as $eqLogic) {
     $cmd = $eqLogic->getCm('action', 'refresh');
