@@ -39,11 +39,11 @@
         "Options": "Options",
         "Activer": "Activate",
         "Visible": "Visible",
-        "Type": "Type",
+        "Type": "Kind",
         "Inconnu": "Unknown",
         "Couleur": "Color",
         "Blanc": "White",
-        "Noir": "Noir",
+        "Noir": "Black",
         "Numéro de l'équipement": "Equipment number",
         "Identifiant": "Username",
         "IP": "IPs",
@@ -52,7 +52,7 @@
         "Nom": "Last name",
         "Logical ID": "Logical ID",
         "Paramètres": "Settings",
-        "Action": "Action"
+        "Action": "Stock"
     },
     "plugins\/ajaxSystem\/desktop\/js\/ajaxSystem.js": {
         "Synchronisation réussie": "Synchronization successful",
