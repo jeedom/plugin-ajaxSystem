@@ -4,7 +4,7 @@
     "python3-pip" : {}
   },
   "pip3" : {
-    "pySIAAlarm"  : {},
+    "pySIAAlarm"  : {"reinstall" : true},
     "pyserial" : {},
     "pyudev" : {},
     "requests" : {},
