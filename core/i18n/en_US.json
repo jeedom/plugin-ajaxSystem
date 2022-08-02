@@ -82,6 +82,7 @@
         "Veuillez vérifier la configuration": "Please check the configuration",
         "Erreur lors de la requete à Ajax System : ": "Error when requesting Ajax System:",
         "Erreur lors de la mise à jour des données de :": "Error updating data from:",
+        "Impossible de mettre à jour les tokens d\\'accès, refresh token vide : ": "Unable to update access tokens, refresh token empty:",
         "SIA code": "SIA code",
         "SIA Type": "AIS Type",
         "SIA description": "AIS description",

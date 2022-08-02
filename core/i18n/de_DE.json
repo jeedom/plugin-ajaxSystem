@@ -82,6 +82,7 @@
         "Veuillez vérifier la configuration": "Bitte überprüfen Sie die Konfiguration",
         "Erreur lors de la requete à Ajax System : ": "Fehler beim Anfordern von Ajax System:",
         "Erreur lors de la mise à jour des données de :": "Fehler beim Aktualisieren der Daten von:",
+        "Impossible de mettre à jour les tokens d\\'accès, refresh token vide : ": "Zugriffstoken können nicht aktualisiert werden, Aktualisierungstoken leer:",
         "SIA code": "SIA-Code",
         "SIA Type": "SIA-Typ",
         "SIA description": "SIA-Beschreibung",
