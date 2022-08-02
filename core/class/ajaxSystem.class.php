@@ -207,6 +207,18 @@ class ajaxSystem extends eqLogic {
       'refreshToken' => config::byKey('refreshToken', 'ajaxSystem')
     ), 'POST');
     log::add('ajaxSystem', 'debug', '[refreshToken] ' . json_encode($data));
+    if ($data['refreshToken'] == '') {
+      log::add('ajaxSystem', 'debug', '[refreshToken] Empty refresh token, retry in 5s');
+      sleep(5);
+      $data = self::request('/refresh', array(
+        'userId' => config::byKey('userId', 'ajaxSystem'),
+        'refreshToken' => config::byKey('refreshToken', 'ajaxSystem')
+      ), 'POST');
+      log::add('ajaxSystem', 'debug', '[refreshToken] ' . json_encode($data));
+    }
+    if ($data['refreshToken'] == '') {
+      throw new Exception(__('Impossible de mettre à jour les tokens d\'accès, refresh token vide : ', __FILE__) . json_encode($data));
+    }
     config::save('refreshToken', $data['refreshToken'], 'ajaxSystem');
     cache::set('ajaxSystem::sessionToken', $data['sessionToken'], 60 * 14);
     return $data['sessionToken'];
