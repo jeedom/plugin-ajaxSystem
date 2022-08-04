@@ -56,6 +56,9 @@ foreach ($datas['data'] as $data) {
       if ($convert_key == 'hubPowered') {
         $convert_key = 'externallyPowered';
       }
+      if ($convert_key == 'realState') {
+        $value = ($value == 0) ? 1 : 0;
+      }
       $ajaxSystem->checkAndUpdateCmd($convert_key, $value);
     }
   } else if (isset($data['event'])) {

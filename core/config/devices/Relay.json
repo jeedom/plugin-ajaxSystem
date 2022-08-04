@@ -20,7 +20,7 @@
     {
       "name": "Etat",
       "type": "info",
-      "subtype": "numeric",
+      "subtype": "binary",
       "isVisible": 1,
       "isHistorized": 1,
       "logicalId": "realState"
@@ -61,7 +61,8 @@
       "subtype": "other",
       "isVisible": 1,
       "isHistorized": 0,
-      "logicalId": "SWITCH_ON"
+      "logicalId": "SWITCH_ON",
+      "value" :"Etat"
     },
     {
       "name": "Off",
@@ -69,7 +70,8 @@
       "subtype": "other",
       "isVisible": 1,
       "isHistorized": 0,
-      "logicalId": "SWITCH_OFF"
+      "logicalId": "SWITCH_OFF",
+      "value" :"Etat"
     }
   ]
 }
