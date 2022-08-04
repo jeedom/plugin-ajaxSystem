@@ -59,7 +59,11 @@
       "isVisible": 1,
       "isHistorized": 0,
       "logicalId": "SWITCH_ON",
-      "value" :"Etat"
+      "value" :"Etat",
+      "template":{
+        "dashboard" : "prise",
+        "mobile" : "prise"
+      }
     },
     {
       "name": "Off",
@@ -68,7 +72,11 @@
       "isVisible": 1,
       "isHistorized": 0,
       "logicalId": "SWITCH_OFF",
-      "value" :"Etat"
+      "value" :"Etat",
+      "template":{
+        "dashboard" : "prise",
+        "mobile" : "prise"
+      }
     }
   ]
 }
