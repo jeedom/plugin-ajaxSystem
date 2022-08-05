@@ -31,17 +31,22 @@
       "subtype": "numeric",
       "isVisible": 1,
       "isHistorized": 1,
+      "unite":"V",
       "generic_type": "VOLTAGE",
       "logicalId": "voltage"
     },
     {
-      "name": "Puissance",
+      "name": "Consommation",
       "type": "info",
       "subtype": "numeric",
       "generic_type": "POWER",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "powerWtH"
+      "unite":"kWh",
+      "logicalId": "powerWtH",
+      "configuration" : {
+        "calculValueOffset":"#value# / 100"
+      }
     },
     {
       "name": "Courant",
@@ -50,7 +55,11 @@
       "generic_type": "CURRENT",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "currentMA"
+      "unite":"A",
+      "logicalId": "currentMA",
+      "configuration" : {
+        "calculValueOffset":"#value# / 100"
+      }
     },
     {
       "name": "On",
