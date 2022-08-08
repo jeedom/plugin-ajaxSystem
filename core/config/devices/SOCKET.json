@@ -45,7 +45,7 @@
       "unite":"kWh",
       "logicalId": "powerWtH",
       "configuration" : {
-        "calculValueOffset":"#value# / 100"
+        "calculValueOffset":"#value# / 1000"
       }
     },
     {
