@@ -52,6 +52,7 @@
         "Nom": "Last name",
         "Logical ID": "Logical ID",
         "Paramètres": "Settings",
+        "Etat": "State",
         "Action": "Stock"
     },
     "plugins\/ajaxSystem\/desktop\/js\/ajaxSystem.js": {

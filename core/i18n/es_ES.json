@@ -52,6 +52,7 @@
         "Nom": "Apellido",
         "Logical ID": "ID lógica",
         "Paramètres": "Configuraciones",
+        "Etat": "Estado",
         "Action": "Acción"
     },
     "plugins\/ajaxSystem\/desktop\/js\/ajaxSystem.js": {
