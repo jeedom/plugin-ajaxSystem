@@ -52,6 +52,7 @@
         "Nom": "Nom",
         "Logical ID": "Logical ID",
         "Paramètres": "Paramètres",
+        "Etat": "Etat",
         "Action": "Action"
     },
     "plugins\/ajaxSystem\/desktop\/js\/ajaxSystem.js": {

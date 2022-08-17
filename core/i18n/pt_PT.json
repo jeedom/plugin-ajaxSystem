@@ -52,6 +52,7 @@
         "Nom": "Sobrenome",
         "Logical ID": "ID lógico",
         "Paramètres": "Definições",
+        "Etat": "Estado",
         "Action": "Açao"
     },
     "plugins\/ajaxSystem\/desktop\/js\/ajaxSystem.js": {

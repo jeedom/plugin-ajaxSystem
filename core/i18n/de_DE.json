@@ -52,6 +52,7 @@
         "Nom": "Nachname",
         "Logical ID": "Logische ID",
         "Paramètres": "Die Einstellungen",
+        "Etat": "Bundesland",
         "Action": "Aktion"
     },
     "plugins\/ajaxSystem\/desktop\/js\/ajaxSystem.js": {
