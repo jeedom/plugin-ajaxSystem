@@ -43,7 +43,7 @@ foreach ($datas['data'] as $data) {
       continue;
     }
     foreach ($data['updates'] as $key => &$value) {
-      if ($data['type'] == 'HUB' && $key == 'state') {
+      if (in_array($data['type'], array('HUB', 'GROUP')) && $key == 'state') {
         if ($value == 0) {
           $value = 'DISARMED';
         } elseif ($value == 1) {
