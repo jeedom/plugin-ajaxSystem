@@ -1,0 +1,42 @@
+{
+    "name" : "Groupe",
+    "commands" : [
+      {
+        "name": "Etat",
+        "type": "info",
+        "subtype": "string",
+        "isVisible": 1,
+        "isHistorized": 0,
+        "logicalId": "state",
+        "template":{
+          "dashboard":"ajaxSystem::state",
+          "mobile":"ajaxSystem::state"
+        }
+      },
+      {
+        "name": "Armement",
+        "type": "action",
+        "subtype": "other",
+        "isVisible": 1,
+        "isHistorized": 0,
+        "logicalId": "ARM"
+      },
+      {
+        "name": "Mode nuit",
+        "type": "action",
+        "subtype": "other",
+        "isVisible": 1,
+        "isHistorized": 0,
+        "logicalId": "NIGHT_MODE"
+      }, 
+      {
+        "name": "Desarmement",
+        "type": "action",
+        "subtype": "other",
+        "isVisible": 1,
+        "isHistorized": 0,
+        "logicalId": "DISARM"
+      }
+    ]
+  }
+  

@@ -52,6 +52,7 @@
         "Nom": "Nom",
         "Logical ID": "Logical ID",
         "Paramètres": "Paramètres",
+        "Etat": "Etat",
         "Action": "Action"
     },
     "plugins\/ajaxSystem\/desktop\/js\/ajaxSystem.js": {
@@ -82,6 +83,7 @@
         "Veuillez vérifier la configuration": "Veuillez vérifier la configuration",
         "Erreur lors de la requete à Ajax System : ": "Erreur lors de la requete à Ajax System :",
         "Erreur lors de la mise à jour des données de :": "Erreur lors de la mise à jour des données de :",
+        "Impossible de mettre à jour les tokens d\\'accès, refresh token vide : ": "Impossible de mettre à jour les tokens d\\'accès, refresh token vide :",
         "SIA code": "SIA code",
         "SIA Type": "SIA Type",
         "SIA description": "SIA description",

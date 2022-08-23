@@ -207,6 +207,18 @@ class ajaxSystem extends eqLogic {
       'refreshToken' => config::byKey('refreshToken', 'ajaxSystem')
     ), 'POST');
     log::add('ajaxSystem', 'debug', '[refreshToken] ' . json_encode($data));
+    if ($data['refreshToken'] == '') {
+      log::add('ajaxSystem', 'debug', '[refreshToken] Empty refresh token, retry in 5s');
+      sleep(5);
+      $data = self::request('/refresh', array(
+        'userId' => config::byKey('userId', 'ajaxSystem'),
+        'refreshToken' => config::byKey('refreshToken', 'ajaxSystem')
+      ), 'POST');
+      log::add('ajaxSystem', 'debug', '[refreshToken] ' . json_encode($data));
+    }
+    if ($data['refreshToken'] == '') {
+      throw new Exception(__('Impossible de mettre à jour les tokens d\'accès, refresh token vide : ', __FILE__) . json_encode($data));
+    }
     config::save('refreshToken', $data['refreshToken'], 'ajaxSystem');
     cache::set('ajaxSystem::sessionToken', $data['sessionToken'], 60 * 14);
     return $data['sessionToken'];
@@ -254,6 +266,25 @@ class ajaxSystem extends eqLogic {
         $eqLogic->setConfiguration('device', $device_info['deviceType']);
         $eqLogic->setConfiguration('firmware', $device_info['firmwareVersion']);
         $eqLogic->setLogicalId($device['id']);
+        $eqLogic->save();
+      }
+
+      $groups = self::request('/user/{userId}/hubs/' . $hub['hubId'] . '/groups');
+      log::add('ajaxSystem', 'debug', json_encode($groups));
+      foreach ($groups as $group) {
+        $eqLogic = eqLogic::byLogicalId($group['id'], 'ajaxSystem');
+        if (!is_object($eqLogic)) {
+          $eqLogic = new ajaxSystem();
+          $eqLogic->setEqType_name('ajaxSystem');
+          $eqLogic->setIsEnable(1);
+          $eqLogic->setName($group['groupName']);
+          $eqLogic->setCategory('security', 1);
+          $eqLogic->setIsVisible(1);
+        }
+        $eqLogic->setConfiguration('hub_id', $hub['hubId']);
+        $eqLogic->setConfiguration('type', 'group');
+        $eqLogic->setConfiguration('device', 'group');
+        $eqLogic->setLogicalId($group['id']);
         $eqLogic->save();
       }
     }
@@ -415,14 +446,20 @@ class ajaxSystemCmd extends cmd {
       } else if ($this->getLogicalId() == 'muteFireDetectors') {
         ajaxSystem::request('/user/{userId}/hubs/' . $eqLogic->getLogicalId() . '/commands/muteFireDetectors', array('muteType' => 'ALL_FIRE_DETECTORS'), 'PUT');
       }
-      sleep(1);
     } else if ($eqLogic->getConfiguration('type') == 'device') {
       $command = array(
         'command' => $this->getLogicalId(),
         'deviceType' => $eqLogic->getConfiguration('device')
       );
       ajaxSystem::request('/user/{userId}/hubs/' . $eqLogic->getConfiguration('hub_id') . '/devices/' . $eqLogic->getLogicalId() . '/command', $command, 'POST');
-      sleep(1);
+    } else if ($eqLogic->getConfiguration('type') == 'group') {
+      if ($this->getLogicalId() == 'ARM') {
+        ajaxSystem::request('/user/{userId}/hubs/' . $eqLogic->getConfiguration('hub_id') . '/groups/' . $eqLogic->getLogicalId()  . '/commands/arming', array('command' => 'ARM', 'ignoreProblems' => true), 'PUT');
+      } else if ($this->getLogicalId() == 'DISARM') {
+        ajaxSystem::request('/user/{userId}/hubs/' . $eqLogic->getConfiguration('hub_id') . '/groups/' . $eqLogic->getLogicalId() . '/commands/arming', array('command' => 'DISARM', 'ignoreProblems' => true), 'PUT');
+      } else if ($this->getLogicalId() == 'NIGHT_MODE') {
+        ajaxSystem::request('/user/{userId}/hubs/' . $eqLogic->getConfiguration('hub_id') . '/groups/' . $eqLogic->getLogicalId() . '/commands/arming', array('command' => 'NIGHT_MODE_ON', 'ignoreProblems' => true), 'PUT');
+      }
     }
   }
 

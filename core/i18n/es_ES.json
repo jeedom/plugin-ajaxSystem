@@ -52,6 +52,7 @@
         "Nom": "Apellido",
         "Logical ID": "ID lógica",
         "Paramètres": "Configuraciones",
+        "Etat": "Estado",
         "Action": "Acción"
     },
     "plugins\/ajaxSystem\/desktop\/js\/ajaxSystem.js": {
@@ -82,6 +83,7 @@
         "Veuillez vérifier la configuration": "Por favor revise la configuración",
         "Erreur lors de la requete à Ajax System : ": "Error al solicitar el sistema Ajax:",
         "Erreur lors de la mise à jour des données de :": "Error al actualizar datos de:",
+        "Impossible de mettre à jour les tokens d\\'accès, refresh token vide : ": "No se pueden actualizar los tokens de acceso, el token de actualización está vacío:",
         "SIA code": "Código SIA",
         "SIA Type": "Tipo de SIA",
         "SIA description": "Descripción SIA",

@@ -43,7 +43,7 @@ foreach ($datas['data'] as $data) {
       continue;
     }
     foreach ($data['updates'] as $key => &$value) {
-      if ($data['type'] == 'HUB' && $key == 'state') {
+      if (in_array($data['type'], array('HUB', 'GROUP')) && $key == 'state') {
         if ($value == 0) {
           $value = 'DISARMED';
         } elseif ($value == 1) {
@@ -55,6 +55,9 @@ foreach ($datas['data'] as $data) {
       $convert_key = $key;
       if ($convert_key == 'hubPowered') {
         $convert_key = 'externallyPowered';
+      }
+      if ($convert_key == 'realState') {
+        $value = ($value == 0) ? 1 : 0;
       }
       $ajaxSystem->checkAndUpdateCmd($convert_key, $value);
     }

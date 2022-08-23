@@ -2,6 +2,14 @@
   "name" : "Socket",
   "commands" : [
     {
+      "name": "Etat",
+      "type": "info",
+      "subtype": "binary",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "realState"
+    },
+    {
       "name": "Evenement",
       "type": "info",
       "subtype": "string",
@@ -23,17 +31,22 @@
       "subtype": "numeric",
       "isVisible": 1,
       "isHistorized": 1,
+      "unite":"V",
       "generic_type": "VOLTAGE",
       "logicalId": "voltage"
     },
     {
-      "name": "Puissance",
+      "name": "Consommation",
       "type": "info",
       "subtype": "numeric",
       "generic_type": "POWER",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "powerWtH"
+      "unite":"kWh",
+      "logicalId": "powerWtH",
+      "configuration" : {
+        "calculValueOffset":"#value# / 1000"
+      }
     },
     {
       "name": "Courant",
@@ -42,7 +55,11 @@
       "generic_type": "CURRENT",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "currentMA"
+      "unite":"A",
+      "logicalId": "currentMA",
+      "configuration" : {
+        "calculValueOffset":"#value# / 100"
+      }
     },
     {
       "name": "On",
@@ -50,7 +67,12 @@
       "subtype": "other",
       "isVisible": 1,
       "isHistorized": 0,
-      "logicalId": "SWITCH_ON"
+      "logicalId": "SWITCH_ON",
+      "value" :"Etat",
+      "template":{
+        "dashboard" : "prise",
+        "mobile" : "prise"
+      }
     },
     {
       "name": "Off",
@@ -58,7 +80,12 @@
       "subtype": "other",
       "isVisible": 1,
       "isHistorized": 0,
-      "logicalId": "SWITCH_OFF"
+      "logicalId": "SWITCH_OFF",
+      "value" :"Etat",
+      "template":{
+        "dashboard" : "prise",
+        "mobile" : "prise"
+      }
     }
   ]
 }
