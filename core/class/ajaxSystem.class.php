@@ -272,19 +272,19 @@ class ajaxSystem extends eqLogic {
       $groups = self::request('/user/{userId}/hubs/' . $hub['hubId'] . '/groups');
       log::add('ajaxSystem', 'debug', json_encode($groups));
       foreach ($groups as $group) {
-        $eqLogic = eqLogic::byLogicalId($groups['id'], 'ajaxSystem');
+        $eqLogic = eqLogic::byLogicalId($group['id'], 'ajaxSystem');
         if (!is_object($eqLogic)) {
           $eqLogic = new ajaxSystem();
           $eqLogic->setEqType_name('ajaxSystem');
           $eqLogic->setIsEnable(1);
-          $eqLogic->setName($groups['groupName']);
+          $eqLogic->setName($group['groupName']);
           $eqLogic->setCategory('security', 1);
           $eqLogic->setIsVisible(1);
         }
         $eqLogic->setConfiguration('hub_id', $hub['hubId']);
         $eqLogic->setConfiguration('type', 'group');
         $eqLogic->setConfiguration('device', 'group');
-        $eqLogic->setLogicalId($groups['id']);
+        $eqLogic->setLogicalId($group['id']);
         $eqLogic->save();
       }
     }
