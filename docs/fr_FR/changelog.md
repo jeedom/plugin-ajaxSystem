@@ -7,6 +7,7 @@
 # 23/08/2022
 
 - Ajout de la gestion des groupes
+- Amélioration du support du multi transmitter
 
 # 09/06/2022
 
