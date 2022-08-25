@@ -188,6 +188,9 @@ class ajaxSystem extends eqLogic {
   }
 
   public static function login($_username, $_password) {
+    if (trim(network::getNetworkAccess('external')) == '') {
+      throw new Exception(__('URL d\'accès externe de votre Jeedom invalide. Merci de la configurer dans Réglage -> Système -> Configuration puis onglet Réseaux'));
+    }
     $data = self::request('/login', array(
       'login' => $_username,
       'passwordHash' => $_password,
