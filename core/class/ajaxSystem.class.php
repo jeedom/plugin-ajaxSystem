@@ -21,10 +21,98 @@ require_once __DIR__  . '/../../../../core/php/core.inc.php';
 
 class ajaxSystem extends eqLogic {
   /*     * *************************Attributs****************************** */
+  public static $_SIA_GLOBALS = array('CL', 'OP', 'NL', 'BR', 'BA');
 
+  public static $_SIA_CONVERT = array(
+    'CL' => array(array('cmd' => 'state', 'value' => 'ARMED', 'hubOnly' => true)),
+    'OP' => array(array('cmd' => 'state', 'value' => 'DISARMED', 'hubOnly' => true)),
+    'NL' => array(array('cmd' => 'state', 'value' => 'NIGHT_MODE', 'hubOnly' => true)),
+    'PA' => array(array('cmd' => 'state', 'value' => 'PANIC', 'hubOnly' => true)),
+    'CF' => array(array('cmd' => 'state', 'value' => 'ARMED', 'hubOnly' => true)),
+    'BA' => array(array('cmd' => 'sia_state', 'value' => 1), array('cmd' => 'reedClosed', 'value' => 1)), array('cmd' => 'sia_state_intrusion', 'value' => 1),
+    'TA' => array(array('cmd' => 'sia_state_masking', 'value' => 1)),
+    'TR' => array(array('cmd' => 'sia_state_masking', 'value' => 0)),
+    'BR' => array(array('cmd' => 'sia_state', 'value' => 0), array('cmd' => 'reedClosed', 'value' => 1), array('cmd' => 'sia_state_intrusion', 'value' => 1)),
+    'HA' => array(array('cmd' => 'sia_state', 'value' => 1)),
+    'FA' => array(array('cmd' => 'sia_state', 'value' => 1)),
+    'MA' => array(array('cmd' => 'sia_state', 'value' => 1)),
+    'GA' => array(array('cmd' => 'sia_state', 'value' => 1)),
+    'KA' => array(array('cmd' => 'sia_state', 'value' => 1)),
+    'GH' => array(array('cmd' => 'sia_state', 'value' => 0)),
+    'FH' => array(array('cmd' => 'sia_state', 'value' => 0)),
+    'KH' => array(array('cmd' => 'sia_state', 'value' => 0)),
+    'YP' => array(array('cmd' => 'externallyPowered', 'value' => 1)),
+    'YQ' => array(array('cmd' => 'externallyPowered', 'value' => 0)),
+    'WA' => array(array('cmd' => 'leakDetected', 'value' => 1)),
+    'WH' => array(array('cmd' => 'leakDetected', 'value' => 1)),
+    'AT' => array(array('cmd' => 'externallyPowered', 'value' => 0)),
+    'AR' => array(array('cmd' => 'externallyPowered', 'value' => 1)),
+    'BV' => array(array('cmd' => 'sia_state_intrusion', 'value' => 1)),
+    'HV' => array(array('cmd' => 'sia_state_intrusion', 'value' => 1))
+  );
 
 
   /*     * ***********************Methode static*************************** */
+
+  public static function handleMqttMessage($_datas) {
+    if (!isset($_datas['ajax'])) {
+      return;
+    }
+    log::add('ajaxSystem', 'debug', print_r($_datas, true));
+    $eqLogics = self::byType('ajaxSystem');
+    foreach ($_datas['ajax'] as $id => $value) {
+      $info = json_decode($value, true);
+      foreach ($eqLogics as $eqLogic) {
+        if ($eqLogic->getConfiguration('device_number') != $id && (!in_array($info['code'], self::$_SIA_GLOBALS) || $eqLogic->getConfiguration('type') != 'hub')) {
+          continue;
+        }
+        $eqLogic->checkAndUpdateCmd('sia_code', $info['code']);
+        if (isset($info['type'])) {
+          $eqLogic->checkAndUpdateCmd('sia_type', $info['type']);
+        }
+        if (isset($info['description'])) {
+          $eqLogic->checkAndUpdateCmd('sia_description', $info['description']);
+        }
+        if (isset($info['concerns'])) {
+          $eqLogic->checkAndUpdateCmd('sia_concerns', $info['concerns']);
+        }
+        if (isset(self::$_SIA_CONVERT[$info['code']])) {
+          foreach (self::$_SIA_CONVERT[$info['code']] as $convert) {
+            if (isset($convert['hubOnly']) && $convert['hubOnly'] && $eqLogic->getConfiguration('type') != 'hub') {
+              continue;
+            }
+            log::add('ajaxSystem', 'debug', 'SIA ' . $eqLogic->getHumanName() . ' ' . $convert['cmd'] . ' => ' . $convert['value']);
+            $eqLogic->checkAndUpdateCmd($convert['cmd'], $convert['value']);
+          }
+        }
+      }
+    }
+  }
+
+  public static function postConfig_local_mode($_value) {
+    $plugin = plugin::byId('ajaxSystem');
+    switch ($_value) {
+      case 'none':
+        $plugin->dependancy_changeAutoMode(0);
+        $plugin->deamon_info(0);
+        break;
+      case 'sia':
+        $plugin->dependancy_changeAutoMode(1);
+        $plugin->deamon_info(1);
+        break;
+      case 'mqtt':
+        $plugin->dependancy_changeAutoMode(0);
+        $plugin->deamon_info(0);
+        if (!class_exists('mqtt2')) {
+          throw new Exception(__('Le plugin MQTT Manager n\'est pas installé', __FILE__));
+        }
+        if (mqtt2::deamon_info()['state'] != 'ok') {
+          throw new Exception(__('Le démon MQTT Manager n\'est pas démarré', __FILE__));
+        }
+        mqtt2::addPluginTopic(__CLASS__, config::byKey('mqtt::prefix', __CLASS__, 'ajax'));
+        break;
+    }
+  }
 
 
   public static function dependancy_info() {
