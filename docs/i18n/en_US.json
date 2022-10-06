@@ -2,6 +2,7 @@
     "changelog.md": {
         "Changelog Ajax Systems": "Changelog Ajax Systems",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "As a reminder, if there is no information on the update, it is because it concerns only the update of documentation, translation or text",
+        "Possibilité de passer par un mode mqtt pour les remontées d'information SIA, via nodered (un article sur le blog expliquera comment faire": "Possibility of going through an mqtt mode for SIA information feedback, via nodered (an article on the blog will explain how to do this",
         "23\/08\/2022": "08\/23\/2022",
         "Ajout de la gestion des groupes": "Added group management",
         "Amélioration du support du multi transmitter": "Improved multi transmitter support",
