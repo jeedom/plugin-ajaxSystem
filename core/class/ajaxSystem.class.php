@@ -62,6 +62,12 @@ class ajaxSystem extends eqLogic {
     $eqLogics = self::byType('ajaxSystem');
     foreach ($_datas['ajax'] as $id => $value) {
       $info = json_decode($value, true);
+      if ($id == 'error') {
+        if (isset($info['description'])) {
+          log::add('ajaxSystem', 'error', __('Erreur renvoyé par MQTT : ', __FILE__) . $info['description']);
+        }
+        continue;
+      }
       foreach ($eqLogics as $eqLogic) {
         if ($eqLogic->getConfiguration('device_number') != $id && (!in_array($info['code'], self::$_SIA_GLOBALS) || $eqLogic->getConfiguration('type') != 'hub')) {
           continue;
