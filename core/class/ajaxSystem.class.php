@@ -101,10 +101,12 @@ class ajaxSystem extends eqLogic {
       case 'none':
         $plugin->dependancy_changeAutoMode(0);
         $plugin->deamon_info(0);
+        mqtt2::removePluginTopic(config::byKey('mqtt::prefix', __CLASS__, 'ajax'));
         break;
       case 'sia':
         $plugin->dependancy_changeAutoMode(1);
         $plugin->deamon_info(1);
+        mqtt2::removePluginTopic(config::byKey('mqtt::prefix', __CLASS__, 'ajax'));
         break;
       case 'mqtt':
         $plugin->dependancy_changeAutoMode(0);
