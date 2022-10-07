@@ -87,7 +87,7 @@ class ajaxSystem extends eqLogic {
             if (isset($convert['hubOnly']) && $convert['hubOnly'] && $eqLogic->getConfiguration('type') != 'hub') {
               continue;
             }
-            log::add('ajaxSystem', 'debug', 'SIA ' . $eqLogic->getHumanName() . ' ' . $convert['cmd'] . ' => ' . $convert['value']);
+            log::add('ajaxSystem', 'debug', 'MQTT ' . $eqLogic->getHumanName() . ' ' . $convert['cmd'] . ' => ' . $convert['value']);
             $eqLogic->checkAndUpdateCmd($convert['cmd'], $convert['value']);
           }
         }
