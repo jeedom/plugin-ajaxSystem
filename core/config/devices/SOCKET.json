@@ -62,6 +62,19 @@
       }
     },
     {
+      "name": "Puissance",
+      "type": "info",
+      "subtype": "numeric",
+      "generic_type": "POWER",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "unite":"W",
+      "logicalId": "power",
+      "configuration" : {
+        "calculValueOffset":"#value# / 100"
+      }
+    },
+    {
       "name": "On",
       "type": "action",
       "subtype": "other",

@@ -60,6 +60,13 @@ foreach ($datas['data'] as $data) {
         $value = ($value == 0) ? 1 : 0;
       }
       $ajaxSystem->checkAndUpdateCmd($convert_key, $value);
+      if ($ajaxSystem->getConfiguration('device') == 'Socket') {
+        $current = $ajaxSystem->getCmd('info', 'currentMA');
+        $voltage = $ajaxSystem->getCmd('info', 'voltage');
+        if (is_object($current) && is_object($voltage)) {
+          $ajaxSystem->checkAndUpdateCmd('power', $current->execCmd() * $voltage->execCmd());
+        }
+      }
     }
   } else if (isset($data['event'])) {
     if (!isset($data['event']['sourceObjectId'])) {
