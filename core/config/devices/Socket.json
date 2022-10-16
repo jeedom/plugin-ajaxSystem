@@ -58,7 +58,7 @@
       "unite":"A",
       "logicalId": "currentMA",
       "configuration" : {
-        "calculValueOffset":"#value# / 100"
+        "calculValueOffset":"#value# / 1000"
       }
     },
     {
@@ -69,10 +69,7 @@
       "isVisible": 0,
       "isHistorized": 0,
       "unite":"W",
-      "logicalId": "power",
-      "configuration" : {
-        "calculValueOffset":"#value# / 100"
-      }
+      "logicalId": "power"
     },
     {
       "name": "On",
