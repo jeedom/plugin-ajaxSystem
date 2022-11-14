@@ -41,7 +41,7 @@
         "mobile" : "door"
       },
       "configuration": {
-        "repeatEventManagement": "always"
+        "repeatEventManagement": "never"
       }
     },
     {
@@ -52,7 +52,7 @@
       "isHistorized": 0,
       "logicalId": "extraContactClosed",
       "configuration": {
-        "repeatEventManagement": "always"
+        "repeatEventManagement": "never"
       }
     },
     {
@@ -73,7 +73,7 @@
       "isHistorized": 0,
       "logicalId": "tampered",
       "configuration": {
-        "repeatEventManagement": "always"
+        "repeatEventManagement": "never"
       }
     },
     {
@@ -84,7 +84,7 @@
       "isHistorized": 0,
       "logicalId": "online",
       "configuration": {
-        "repeatEventManagement": "always"
+        "repeatEventManagement": "never"
       }
     },
     {
