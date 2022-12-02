@@ -16,13 +16,19 @@
 */
 
 $('.eqLogicAttr[data-l1key=configuration][data-l2key=device]').on('change',function(){
-  let color = $('.eqLogicAttr[data-l1key=configuration][data-l2key=color]').value().toLowerCase();
+  let color = 'white';
+  if($('.eqLogicAttr[data-l1key=configuration][data-l2key=color]').value()){
+    color = $('.eqLogicAttr[data-l1key=configuration][data-l2key=color]').value().toLowerCase();
+  }
   let device = $('.eqLogicAttr[data-l1key=configuration][data-l2key=device]').value();
   $('#img_ajaxSystemModel').attr('src','plugins/ajaxSystem/core/config/devices/'+device+'_'+color+'.png');
 });
 
 $('.eqLogicAttr[data-l1key=configuration][data-l2key=color]').on('change',function(){
-  let color = $('.eqLogicAttr[data-l1key=configuration][data-l2key=color]').value().toLowerCase();
+  let color = 'white';
+  if($('.eqLogicAttr[data-l1key=configuration][data-l2key=color]').value()){
+    color = $('.eqLogicAttr[data-l1key=configuration][data-l2key=color]').value().toLowerCase();
+  }
   let device = $('.eqLogicAttr[data-l1key=configuration][data-l2key=device]').value();
   $('#img_ajaxSystemModel').attr('src','plugins/ajaxSystem/core/config/devices/'+device+'_'+color+'.png');
 });
