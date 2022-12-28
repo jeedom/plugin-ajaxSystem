@@ -72,6 +72,10 @@ class ajaxSystem extends eqLogic {
         }
         continue;
       }
+      $d = DateTime::createFromFormat('H:i:s,m-d-Y', $info['datetime'], new DateTimeZone('UTC'));
+      if ($d->getTimestamp() < (strtotime('now') - 120)) {
+        continue;
+      }
       foreach ($eqLogics as $eqLogic) {
         if ($eqLogic->getConfiguration('device_number') != $id && (!in_array($info['code'], self::$_SIA_GLOBALS) || $eqLogic->getConfiguration('type') != 'hub')) {
           continue;
