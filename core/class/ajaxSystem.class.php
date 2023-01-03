@@ -21,7 +21,7 @@ require_once __DIR__  . '/../../../../core/php/core.inc.php';
 
 class ajaxSystem extends eqLogic {
   /*     * *************************Attributs****************************** */
-  public static $_SIA_GLOBALS = array('CL', 'OP', 'NL', 'BR', 'BA');
+  public static $_SIA_GLOBALS = array('CL', 'OP', 'NL', 'BR', 'BA', 'KA', 'FA', 'GA', 'WA', 'PA');
 
   public static $_SIA_CONVERT = array(
     'CL' => array(array('cmd' => 'state', 'value' => 'ARMED', 'hubOnly' => true)),
@@ -61,11 +61,7 @@ class ajaxSystem extends eqLogic {
     log::add('ajaxSystem', 'debug', json_encode($_datas));
     $eqLogics = self::byType('ajaxSystem');
     foreach ($_datas['ajax'] as $id => $value) {
-      if (is_array($value)) {
-        $info = $value;
-      } else {
-        $info = json_decode($value, true);
-      }
+      $info = (is_array($value)) ? $value : json_decode($value, true);
       if ($id == 'error') {
         if (isset($info['description'])) {
           log::add('ajaxSystem', 'error', __('Erreur renvoyé par MQTT : ', __FILE__) . $info['description']);
