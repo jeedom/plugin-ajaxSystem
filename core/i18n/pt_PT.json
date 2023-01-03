@@ -51,7 +51,7 @@
         "Noir": "Preto",
         "Numéro de l'équipement": "Número do equipamento",
         "Identifiant": "Nome do usuário",
-        "IP": "IP",
+        "IP": "IPs",
         "Firmware": "Firmware",
         "Ajouter une commande": "Adicionar um pedido",
         "Id": "Identidade",
@@ -70,7 +70,7 @@
         "Afficher": "Exibição",
         "Historiser": "Historize",
         "Inverser": "Marcha ré",
-        "Min.": "Min.",
+        "Min.": "Mín.",
         "Max.": "Máx.",
         "Unité": "Unidade"
     },
