@@ -72,13 +72,17 @@ class ajaxSystem extends eqLogic {
         continue;
       }
       if (!isset($info['code']) || $info['code'] == '') {
+        log::add('ajaxSystem', 'debug', 'Invalid code : ' . json_encode($info));
         continue;
       }
       if (!isset($info['datetime']) || $info['datetime'] == '') {
+        log::add('ajaxSystem', 'debug', 'Invalid datetime : ' .  json_encode($info));
         continue;
       }
       $d = DateTime::createFromFormat('H:i:s,m-d-Y', $info['datetime'], new DateTimeZone('UTC'));
+
       if ($d->getTimestamp() < (strtotime('now') - 120)) {
+        log::add('ajaxSystem', 'debug', 'Invalid too old datetime : ' .  json_encode($info));
         continue;
       }
       foreach ($eqLogics as $eqLogic) {
