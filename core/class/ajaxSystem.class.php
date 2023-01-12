@@ -61,11 +61,20 @@ class ajaxSystem extends eqLogic {
     log::add('ajaxSystem', 'debug', json_encode($_datas));
     $eqLogics = self::byType('ajaxSystem');
     foreach ($_datas['ajax'] as $id => $value) {
+      if ($id == '') {
+        continue;
+      }
       $info = (is_array($value)) ? $value : json_decode($value, true);
       if ($id == 'error') {
         if (isset($info['description'])) {
           log::add('ajaxSystem', 'error', __('Erreur renvoyé par MQTT : ', __FILE__) . $info['description']);
         }
+        continue;
+      }
+      if (!isset($info['code']) || $info['code'] == '') {
+        continue;
+      }
+      if (!isset($info['datetime']) || $info['datetime'] == '') {
         continue;
       }
       $d = DateTime::createFromFormat('H:i:s,m-d-Y', $info['datetime'], new DateTimeZone('UTC'));
