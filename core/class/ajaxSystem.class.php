@@ -65,6 +65,9 @@ class ajaxSystem extends eqLogic {
         continue;
       }
       $info = (is_array($value)) ? $value : json_decode($value, true);
+      if ($info == null || !is_array($info)) {
+        continue;
+      }
       if ($id == 'error') {
         if (isset($info['description'])) {
           log::add('ajaxSystem', 'error', __('Erreur renvoyé par MQTT : ', __FILE__) . $info['description']);
