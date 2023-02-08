@@ -2,6 +2,14 @@
   "name" : "Relay",
   "commands" : [
     {
+      "name": "Source evenement",
+      "type": "info",
+      "subtype": "string",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "sourceObjectName"
+    },
+    {
       "name": "Evenement",
       "type": "info",
       "subtype": "string",
