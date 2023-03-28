@@ -2,7 +2,8 @@
     "changelog.md": {
         "Changelog Ajax Systems": "Registro de cambios de sistemas Ajax",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Como recordatorio, si no hay información sobre la actualización es porque se trata solo de la actualización de la documentación, la traducción o el texto",
-        "Possibilité de passer par un mode mqtt pour les remontées d'information SIA, via nodered (un article sur le blog expliquera comment faire": "Posibilidad de pasar por un modo mqtt para retroalimentación de información SIA, vía nodered (un artículo en el blog explicará cómo hacer esto",
+        "Possibilité de passer par un mode mqtt pour les remontées d'information SIA, via nodered": "Posibilidad de pasar por un modo mqtt para retroalimentación de información SIA, vía nodered",
+        "Ajout hub fibra": "Agregar concentrador de fibra",
         "23\/08\/2022": "23\/08\/2022",
         "Ajout de la gestion des groupes": "Gestión de grupos añadida",
         "Amélioration du support du multi transmitter": "Compatibilidad mejorada con múltiples transmisores",
