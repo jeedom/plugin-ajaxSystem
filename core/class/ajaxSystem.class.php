@@ -558,14 +558,14 @@ class ajaxSystemCmd extends cmd {
     if ($eqLogic->getConfiguration('type') == 'hub') {
       $cmdValue = $this->getCmdValue();
       $value =  $cmdValue->execCmd();
-      if ($this->getLogicalId() == 'ARM' && $value == 'ARMED') {
-        return true;
+      if ($this->getLogicalId() == 'ARM') {
+        return ($value == 'ARMED');
       }
-      if ($this->getLogicalId() == 'DISARM' && ($value == 'DISARMED_NIGHT_MODE_OFF' || $value == 'DISARMED')) {
-        return true;
+      if ($this->getLogicalId() == 'DISARM') {
+        return ($value == 'DISARMED_NIGHT_MODE_OFF' || $value == 'DISARMED');
       }
-      if ($this->getLogicalId() == 'NIGHT_MODE' && $value == 'NIGHT_MODE') {
-        return true;
+      if ($this->getLogicalId() == 'NIGHT_MODE') {
+        return ($value == 'NIGHT_MODE');
       }
       if ($this->getLogicalId() == 'PANIC' || $this->getLogicalId() == 'muteFireDetectors') {
         return false;
@@ -574,7 +574,7 @@ class ajaxSystemCmd extends cmd {
     if ($eqLogic->getConfiguration('type') == 'group') {
       return false;
     }
-    return parent::alreadyInState();
+    return parent::alreadyInState($_options);
   }
 
   public function execute($_options = array()) {
