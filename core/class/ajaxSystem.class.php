@@ -576,6 +576,7 @@ class ajaxSystemCmd extends cmd {
     }
     return parent::alreadyInState();
   }
+
   public function execute($_options = array()) {
     $eqLogic = $this->getEqLogic();
     if ($eqLogic->getConfiguration('type') == 'hub') {
