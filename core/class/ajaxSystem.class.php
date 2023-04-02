@@ -166,6 +166,7 @@ class ajaxSystem extends eqLogic {
       'test' => array(
         array('operation' => '#value# == "ARMED"', 'state_light' => '<i class="fas fa-lock"></i>'),
         array('operation' => '#value# == "DISARMED"', 'state_light' => '<i class="fas fa-lock-open"></i>'),
+        array('operation' => '#value# == "DISARMED_NIGHT_MODE_OFF"', 'state_light' => '<i class="fas fa-lock-open"></i>'),
         array('operation' => '#value# == "NIGHT_MODE"', 'state_light' => '<i class="fas fa-moon"></i>'),
         array('operation' => '#value# == "PANIC"', 'state_light' => '<i class="fas fa-exclamation-circle"></i>')
       )
@@ -551,6 +552,30 @@ class ajaxSystemCmd extends cmd {
 
   /*     * *********************Methode d'instance************************* */
 
+
+  public function alreadyInState($_options) {
+    $eqLogic = $this->getEqLogic();
+    if ($eqLogic->getConfiguration('type') == 'hub') {
+      $cmdValue = $this->getCmdValue();
+      $value =  $cmdValue->execCmd();
+      if ($this->getLogicalId() == 'ARM' && $value == 'ARMED') {
+        return true;
+      }
+      if ($this->getLogicalId() == 'DISARM' && ($value == 'DISARMED_NIGHT_MODE_OFF' || $value == 'DISARMED')) {
+        return true;
+      }
+      if ($this->getLogicalId() == 'NIGHT_MODE' && $value == 'NIGHT_MODE') {
+        return true;
+      }
+      if ($this->getLogicalId() == 'PANIC' || $this->getLogicalId() == 'muteFireDetectors') {
+        return false;
+      }
+    }
+    if ($eqLogic->getConfiguration('type') == 'group') {
+      return false;
+    }
+    return parent::alreadyInState();
+  }
   public function execute($_options = array()) {
     $eqLogic = $this->getEqLogic();
     if ($eqLogic->getConfiguration('type') == 'hub') {
