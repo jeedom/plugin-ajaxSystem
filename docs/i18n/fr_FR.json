@@ -3,7 +3,7 @@
         "Changelog Ajax Systems": "Changelog Ajax Systems",
         "IMPORTANT": "IMPORTANT",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte",
-        "Possibilité de passer par un mode mqtt pour les remontées d'information SIA, via nodered": "Possibilité de passer par un mode mqtt pour les remontées d'information SIA, via nodered",
+        "24\/04\/2023": "24\/04\/2023",
         "Ajout hub fibra": "Ajout hub fibra",
         "23\/08\/2022": "23\/08\/2022",
         "Ajout de la gestion des groupes": "Ajout de la gestion des groupes",
@@ -87,6 +87,10 @@
         "mettre l'ip local de Jeedom": "mettre l'ip local de Jeedom",
         "Vous pouvez changer aussi la fréquence de test du service de 1min à 24h (pour reduire la charge sur votre Jeedom": "Vous pouvez changer aussi la fréquence de test du service de 1min à 24h (pour reduire la charge sur votre Jeedom",
         "Normalement si tout est bon vous devriez voir le \"Centre de télésurveillance\" passer à \"Connecté": "Normalement si tout est bon vous devriez voir le \"Centre de télésurveillance\" passer à \"Connecté",
-        "Certaine information ne remontent que si le SIA est configuré": "Certaine information ne remontent que si le SIA est configuré"
+        "Certaine information ne remontent que si le SIA est configuré": "Certaine information ne remontent que si le SIA est configuré",
+        "FAQ": "FAQ",
+        "Configuration MQTT": "Configuration MQTT",
+        "Dans la configuration du plugin vous avez la possibilité de passer pour la partie SIA en mqtt, il y a volontairement aucune explication de comment car la mise en place est relativement complexe": "Dans la configuration du plugin vous avez la possibilité de passer pour la partie SIA en mqtt, il y a volontairement aucune explication de comment car la mise en place est relativement complexe",
+        "L'option est la pour répondre à un besoin d'un client seulement": "L'option est la pour répondre à un besoin d'un client seulement"
     }
 }
