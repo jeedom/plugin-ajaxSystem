@@ -10,6 +10,14 @@
       "logicalId": "realState"
     },
     {
+      "name": "Source evenement",
+      "type": "info",
+      "subtype": "string",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "sourceObjectName"
+    },
+    {
       "name": "Evenement",
       "type": "info",
       "subtype": "string",
@@ -58,8 +66,18 @@
       "unite":"A",
       "logicalId": "currentMA",
       "configuration" : {
-        "calculValueOffset":"#value# / 100"
+        "calculValueOffset":"#value# / 1000"
       }
+    },
+    {
+      "name": "Puissance",
+      "type": "info",
+      "subtype": "numeric",
+      "generic_type": "POWER",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "unite":"W",
+      "logicalId": "power"
     },
     {
       "name": "On",

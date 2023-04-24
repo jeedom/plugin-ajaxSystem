@@ -21,10 +21,126 @@ require_once __DIR__  . '/../../../../core/php/core.inc.php';
 
 class ajaxSystem extends eqLogic {
   /*     * *************************Attributs****************************** */
+  public static $_SIA_GLOBALS = array('CL', 'OP', 'NL', 'BR', 'BA', 'KA', 'FA', 'GA', 'WA', 'PA');
 
+  public static $_SIA_CONVERT = array(
+    'CL' => array(array('cmd' => 'state', 'value' => 'ARMED', 'hubOnly' => true)),
+    'OP' => array(array('cmd' => 'state', 'value' => 'DISARMED', 'hubOnly' => true)),
+    'NL' => array(array('cmd' => 'state', 'value' => 'NIGHT_MODE', 'hubOnly' => true)),
+    'PA' => array(array('cmd' => 'state', 'value' => 'PANIC', 'hubOnly' => true)),
+    'CF' => array(array('cmd' => 'state', 'value' => 'ARMED', 'hubOnly' => true)),
+    'BA' => array(array('cmd' => 'sia_state', 'value' => 1), array('cmd' => 'reedClosed', 'value' => 1)), array('cmd' => 'sia_state_intrusion', 'value' => 1),
+    'TA' => array(array('cmd' => 'sia_state_masking', 'value' => 1)),
+    'TR' => array(array('cmd' => 'sia_state_masking', 'value' => 0)),
+    'BR' => array(array('cmd' => 'sia_state', 'value' => 0), array('cmd' => 'reedClosed', 'value' => 1), array('cmd' => 'sia_state_intrusion', 'value' => 1)),
+    'HA' => array(array('cmd' => 'sia_state', 'value' => 1)),
+    'FA' => array(array('cmd' => 'sia_state', 'value' => 1)),
+    'MA' => array(array('cmd' => 'sia_state', 'value' => 1)),
+    'GA' => array(array('cmd' => 'sia_state', 'value' => 1)),
+    'KA' => array(array('cmd' => 'sia_state', 'value' => 1)),
+    'GH' => array(array('cmd' => 'sia_state', 'value' => 0)),
+    'FH' => array(array('cmd' => 'sia_state', 'value' => 0)),
+    'KH' => array(array('cmd' => 'sia_state', 'value' => 0)),
+    'YP' => array(array('cmd' => 'externallyPowered', 'value' => 1)),
+    'YQ' => array(array('cmd' => 'externallyPowered', 'value' => 0)),
+    'WA' => array(array('cmd' => 'leakDetected', 'value' => 1)),
+    'WH' => array(array('cmd' => 'leakDetected', 'value' => 1)),
+    'AT' => array(array('cmd' => 'externallyPowered', 'value' => 0)),
+    'AR' => array(array('cmd' => 'externallyPowered', 'value' => 1)),
+    'BV' => array(array('cmd' => 'sia_state_intrusion', 'value' => 1)),
+    'HV' => array(array('cmd' => 'sia_state_intrusion', 'value' => 1))
+  );
 
 
   /*     * ***********************Methode static*************************** */
+
+  public static function handleMqttMessage($_datas) {
+    if (!isset($_datas['ajax'])) {
+      return;
+    }
+    log::add('ajaxSystem', 'debug', json_encode($_datas));
+    $eqLogics = self::byType('ajaxSystem');
+    foreach ($_datas['ajax'] as $id => $value) {
+      if ($id == '') {
+        continue;
+      }
+      $info = (is_array($value)) ? $value : json_decode($value, true);
+      if ($info == null || !is_array($info)) {
+        continue;
+      }
+      if ($id == 'error') {
+        if (isset($info['description'])) {
+          log::add('ajaxSystem', 'error', __('Erreur renvoyé par MQTT : ', __FILE__) . $info['description']);
+        }
+        continue;
+      }
+      if (!isset($info['code']) || $info['code'] == '') {
+        log::add('ajaxSystem', 'debug', 'Invalid code : ' . json_encode($info));
+        continue;
+      }
+      if (!isset($info['datetime']) || $info['datetime'] == '') {
+        log::add('ajaxSystem', 'debug', 'Invalid datetime : ' .  json_encode($info));
+        continue;
+      }
+      $d = DateTime::createFromFormat('H:i:s,m-d-Y', $info['datetime'], new DateTimeZone('UTC'));
+
+      if ($d->getTimestamp() < (strtotime('now') - 120)) {
+        log::add('ajaxSystem', 'debug', 'Invalid too old datetime : ' .  json_encode($info));
+        continue;
+      }
+      foreach ($eqLogics as $eqLogic) {
+        if ($eqLogic->getConfiguration('device_number') != $id && (!in_array($info['code'], self::$_SIA_GLOBALS) || $eqLogic->getConfiguration('type') != 'hub')) {
+          continue;
+        }
+        $eqLogic->checkAndUpdateCmd('sia_code', $info['code']);
+        if (isset($info['type'])) {
+          $eqLogic->checkAndUpdateCmd('sia_type', $info['type']);
+        }
+        if (isset($info['description'])) {
+          $eqLogic->checkAndUpdateCmd('sia_description', $info['description']);
+        }
+        if (isset($info['concerns'])) {
+          $eqLogic->checkAndUpdateCmd('sia_concerns', $info['concerns']);
+        }
+        if (isset(self::$_SIA_CONVERT[$info['code']])) {
+          foreach (self::$_SIA_CONVERT[$info['code']] as $convert) {
+            if (isset($convert['hubOnly']) && $convert['hubOnly'] && $eqLogic->getConfiguration('type') != 'hub') {
+              continue;
+            }
+            log::add('ajaxSystem', 'debug', 'MQTT ' . $eqLogic->getHumanName() . ' ' . $convert['cmd'] . ' => ' . $convert['value']);
+            $eqLogic->checkAndUpdateCmd($convert['cmd'], $convert['value']);
+          }
+        }
+      }
+    }
+  }
+
+  public static function postConfig_local_mode($_value) {
+    $plugin = plugin::byId('ajaxSystem');
+    switch ($_value) {
+      case 'none':
+        $plugin->dependancy_changeAutoMode(0);
+        $plugin->deamon_info(0);
+        mqtt2::removePluginTopic(config::byKey('mqtt::prefix', __CLASS__, 'ajax'));
+        break;
+      case 'sia':
+        $plugin->dependancy_changeAutoMode(1);
+        $plugin->deamon_info(1);
+        mqtt2::removePluginTopic(config::byKey('mqtt::prefix', __CLASS__, 'ajax'));
+        break;
+      case 'mqtt':
+        $plugin->dependancy_changeAutoMode(0);
+        $plugin->deamon_info(0);
+        if (!class_exists('mqtt2')) {
+          throw new Exception(__('Le plugin MQTT Manager n\'est pas installé', __FILE__));
+        }
+        if (mqtt2::deamon_info()['state'] != 'ok') {
+          throw new Exception(__('Le démon MQTT Manager n\'est pas démarré', __FILE__));
+        }
+        mqtt2::addPluginTopic(__CLASS__, config::byKey('mqtt::prefix', __CLASS__, 'ajax'));
+        break;
+    }
+  }
 
 
   public static function dependancy_info() {
@@ -50,6 +166,7 @@ class ajaxSystem extends eqLogic {
       'test' => array(
         array('operation' => '#value# == "ARMED"', 'state_light' => '<i class="fas fa-lock"></i>'),
         array('operation' => '#value# == "DISARMED"', 'state_light' => '<i class="fas fa-lock-open"></i>'),
+        array('operation' => '#value# == "DISARMED_NIGHT_MODE_OFF"', 'state_light' => '<i class="fas fa-lock-open"></i>'),
         array('operation' => '#value# == "NIGHT_MODE"', 'state_light' => '<i class="fas fa-moon"></i>'),
         array('operation' => '#value# == "PANIC"', 'state_light' => '<i class="fas fa-exclamation-circle"></i>')
       )
@@ -188,6 +305,9 @@ class ajaxSystem extends eqLogic {
   }
 
   public static function login($_username, $_password) {
+    if (trim(network::getNetworkAccess('external')) == '') {
+      throw new Exception(__('URL d\'accès externe de votre Jeedom invalide. Merci de la configurer dans Réglage -> Système -> Configuration puis onglet Réseaux'));
+    }
     $data = self::request('/login', array(
       'login' => $_username,
       'passwordHash' => $_password,
@@ -431,6 +551,31 @@ class ajaxSystemCmd extends cmd {
 
 
   /*     * *********************Methode d'instance************************* */
+
+
+  public function alreadyInState($_options) {
+    $eqLogic = $this->getEqLogic();
+    if ($eqLogic->getConfiguration('type') == 'hub') {
+      $cmdValue = $this->getCmdValue();
+      $value =  $cmdValue->execCmd();
+      if ($this->getLogicalId() == 'ARM') {
+        return ($value == 'ARMED');
+      }
+      if ($this->getLogicalId() == 'DISARM') {
+        return ($value == 'DISARMED_NIGHT_MODE_OFF' || $value == 'DISARMED');
+      }
+      if ($this->getLogicalId() == 'NIGHT_MODE') {
+        return ($value == 'NIGHT_MODE');
+      }
+      if ($this->getLogicalId() == 'PANIC' || $this->getLogicalId() == 'muteFireDetectors') {
+        return false;
+      }
+    }
+    if ($eqLogic->getConfiguration('type') == 'group') {
+      return false;
+    }
+    return parent::alreadyInState($_options);
+  }
 
   public function execute($_options = array()) {
     $eqLogic = $this->getEqLogic();

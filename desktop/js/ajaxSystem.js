@@ -16,13 +16,19 @@
 */
 
 $('.eqLogicAttr[data-l1key=configuration][data-l2key=device]').on('change',function(){
-  let color = $('.eqLogicAttr[data-l1key=configuration][data-l2key=color]').value().toLowerCase();
+  let color = 'white';
+  if($('.eqLogicAttr[data-l1key=configuration][data-l2key=color]').value()){
+    color = $('.eqLogicAttr[data-l1key=configuration][data-l2key=color]').value().toLowerCase();
+  }
   let device = $('.eqLogicAttr[data-l1key=configuration][data-l2key=device]').value();
   $('#img_ajaxSystemModel').attr('src','plugins/ajaxSystem/core/config/devices/'+device+'_'+color+'.png');
 });
 
 $('.eqLogicAttr[data-l1key=configuration][data-l2key=color]').on('change',function(){
-  let color = $('.eqLogicAttr[data-l1key=configuration][data-l2key=color]').value().toLowerCase();
+  let color = 'white';
+  if($('.eqLogicAttr[data-l1key=configuration][data-l2key=color]').value()){
+    color = $('.eqLogicAttr[data-l1key=configuration][data-l2key=color]').value().toLowerCase();
+  }
   let device = $('.eqLogicAttr[data-l1key=configuration][data-l2key=device]').value();
   $('#img_ajaxSystemModel').attr('src','plugins/ajaxSystem/core/config/devices/'+device+'_'+color+'.png');
 });
@@ -117,7 +123,7 @@ function addCmdToTable(_cmd) {
   tr += '</tr>';
   $('#table_cmd tbody').append(tr);
   var tr = $('#table_cmd tbody tr').last();
-  jeedom.eqLogic.builSelectCmd({
+  jeedom.eqLogic.buildSelectCmd({
     id:  $('.eqLogicAttr[data-l1key=id]').value(),
     filter: {type: 'info'},
     error: function (error) {

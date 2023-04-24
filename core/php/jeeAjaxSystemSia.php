@@ -32,39 +32,9 @@ if (!isset($results['devices'])) {
 
 $eqLogics = ajaxSystem::byType('ajaxSystem');
 
-$SIA_GLOBALS = array('CL', 'OP', 'NL', 'BR', 'BA');
-
-$SIA_CONVERT = array(
-    'CL' => array(array('cmd' => 'state', 'value' => 'ARMED', 'hubOnly' => true)),
-    'OP' => array(array('cmd' => 'state', 'value' => 'DISARMED', 'hubOnly' => true)),
-    'NL' => array(array('cmd' => 'state', 'value' => 'NIGHT_MODE', 'hubOnly' => true)),
-    'PA' => array(array('cmd' => 'state', 'value' => 'PANIC', 'hubOnly' => true)),
-    'CF' => array(array('cmd' => 'state', 'value' => 'ARMED', 'hubOnly' => true)),
-    'BA' => array(array('cmd' => 'sia_state', 'value' => 1), array('cmd' => 'reedClosed', 'value' => 1)), array('cmd' => 'sia_state_intrusion', 'value' => 1),
-    'TA' => array(array('cmd' => 'sia_state_masking', 'value' => 1)),
-    'TR' => array(array('cmd' => 'sia_state_masking', 'value' => 0)),
-    'BR' => array(array('cmd' => 'sia_state', 'value' => 0), array('cmd' => 'reedClosed', 'value' => 1), array('cmd' => 'sia_state_intrusion', 'value' => 1)),
-    'HA' => array(array('cmd' => 'sia_state', 'value' => 1)),
-    'FA' => array(array('cmd' => 'sia_state', 'value' => 1)),
-    'MA' => array(array('cmd' => 'sia_state', 'value' => 1)),
-    'GA' => array(array('cmd' => 'sia_state', 'value' => 1)),
-    'KA' => array(array('cmd' => 'sia_state', 'value' => 1)),
-    'GH' => array(array('cmd' => 'sia_state', 'value' => 0)),
-    'FH' => array(array('cmd' => 'sia_state', 'value' => 0)),
-    'KH' => array(array('cmd' => 'sia_state', 'value' => 0)),
-    'YP' => array(array('cmd' => 'externallyPowered', 'value' => 1)),
-    'YQ' => array(array('cmd' => 'externallyPowered', 'value' => 0)),
-    'WA' => array(array('cmd' => 'leakDetected', 'value' => 1)),
-    'WH' => array(array('cmd' => 'leakDetected', 'value' => 1)),
-    'AT' => array(array('cmd' => 'externallyPowered', 'value' => 0)),
-    'AR' => array(array('cmd' => 'externallyPowered', 'value' => 1)),
-    'BV' => array(array('cmd' => 'sia_state_intrusion', 'value' => 1)),
-    'HV' => array(array('cmd' => 'sia_state_intrusion', 'value' => 1))
-);
-
 foreach ($results['devices'] as $id => $info) {
     foreach ($eqLogics as $eqLogic) {
-        if ($eqLogic->getConfiguration('device_number') != $id && (!in_array($info['code'], $SIA_GLOBALS) || $eqLogic->getConfiguration('type') != 'hub')) {
+        if ($eqLogic->getConfiguration('device_number') != $id && (!in_array($info['code'], ajaxSystem::$_SIA_GLOBALS) || $eqLogic->getConfiguration('type') != 'hub')) {
             continue;
         }
         $eqLogic->checkAndUpdateCmd('sia_code', $info['code']);
@@ -73,8 +43,8 @@ foreach ($results['devices'] as $id => $info) {
             $eqLogic->checkAndUpdateCmd('sia_description', $info['sia_code']['description']);
             $eqLogic->checkAndUpdateCmd('sia_concerns', $info['sia_code']['concerns']);
         }
-        if (isset($SIA_CONVERT[$info['code']])) {
-            foreach ($SIA_CONVERT[$info['code']] as $convert) {
+        if (isset(ajaxSystem::$_SIA_CONVERT[$info['code']])) {
+            foreach (ajaxSystem::$_SIA_CONVERT[$info['code']] as $convert) {
                 if (isset($convert['hubOnly']) && $convert['hubOnly'] && $eqLogic->getConfiguration('type') != 'hub') {
                     continue;
                 }
