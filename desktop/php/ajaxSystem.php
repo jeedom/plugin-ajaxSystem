@@ -145,7 +145,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								</div>
 								<div class="form-group">
 									<label class="col-sm-3 control-label">{{Numéro de l'équipement}}</label>
-									<div class="col-sm-1">
+									<div class="col-sm-2">
 										<input type="number" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="device_number" />
 									</div>
 								</div>
