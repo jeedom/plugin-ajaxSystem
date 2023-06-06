@@ -2,7 +2,7 @@
     "changelog.md": {
         "Changelog Ajax Systems": "Änderungsprotokoll Ajax-Systeme",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Zur Erinnerung: Wenn keine Informationen zur Aktualisierung vorliegen, liegt dies daran, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt",
-        "Possibilité de passer par un mode mqtt pour les remontées d'information SIA, via nodered": "Möglichkeit, über nodered einen mqtt-Modus für die Rückmeldung von SIA-Informationen zu durchlaufen",
+        "24\/04\/2023": "24.04.2023",
         "Ajout hub fibra": "Fasernabe hinzufügen",
         "23\/08\/2022": "23.08.2022",
         "Ajout de la gestion des groupes": "Gruppenverwaltung hinzugefügt",
@@ -86,6 +86,9 @@
         "Vous pouvez changer aussi la fréquence de test du service de 1min à 24h (pour reduire la charge sur votre Jeedom": "Sie können auch die Häufigkeit der Servicetests von 1 Minute auf 24 Stunden ändern (um die Belastung Ihres Jeedom zu reduzieren",
         "Normalement si tout est bon vous devriez voir le \"Centre de télésurveillance\" passer à \"Connecté": "Wenn alles in Ordnung ist, sollten Sie normalerweise sehen, dass sich die \"Zentrale\" in \"Verbunden\" ändert",
         "Certaine information ne remontent que si le SIA est configuré": "Bestimmte Informationen werden nur zurückgegeben, wenn das AIS konfiguriert ist",
+        "Configuration MQTT": "MQTT-Setup",
+        "Dans la configuration du plugin vous avez la possibilité de passer pour la partie SIA en mqtt, il y a volontairement aucune explication de comment car la mise en place est relativement complexe": "In der Konfiguration des Plugins hat man die Möglichkeit für den SIA-Teil in mqtt zu übergeben, es wird freiwillig nicht erklärt wie, da die Implementierung relativ komplex ist",
+        "L'option est la pour répondre à un besoin d'un client seulement": "Die Option ist nur dazu da, ein Kundenbedürfnis zu erfüllen",
         " Configuration.": " Aufbau.",
         " Configuration?": " Aufbau?",
         "Configuration ": "Aufbau ",
@@ -141,6 +144,13 @@
         " ip]": " ip]",
         "[ip]": "[ip]",
         "*ip*": "*ip*",
-        " ip*": " ip*"
+        " ip*": " ip*",
+        " FAQ.": " Häufig gestellte Fragen.",
+        " FAQ?": " Häufig gestellte Fragen?",
+        "FAQ ": "Häufig gestellte Fragen ",
+        " FAQ]": " Häufig gestellte Fragen]",
+        "[FAQ]": "[Häufig gestellte Fragen]",
+        "*FAQ*": "*Häufig gestellte Fragen*",
+        " FAQ*": " Häufig gestellte Fragen*"
     }
 }
