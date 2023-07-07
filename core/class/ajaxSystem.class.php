@@ -148,9 +148,6 @@ class ajaxSystem extends eqLogic {
     $return['log'] = 'ajaxSystem_update';
     $return['progress_file'] = '/tmp/dependancy_ajaxSystem_in_progress';
     $return['state'] = 'ok';
-    if (exec(system::getCmdSudo() . 'pip3 list | grep -E "pysiaalarm" | wc -l') < 1) {
-      $return['state'] = 'nok';
-    }
     return $return;
   }
 
