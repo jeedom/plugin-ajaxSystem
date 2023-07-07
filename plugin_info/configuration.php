@@ -44,21 +44,9 @@ if (!isConnect()) {
         <select id="sel_ajaxSystemLocalMode" class="configKey form-control" data-l1key="local_mode">
           <option value="none">{{Aucun}}</option>
           <option value="sia">{{SIA via démon}}</option>
-          <option value="mqtt">{{SIA via MQTT}}</option>
         </select>
       </div>
     </div>
-
-    <div class="local_mode mqtt" style="display:none;">
-      <div class="form-group">
-        <label class="col-lg-3 control-label">{{Topic racine}}</label>
-        <div class="col-md-2">
-          <input class="configKey form-control" data-l1key="mqtt::prefix" />
-        </div>
-      </div>
-
-    </div>
-
     <div class="local_mode sia" style="display:none;">
       <legend>{{Configuration SIA}}</legend>
       <div class="form-group">

@@ -54,90 +54,16 @@ class ajaxSystem extends eqLogic {
 
   /*     * ***********************Methode static*************************** */
 
-  public static function handleMqttMessage($_datas) {
-    if (!isset($_datas['ajax'])) {
-      return;
-    }
-    log::add('ajaxSystem', 'debug', json_encode($_datas));
-    $eqLogics = self::byType('ajaxSystem');
-    foreach ($_datas['ajax'] as $id => $value) {
-      if ($id == '') {
-        continue;
-      }
-      $info = (is_array($value)) ? $value : json_decode($value, true);
-      if ($info == null || !is_array($info)) {
-        continue;
-      }
-      if ($id == 'error') {
-        if (isset($info['description'])) {
-          log::add('ajaxSystem', 'error', __('Erreur renvoyé par MQTT : ', __FILE__) . $info['description']);
-        }
-        continue;
-      }
-      if (!isset($info['code']) || $info['code'] == '') {
-        log::add('ajaxSystem', 'debug', 'Invalid code : ' . json_encode($info));
-        continue;
-      }
-      if (!isset($info['datetime']) || $info['datetime'] == '') {
-        log::add('ajaxSystem', 'debug', 'Invalid datetime : ' .  json_encode($info));
-        continue;
-      }
-      $d = DateTime::createFromFormat('H:i:s,m-d-Y', $info['datetime'], new DateTimeZone('UTC'));
-
-      if ($d->getTimestamp() < (strtotime('now') - 120)) {
-        log::add('ajaxSystem', 'debug', 'Invalid too old datetime : ' .  json_encode($info));
-        continue;
-      }
-      foreach ($eqLogics as $eqLogic) {
-        if ($eqLogic->getConfiguration('device_number') != $id && (!in_array($info['code'], self::$_SIA_GLOBALS) || $eqLogic->getConfiguration('type') != 'hub')) {
-          continue;
-        }
-        $eqLogic->checkAndUpdateCmd('sia_code', $info['code']);
-        if (isset($info['type'])) {
-          $eqLogic->checkAndUpdateCmd('sia_type', $info['type']);
-        }
-        if (isset($info['description'])) {
-          $eqLogic->checkAndUpdateCmd('sia_description', $info['description']);
-        }
-        if (isset($info['concerns'])) {
-          $eqLogic->checkAndUpdateCmd('sia_concerns', $info['concerns']);
-        }
-        if (isset(self::$_SIA_CONVERT[$info['code']])) {
-          foreach (self::$_SIA_CONVERT[$info['code']] as $convert) {
-            if (isset($convert['hubOnly']) && $convert['hubOnly'] && $eqLogic->getConfiguration('type') != 'hub') {
-              continue;
-            }
-            log::add('ajaxSystem', 'debug', 'MQTT ' . $eqLogic->getHumanName() . ' ' . $convert['cmd'] . ' => ' . $convert['value']);
-            $eqLogic->checkAndUpdateCmd($convert['cmd'], $convert['value']);
-          }
-        }
-      }
-    }
-  }
-
   public static function postConfig_local_mode($_value) {
     $plugin = plugin::byId('ajaxSystem');
     switch ($_value) {
       case 'none':
         $plugin->dependancy_changeAutoMode(0);
         $plugin->deamon_info(0);
-        mqtt2::removePluginTopic(config::byKey('mqtt::prefix', __CLASS__, 'ajax'));
         break;
       case 'sia':
         $plugin->dependancy_changeAutoMode(1);
         $plugin->deamon_info(1);
-        mqtt2::removePluginTopic(config::byKey('mqtt::prefix', __CLASS__, 'ajax'));
-        break;
-      case 'mqtt':
-        $plugin->dependancy_changeAutoMode(0);
-        $plugin->deamon_info(0);
-        if (!class_exists('mqtt2')) {
-          throw new Exception(__('Le plugin MQTT Manager n\'est pas installé', __FILE__));
-        }
-        if (mqtt2::deamon_info()['state'] != 'ok') {
-          throw new Exception(__('Le démon MQTT Manager n\'est pas démarré', __FILE__));
-        }
-        mqtt2::addPluginTopic(__CLASS__, config::byKey('mqtt::prefix', __CLASS__, 'ajax'));
         break;
     }
   }
