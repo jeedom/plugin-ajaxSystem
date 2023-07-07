@@ -2,7 +2,9 @@
     "changelog.md": {
         "Changelog Ajax Systems": "Registro de cambios de sistemas Ajax",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Como recordatorio, si no hay información sobre la actualización es porque se trata solo de la actualización de la documentación, la traducción o el texto",
-        "Possibilité de passer par un mode mqtt pour les remontées d'information SIA, via nodered": "Posibilidad de pasar por un modo mqtt para retroalimentación de información SIA, vía nodered",
+        "06\/06\/2023": "06\/06\/2023",
+        "Correction d'un bug sur le démarrage du démon SIA": "Se corrigió un error al iniciar el demonio SIA",
+        "24\/04\/2023": "24\/04\/2023",
         "Ajout hub fibra": "Agregar concentrador de fibra",
         "23\/08\/2022": "23\/08\/2022",
         "Ajout de la gestion des groupes": "Gestión de grupos añadida",
@@ -86,6 +88,9 @@
         "Vous pouvez changer aussi la fréquence de test du service de 1min à 24h (pour reduire la charge sur votre Jeedom": "También puede cambiar la frecuencia de la prueba de servicio de 1 minuto a 24 horas (para reducir la carga en su Jeedom",
         "Normalement si tout est bon vous devriez voir le \"Centre de télésurveillance\" passer à \"Connecté": "Normalmente, si todo está bien, debería ver el cambio de \"Estación central\" a \"Conectado",
         "Certaine information ne remontent que si le SIA est configuré": "Cierta información solo se devuelve si el AIS está configurado",
+        "Configuration MQTT": "Configuración de MQTT",
+        "Dans la configuration du plugin vous avez la possibilité de passer pour la partie SIA en mqtt, il y a volontairement aucune explication de comment car la mise en place est relativement complexe": "En la configuración del complemento tiene la posibilidad de pasar por la parte SIA en mqtt, voluntariamente no hay una explicación de cómo porque la implementación es relativamente compleja",
+        "L'option est la pour répondre à un besoin d'un client seulement": "La opción está ahí para satisfacer una necesidad del cliente solamente",
         " Configuration.": " Configuración.",
         " Configuration?": " Configuración?",
         "Configuration ": "Configuración ",
@@ -141,6 +146,13 @@
         " ip]": " ip]",
         "[ip]": "[ip]",
         "*ip*": "*ip*",
-        " ip*": " ip*"
+        " ip*": " ip*",
+        " FAQ.": " Preguntas frecuentes.",
+        " FAQ?": " Preguntas frecuentes?",
+        "FAQ ": "Preguntas frecuentes ",
+        " FAQ]": " Preguntas frecuentes]",
+        "[FAQ]": "[Preguntas frecuentes]",
+        "*FAQ*": "*Preguntas frecuentes*",
+        " FAQ*": " Preguntas frecuentes*"
     }
 }

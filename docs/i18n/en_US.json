@@ -2,7 +2,9 @@
     "changelog.md": {
         "Changelog Ajax Systems": "Changelog Ajax Systems",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "As a reminder, if there is no information on the update, it is because it concerns only the update of documentation, translation or text",
-        "Possibilité de passer par un mode mqtt pour les remontées d'information SIA, via nodered": "Possibility of going through an mqtt mode for SIA information feedback, via nodered",
+        "06\/06\/2023": "06\/06\/2023",
+        "Correction d'un bug sur le démarrage du démon SIA": "Fixed a bug on starting the SIA daemon",
+        "24\/04\/2023": "04\/24\/2023",
         "Ajout hub fibra": "Add fibra hub",
         "23\/08\/2022": "08\/23\/2022",
         "Ajout de la gestion des groupes": "Added group management",
@@ -86,6 +88,9 @@
         "Vous pouvez changer aussi la fréquence de test du service de 1min à 24h (pour reduire la charge sur votre Jeedom": "You can also change the service test frequency from 1min to 24h (to reduce the load on your Jeedom",
         "Normalement si tout est bon vous devriez voir le \"Centre de télésurveillance\" passer à \"Connecté": "Normally if all is well you should see the \"Central Station\" change to \"Connected",
         "Certaine information ne remontent que si le SIA est configuré": "Certain information is only returned if the AIS is configured",
+        "Configuration MQTT": "MQTT Setup",
+        "Dans la configuration du plugin vous avez la possibilité de passer pour la partie SIA en mqtt, il y a volontairement aucune explication de comment car la mise en place est relativement complexe": "In the configuration of the plugin you have the possibility to pass for the SIA part in mqtt, there is voluntarily no explanation of how because the implementation is relatively complex",
+        "L'option est la pour répondre à un besoin d'un client seulement": "The option is there to meet a customer need only",
         " Configuration.": " Configuration.",
         " Configuration?": " Configuration?",
         "Configuration ": "Configuration ",
@@ -141,6 +146,13 @@
         " ip]": " ip]",
         "[ip]": "[ip]",
         "*ip*": "*ip*",
-        " ip*": " ip*"
+        " ip*": " ip*",
+        " FAQ.": " FAQs.",
+        " FAQ?": " FAQs?",
+        "FAQ ": "FAQs ",
+        " FAQ]": " FAQs]",
+        "[FAQ]": "[FAQs]",
+        "*FAQ*": "*FAQs*",
+        " FAQ*": " FAQs*"
     }
 }
