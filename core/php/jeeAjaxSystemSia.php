@@ -25,7 +25,7 @@ if (isset($_GET['test'])) {
     die();
 }
 $results = json_decode(file_get_contents("php://input"), true);
-log::add('ajaxSystem', 'debug', json_encode($results));
+log::add('ajaxSystem', 'debug', '[SIA] ' . json_encode($results));
 if (!isset($results['devices'])) {
     die;
 }
@@ -34,23 +34,32 @@ $eqLogics = ajaxSystem::byType('ajaxSystem');
 
 foreach ($results['devices'] as $id => $info) {
     foreach ($eqLogics as $eqLogic) {
-        if ($eqLogic->getConfiguration('device_number') != $id && (!in_array($info['code'], ajaxSystem::$_SIA_GLOBALS) || $eqLogic->getConfiguration('type') != 'hub')) {
-            continue;
+        if ($id == 501 && $eqLogic->getConfiguration('type') == 'group' && $info['ri'] == $eqLogic->getLogicalId()) {
+            updateDevice($eqLogic, $info);
         }
-        $eqLogic->checkAndUpdateCmd('sia_code', $info['code']);
-        if (isset($info['sia_code'])) {
-            $eqLogic->checkAndUpdateCmd('sia_type', $info['sia_code']['type']);
-            $eqLogic->checkAndUpdateCmd('sia_description', $info['sia_code']['description']);
-            $eqLogic->checkAndUpdateCmd('sia_concerns', $info['sia_code']['concerns']);
+        if ($eqLogic->getConfiguration('device_number') == $id) {
+            updateDevice($eqLogic, $info);
         }
-        if (isset(ajaxSystem::$_SIA_CONVERT[$info['code']])) {
-            foreach (ajaxSystem::$_SIA_CONVERT[$info['code']] as $convert) {
-                if (isset($convert['hubOnly']) && $convert['hubOnly'] && $eqLogic->getConfiguration('type') != 'hub') {
-                    continue;
-                }
-                log::add('ajaxSystem', 'debug', 'SIA ' . $eqLogic->getHumanName() . ' ' . $convert['cmd'] . ' => ' . $convert['value']);
-                $eqLogic->checkAndUpdateCmd($convert['cmd'], $convert['value']);
+        if (in_array($info['code'], ajaxSystem::$_SIA_GLOBALS) && $eqLogic->getConfiguration('type') == 'hub') {
+            updateDevice($eqLogic, $info);
+        }
+    }
+}
+
+function updateDevice($_eqLogic, $info) {
+    $_eqLogic->checkAndUpdateCmd('sia_code', $info['code']);
+    if (isset($info['sia_code'])) {
+        $_eqLogic->checkAndUpdateCmd('sia_type', $info['sia_code']['type']);
+        $_eqLogic->checkAndUpdateCmd('sia_description', $info['sia_code']['description']);
+        $_eqLogic->checkAndUpdateCmd('sia_concerns', $info['sia_code']['concerns']);
+    }
+    if (isset(ajaxSystem::$_SIA_CONVERT[$info['code']])) {
+        foreach (ajaxSystem::$_SIA_CONVERT[$info['code']] as $convert) {
+            if (isset($convert['hubOnly']) && $convert['hubOnly'] && $_eqLogic->getConfiguration('type') != 'hub') {
+                continue;
             }
+            log::add('ajaxSystem', 'debug', '[SIA] ' . $_eqLogic->getHumanName() . ' ' . $convert['cmd'] . ' => ' . $convert['value']);
+            $_eqLogic->checkAndUpdateCmd($convert['cmd'], $convert['value']);
         }
     }
 }

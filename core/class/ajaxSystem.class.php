@@ -24,6 +24,10 @@ class ajaxSystem extends eqLogic {
   public static $_SIA_GLOBALS = array('CL', 'OP', 'NL', 'BR', 'BA', 'KA', 'FA', 'GA', 'WA', 'PA');
 
   public static $_SIA_CONVERT = array(
+    'CF' => array(array('cmd' => 'state', 'value' => 'ARMED')),
+    'CG' => array(array('cmd' => 'state', 'value' => 'ARMED')),
+    'OG' => array(array('cmd' => 'state', 'value' => 'DISARMED')),
+    'NF' => array(array('cmd' => 'state', 'value' => 'NIGHT_MODE')),
     'CL' => array(array('cmd' => 'state', 'value' => 'ARMED', 'hubOnly' => true)),
     'OP' => array(array('cmd' => 'state', 'value' => 'DISARMED', 'hubOnly' => true)),
     'NL' => array(array('cmd' => 'state', 'value' => 'NIGHT_MODE', 'hubOnly' => true)),
