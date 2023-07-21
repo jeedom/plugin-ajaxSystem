@@ -8,8 +8,8 @@ from dataclasses import dataclass, field, asdict
 from datetime import datetime, timedelta, timezone, tzinfo
 from typing import Union, Any
 
-from Crypto.Cipher import AES
-from Crypto.Cipher._mode_cbc import CbcMode
+from Cryptodome.Cipher import AES
+from Cryptodome.Cipher._mode_cbc import CbcMode
 
 from .account import SIAAccount
 from .const import IV, RSP_XDATA
