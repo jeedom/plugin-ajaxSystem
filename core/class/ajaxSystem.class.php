@@ -32,7 +32,6 @@ class ajaxSystem extends eqLogic {
     'OP' => array(array('cmd' => 'state', 'value' => 'DISARMED', 'hubOnly' => true)),
     'NL' => array(array('cmd' => 'state', 'value' => 'NIGHT_MODE', 'hubOnly' => true)),
     'PA' => array(array('cmd' => 'state', 'value' => 'PANIC', 'hubOnly' => true)),
-    'CF' => array(array('cmd' => 'state', 'value' => 'ARMED', 'hubOnly' => true)),
     'BA' => array(array('cmd' => 'sia_state', 'value' => 1), array('cmd' => 'reedClosed', 'value' => 1)), array('cmd' => 'sia_state_intrusion', 'value' => 1),
     'TA' => array(array('cmd' => 'sia_state_masking', 'value' => 1)),
     'TR' => array(array('cmd' => 'sia_state_masking', 'value' => 0)),
