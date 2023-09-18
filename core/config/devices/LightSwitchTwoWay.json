@@ -1,0 +1,109 @@
+{
+    "name" : "Va et vient",
+    "commands" : [
+      {
+        "name": "Etat",
+        "type": "info",
+        "subtype": "binary",
+        "isVisible": 0,
+        "isHistorized": 0,
+        "logicalId": "realState"
+      },
+      {
+        "name": "Source evenement",
+        "type": "info",
+        "subtype": "string",
+        "isVisible": 0,
+        "isHistorized": 0,
+        "logicalId": "sourceObjectName"
+      },
+      {
+        "name": "Evenement",
+        "type": "info",
+        "subtype": "string",
+        "isVisible": 0,
+        "isHistorized": 0,
+        "logicalId": "event"
+      },
+      {
+        "name": "Code evenement",
+        "type": "info",
+        "subtype": "string",
+        "isVisible": 0,
+        "isHistorized": 0,
+        "logicalId": "eventCode"
+      },
+      {
+        "name": "Voltage",
+        "type": "info",
+        "subtype": "numeric",
+        "isVisible": 1,
+        "isHistorized": 1,
+        "unite":"V",
+        "generic_type": "VOLTAGE",
+        "logicalId": "voltage"
+      },
+      {
+        "name": "Consommation",
+        "type": "info",
+        "subtype": "numeric",
+        "generic_type": "POWER",
+        "isVisible": 0,
+        "isHistorized": 0,
+        "unite":"kWh",
+        "logicalId": "powerWtH",
+        "configuration" : {
+          "calculValueOffset":"#value# / 1000"
+        }
+      },
+      {
+        "name": "Courant",
+        "type": "info",
+        "subtype": "numeric",
+        "generic_type": "CURRENT",
+        "isVisible": 0,
+        "isHistorized": 0,
+        "unite":"A",
+        "logicalId": "currentMA",
+        "configuration" : {
+          "calculValueOffset":"#value# / 1000"
+        }
+      },
+      {
+        "name": "Puissance",
+        "type": "info",
+        "subtype": "numeric",
+        "generic_type": "POWER",
+        "isVisible": 0,
+        "isHistorized": 0,
+        "unite":"W",
+        "logicalId": "power"
+      },
+      {
+        "name": "On",
+        "type": "action",
+        "subtype": "other",
+        "isVisible": 1,
+        "isHistorized": 0,
+        "logicalId": "SWITCH_ON",
+        "value" :"Etat",
+        "template":{
+          "dashboard" : "prise",
+          "mobile" : "prise"
+        }
+      },
+      {
+        "name": "Off",
+        "type": "action",
+        "subtype": "other",
+        "isVisible": 1,
+        "isHistorized": 0,
+        "logicalId": "SWITCH_OFF",
+        "value" :"Etat",
+        "template":{
+          "dashboard" : "prise",
+          "mobile" : "prise"
+        }
+      }
+    ]
+  }
