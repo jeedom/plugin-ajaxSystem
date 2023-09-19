@@ -7,7 +7,7 @@
         "subtype": "binary",
         "isVisible": 0,
         "isHistorized": 0,
-        "logicalId": "realState"
+        "logicalId": "channelStatus"
       },
       {
         "name": "Source evenement",
@@ -32,52 +32,6 @@
         "isVisible": 0,
         "isHistorized": 0,
         "logicalId": "eventCode"
-      },
-      {
-        "name": "Voltage",
-        "type": "info",
-        "subtype": "numeric",
-        "isVisible": 1,
-        "isHistorized": 1,
-        "unite":"V",
-        "generic_type": "VOLTAGE",
-        "logicalId": "voltage"
-      },
-      {
-        "name": "Consommation",
-        "type": "info",
-        "subtype": "numeric",
-        "generic_type": "POWER",
-        "isVisible": 0,
-        "isHistorized": 0,
-        "unite":"kWh",
-        "logicalId": "powerWtH",
-        "configuration" : {
-          "calculValueOffset":"#value# / 1000"
-        }
-      },
-      {
-        "name": "Courant",
-        "type": "info",
-        "subtype": "numeric",
-        "generic_type": "CURRENT",
-        "isVisible": 0,
-        "isHistorized": 0,
-        "unite":"A",
-        "logicalId": "currentMA",
-        "configuration" : {
-          "calculValueOffset":"#value# / 1000"
-        }
-      },
-      {
-        "name": "Puissance",
-        "type": "info",
-        "subtype": "numeric",
-        "generic_type": "POWER",
-        "isVisible": 0,
-        "isHistorized": 0,
-        "unite":"W",
-        "logicalId": "power"
       },
       {
         "name": "On",
