@@ -25,10 +25,9 @@ class ajaxSystem extends eqLogic {
 
   public static $_SIA_CONVERT = array(
     'CF' => array(array('cmd' => 'state', 'value' => 'ARMED')),
-    'NF' => array(array('cmd' => 'state', 'value' => 'ARMED')),
+    'NF' => array(array('cmd' => 'state', 'value' => 'FORCED_ARM')),
     'CG' => array(array('cmd' => 'state', 'value' => 'ARMED')),
     'OG' => array(array('cmd' => 'state', 'value' => 'DISARMED')),
-    'NF' => array(array('cmd' => 'state', 'value' => 'NIGHT_MODE')),
     'CL' => array(array('cmd' => 'state', 'value' => 'ARMED', 'hubOnly' => true)),
     'OP' => array(array('cmd' => 'state', 'value' => 'DISARMED', 'hubOnly' => true)),
     'NL' => array(array('cmd' => 'state', 'value' => 'NIGHT_MODE', 'hubOnly' => true)),
@@ -92,6 +91,7 @@ class ajaxSystem extends eqLogic {
       'template' => 'tmplmultistate',
       'test' => array(
         array('operation' => '#value# == "ARMED"', 'state_light' => '<i class="fas fa-lock"></i>'),
+        array('operation' => '#value# == "FORCED_ARM"', 'state_light' => '<i class="fas fa-shield-alt"></i>'),
         array('operation' => '#value# == "DISARMED"', 'state_light' => '<i class="fas fa-lock-open"></i>'),
         array('operation' => '#value# == "DISARMED_NIGHT_MODE_OFF"', 'state_light' => '<i class="fas fa-lock-open"></i>'),
         array('operation' => '#value# == "NIGHT_MODE"', 'state_light' => '<i class="fas fa-moon"></i>'),
