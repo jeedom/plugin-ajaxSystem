@@ -44,7 +44,15 @@ foreach ($datas['data'] as $data) {
     }
     foreach ($data['updates'] as $key => &$value) {
       if ($key == 'batteryCharge') {
+        //Actualisation de la charge de la batterie au niveau de l'équipement jeedom
         $ajaxSystem->batteryStatus($value);
+
+        //Actualisation de la commande batterie si elle existe si l'équipement
+        //Cette commande existe actuellement sur les HUB2, HUB2_4G, et HUB2_PLUS
+        $batteryCmd = $ajaxSystem->getCmd('info', 'battery::chargeLevelPercentage');
+        if(is_object($batteryCmd)){
+              $ajaxSystem->checkAndUpdateCmd('battery::chargeLevelPercentage', $value);
+        }
       }
       if (in_array($data['type'], array('HUB', 'GROUP')) && $key == 'state') {
         if ($value == 0) {

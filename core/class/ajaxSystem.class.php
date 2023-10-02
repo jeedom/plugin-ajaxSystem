@@ -459,11 +459,26 @@ class ajaxSystem extends eqLogic {
       }
       $this->checkAndUpdateCmd($cmd, $value);
     }
+
+    //Refresh batterie depuis trame de synchronisation / refresh
+    $batteryChargeLevel = '-1';
     if (isset($datas['batteryChargeLevelPercentage'])) {
-      $this->batteryStatus($datas['batteryChargeLevelPercentage']);
+      $batteryChargeLevel = $datas['batteryChargeLevelPercentage'];  
     }
     if (isset($datas['battery']) && isset($datas['battery']['chargeLevelPercentage'])) {
-      $this->batteryStatus($datas['battery']['chargeLevelPercentage']);
+      $batteryChargeLevel = $datas['battery']['chargeLevelPercentage'];
+    }
+
+    //Si niveau de charge numérique disponible, mise à jour de l'information
+    if($batteryChargeLevel != '-1'){
+      //Au niveau de l'équipement
+      $this->batteryStatus($batteryChargeLevel);
+
+      //Au niveau de la commande spécifique si elle existe
+      $batteryCmd = $this->getCmd('info', 'battery::chargeLevelPercentage');
+      if(is_object($batteryCmd)){
+        $this->checkAndUpdateCmd('battery::chargeLevelPercentage', $value);
+      }
     }
   }
 
