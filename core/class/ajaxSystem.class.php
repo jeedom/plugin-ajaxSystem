@@ -362,6 +362,8 @@ class ajaxSystem extends eqLogic {
     if ($this->getConfiguration('applyDevice') != $this->getConfiguration('device')) {
       $this->applyModuleConfiguration();
     }
+
+    //Ajout de la commande SIA Code si manquante
     $cmd = $this->getCmd(null, 'sia_code');
     if (!is_object($cmd)) {
       $cmd = new ajaxSystemCmd();

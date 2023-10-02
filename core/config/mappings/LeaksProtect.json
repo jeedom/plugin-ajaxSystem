@@ -1,0 +1,50 @@
+{
+  "name" : "Détecteur de fuites d'eau",
+  "mappings" : [
+    {
+      "name": "Etat",
+      "logicalId": "state",
+      "protocolPath": "state"
+    },
+    {
+      "name": "Source evenement",
+      "logicalId": "sourceObjectName",
+      "protocolPath": "sourceObjectName"
+    },
+    {
+      "name": "Evenement",
+      "logicalId": "event",
+      "protocolPath": "event"
+    },
+    {
+      "name": "Code evenement",
+      "logicalId": "eventCode",
+      "protocolPath": "eventCode"
+    },
+    {
+      "name": "Température",
+      "logicalId": "temperature",
+      "protocolPath": "temperature"
+    },
+    {
+      "name": "Trafiqué",
+      "logicalId": "tampered",
+      "protocolPath": "tampered"
+    },
+    {
+      "name": "En ligne",
+      "logicalId": "online",
+      "protocolPath": "online"
+    },
+    {
+      "name": "Signal",
+      "logicalId": "signalLevel",
+      "protocolPath": "signalLevel"
+    },
+    {
+      "name": "Fuite détectée",
+      "logicalId": "leakDetected",
+      "protocolPath": "leakDetected"
+    }
+  ]
+}

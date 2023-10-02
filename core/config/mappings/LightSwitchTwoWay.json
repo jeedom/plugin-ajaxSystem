@@ -1,0 +1,25 @@
+{
+    "name" : "Va et vient",
+    "mappings" : [
+      {
+        "name": "Etat",
+        "logicalId": "channelStatus",
+        "protocolPath": "channelStatus"
+      },
+      {
+        "name": "Source evenement",
+        "logicalId": "sourceObjectName",
+        "protocolPath": "sourceObjectName"
+      },
+      {
+        "name": "Evenement",
+        "logicalId": "event",
+        "protocolPath": "event"
+      },
+      {
+        "name": "Code evenement",
+        "logicalId": "eventCode",
+        "protocolPath": "eventCode"
+      }
+    ]
+  }

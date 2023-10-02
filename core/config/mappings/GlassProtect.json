@@ -1,0 +1,45 @@
+{
+  "name" : "Door Protect",
+  "mappings" : [
+    {
+      "name": "Etat",
+      "logicalId": "state",
+      "protocolPath": "state"
+    },
+    {
+      "name": "Source evenement",
+      "logicalId": "sourceObjectName",
+      "protocolPath": "sourceObjectName"
+    },
+    {
+      "name": "Evenement",
+      "logicalId": "event",
+      "protocolPath": "event"
+    },
+    {
+      "name": "Code evenement",
+      "logicalId": "eventCode",
+      "protocolPath": "eventCode"
+    },
+    {
+      "name": "Trafiqué",
+      "logicalId": "tampered",
+      "protocolPath": "tampered"
+    },
+    {
+      "name": "En ligne",
+      "logicalId": "online",
+      "protocolPath": "online"
+    },
+    {
+      "name": "Signal",
+      "logicalId": "signalLevel",
+      "protocolPath": "signalLevel"
+    },
+    {
+      "name": "Bris de verre",
+      "logicalId": "sia_state",
+      "protocolPath": "sia_state"
+    }
+  ]
+}

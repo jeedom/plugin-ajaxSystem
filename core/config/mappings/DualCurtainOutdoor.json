@@ -1,0 +1,50 @@
+{
+  "name" : "DualCurtain Outdoor",
+  "mappings" : [
+    {
+      "name": "Etat",
+      "logicalId": "state",
+      "protocolPath": "state"
+    },
+    {
+      "name": "Source evenement",
+      "logicalId": "sourceObjectName",
+      "protocolPath": "state"
+    },
+    {
+      "name": "Evenement",
+      "logicalId": "event",
+      "protocolPath": "state"
+    },
+    {
+      "name": "Code evenement",
+      "logicalId": "eventCode",
+      "protocolPath": "state"
+    },
+    {
+      "name": "Température",
+      "logicalId": "temperature",
+      "protocolPath": "state"
+    },
+    {
+      "name": "Trafiqué",
+      "logicalId": "tampered",
+      "protocolPath": "state"
+    },
+    {
+      "name": "En ligne",
+      "logicalId": "online",
+      "protocolPath": "state"
+    },
+    {
+      "name": "Signal",
+      "logicalId": "signalLevel",
+      "protocolPath": "state"
+    },
+    {
+      "name": "Mouvement",
+      "logicalId": "sia_state",
+      "protocolPath": "state"
+    }
+  ]
+}

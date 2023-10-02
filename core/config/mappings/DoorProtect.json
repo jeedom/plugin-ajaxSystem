@@ -1,0 +1,55 @@
+{
+  "name" : "Door Protect",
+  "mappings" : [
+    {
+      "name": "Etat",
+      "logicalId": "state",
+      "protocolPath": "state"
+    },
+    {
+      "name": "Source evenement",
+      "logicalId": "sourceObjectName",
+      "protocolPath": "sourceObjectName"
+    },
+    {
+      "name": "Evenement",
+      "logicalId": "event",
+      "protocolPath": "event"
+    },
+    {
+      "name": "Code evenement",
+      "logicalId": "eventCode",
+      "protocolPath": "eventCode"
+    },
+    {
+      "name": "Ouverture",
+      "logicalId": "reedClosed",
+      "protocolPath": "reedClosed"
+    },
+    {
+      "name": "Contacteur",
+      "logicalId": "extraContactClosed",
+      "protocolPath": "extraContactClosed"
+    },
+    {
+      "name": "Température",
+      "logicalId": "temperature",
+      "protocolPath": "temperature"
+    },
+    {
+      "name": "Trafiqué",
+      "logicalId": "tampered",
+      "protocolPath": "tampered"
+    },
+    {
+      "name": "En ligne",
+      "logicalId": "online",
+      "protocolPath": "online"
+    },
+    {
+      "name": "Signal",
+      "logicalId": "signalLevel",
+      "protocolPath": "signalLevel"
+    }
+  ]
+}

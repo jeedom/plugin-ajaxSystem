@@ -1,0 +1,105 @@
+{
+  "name" : "Hub 2+",
+  "mappings" : [
+    {
+      "name": "Etat",
+      "logicalId": "state",
+      "protocolPath": "state"
+    },
+    {
+      "name": "Source evenement",
+      "logicalId": "sourceObjectName",
+      "protocolPath": "sourceObjectName"
+    },
+    {
+      "name": "Evenement",
+      "logicalId": "event",
+      "protocolPath": "event"
+    },
+    {
+      "name": "Code evenement",
+      "logicalId": "eventCode",
+      "protocolPath": "eventCode"
+    },
+    {
+      "name": "Trafiqué",
+      "logicalId": "tampered",
+      "protocolPath": "tampered"
+    },
+    {
+      "name": "GSM",
+      "logicalId": "gsmNetworkStatus",
+      "protocolPath": "gsmNetworkStatus"
+    },
+	{
+      "name": "Intensité du signal cellulaire",
+      "logicalId": "gsm::signalLevel",
+      "protocolPath": "gsm::signalLevel"
+    },
+	{
+      "name": "Type réseau GSM",
+      "logicalId": "gsm::networkStatus",
+      "protocolPath": "gsm::networkStatus"
+    },
+	{
+      "name": "Données cellulaires actives",
+      "logicalId": "gsm::gprsEnabled",
+      "protocolPath": "gsm::gprsEnabled"
+    },
+    {
+      "name": "CMS",
+      "logicalId": "CMSActiveChannels",
+      "protocolPath": "CMSActiveChannels"
+    },
+    {
+      "name": "Ethernet",
+      "logicalId": "ethernet::enabled",
+      "protocolPath": "ethernet::enabled"
+    },
+    {
+      "name": "Alimentation secteur",
+      "logicalId": "externallyPowered",
+      "protocolPath": "externallyPowered"
+    },
+	{
+      "name": "Etat de la batterie",
+      "logicalId": "battery::state",
+      "protocolPath": "battery::state"
+    },
+	{
+      "name": "Batterie",
+      "logicalId": "battery::chargeLevelPercentage",
+      "protocolPath": "battery::chargeLevelPercentage"
+    },
+    {
+      "name": "Armement",
+      "logicalId": "ARM",
+      "protocolPath": "ARM"
+    },
+    {
+      "name": "Mode nuit",
+      "logicalId": "NIGHT_MODE",
+      "protocolPath": "NIGHT_MODE"
+    }, 
+    {
+      "name": "Desarmement",
+      "logicalId": "DISARM",
+      "protocolPath": "DISARM"
+    },
+    {
+      "name": "Panic",
+      "logicalId": "PANIC",
+      "protocolPath": "PANIC"
+    },
+    {
+      "name": "Arret detection incendie",
+      "logicalId": "muteFireDetectors",
+      "protocolPath": "muteFireDetectors"
+    },
+    {
+      "name": "Intrusion",
+      "logicalId": "sia_state_intrusion",
+      "protocolPath": "sia_state_intrusion"
+    }
+  ]
+}

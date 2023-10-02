@@ -1,0 +1,15 @@
+{
+  "name" : "Street Siren",
+  "mappings" : [
+    {
+      "name": "Température",
+      "logicalId": "temperature",
+      "protocolPath": "temperature"
+    },
+    {
+      "name": "Etat",
+      "logicalId": "buzzerState",
+      "protocolPath": "buzzerState"
+    }
+  ]
+}
