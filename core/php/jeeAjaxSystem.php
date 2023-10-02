@@ -43,6 +43,9 @@ foreach ($datas['data'] as $data) {
       continue;
     }
     foreach ($data['updates'] as $key => &$value) {
+      if ($key == 'batteryCharge') {
+        $ajaxSystem->batteryStatus($value);
+      }
       if (in_array($data['type'], array('HUB', 'GROUP')) && $key == 'state') {
         if ($value == 0) {
           $value = 'DISARMED';
