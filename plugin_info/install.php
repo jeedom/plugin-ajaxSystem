@@ -30,7 +30,7 @@ function ajaxSystem_update() {
     $cron->remove();
   }
   foreach (eqLogic::byType('ajaxSystem') as $eqLogic) {
-    $cmd = $eqLogic->getCm('action', 'refresh');
+    $cmd = $eqLogic->getCmd('action', 'refresh');
     if (is_object($cmd)) {
       $cmd->remove();
     }
