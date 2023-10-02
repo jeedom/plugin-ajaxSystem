@@ -1,5 +1,8 @@
 {
   "name" : "Hub 2 4G",
+  "configuration" : {
+    "battery_type" : "Li-Ion"
+  },
   "commands" : [
     {
       "name": "Etat",

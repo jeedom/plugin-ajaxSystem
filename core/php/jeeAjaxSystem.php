@@ -53,12 +53,15 @@ foreach ($datas['data'] as $data) {
         //Actualisation de la charge de la batterie au niveau de l'équipement jeedom
         $ajaxSystem->batteryStatus($value);
 
+        //TODO START a priori ce code spécifique pourra être retiré au profit du mécanisme de mapping
+        
         //Actualisation de la commande batterie si elle existe si l'équipement
         //Cette commande existe actuellement sur les HUB2, HUB2_4G, et HUB2_PLUS
         $batteryCmd = $ajaxSystem->getCmd('info', 'battery::chargeLevelPercentage');
         if(is_object($batteryCmd)){
               $ajaxSystem->checkAndUpdateCmd('battery::chargeLevelPercentage', $value);
         }
+        //TODO END
       }
 
       if (in_array($data['type'], array('HUB', 'GROUP')) && $key == 'state') {
@@ -81,7 +84,7 @@ foreach ($datas['data'] as $data) {
       if ($convert_key == 'realState') {
         $value = ($value == 0) ? 1 : 0;
       }
-      //TODO FIN
+      //TODO END
 
       $ajaxSystem->checkAndUpdateCmd($convert_key, $value);
 

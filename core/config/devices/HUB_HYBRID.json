@@ -1,5 +1,8 @@
 {
   "name" : "Hub fibra",
+  "configuration" : {
+    "battery_type" : "Li-Ion"
+  },
   "commands" : [
     {
       "name": "Etat",
