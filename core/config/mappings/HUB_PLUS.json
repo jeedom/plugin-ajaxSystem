@@ -71,7 +71,7 @@
       "name": "Alimentation secteur",
       "logicalId": "externallyPowered",
       "protocolPath": "externallyPowered",
-      "updateKey" : "externallyPowered"
+      "updateKey" : "hubPowered"
     },
     {
       "name": "Intrusion",

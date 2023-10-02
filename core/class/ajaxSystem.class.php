@@ -337,6 +337,23 @@ class ajaxSystem extends eqLogic {
     }
   }
 
+  public static function devicesMappings($_device = '') {
+    $return = array();
+    $files = ls(__DIR__ . '/../config/mappings', '*.json', false, array('files', 'quiet'));
+    foreach ($files as $file) {
+      try {
+        $return[str_replace('.json', '', $file)] = is_json(file_get_contents(__DIR__ . '/../config/mappings/' . $file), false);
+      } catch (Exception $e) {
+      }
+    }
+    if (isset($_device) && $_device != '') {
+      if (isset($return[$_device])) {
+        return $return[$_device];
+      }
+      return array();
+    }
+    return $return;
+  }
 
   public static function devicesParameters($_device = '') {
     $return = array();
@@ -446,20 +463,54 @@ class ajaxSystem extends eqLogic {
     if ($this->getConfiguration('type') == 'device') {
       $datas = self::request('/user/{userId}/hubs/' . $this->getConfiguration('hub_id') . '/devices/' . $this->getLogicalId());
     }
+
+    //Rafraichissement de la version firmware si celle-ci diffère de celle dernièrement connue par jeedom
     if (isset($datas['firmwareVersion']) && $datas['firmwareVersion'] != $this->getConfiguration('firmware')) {
       $this->setConfiguration('firmware', $datas['firmwareVersion']);
       $this->save();
     }
-    foreach ($this->getCmd('info') as $cmd) {
-      $paths = explode('::', $cmd->getLogicalId());
-      $value = $datas;
-      foreach ($paths as $key) {
-        if (!isset($value[$key])) {
-          continue 2;
+
+    //Récupération des mappings commande <=> procotole en fonction du type de device
+    $mappings = self::devicesMappings($this->getConfiguration('device'));
+
+    if (!is_array($mappings)) {
+      //Si aucun mapping connu pour ce type de device, on skip, car on ne sait pas ce qu'on doit rafraichir
+      log::add('ajaxSystem', 'warning', __('Impossible de trouver un mapping de commandes pour le device :', __FILE__) . ' ' . $this->getConfiguration('device'));
+    }else{
+      //Boucle pour le rafraichissement de chaque commande de l'équipement
+      foreach ($this->getCmd('info') as $cmd) {
+      
+        $deviceProtocolMapping = ' ';
+        $updateKey = ' ';
+        $logicId = $cmd->getLogicalId();
+
+        //Extraire l'info du mapping pour aller chercher dans le bon path
+        foreach($mappings['mappings'] as $mapping){
+          if($mapping['logicalId'] == $logicId)
+          {
+            $deviceProtocolMapping = $mapping['protocolPath'];
+            $updateKey = $mapping['updateKey'];
+            break;
+          }
         }
-        $value = $value[$key];
+
+        if($deviceProtocolMapping == ' ' && $updateKey == ' ')
+        {
+          //Aucune correspondance trouvée dans les mappings pour ce logical ID, impossible de savoir quelle valeur on tente de mettre à jour
+          //On sort de la fonction
+          return;
+        }
+
+        $value = $datas;
+        foreach ($deviceProtocolMapping as $key) {
+          if (!isset($value[$key])) {
+            continue 2;
+          }
+          $value = $value[$key];
+        }
+
+        $this->checkAndUpdateCmd($cmd, $value);
       }
-      $this->checkAndUpdateCmd($cmd, $value);
     }
 
     //Refresh batterie depuis trame de synchronisation / refresh

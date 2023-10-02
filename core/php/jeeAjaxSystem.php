@@ -33,6 +33,8 @@ if (!isset($datas['apikey']) || !jeedom::apiAccess($datas['apikey'], 'ajaxSystem
 }
 log::add('ajaxSystem', 'debug', 'Received : ' . json_encode($datas));
 
+
+
 foreach ($datas['data'] as $data) {
   if (isset($data['updates'])) {
     if (!isset($data['id'])) {
@@ -42,7 +44,11 @@ foreach ($datas['data'] as $data) {
     if (!is_object($ajaxSystem)) {
       continue;
     }
+
+    $mappings = ajaxSystem::devicesMappings($ajaxSystem->getConfiguration('device'));
+
     foreach ($data['updates'] as $key => &$value) {
+      
       if ($key == 'batteryCharge') {
         //Actualisation de la charge de la batterie au niveau de l'équipement jeedom
         $ajaxSystem->batteryStatus($value);
@@ -54,6 +60,7 @@ foreach ($datas['data'] as $data) {
               $ajaxSystem->checkAndUpdateCmd('battery::chargeLevelPercentage', $value);
         }
       }
+
       if (in_array($data['type'], array('HUB', 'GROUP')) && $key == 'state') {
         if ($value == 0) {
           $value = 'DISARMED';
@@ -63,14 +70,22 @@ foreach ($datas['data'] as $data) {
           $value = 'NIGHT_MODE';
         }
       }
+
+      //TODO START retirer le mécanisme de conversion avec valeurs spécifiques pour passer au système de mapping sur base de clé d'update
       $convert_key = $key;
+
       if ($convert_key == 'hubPowered') {
         $convert_key = 'externallyPowered';
       }
+
       if ($convert_key == 'realState') {
         $value = ($value == 0) ? 1 : 0;
       }
+      //TODO FIN
+
       $ajaxSystem->checkAndUpdateCmd($convert_key, $value);
+
+      //Calcul de la puissance spécifique pour les devices de type prise électrique (socket)
       if ($ajaxSystem->getConfiguration('device') == 'Socket') {
         $current = $ajaxSystem->getCmd('info', 'currentMA');
         $voltage = $ajaxSystem->getCmd('info', 'voltage');
