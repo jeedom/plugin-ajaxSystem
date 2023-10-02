@@ -47,14 +47,13 @@ foreach ($datas['data'] as $data) {
 
     $mappings = ajaxSystem::devicesMappings($ajaxSystem->getConfiguration('device'));
 
-    foreach ($data['updates'] as $key => &$value) {
-      
+    foreach ($data['updates'] as $key => &$value) {      
       if ($key == 'batteryCharge') {
         //Actualisation de la charge de la batterie au niveau de l'équipement jeedom
         $ajaxSystem->batteryStatus($value);
 
         //TODO START a priori ce code spécifique pourra être retiré au profit du mécanisme de mapping
-        
+
         //Actualisation de la commande batterie si elle existe si l'équipement
         //Cette commande existe actuellement sur les HUB2, HUB2_4G, et HUB2_PLUS
         $batteryCmd = $ajaxSystem->getCmd('info', 'battery::chargeLevelPercentage');
@@ -74,19 +73,29 @@ foreach ($datas['data'] as $data) {
         }
       }
 
-      //TODO START retirer le mécanisme de conversion avec valeurs spécifiques pour passer au système de mapping sur base de clé d'update
       $convert_key = $key;
-
-      if ($convert_key == 'hubPowered') {
-        $convert_key = 'externallyPowered';
-      }
 
       if ($convert_key == 'realState') {
         $value = ($value == 0) ? 1 : 0;
       }
-      //TODO END
 
-      $ajaxSystem->checkAndUpdateCmd($convert_key, $value);
+      $logicalIdCorrespondingToUpdateKey = ' ';
+
+      //Extraire l'info du mapping pour aller chercher dans le bon logicalId
+      foreach($mappings['mappings'] as $mapping){
+        if($mapping['updateKey'] == $key)
+        {
+          $logicalIdCorrespondingToUpdateKey = $mapping['logicalId'];
+          break;
+        }
+      }
+
+      //Si correspondance trouvée entre l'update key et un logicalId dans les mappings
+      //Alors mise à jour de la valeur
+      if($logicalIdCorrespondingToUpdateKey != ' ')
+      {
+        $ajaxSystem->checkAndUpdateCmd($logicalIdCorrespondingToUpdateKey, $value);
+      }
 
       //Calcul de la puissance spécifique pour les devices de type prise électrique (socket)
       if ($ajaxSystem->getConfiguration('device') == 'Socket') {
