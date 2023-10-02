@@ -4,42 +4,50 @@
     {
       "name": "Etat",
       "logicalId": "realState",
-      "protocolPath": "realState"
+      "protocolPath": "realState",
+      "updateKey" : "realState"
     },
     {
       "name": "Source evenement",
       "logicalId": "sourceObjectName",
-      "protocolPath": "sourceObjectName"
+      "protocolPath": "sourceObjectName",
+      "updateKey" : "sourceObjectName"
     },
     {
       "name": "Evenement",
       "logicalId": "event",
-      "protocolPath": "event"
+      "protocolPath": "event",
+      "updateKey" : "event"
     },
     {
       "name": "Code evenement",
       "logicalId": "eventCode",
-      "protocolPath": "eventCode"
+      "protocolPath": "eventCode",
+      "updateKey" : "eventCode"
     },
     {
       "name": "Voltage",
       "logicalId": "voltage",
-      "protocolPath": "voltage"
+      "protocolPath": "voltage",
+      "updateKey" : "voltage"
     },
     {
       "name": "Consommation",
       "logicalId": "powerWtH",
-      "protocolPath": "powerWtH"
+      "protocolPath": "powerWtH",
+      "updateKey" : "powerWtH"
     },
     {
       "name": "Courant",
       "logicalId": "currentMA",
-      "protocolPath": "currentMA"
+      "protocolPath": "currentMA",
+      "updateKey" : "currentMA"
     },
     {
       "name": "Puissance",
       "logicalId": "power",
-      "protocolPath": "currentMA"
+      "protocolPath": "currentMA",
+      "updateKey" : "currentMA"
     }
   ]
 }

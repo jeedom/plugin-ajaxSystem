@@ -4,37 +4,44 @@
     {
       "name": "Source evenement",
       "logicalId": "sourceObjectName",
-      "protocolPath": "sourceObjectName"
+      "protocolPath": "sourceObjectName",
+      "updateKey" : "sourceObjectName"
     },
     {
       "name": "Evenement",
       "logicalId": "event",
-      "protocolPath": "event"
+      "protocolPath": "event",
+      "updateKey" : "event"
     },
     {
       "name": "Code evenement",
       "logicalId": "eventCode",
-      "protocolPath": "eventCode"
+      "protocolPath": "eventCode",
+      "updateKey" : "eventCode"
     },
     {
       "name": "Etat",
       "logicalId": "realState",
-      "protocolPath": "realState"
+      "protocolPath": "realState",
+      "updateKey" : "realState"
     },
     {
       "name": "Voltage",
       "logicalId": "voltage",
-      "protocolPath": "voltage"
+      "protocolPath": "voltage",
+      "updateKey" : "voltage"
     },
     {
       "name": "En ligne",
       "logicalId": "online",
-      "protocolPath": "online"
+      "protocolPath": "online",
+      "updateKey" : "online"
     },
     {
       "name": "Signal",
       "logicalId": "signalLevel",
-      "protocolPath": "signalLevel"
+      "protocolPath": "signalLevel",
+      "updateKey" : "signalLevel"
     }
   ]
 }

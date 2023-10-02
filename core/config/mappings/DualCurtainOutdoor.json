@@ -4,47 +4,56 @@
     {
       "name": "Etat",
       "logicalId": "state",
-      "protocolPath": "state"
+      "protocolPath": "state",
+      "updateKey" : "state"
     },
     {
       "name": "Source evenement",
       "logicalId": "sourceObjectName",
-      "protocolPath": "state"
+      "protocolPath": "sourceObjectName",
+      "updateKey" : "sourceObjectName"
     },
     {
       "name": "Evenement",
       "logicalId": "event",
-      "protocolPath": "state"
+      "protocolPath": "event",
+      "updateKey" : "event"
     },
     {
       "name": "Code evenement",
       "logicalId": "eventCode",
-      "protocolPath": "state"
+      "protocolPath": "eventCode",
+      "updateKey" : "eventCode"
     },
     {
       "name": "Température",
       "logicalId": "temperature",
-      "protocolPath": "state"
+      "protocolPath": "temperature",
+      "updateKey" : "temperature"
     },
     {
       "name": "Trafiqué",
       "logicalId": "tampered",
-      "protocolPath": "state"
+      "protocolPath": "tampered",
+      "updateKey" : "tampered"
     },
     {
       "name": "En ligne",
       "logicalId": "online",
-      "protocolPath": "state"
+      "protocolPath": "online",
+      "updateKey" : "online"
     },
     {
       "name": "Signal",
       "logicalId": "signalLevel",
-      "protocolPath": "state"
+      "protocolPath": "signalLevel",
+      "updateKey" : "signalLevel"
     },
     {
       "name": "Mouvement",
       "logicalId": "sia_state",
-      "protocolPath": "state"
+      "protocolPath": "sia_state",
+      "updateKey" : "sia_state"
     }
   ]
 }

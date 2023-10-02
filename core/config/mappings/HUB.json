@@ -4,77 +4,62 @@
     {
       "name": "Etat",
       "logicalId": "state",
-      "protocolPath": "state"
+      "protocolPath": "state",
+      "updateKey" : "state"
     },
     {
       "name": "Source evenement",
       "logicalId": "sourceObjectName",
-      "protocolPath": "sourceObjectName"
+      "protocolPath": "sourceObjectName",
+      "updateKey" : "sourceObjectName"
     },
     {
       "name": "Evenement",
       "logicalId": "event",
-      "protocolPath": "event"
+      "protocolPath": "event",
+      "updateKey" : "event"
     },
     {
       "name": "Code evenement",
       "logicalId": "eventCode",
-      "protocolPath": "eventCode"
+      "protocolPath": "eventCode",
+      "updateKey" : "eventCode"
     },
     {
       "name": "Trafiqué",
       "logicalId": "tampered",
-      "protocolPath": "tampered"
+      "protocolPath": "tampered",
+      "updateKey" : "tampered"
     },
     {
       "name": "GSM",
       "logicalId": "gsmNetworkStatus",
-      "protocolPath": "gsmNetworkStatus"
+      "protocolPath": "gsmNetworkStatus",
+      "updateKey" : "gsmNetworkStatus"
     },
     {
       "name": "CMS",
       "logicalId": "CMSActiveChannels",
-      "protocolPath": "CMSActiveChannels"
+      "protocolPath": "CMSActiveChannels",
+      "updateKey" : "CMSActiveChannels"
     },
     {
       "name": "Ethernet",
       "logicalId": "ethernet::enabled",
-      "protocolPath": "ethernet::enabled"
+      "protocolPath": "ethernet::enabled",
+      "updateKey" : "ethernet::enabled"
     },
     {
       "name": "Alimentation secteur",
       "logicalId": "externallyPowered",
-      "protocolPath": "externallyPowered"
-    },
-    {
-      "name": "Armement",
-      "logicalId": "ARM",
-      "protocolPath": "ARM"
-    },
-    {
-      "name": "Mode nuit",
-      "logicalId": "NIGHT_MODE",
-      "protocolPath": "NIGHT_MODE"
-    }, 
-    {
-      "name": "Desarmement",
-      "logicalId": "DISARM",
-      "protocolPath": "DISARM"
-    },
-    {
-      "name": "Panic",
-      "logicalId": "PANIC",
-      "protocolPath": "PANIC"
-    },
-    {
-      "name": "Arret detection incendie",
-      "logicalId": "muteFireDetectors",
-      "protocolPath": "muteFireDetectors"
+      "protocolPath": "externallyPowered",
+      "updateKey" : "externallyPowered"
     },
     {
       "name": "Intrusion",
       "logicalId": "sia_state_intrusion",
-      "protocolPath": "sia_state_intrusion"
+      "protocolPath": "sia_state_intrusion",
+      "updateKey" : "sia_state_intrusion"
     }
   ]
 }

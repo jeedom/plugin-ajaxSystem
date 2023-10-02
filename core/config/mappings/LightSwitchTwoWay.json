@@ -4,22 +4,26 @@
       {
         "name": "Etat",
         "logicalId": "channelStatus",
-        "protocolPath": "channelStatus"
+        "protocolPath": "channelStatus",
+        "updateKey" : "channelStatus"
       },
       {
         "name": "Source evenement",
         "logicalId": "sourceObjectName",
-        "protocolPath": "sourceObjectName"
+        "protocolPath": "sourceObjectName",
+        "updateKey" : "sourceObjectName"
       },
       {
         "name": "Evenement",
         "logicalId": "event",
-        "protocolPath": "event"
+        "protocolPath": "event",
+        "updateKey" : "event"
       },
       {
         "name": "Code evenement",
         "logicalId": "eventCode",
-        "protocolPath": "eventCode"
+        "protocolPath": "eventCode",
+        "updateKey" : "eventCode"
       }
     ]
   }

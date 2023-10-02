@@ -4,52 +4,62 @@
     {
       "name": "Etat",
       "logicalId": "state",
-      "protocolPath": "state"
+      "protocolPath": "state",
+      "updateKey" : "state"
     },
     {
       "name": "Source evenement",
       "logicalId": "sourceObjectName",
-      "protocolPath": "sourceObjectName"
+      "protocolPath": "sourceObjectName",
+      "updateKey" : "sourceObjectName"
     },
     {
       "name": "Evenement",
       "logicalId": "event",
-      "protocolPath": "event"
+      "protocolPath": "event",
+      "updateKey" : "event"
     },
     {
       "name": "Code evenement",
       "logicalId": "eventCode",
-      "protocolPath": "eventCode"
+      "protocolPath": "eventCode",
+      "updateKey" : "eventCode"
     },
     {
       "name": "Ouverture",
       "logicalId": "reedClosed",
-      "protocolPath": "reedClosed"
+      "protocolPath": "reedClosed",
+      "updateKey" : "reedClosed"
     },
     {
       "name": "Contacteur",
       "logicalId": "extraContactClosed",
-      "protocolPath": "extraContactClosed"
+      "protocolPath": "extraContactClosed",
+      "updateKey" : "extraContactClosed"
     },
     {
       "name": "Température",
       "logicalId": "temperature",
-      "protocolPath": "temperature"
+      "protocolPath": "temperature",
+      "updateKey" : "temperature"
     },
     {
       "name": "Trafiqué",
       "logicalId": "tampered",
-      "protocolPath": "tampered"
+      "protocolPath": "tampered",
+      "updateKey" : "tampered"
     },
     {
       "name": "En ligne",
       "logicalId": "online",
-      "protocolPath": "online"
+      "protocolPath": "online",
+      "updateKey" : "online"
     },
     {
       "name": "Signal",
       "logicalId": "signalLevel",
-      "protocolPath": "signalLevel"
+      "protocolPath": "signalLevel",
+      "updateKey" : "signalLevel"
     }
   ]
 }
