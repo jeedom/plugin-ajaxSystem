@@ -33,8 +33,6 @@ if (!isset($datas['apikey']) || !jeedom::apiAccess($datas['apikey'], 'ajaxSystem
 }
 log::add('ajaxSystem', 'debug', 'Received : ' . json_encode($datas));
 
-
-
 foreach ($datas['data'] as $data) {
   if (isset($data['updates'])) {
     if (!isset($data['id'])) {
@@ -51,16 +49,6 @@ foreach ($datas['data'] as $data) {
       if ($key == 'batteryCharge') {
         //Actualisation de la charge de la batterie au niveau de l'équipement jeedom
         $ajaxSystem->batteryStatus($value);
-
-        //TODO START a priori ce code spécifique pourra être retiré au profit du mécanisme de mapping
-
-        //Actualisation de la commande batterie si elle existe si l'équipement
-        //Cette commande existe actuellement sur les HUB2, HUB2_4G, et HUB2_PLUS
-        $batteryCmd = $ajaxSystem->getCmd('info', 'battery::chargeLevelPercentage');
-        if(is_object($batteryCmd)){
-              $ajaxSystem->checkAndUpdateCmd('battery::chargeLevelPercentage', $value);
-        }
-        //TODO END
       }
 
       if (in_array($data['type'], array('HUB', 'GROUP')) && $key == 'state') {
@@ -73,15 +61,15 @@ foreach ($datas['data'] as $data) {
         }
       }
 
-      $convert_key = $key;
-
+      //Manipulation de valeur pour inverser le statut des équipements relais et équipements prises
       if ($convert_key == 'realState') {
         $value = ($value == 0) ? 1 : 0;
       }
 
+      //Extraire l'info du mapping pour aller chercher dans le bon logicalId
+
       $logicalIdCorrespondingToUpdateKey = ' ';
 
-      //Extraire l'info du mapping pour aller chercher dans le bon logicalId
       foreach($mappings['mappings'] as $mapping){
         if($mapping['updateKey'] == $key)
         {
@@ -95,6 +83,12 @@ foreach ($datas['data'] as $data) {
       if($logicalIdCorrespondingToUpdateKey != ' ')
       {
         $ajaxSystem->checkAndUpdateCmd($logicalIdCorrespondingToUpdateKey, $value);
+      }
+      else{
+        //TODO : Penser a ajouter un log de type warning pour dire qu'on reçu un update avec une clé inconnue
+        //Celà permettrait aussi de logger des choses que l'on a pas encore implémenté pour le moment et qu'on voudrait
+        //Peut être rajouter un jour / mettre à disposition des utilisateurs. Pratique aussi pour les device dont on ne connait
+        //Pas tous les updates qui pourraient remonter
       }
 
       //Calcul de la puissance spécifique pour les devices de type prise électrique (socket)
