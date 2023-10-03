@@ -46,11 +46,7 @@ foreach ($datas['data'] as $data) {
     $mappings = ajaxSystem::devicesMappings($ajaxSystem->getConfiguration('device'));
 
     foreach ($data['updates'] as $key => &$value) {      
-      if ($key == 'batteryCharge') {
-        //Actualisation de la charge de la batterie au niveau de l'équipement jeedom
-        $ajaxSystem->batteryStatus($value);
-      }
-
+      //Mapping du statut d'armement vers des valeurs traduites en texte facilement compréhensible
       if (in_array($data['type'], array('HUB', 'GROUP')) && $key == 'state') {
         if ($value == 0) {
           $value = 'DISARMED';
@@ -61,13 +57,17 @@ foreach ($datas['data'] as $data) {
         }
       }
 
+      if ($key == 'batteryCharge') {
+        //Actualisation de la charge de la batterie au niveau de l'équipement jeedom
+        $ajaxSystem->batteryStatus($value);
+      }
+
       //Manipulation de valeur pour inverser le statut des équipements relais et équipements prises
-      if ($convert_key == 'realState') {
+      if ($key == 'realState') {
         $value = ($value == 0) ? 1 : 0;
       }
 
       //Extraire l'info du mapping pour aller chercher dans le bon logicalId
-
       $logicalIdCorrespondingToUpdateKey = ' ';
 
       foreach($mappings['mappings'] as $mapping){
