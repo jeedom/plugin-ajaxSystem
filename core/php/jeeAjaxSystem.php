@@ -43,8 +43,6 @@ foreach ($datas['data'] as $data) {
       continue;
     }
 
-    $mappings = ajaxSystem::devicesMappings($ajaxSystem->getConfiguration('device'));
-
     foreach ($data['updates'] as $key => &$value) {      
       //Mapping du statut d'armement vers des valeurs traduites en texte facilement compréhensible
       if (in_array($data['type'], array('HUB', 'GROUP')) && $key == 'state') {
@@ -67,36 +65,40 @@ foreach ($datas['data'] as $data) {
         $value = ($value == 0) ? 1 : 0;
       }
 
-      //Extraire l'info du mapping pour aller chercher dans le bon logicalId
-      $logicalIdCorrespondingToUpdateKey = ' ';
+      //Determiner quelle commande correspond à cette updateKey
+      $logicalIdCorrespondingToUpdateKey = '';
 
-      foreach($mappings['mappings'] as $mapping){
-        if($mapping['updateKey'] == $key)
+      foreach ($ajaxSystem->getCmd('info') as $cmd)
+      {
+        $updateKey = $cmd->getConfiguration('updateKey');
+        if($key == $updateKey)
         {
-          $logicalIdCorrespondingToUpdateKey = $mapping['logicalId'];
+          $logicalIdCorrespondingToUpdateKey = $cmd->getLogicalId();
           break;
         }
       }
 
       //Si correspondance trouvée entre l'update key et un logicalId dans les mappings
       //Alors mise à jour de la valeur
-      if($logicalIdCorrespondingToUpdateKey != ' ')
+      if($logicalIdCorrespondingToUpdateKey != '')
       {
         $ajaxSystem->checkAndUpdateCmd($logicalIdCorrespondingToUpdateKey, $value);
       }
       else{
-        //TODO : Penser a ajouter un log de type warning pour dire qu'on reçu un update avec une clé inconnue
-        //Celà permettrait aussi de logger des choses que l'on a pas encore implémenté pour le moment et qu'on voudrait
-        //Peut être rajouter un jour / mettre à disposition des utilisateurs. Pratique aussi pour les device dont on ne connait
-        //Pas tous les updates qui pourraient remonter
+        log::add('ajaxSystem', 'debug', __('No corresponding command found for the update key' . $key . ' - for device ' .$ajaxSystem->getHumanName, __FILE__));
       }
 
-      //Calcul de la puissance spécifique pour les devices de type prise électrique (socket)
+      //Calcul de la puissance spécifique pour les devices de type prise électrique (socket)    
       if ($ajaxSystem->getConfiguration('device') == 'Socket') {
-        $current = $ajaxSystem->getCmd('info', 'currentMA');
-        $voltage = $ajaxSystem->getCmd('info', 'voltage');
-        if (is_object($current) && is_object($voltage)) {
-          $ajaxSystem->checkAndUpdateCmd('power', $current->execCmd() * $voltage->execCmd());
+        //Optimisation du code pour ne recalculer la puissance des équipements Socket que si on a reçu un update
+        //Des valeurs de voltage ou d'intensité
+        if(($key == 'currentMA' || $key == 'voltage'))
+        {
+          $current = $ajaxSystem->getCmd('info', 'currentMA');
+          $voltage = $ajaxSystem->getCmd('info', 'voltage');
+          if (is_object($current) && is_object($voltage)) {
+            $ajaxSystem->checkAndUpdateCmd('power', $current->execCmd() * $voltage->execCmd());
+          }
         }
       }
     }

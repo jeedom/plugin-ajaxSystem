@@ -7,7 +7,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "sourceObjectName"
+      "logicalId": "sourceObjectName",
+      "configuration": {
+        "protocolPath": "sourceObjectName",
+        "updateKey" : "sourceObjectName"
+      }
     },
     {
       "name": "Evenement",
@@ -15,7 +19,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "event"
+      "logicalId": "event",
+      "configuration": {
+        "protocolPath": "event",
+        "updateKey" : "event"
+      }
     },
     {
       "name": "Code evenement",
@@ -23,7 +31,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "eventCode"
+      "logicalId": "eventCode",
+      "configuration": {
+        "protocolPath": "eventCode",
+        "updateKey" : "eventCode"
+      }
     },
     {
       "name": "En ligne",
@@ -33,7 +45,9 @@
       "isHistorized": 0,
       "logicalId": "online",
       "configuration": {
-        "repeatEventManagement": "always"
+        "repeatEventManagement": "always",
+        "protocolPath": "online",
+        "updateKey" : "online"
       }
     },
     {
@@ -42,7 +56,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "signalLevel"
+      "logicalId": "signalLevel",
+      "configuration": {
+        "protocolPath": "signalLevel",
+        "updateKey" : "signalLevel"
+      }
     }
   ]
 }

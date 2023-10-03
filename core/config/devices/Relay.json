@@ -7,7 +7,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "sourceObjectName"
+      "logicalId": "sourceObjectName",
+      "configuration": {
+        "protocolPath": "sourceObjectName",
+        "updateKey" : "sourceObjectName"
+      }
     },
     {
       "name": "Evenement",
@@ -15,7 +19,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "event"
+      "logicalId": "event",
+      "configuration": {
+        "protocolPath": "event",
+        "updateKey" : "event"
+      }
     },
     {
       "name": "Code evenement",
@@ -23,7 +31,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "eventCode"
+      "logicalId": "eventCode",
+      "configuration": {
+        "protocolPath": "eventCode",
+        "updateKey" : "eventCode"
+      }
     },
     {
       "name": "Etat",
@@ -31,7 +43,11 @@
       "subtype": "binary",
       "isVisible": 1,
       "isHistorized": 1,
-      "logicalId": "realState"
+      "logicalId": "realState",
+      "configuration": {
+        "protocolPath": "realState",
+        "updateKey" : "realState"
+      }
     },
     {
       "name": "Voltage",
@@ -41,7 +57,9 @@
       "isHistorized": 1,
       "logicalId": "voltage",
       "configuration" : {
-        "calculValueOffset":"#value# / 100"
+        "calculValueOffset":"#value# / 100",
+        "protocolPath": "voltage",
+        "updateKey" : "voltage"
       }
     },
     {
@@ -52,7 +70,9 @@
       "isHistorized": 0,
       "logicalId": "online",
       "configuration": {
-        "repeatEventManagement": "always"
+        "repeatEventManagement": "always",
+        "protocolPath": "online",
+        "updateKey" : "online"
       }
     },
     {
@@ -61,7 +81,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "signalLevel"
+      "logicalId": "signalLevel",
+      "configuration": {
+        "protocolPath": "signalLevel",
+        "updateKey" : "signalLevel"
+      }
     },
     {
       "name": "On",

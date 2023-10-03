@@ -7,7 +7,11 @@
       "subtype": "binary",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "realState"
+      "logicalId": "realState",
+      "configuration": {
+        "protocolPath": "realState",
+        "updateKey" : "realState"
+      }
     },
     {
       "name": "Source evenement",
@@ -15,7 +19,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "sourceObjectName"
+      "logicalId": "sourceObjectName",
+      "configuration": {
+        "protocolPath": "sourceObjectName",
+        "updateKey" : "sourceObjectName"
+      }
     },
     {
       "name": "Evenement",
@@ -23,7 +31,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "event"
+      "logicalId": "event",
+      "configuration": {
+        "protocolPath": "event",
+        "updateKey" : "event"
+      }
     },
     {
       "name": "Code evenement",
@@ -31,7 +43,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "eventCode"
+      "logicalId": "eventCode",
+      "configuration": {
+        "protocolPath": "eventCode",
+        "updateKey" : "eventCode"
+      }
     },
     {
       "name": "Voltage",
@@ -41,7 +57,11 @@
       "isHistorized": 1,
       "unite":"V",
       "generic_type": "VOLTAGE",
-      "logicalId": "voltage"
+      "logicalId": "voltage",
+      "configuration": {
+        "protocolPath": "voltage",
+        "updateKey" : "voltage"
+      }
     },
     {
       "name": "Consommation",
@@ -53,7 +73,9 @@
       "unite":"kWh",
       "logicalId": "powerWtH",
       "configuration" : {
-        "calculValueOffset":"#value# / 1000"
+        "calculValueOffset":"#value# / 1000",
+        "protocolPath": "powerWtH",
+        "updateKey" : "powerWtH"
       }
     },
     {
@@ -66,7 +88,9 @@
       "unite":"A",
       "logicalId": "currentMA",
       "configuration" : {
-        "calculValueOffset":"#value# / 1000"
+        "calculValueOffset":"#value# / 1000",
+        "protocolPath": "currentMA",
+        "updateKey" : "currentMA"
       }
     },
     {
@@ -77,7 +101,11 @@
       "isVisible": 0,
       "isHistorized": 0,
       "unite":"W",
-      "logicalId": "power"
+      "logicalId": "power",
+      "configuration": {
+        "protocolPath": "power",
+        "updateKey" : "power"
+      }
     },
     {
       "name": "On",

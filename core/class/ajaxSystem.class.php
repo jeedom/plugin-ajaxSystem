@@ -337,24 +337,6 @@ class ajaxSystem extends eqLogic {
     }
   }
 
-  public static function devicesMappings($_device = '') {
-    $return = array();
-    $files = ls(__DIR__ . '/../config/mappings', '*.json', false, array('files', 'quiet'));
-    foreach ($files as $file) {
-      try {
-        $return[str_replace('.json', '', $file)] = is_json(file_get_contents(__DIR__ . '/../config/mappings/' . $file), false);
-      } catch (Exception $e) {
-      }
-    }
-    if (isset($_device) && $_device != '') {
-      if (isset($return[$_device])) {
-        return $return[$_device];
-      }
-      return array();
-    }
-    return $return;
-  }
-
   public static function devicesParameters($_device = '') {
     $return = array();
     $files = ls(__DIR__ . '/../config/devices', '*.json', false, array('files', 'quiet'));
@@ -470,50 +452,6 @@ class ajaxSystem extends eqLogic {
       $this->save();
     }
 
-    //Récupération des mappings commande <=> procotole en fonction du type de device
-    $mappings = self::devicesMappings($this->getConfiguration('device'));
-
-    if (!is_array($mappings)) {
-      //Si aucun mapping connu pour ce type de device, on skip, car on ne sait pas ce qu'on doit rafraichir
-      log::add('ajaxSystem', 'warning', __('Impossible de trouver un mapping de commandes pour le device :', __FILE__) . ' ' . $this->getConfiguration('device'));
-    }else{
-      //Boucle pour le rafraichissement de chaque commande de l'équipement
-      foreach ($this->getCmd('info') as $cmd) {
-      
-        $deviceProtocolMapping = ' ';
-        $updateKey = ' ';
-        $logicId = $cmd->getLogicalId();
-
-        //Extraire l'info du mapping pour aller chercher dans le bon path
-        foreach($mappings['mappings'] as $mapping){
-          if($mapping['logicalId'] == $logicId)
-          {
-            $deviceProtocolMapping = $mapping['protocolPath'];
-            $updateKey = $mapping['updateKey'];
-            break;
-          }
-        }
-
-        if($deviceProtocolMapping == ' ' && $updateKey == ' ')
-        {
-          //Aucune correspondance trouvée dans les mappings pour ce logical ID, impossible de savoir quelle valeur on tente de mettre à jour
-          //On sort de la fonction
-          //TODO : ajouter du logging pour ce cas spécifique (warning)
-          return;
-        }
-
-        $value = $datas;
-        foreach ($deviceProtocolMapping as $key) {
-          if (!isset($value[$key])) {
-            continue 2;
-          }
-          $value = $value[$key];
-        }
-
-        $this->checkAndUpdateCmd($cmd, $value);
-      }
-    }
-
     //Refresh batterie depuis trame de synchronisation / refresh
     $batteryChargeLevel = '-1';
     if (isset($datas['batteryChargeLevelPercentage'])) {
@@ -531,8 +469,22 @@ class ajaxSystem extends eqLogic {
       //Au niveau de la commande spécifique si elle existe
       $batteryCmd = $this->getCmd('info', 'battery::chargeLevelPercentage');
       if(is_object($batteryCmd)){
-        $this->checkAndUpdateCmd('battery::chargeLevelPercentage', $value);
+        $this->checkAndUpdateCmd('battery::chargeLevelPercentage', $batteryChargeLevel);
       }
+    }
+
+    //Boucle pour le rafraichissement de chaque commande de l'équipement
+    foreach ($this->getCmd('info') as $cmd) {   
+      $deviceProtocolMapping = $cmd->getConfiguration('protocolPath');
+      $value = $datas;
+      foreach ($deviceProtocolMapping as $key) {
+        if (!isset($value[$key])) {
+          continue 2;
+        }
+        $value = $value[$key];
+      }
+
+      $this->checkAndUpdateCmd($cmd, $value);
     }
   }
 

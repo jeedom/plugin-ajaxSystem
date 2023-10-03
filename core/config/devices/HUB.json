@@ -15,6 +15,10 @@
       "template":{
         "dashboard":"ajaxSystem::state",
         "mobile":"ajaxSystem::state"
+      },
+      "configuration": {
+        "protocolPath": "state",
+        "updateKey" : "state"
       }
     },
     {
@@ -23,7 +27,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "sourceObjectName"
+      "logicalId": "sourceObjectName",
+      "configuration": {
+        "protocolPath": "sourceObjectName",
+        "updateKey" : "sourceObjectName"
+      }
     },
     {
       "name": "Evenement",
@@ -31,7 +39,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "event"
+      "logicalId": "event",
+      "configuration": {
+        "protocolPath": "event",
+        "updateKey" : "event"
+      }
     },
     {
       "name": "Code evenement",
@@ -39,7 +51,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "eventCode"
+      "logicalId": "eventCode",
+      "configuration": {
+        "protocolPath": "eventCode",
+        "updateKey" : "eventCode"
+      }
     },
     {
       "name": "Trafiqué",
@@ -49,7 +65,9 @@
       "isHistorized": 0,
       "logicalId": "tampered",
       "configuration": {
-        "repeatEventManagement": "always"
+        "repeatEventManagement": "always",
+        "protocolPath": "tampered",
+        "updateKey" : "tampered"
       }
     },
     {
@@ -58,7 +76,11 @@
       "subtype": "binary",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "gsmNetworkStatus"
+      "logicalId": "gsmNetworkStatus",
+      "configuration": {
+        "protocolPath": "gsmNetworkStatus",
+        "updateKey" : "gsmNetworkStatus"
+      }
     },
     {
       "name": "CMS",
@@ -66,7 +88,11 @@
       "subtype": "binary",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "CMSActiveChannels"
+      "logicalId": "CMSActiveChannels",
+      "configuration": {
+        "protocolPath": "CMSActiveChannels",
+        "updateKey" : "CMSActiveChannels"
+      }
     },
     {
       "name": "Ethernet",
@@ -76,7 +102,9 @@
       "isHistorized": 0,
       "logicalId": "ethernet::enabled",
       "configuration": {
-        "repeatEventManagement": "always"
+        "repeatEventManagement": "always",
+        "protocolPath": "ethernet::enabled",
+        "updateKey" : "ethernet::enabled"
       }
     },
     {
@@ -87,7 +115,9 @@
       "isHistorized": 0,
       "logicalId": "externallyPowered",
       "configuration": {
-        "repeatEventManagement": "always"
+        "repeatEventManagement": "always",
+        "protocolPath": "externallyPowered",
+        "updateKey" : "hubPowered"
       }
     },
     {
@@ -145,7 +175,9 @@
       "configuration": {
         "repeatEventManagement": "always",
         "returnStateValue" : 0,
-        "returnStateTime" : 1
+        "returnStateTime" : 1,
+        "protocolPath": "sia_state_intrusion",
+        "updateKey" : "sia_state_intrusion"
       },
       "template":{
         "dashboard" : "alert",

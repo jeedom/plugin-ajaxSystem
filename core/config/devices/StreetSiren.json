@@ -9,7 +9,11 @@
       "isHistorized": 1,
       "logicalId": "temperature",
       "generic_type": "TEMPERATURE",
-      "unite" : "°C"
+      "unite" : "°C",
+      "configuration": {
+        "protocolPath": "temperature",
+        "updateKey" : "temperature"
+      }
     },
     {
       "name": "Etat",
@@ -19,7 +23,9 @@
       "isHistorized": 0,
       "logicalId": "buzzerState",
       "configuration": {
-        "repeatEventManagement": "always"
+        "repeatEventManagement": "always",
+        "protocolPath": "buzzerState",
+        "updateKey" : "buzzerState"
       }
     }
   ]

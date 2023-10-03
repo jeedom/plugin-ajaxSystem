@@ -7,7 +7,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "sourceObjectName"
+      "logicalId": "sourceObjectName",
+      "configuration": {
+        "protocolPath": "sourceObjectName",
+        "updateKey" : "sourceObjectName"
+      }
     },
     {
       "name": "Evenement",
@@ -15,7 +19,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "event"
+      "logicalId": "event",
+      "configuration": {
+        "protocolPath": "event",
+        "updateKey" : "event"
+      }
     },
     {
       "name": "Code evenement",
@@ -23,7 +31,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "eventCode"
+      "logicalId": "eventCode",
+      "configuration": {
+        "protocolPath": "eventCode",
+        "updateKey" : "eventCode"
+      }
     },
     {
       "name": "Voltage",
@@ -32,7 +44,11 @@
       "isVisible": 1,
       "isHistorized": 1,
       "generic_type": "VOLTAGE",
-      "logicalId": "voltage"
+      "logicalId": "voltage",
+      "configuration": {
+        "protocolPath": "voltage",
+        "updateKey" : "voltage"
+      }
     },
     {
       "name": "Puissance",
@@ -41,7 +57,11 @@
       "generic_type": "POWER",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "powerWtH"
+      "logicalId": "powerWtH",
+      "configuration": {
+        "protocolPath": "powerWtH",
+        "updateKey" : "powerWtH"
+      }
     },
     {
       "name": "Courant",
@@ -50,7 +70,11 @@
       "generic_type": "CURRENT",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "currentMA"
+      "logicalId": "currentMA",
+      "configuration": {
+        "protocolPath": "currentMA",
+        "updateKey" : "currentMA"
+      }
     },
     {
       "name": "On",
