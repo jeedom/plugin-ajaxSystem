@@ -4,6 +4,17 @@
 >
 >Como recordatorio, si no hay información sobre la actualización es porque se trata solo de la actualización de la documentación, la traducción o el texto
 
+# 03/10/2023
+
+- Adición de un nuevo estado de alarma en caso de armado forzado (por ejemplo, cuando el equipo tiene un error pero se fuerza la activación de la alarma)
+  Este nuevo estado está disponible en el comando de estado del concentrador y tiene el valor técnico "FORCED_ARM". Ahora se muestra un logotipo con un escudo parcialmente lleno en el widget en este modo para indicar claramente que la alarma está en servicio pero con fallas potenciales.
+- Se revisó el mecanismo de búsqueda de actualizaciones de comandos para permitir una mayor flexibilidad. En un futuro próximo, esto debería permitir añadir
+  más información sobre el equipo. Dependiendo del tiempo y del material disponible para la prueba.
+- Se eliminó la capacidad de ajustar manualmente las ID lógicas en pedidos de equipos.
+- Se eliminó la capacidad de agregar o eliminar manualmente pedidos de equipos.
+- Preparativos para implementar un mecanismo para actualizar los controles del equipo durante la actualización del complemento. Esto permitirá eliminar comandos obsoletos pero también agregar nuevos comandos sin afectar al usuario final. (Esta parte está actualmente en desarrollo)
+- Documentación actualizada
+
 # 06/06/2023
 
 - Agregar concentrador de fibra

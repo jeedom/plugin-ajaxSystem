@@ -5,6 +5,7 @@
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte
 
 # 03/10/2023
+
 - Ajout d'un nouveau statut d'alarme en cas d'armement forcé (par exemple lorsqu'un équipement est en erreur mais qu'on force la mise en service de l'alarme)
   Ce nouveau statut est disponible sur la commande statut du Hub, et a comme valeur technique "FORCED_ARM". Un logo avec un bouclier partiellement rempli s'affiche désormais sur le widget dans ce mode pour indiquer clairement que l'alarme est en service mais avec des défauts potentiels
 - Révision du mécanisme de récupération des mises à jour de commande pour permettre une plus grande flexibilité. Dans un avenir proche, celà devrait permettre de rajouter     
