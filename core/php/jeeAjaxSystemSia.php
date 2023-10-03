@@ -27,7 +27,7 @@ if (isset($_GET['test'])) {
 $results = json_decode(file_get_contents("php://input"), true);
 log::add('ajaxSystem', 'debug', '[SIA] ' . json_encode($results));
 if (!isset($results['devices'])) {
-    die;
+    die();
 }
 
 $eqLogics = ajaxSystem::byType('ajaxSystem');
