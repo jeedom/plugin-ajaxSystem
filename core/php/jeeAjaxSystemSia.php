@@ -34,12 +34,15 @@ $eqLogics = ajaxSystem::byType('ajaxSystem');
 
 foreach ($results['devices'] as $id => $info) {
     foreach ($eqLogics as $eqLogic) {
+        //Mise à jour des groupes
         if ($id == 501 && $eqLogic->getConfiguration('type') == 'group' && $info['ri'] == $eqLogic->getLogicalId()) {
             updateDevice($eqLogic, $info);
         }
+        //Mise à jour device sur base du device_number
         if ($eqLogic->getConfiguration('device_number') == $id) {
             updateDevice($eqLogic, $info);
         }
+        //Mise a jour Hub
         if (in_array($info['code'], ajaxSystem::$_SIA_GLOBALS) && $eqLogic->getConfiguration('type') == 'hub') {
             updateDevice($eqLogic, $info);
         }
