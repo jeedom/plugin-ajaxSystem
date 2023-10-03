@@ -8,6 +8,10 @@
         "isVisible": 1,
         "isHistorized": 0,
         "logicalId": "state",
+        "configuration": {
+          "protocolPath": "state",
+          "updateKey" : "state"
+        },
         "template":{
           "dashboard":"ajaxSystem::state",
           "mobile":"ajaxSystem::state"

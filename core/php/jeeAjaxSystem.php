@@ -42,18 +42,9 @@ foreach ($datas['data'] as $data) {
     if (!is_object($ajaxSystem)) {
       continue;
     }
-    foreach ($data['updates'] as $key => &$value) {
-      if ($key == 'batteryCharge') {
-        //Actualisation de la charge de la batterie au niveau de l'équipement jeedom
-        $ajaxSystem->batteryStatus($value);
 
-        //Actualisation de la commande batterie si elle existe si l'équipement
-        //Cette commande existe actuellement sur les HUB2, HUB2_4G, et HUB2_PLUS
-        $batteryCmd = $ajaxSystem->getCmd('info', 'battery::chargeLevelPercentage');
-        if(is_object($batteryCmd)){
-              $ajaxSystem->checkAndUpdateCmd('battery::chargeLevelPercentage', $value);
-        }
-      }
+    foreach ($data['updates'] as $key => &$value) {      
+      //Mapping du statut d'armement vers des valeurs traduites en texte facilement compréhensible
       if (in_array($data['type'], array('HUB', 'GROUP')) && $key == 'state') {
         if ($value == 0) {
           $value = 'DISARMED';
@@ -63,19 +54,51 @@ foreach ($datas['data'] as $data) {
           $value = 'NIGHT_MODE';
         }
       }
-      $convert_key = $key;
-      if ($convert_key == 'hubPowered') {
-        $convert_key = 'externallyPowered';
+
+      if ($key == 'batteryCharge') {
+        //Actualisation de la charge de la batterie au niveau de l'équipement jeedom
+        $ajaxSystem->batteryStatus($value);
       }
-      if ($convert_key == 'realState') {
+
+      //Manipulation de valeur pour inverser le statut des équipements relais et équipements prises
+      if ($key == 'realState') {
         $value = ($value == 0) ? 1 : 0;
       }
-      $ajaxSystem->checkAndUpdateCmd($convert_key, $value);
+
+      //Determiner quelle commande correspond à cette updateKey
+      $logicalIdCorrespondingToUpdateKey = '';
+
+      foreach ($ajaxSystem->getCmd('info') as $cmd)
+      {
+        $updateKey = $cmd->getConfiguration('updateKey');
+        if($key == $updateKey)
+        {
+          $logicalIdCorrespondingToUpdateKey = $cmd->getLogicalId();
+          break;
+        }
+      }
+
+      //Si correspondance trouvée entre l'update key et un logicalId dans les mappings
+      //Alors mise à jour de la valeur
+      if($logicalIdCorrespondingToUpdateKey != '')
+      {
+        $ajaxSystem->checkAndUpdateCmd($logicalIdCorrespondingToUpdateKey, $value);
+      }
+      else{
+        log::add('ajaxSystem', 'debug', __('No corresponding command found for the update key' . $key . ' - for device ' .$ajaxSystem->getHumanName, __FILE__));
+      }
+
+      //Calcul de la puissance spécifique pour les devices de type prise électrique (socket)    
       if ($ajaxSystem->getConfiguration('device') == 'Socket') {
-        $current = $ajaxSystem->getCmd('info', 'currentMA');
-        $voltage = $ajaxSystem->getCmd('info', 'voltage');
-        if (is_object($current) && is_object($voltage)) {
-          $ajaxSystem->checkAndUpdateCmd('power', $current->execCmd() * $voltage->execCmd());
+        //Optimisation du code pour ne recalculer la puissance des équipements Socket que si on a reçu un update
+        //Des valeurs de voltage ou d'intensité
+        if(($key == 'currentMA' || $key == 'voltage'))
+        {
+          $current = $ajaxSystem->getCmd('info', 'currentMA');
+          $voltage = $ajaxSystem->getCmd('info', 'voltage');
+          if (is_object($current) && is_object($voltage)) {
+            $ajaxSystem->checkAndUpdateCmd('power', $current->execCmd() * $voltage->execCmd());
+          }
         }
       }
     }

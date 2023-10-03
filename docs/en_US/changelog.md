@@ -4,6 +4,17 @@
 >
 >As a reminder, if there is no information on the update, it is because it concerns only the update of documentation, translation or text
 
+# 03/10/2023
+
+- Addition of a new alarm status in the event of forced arming (for example when equipment is in error but the alarm is forced to be activated)
+  This new status is available on the Hub status command, and has the technical value "FORCED_ARM". A logo with a partially filled shield is now displayed on the widget in this mode to clearly indicate that the alarm is in service but with potential faults
+- Revised the command update fetching mechanism to allow greater flexibility. In the near future, this should make it possible to add
+  more information on the equipment. Depending on time and material available for testing
+- Removed the ability to manually adjust Logical IDs on equipment orders
+- Removed the ability to manually add or remove equipment orders
+- Preparations for implementing a mechanism to upgrade equipment controls during plugin update. This will allow obsolete commands to be deleted but also new commands to be added without impacting the end user. (This part is currently under development)
+- Updated documentation
+
 # 06/06/2023
 
 - Add fibra hub

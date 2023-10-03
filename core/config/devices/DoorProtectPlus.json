@@ -10,7 +10,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "state"
+      "logicalId": "state",
+      "configuration": {
+        "protocolPath": "state",
+        "updateKey" : "state"
+      }
     },
     {
       "name": "Source evenement",
@@ -18,7 +22,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "sourceObjectName"
+      "logicalId": "sourceObjectName",
+      "configuration": {
+        "protocolPath": "sourceObjectName",
+        "updateKey" : "sourceObjectName"
+      }
     },
     {
       "name": "Evenement",
@@ -26,7 +34,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "event"
+      "logicalId": "event",
+      "configuration": {
+        "protocolPath": "event",
+        "updateKey" : "event"
+      }
     },
     {
       "name": "Code evenement",
@@ -34,7 +46,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "eventCode"
+      "logicalId": "eventCode",
+      "configuration": {
+        "protocolPath": "eventCode",
+        "updateKey" : "eventCode"
+      }
     },
     {
       "name": "Ouverture",
@@ -49,7 +65,9 @@
         "mobile" : "door"
       },
       "configuration": {
-        "repeatEventManagement": "never"
+        "repeatEventManagement": "never",
+        "protocolPath": "reedClosed",
+        "updateKey" : "reedClosed"
       }
     },
     {
@@ -60,7 +78,9 @@
       "isHistorized": 0,
       "logicalId": "extraContactClosed",
       "configuration": {
-        "repeatEventManagement": "never"
+        "repeatEventManagement": "never",
+        "protocolPath": "extraContactClosed",
+        "updateKey" : "extraContactClosed"
       }
     },
     {
@@ -71,7 +91,11 @@
       "isHistorized": 1,
       "logicalId": "temperature",
       "generic_type": "TEMPERATURE",
-      "unite" : "°C"
+      "unite" : "°C",
+      "configuration": {
+        "protocolPath": "temperature",
+        "updateKey" : "temperature"
+      }
     },
     {
       "name": "Trafiqué",
@@ -81,7 +105,9 @@
       "isHistorized": 0,
       "logicalId": "tampered",
       "configuration": {
-        "repeatEventManagement": "never"
+        "repeatEventManagement": "never",
+        "protocolPath": "tampered",
+        "updateKey" : "tampered"
       }
     },
     {
@@ -92,7 +118,9 @@
       "isHistorized": 0,
       "logicalId": "online",
       "configuration": {
-        "repeatEventManagement": "never"
+        "repeatEventManagement": "never",
+        "protocolPath": "online",
+        "updateKey" : "online"
       }
     },
     {
@@ -101,7 +129,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "signalLevel"
+      "logicalId": "signalLevel",
+      "configuration": {
+        "protocolPath": "temperature",
+        "updateKey" : "temperature"
+      }
     }
   ]
 }

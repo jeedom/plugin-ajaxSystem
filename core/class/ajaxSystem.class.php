@@ -25,10 +25,9 @@ class ajaxSystem extends eqLogic {
 
   public static $_SIA_CONVERT = array(
     'CF' => array(array('cmd' => 'state', 'value' => 'ARMED')),
-    'NF' => array(array('cmd' => 'state', 'value' => 'ARMED')),
+    'NF' => array(array('cmd' => 'state', 'value' => 'FORCED_ARM')),
     'CG' => array(array('cmd' => 'state', 'value' => 'ARMED')),
     'OG' => array(array('cmd' => 'state', 'value' => 'DISARMED')),
-    'NF' => array(array('cmd' => 'state', 'value' => 'NIGHT_MODE')),
     'CL' => array(array('cmd' => 'state', 'value' => 'ARMED', 'hubOnly' => true)),
     'OP' => array(array('cmd' => 'state', 'value' => 'DISARMED', 'hubOnly' => true)),
     'NL' => array(array('cmd' => 'state', 'value' => 'NIGHT_MODE', 'hubOnly' => true)),
@@ -92,6 +91,7 @@ class ajaxSystem extends eqLogic {
       'template' => 'tmplmultistate',
       'test' => array(
         array('operation' => '#value# == "ARMED"', 'state_light' => '<i class="fas fa-lock"></i>'),
+        array('operation' => '#value# == "FORCED_ARM"', 'state_light' => '<i class="fas fa-shield-alt"></i>'),
         array('operation' => '#value# == "DISARMED"', 'state_light' => '<i class="fas fa-lock-open"></i>'),
         array('operation' => '#value# == "DISARMED_NIGHT_MODE_OFF"', 'state_light' => '<i class="fas fa-lock-open"></i>'),
         array('operation' => '#value# == "NIGHT_MODE"', 'state_light' => '<i class="fas fa-moon"></i>'),
@@ -337,7 +337,6 @@ class ajaxSystem extends eqLogic {
     }
   }
 
-
   public static function devicesParameters($_device = '') {
     $return = array();
     $files = ls(__DIR__ . '/../config/devices', '*.json', false, array('files', 'quiet'));
@@ -362,6 +361,8 @@ class ajaxSystem extends eqLogic {
     if ($this->getConfiguration('applyDevice') != $this->getConfiguration('device')) {
       $this->applyModuleConfiguration();
     }
+
+    //Ajout de la commande SIA Code si manquante
     $cmd = $this->getCmd(null, 'sia_code');
     if (!is_object($cmd)) {
       $cmd = new ajaxSystemCmd();
@@ -374,7 +375,7 @@ class ajaxSystem extends eqLogic {
     $cmd->setEqLogic_id($this->getId());
     $cmd->save();
 
-
+    //Ajout de la commande SIA Type si manquante
     $cmd = $this->getCmd(null, 'sia_type');
     if (!is_object($cmd)) {
       $cmd = new ajaxSystemCmd();
@@ -387,7 +388,7 @@ class ajaxSystem extends eqLogic {
     $cmd->setEqLogic_id($this->getId());
     $cmd->save();
 
-
+    //Ajout de la commande SIA Description si manquante
     $cmd = $this->getCmd(null, 'sia_description');
     if (!is_object($cmd)) {
       $cmd = new ajaxSystemCmd();
@@ -400,7 +401,7 @@ class ajaxSystem extends eqLogic {
     $cmd->setEqLogic_id($this->getId());
     $cmd->save();
 
-
+    //Ajout de la commande SIA Concerns si manquante
     $cmd = $this->getCmd(null, 'sia_concerns');
     if (!is_object($cmd)) {
       $cmd = new ajaxSystemCmd();
@@ -444,20 +445,11 @@ class ajaxSystem extends eqLogic {
     if ($this->getConfiguration('type') == 'device') {
       $datas = self::request('/user/{userId}/hubs/' . $this->getConfiguration('hub_id') . '/devices/' . $this->getLogicalId());
     }
+
+    //Rafraichissement de la version firmware si celle-ci diffère de celle dernièrement connue par jeedom
     if (isset($datas['firmwareVersion']) && $datas['firmwareVersion'] != $this->getConfiguration('firmware')) {
       $this->setConfiguration('firmware', $datas['firmwareVersion']);
       $this->save();
-    }
-    foreach ($this->getCmd('info') as $cmd) {
-      $paths = explode('::', $cmd->getLogicalId());
-      $value = $datas;
-      foreach ($paths as $key) {
-        if (!isset($value[$key])) {
-          continue 2;
-        }
-        $value = $value[$key];
-      }
-      $this->checkAndUpdateCmd($cmd, $value);
     }
 
     //Refresh batterie depuis trame de synchronisation / refresh
@@ -477,8 +469,22 @@ class ajaxSystem extends eqLogic {
       //Au niveau de la commande spécifique si elle existe
       $batteryCmd = $this->getCmd('info', 'battery::chargeLevelPercentage');
       if(is_object($batteryCmd)){
-        $this->checkAndUpdateCmd('battery::chargeLevelPercentage', $value);
+        $this->checkAndUpdateCmd('battery::chargeLevelPercentage', $batteryChargeLevel);
       }
+    }
+
+    //Boucle pour le rafraichissement de chaque commande de l'équipement
+    foreach ($this->getCmd('info') as $cmd) {   
+      $deviceProtocolMapping = $cmd->getConfiguration('protocolPath');
+      $value = $datas;
+      foreach ($deviceProtocolMapping as $key) {
+        if (!isset($value[$key])) {
+          continue 2;
+        }
+        $value = $value[$key];
+      }
+
+      $this->checkAndUpdateCmd($cmd, $value);
     }
   }
 

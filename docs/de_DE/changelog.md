@@ -4,6 +4,17 @@
 >
 >Zur Erinnerung: Wenn keine Informationen zur Aktualisierung vorliegen, liegt dies daran, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt
 
+# 03/10/2023
+
+- Hinzufügung eines neuen Alarmstatus im Falle einer erzwungenen Scharfschaltung (z. B. wenn ein Gerätefehler vorliegt, der Alarm jedoch zwangsweise aktiviert werden muss)
+  Dieser neue Status ist über den Hub-Statusbefehl verfügbar und hat den technischen Wert „FORCED_ARM“. In diesem Modus wird jetzt auf dem Widget ein Logo mit einem teilweise ausgefüllten Schild angezeigt, um deutlich anzuzeigen, dass der Alarm in Betrieb ist, aber möglicherweise Fehler vorliegen
+– Der Mechanismus zum Abrufen von Befehlsaktualisierungen wurde überarbeitet, um mehr Flexibilität zu ermöglichen. In naher Zukunft sollte dies eine Erweiterung ermöglichen
+  Weitere Informationen zur Ausstattung. Abhängig von Zeit und Material, das zum Testen zur Verfügung steht
+- Die Möglichkeit, logische IDs bei Ausrüstungsbestellungen manuell anzupassen, wurde entfernt
+- Die Möglichkeit, Ausrüstungsbestellungen manuell hinzuzufügen oder zu entfernen, wurde entfernt
+- Vorbereitungen für die Implementierung eines Mechanismus zur Aktualisierung der Gerätesteuerung während der Plugin-Aktualisierung. Dadurch können veraltete Befehle gelöscht, aber auch neue Befehle hinzugefügt werden, ohne dass sich dies auf den Endbenutzer auswirkt. (Dieser Teil befindet sich derzeit in der Entwicklung)
+- Aktualisierte Dokumentation
+
 # 06.06.2023
 
 - Fasernabe hinzufügen

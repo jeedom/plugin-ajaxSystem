@@ -1,5 +1,8 @@
 {
   "name" : "Hub 2+",
+  "configuration" : {
+    "battery_type" : "Li-Ion"
+  },
   "commands" : [
     {
       "name": "Etat",
@@ -11,6 +14,10 @@
       "template":{
         "dashboard":"ajaxSystem::state",
         "mobile":"ajaxSystem::state"
+      },
+      "configuration": {
+        "protocolPath": "state",
+        "updateKey" : "state"
       }
     },
     {
@@ -19,7 +26,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "sourceObjectName"
+      "logicalId": "sourceObjectName",
+      "configuration": {
+        "protocolPath": "sourceObjectName",
+        "updateKey" : "sourceObjectName"
+      }
     },
     {
       "name": "Evenement",
@@ -27,7 +38,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "event"
+      "logicalId": "event",
+      "configuration": {
+        "protocolPath": "event",
+        "updateKey" : "event"
+      }
     },
     {
       "name": "Code evenement",
@@ -35,7 +50,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "eventCode"
+      "logicalId": "eventCode",
+      "configuration": {
+        "protocolPath": "eventCode",
+        "updateKey" : "eventCode"
+      }
     },
     {
       "name": "Trafiqué",
@@ -45,7 +64,9 @@
       "isHistorized": 0,
       "logicalId": "tampered",
       "configuration": {
-        "repeatEventManagement": "always"
+        "repeatEventManagement": "always",
+        "protocolPath": "tampered",
+        "updateKey" : "tampered"
       }
     },
     {
@@ -54,7 +75,11 @@
       "subtype": "binary",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "gsmNetworkStatus"
+      "logicalId": "gsmNetworkStatus",
+      "configuration": {
+        "protocolPath": "gsmNetworkStatus",
+        "updateKey" : "gsmNetworkStatus"
+      }
     },
 	{
       "name": "Intensité du signal cellulaire",
@@ -62,7 +87,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "gsm::signalLevel"
+      "logicalId": "gsm::signalLevel",
+      "configuration": {
+        "protocolPath": "gsm::signalLevel",
+        "updateKey" : "gsm::signalLevel"
+      }
     },
 	{
       "name": "Type réseau GSM",
@@ -70,7 +99,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "gsm::networkStatus"
+      "logicalId": "gsm::networkStatus",
+      "configuration": {
+        "protocolPath": "gsm::networkStatus",
+        "updateKey" : "gsm::networkStatus"
+      }
     },
 	{
       "name": "Données cellulaires actives",
@@ -78,7 +111,11 @@
       "subtype": "binary",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "gsm::gprsEnabled"
+      "logicalId": "gsm::gprsEnabled",
+      "configuration": {
+        "protocolPath": "gsm::gprsEnabled",
+        "updateKey" : "gsm::gprsEnabled"
+      }
     },
     {
       "name": "CMS",
@@ -86,7 +123,11 @@
       "subtype": "binary",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "CMSActiveChannels"
+      "logicalId": "CMSActiveChannels",
+      "configuration": {
+        "protocolPath": "CMSActiveChannels",
+        "updateKey" : "CMSActiveChannels"
+      }
     },
     {
       "name": "Ethernet",
@@ -96,7 +137,9 @@
       "isHistorized": 0,
       "logicalId": "ethernet::enabled",
       "configuration": {
-        "repeatEventManagement": "always"
+        "repeatEventManagement": "always",
+        "protocolPath": "ethernet::enabled",
+        "updateKey" : "ethernet::enabled"
       }
     },
     {
@@ -107,7 +150,9 @@
       "isHistorized": 0,
       "logicalId": "externallyPowered",
       "configuration": {
-        "repeatEventManagement": "always"
+        "repeatEventManagement": "always",
+        "protocolPath": "externallyPowered",
+        "updateKey" : "hubPowered"
       }
     },
 	{
@@ -118,7 +163,9 @@
       "isHistorized": 0,
       "logicalId": "battery::state",
       "configuration": {
-        "repeatEventManagement": "always"
+        "repeatEventManagement": "always",
+        "protocolPath": "battery::state",
+        "updateKey" : "battery::state"
       }
     },
 	{
@@ -129,7 +176,9 @@
       "isHistorized": 0,
       "logicalId": "battery::chargeLevelPercentage",
       "configuration": {
-        "repeatEventManagement": "always"
+        "repeatEventManagement": "always",
+        "protocolPath": "battery::chargeLevelPercentage",
+        "updateKey" : "battery::chargeLevelPercentage"
       }
     },
     {
@@ -183,7 +232,9 @@
       "configuration": {
         "repeatEventManagement": "always",
         "returnStateValue" : 0,
-        "returnStateTime" : 1
+        "returnStateTime" : 1,
+        "protocolPath": "sia_state_intrusion",
+        "updateKey" : "sia_state_intrusion"
       },
       "template":{
         "dashboard" : "alert",

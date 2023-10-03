@@ -7,7 +7,11 @@
         "subtype": "binary",
         "isVisible": 0,
         "isHistorized": 0,
-        "logicalId": "channelStatus"
+        "logicalId": "channelStatus",
+        "configuration": {
+          "protocolPath": "channelStatus",
+          "updateKey" : "channelStatus"
+        }
       },
       {
         "name": "Source evenement",
@@ -15,7 +19,11 @@
         "subtype": "string",
         "isVisible": 0,
         "isHistorized": 0,
-        "logicalId": "sourceObjectName"
+        "logicalId": "sourceObjectName",
+        "configuration": {
+          "protocolPath": "sourceObjectName",
+          "updateKey" : "sourceObjectName"
+        }
       },
       {
         "name": "Evenement",
@@ -23,7 +31,11 @@
         "subtype": "string",
         "isVisible": 0,
         "isHistorized": 0,
-        "logicalId": "event"
+        "logicalId": "event",
+        "configuration": {
+          "protocolPath": "event",
+          "updateKey" : "event"
+        }
       },
       {
         "name": "Code evenement",
@@ -31,7 +43,11 @@
         "subtype": "string",
         "isVisible": 0,
         "isHistorized": 0,
-        "logicalId": "eventCode"
+        "logicalId": "eventCode",
+        "configuration": {
+          "protocolPath": "eventCode",
+          "updateKey" : "eventCode"
+        }
       },
       {
         "name": "On",

@@ -7,7 +7,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "state"
+      "logicalId": "state",
+      "configuration": {
+        "protocolPath": "state",
+        "updateKey" : "state"
+      }
     },
     {
       "name": "Source evenement",
@@ -15,7 +19,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "sourceObjectName"
+      "logicalId": "sourceObjectName",
+      "configuration": {
+        "protocolPath": "sourceObjectName",
+        "updateKey" : "sourceObjectName"
+      }
     },
     {
       "name": "Evenement",
@@ -27,7 +35,9 @@
       "configuration": {
         "repeatEventManagement": "always",
         "returnStateValue": "ras",
-        "returnStateTime": "5"
+        "returnStateTime": "5",
+        "protocolPath": "event",
+        "updateKey" : "event"
       }
     },
     {
@@ -36,8 +46,13 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "eventCode"
-    },{
+      "logicalId": "eventCode",
+      "configuration": {
+        "protocolPath": "eventCode",
+        "updateKey" : "eventCode"
+      }
+    },
+    {
       "name": "Trafiqué",
       "type": "info",
       "subtype": "binary",
@@ -45,7 +60,9 @@
       "isHistorized": 0,
       "logicalId": "tampered",
       "configuration": {
-        "repeatEventManagement": "always"
+        "repeatEventManagement": "always",
+        "protocolPath": "tampered",
+        "updateKey" : "tampered"
       }
     },
     {
@@ -56,7 +73,9 @@
       "isHistorized": 0,
       "logicalId": "online",
       "configuration": {
-        "repeatEventManagement": "always"
+        "repeatEventManagement": "always",
+        "protocolPath": "online",
+        "updateKey" : "online"
       }
     },
     {
@@ -65,7 +84,11 @@
       "subtype": "string",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "signalLevel"
+      "logicalId": "signalLevel",
+      "configuration": {
+        "protocolPath": "signalLevel",
+        "updateKey" : "signalLevel"
+      }
     },
     {
       "name": "Température",
@@ -75,7 +98,11 @@
       "isHistorized": 1,
       "logicalId": "temperature",
       "generic_type": "TEMPERATURE",
-      "unite" : "°C"
+      "unite" : "°C",
+      "configuration": {
+        "protocolPath": "temperature",
+        "updateKey" : "temperature"
+      }
     }
   ]
 }
