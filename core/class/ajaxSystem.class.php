@@ -375,7 +375,7 @@ class ajaxSystem extends eqLogic {
     $cmd->setEqLogic_id($this->getId());
     $cmd->save();
 
-
+    //Ajout de la commande SIA Type si manquante
     $cmd = $this->getCmd(null, 'sia_type');
     if (!is_object($cmd)) {
       $cmd = new ajaxSystemCmd();
@@ -388,7 +388,7 @@ class ajaxSystem extends eqLogic {
     $cmd->setEqLogic_id($this->getId());
     $cmd->save();
 
-
+    //Ajout de la commande SIA Description si manquante
     $cmd = $this->getCmd(null, 'sia_description');
     if (!is_object($cmd)) {
       $cmd = new ajaxSystemCmd();
@@ -401,7 +401,7 @@ class ajaxSystem extends eqLogic {
     $cmd->setEqLogic_id($this->getId());
     $cmd->save();
 
-
+    //Ajout de la commande SIA Concerns si manquante
     $cmd = $this->getCmd(null, 'sia_concerns');
     if (!is_object($cmd)) {
       $cmd = new ajaxSystemCmd();
