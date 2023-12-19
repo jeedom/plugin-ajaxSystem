@@ -137,7 +137,7 @@ class ajaxSystem extends eqLogic {
     $cmd .= ' --siaport ' . config::byKey('sia::port', 'ajaxSystem');
     $cmd .= ' --account ' . config::byKey('sia::account', 'ajaxSystem');
     $cmd .= ' --key ' . config::byKey('sia::key', 'ajaxSystem');
-    $cmd .= ' --callback ' . network::getNetworkAccess('internal', 'proto:127.0.0.1:port:comp') . '/plugins/ajaxSystem/core/php/jeeAjaxSystemSia.php';
+    $cmd .= ' --callback ' . network::getNetworkAccess('internal', 'http:127.0.0.1:port:comp') . '/plugins/ajaxSystem/core/php/jeeAjaxSystemSia.php';
     $cmd .= ' --apikey ' . jeedom::getApiKey('ajaxSystem');
     $cmd .= ' --cycle ' . config::byKey('cycle', 'ajaxSystem');
     $cmd .= ' --pid ' . jeedom::getTmpFolder('ajaxSystem') . '/deamon.pid';
