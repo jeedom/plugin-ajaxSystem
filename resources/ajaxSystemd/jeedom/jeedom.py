@@ -20,7 +20,6 @@ import threading
 import requests
 import datetime
 import collections
-import serial
 import os
 from os.path import join
 import socket

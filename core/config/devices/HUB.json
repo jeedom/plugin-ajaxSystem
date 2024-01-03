@@ -55,10 +55,15 @@
       "subtype": "binary",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "gsmNetworkStatus",
-      "configuration": {
-        "repeatEventManagement": "always"
-      }
+      "logicalId": "gsmNetworkStatus"
+    },
+    {
+      "name": "CMS",
+      "type": "info",
+      "subtype": "binary",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "CMSActiveChannels"
     },
     {
       "name": "Ethernet",

@@ -24,11 +24,15 @@ class ajaxSystem extends eqLogic {
   public static $_SIA_GLOBALS = array('CL', 'OP', 'NL', 'BR', 'BA', 'KA', 'FA', 'GA', 'WA', 'PA');
 
   public static $_SIA_CONVERT = array(
+    'CF' => array(array('cmd' => 'state', 'value' => 'ARMED')),
+    'NF' => array(array('cmd' => 'state', 'value' => 'ARMED')),
+    'CG' => array(array('cmd' => 'state', 'value' => 'ARMED')),
+    'OG' => array(array('cmd' => 'state', 'value' => 'DISARMED')),
+    'NF' => array(array('cmd' => 'state', 'value' => 'NIGHT_MODE')),
     'CL' => array(array('cmd' => 'state', 'value' => 'ARMED', 'hubOnly' => true)),
     'OP' => array(array('cmd' => 'state', 'value' => 'DISARMED', 'hubOnly' => true)),
     'NL' => array(array('cmd' => 'state', 'value' => 'NIGHT_MODE', 'hubOnly' => true)),
     'PA' => array(array('cmd' => 'state', 'value' => 'PANIC', 'hubOnly' => true)),
-    'CF' => array(array('cmd' => 'state', 'value' => 'ARMED', 'hubOnly' => true)),
     'BA' => array(array('cmd' => 'sia_state', 'value' => 1), array('cmd' => 'reedClosed', 'value' => 1)), array('cmd' => 'sia_state_intrusion', 'value' => 1),
     'TA' => array(array('cmd' => 'sia_state_masking', 'value' => 1)),
     'TR' => array(array('cmd' => 'sia_state_masking', 'value' => 0)),
@@ -54,94 +58,16 @@ class ajaxSystem extends eqLogic {
 
   /*     * ***********************Methode static*************************** */
 
-  public static function handleMqttMessage($_datas) {
-    if (!isset($_datas['ajax'])) {
-      return;
-    }
-    log::add('ajaxSystem', 'debug', json_encode($_datas));
-    $eqLogics = self::byType('ajaxSystem');
-    foreach ($_datas['ajax'] as $id => $value) {
-      if ($id == '') {
-        continue;
-      }
-      $info = (is_array($value)) ? $value : json_decode($value, true);
-      if ($info == null || !is_array($info)) {
-        continue;
-      }
-      if ($id == 'error') {
-        if (isset($info['description'])) {
-          log::add('ajaxSystem', 'error', __('Erreur renvoyé par MQTT : ', __FILE__) . $info['description']);
-        }
-        continue;
-      }
-      if (!isset($info['code']) || $info['code'] == '') {
-        log::add('ajaxSystem', 'debug', 'Invalid code : ' . json_encode($info));
-        continue;
-      }
-      if (!isset($info['datetime']) || $info['datetime'] == '') {
-        log::add('ajaxSystem', 'debug', 'Invalid datetime : ' .  json_encode($info));
-        continue;
-      }
-      $d = DateTime::createFromFormat('H:i:s,m-d-Y', $info['datetime'], new DateTimeZone('UTC'));
-
-      if ($d->getTimestamp() < (strtotime('now') - 120)) {
-        log::add('ajaxSystem', 'debug', 'Invalid too old datetime : ' .  json_encode($info));
-        continue;
-      }
-      foreach ($eqLogics as $eqLogic) {
-        if ($eqLogic->getConfiguration('device_number') != $id && (!in_array($info['code'], self::$_SIA_GLOBALS) || $eqLogic->getConfiguration('type') != 'hub')) {
-          continue;
-        }
-        $eqLogic->checkAndUpdateCmd('sia_code', $info['code']);
-        if (isset($info['type'])) {
-          $eqLogic->checkAndUpdateCmd('sia_type', $info['type']);
-        }
-        if (isset($info['description'])) {
-          $eqLogic->checkAndUpdateCmd('sia_description', $info['description']);
-        }
-        if (isset($info['concerns'])) {
-          $eqLogic->checkAndUpdateCmd('sia_concerns', $info['concerns']);
-        }
-        if (isset(self::$_SIA_CONVERT[$info['code']])) {
-          foreach (self::$_SIA_CONVERT[$info['code']] as $convert) {
-            if (isset($convert['hubOnly']) && $convert['hubOnly'] && $eqLogic->getConfiguration('type') != 'hub') {
-              continue;
-            }
-            log::add('ajaxSystem', 'debug', 'MQTT ' . $eqLogic->getHumanName() . ' ' . $convert['cmd'] . ' => ' . $convert['value']);
-            $eqLogic->checkAndUpdateCmd($convert['cmd'], $convert['value']);
-          }
-        }
-      }
-    }
-  }
-
   public static function postConfig_local_mode($_value) {
     $plugin = plugin::byId('ajaxSystem');
     switch ($_value) {
       case 'none':
         $plugin->dependancy_changeAutoMode(0);
         $plugin->deamon_info(0);
-        if(class_exists('mqtt2')){
-          mqtt2::removePluginTopic(config::byKey('mqtt::prefix', __CLASS__, 'ajax'));
-        }
         break;
       case 'sia':
         $plugin->dependancy_changeAutoMode(1);
         $plugin->deamon_info(1);
-        if(class_exists('mqtt2')){
-          mqtt2::removePluginTopic(config::byKey('mqtt::prefix', __CLASS__, 'ajax'));
-        }
-        break;
-      case 'mqtt':
-        $plugin->dependancy_changeAutoMode(0);
-        $plugin->deamon_info(0);
-        if (!class_exists('mqtt2')) {
-          throw new Exception(__('Le plugin MQTT Manager n\'est pas installé', __FILE__));
-        }
-        if (mqtt2::deamon_info()['state'] != 'ok') {
-          throw new Exception(__('Le démon MQTT Manager n\'est pas démarré', __FILE__));
-        }
-        mqtt2::addPluginTopic(__CLASS__, config::byKey('mqtt::prefix', __CLASS__, 'ajax'));
         break;
     }
   }
@@ -152,9 +78,6 @@ class ajaxSystem extends eqLogic {
     $return['log'] = 'ajaxSystem_update';
     $return['progress_file'] = '/tmp/dependancy_ajaxSystem_in_progress';
     $return['state'] = 'ok';
-    if (exec(system::getCmdSudo() . 'pip3 list | grep -E "pysiaalarm" | wc -l') < 1) {
-      $return['state'] = 'nok';
-    }
     return $return;
   }
 
@@ -214,7 +137,7 @@ class ajaxSystem extends eqLogic {
     $cmd .= ' --siaport ' . config::byKey('sia::port', 'ajaxSystem');
     $cmd .= ' --account ' . config::byKey('sia::account', 'ajaxSystem');
     $cmd .= ' --key ' . config::byKey('sia::key', 'ajaxSystem');
-    $cmd .= ' --callback ' . network::getNetworkAccess('internal', 'proto:127.0.0.1:port:comp') . '/plugins/ajaxSystem/core/php/jeeAjaxSystemSia.php';
+    $cmd .= ' --callback ' . network::getNetworkAccess('internal', 'http:127.0.0.1:port:comp') . '/plugins/ajaxSystem/core/php/jeeAjaxSystemSia.php';
     $cmd .= ' --apikey ' . jeedom::getApiKey('ajaxSystem');
     $cmd .= ' --cycle ' . config::byKey('cycle', 'ajaxSystem');
     $cmd .= ' --pid ' . jeedom::getTmpFolder('ajaxSystem') . '/deamon.pid';
@@ -536,11 +459,26 @@ class ajaxSystem extends eqLogic {
       }
       $this->checkAndUpdateCmd($cmd, $value);
     }
+
+    //Refresh batterie depuis trame de synchronisation / refresh
+    $batteryChargeLevel = '-1';
     if (isset($datas['batteryChargeLevelPercentage'])) {
-      $this->batteryStatus($datas['batteryChargeLevelPercentage']);
+      $batteryChargeLevel = $datas['batteryChargeLevelPercentage'];  
     }
     if (isset($datas['battery']) && isset($datas['battery']['chargeLevelPercentage'])) {
-      $this->batteryStatus($datas['battery']['chargeLevelPercentage']);
+      $batteryChargeLevel = $datas['battery']['chargeLevelPercentage'];
+    }
+
+    //Si niveau de charge numérique disponible, mise à jour de l'information
+    if($batteryChargeLevel != '-1'){
+      //Au niveau de l'équipement
+      $this->batteryStatus($batteryChargeLevel);
+
+      //Au niveau de la commande spécifique si elle existe
+      $batteryCmd = $this->getCmd('info', 'battery::chargeLevelPercentage');
+      if(is_object($batteryCmd)){
+        $this->checkAndUpdateCmd('battery::chargeLevelPercentage', $value);
+      }
     }
   }
 

@@ -1,0 +1,63 @@
+{
+    "name" : "Va et vient",
+    "commands" : [
+      {
+        "name": "Etat",
+        "type": "info",
+        "subtype": "binary",
+        "isVisible": 0,
+        "isHistorized": 0,
+        "logicalId": "channelStatus"
+      },
+      {
+        "name": "Source evenement",
+        "type": "info",
+        "subtype": "string",
+        "isVisible": 0,
+        "isHistorized": 0,
+        "logicalId": "sourceObjectName"
+      },
+      {
+        "name": "Evenement",
+        "type": "info",
+        "subtype": "string",
+        "isVisible": 0,
+        "isHistorized": 0,
+        "logicalId": "event"
+      },
+      {
+        "name": "Code evenement",
+        "type": "info",
+        "subtype": "string",
+        "isVisible": 0,
+        "isHistorized": 0,
+        "logicalId": "eventCode"
+      },
+      {
+        "name": "On",
+        "type": "action",
+        "subtype": "other",
+        "isVisible": 1,
+        "isHistorized": 0,
+        "logicalId": "SWITCH_ON",
+        "value" :"Etat",
+        "template":{
+          "dashboard" : "prise",
+          "mobile" : "prise"
+        }
+      },
+      {
+        "name": "Off",
+        "type": "action",
+        "subtype": "other",
+        "isVisible": 1,
+        "isHistorized": 0,
+        "logicalId": "SWITCH_OFF",
+        "value" :"Etat",
+        "template":{
+          "dashboard" : "prise",
+          "mobile" : "prise"
+        }
+      }
+    ]
+  }

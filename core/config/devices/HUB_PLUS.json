@@ -54,10 +54,39 @@
       "subtype": "binary",
       "isVisible": 0,
       "isHistorized": 0,
-      "logicalId": "gsmNetworkStatus",
-      "configuration": {
-        "repeatEventManagement": "always"
-      }
+      "logicalId": "gsmNetworkStatus"
+    },
+	{
+      "name": "Intensité du signal cellulaire",
+      "type": "info",
+      "subtype": "string",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "gsm::signalLevel"
+    },
+	{
+      "name": "Type réseau GSM",
+      "type": "info",
+      "subtype": "string",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "gsm::networkStatus"
+    },
+	{
+      "name": "Données cellulaires actives",
+      "type": "info",
+      "subtype": "binary",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "gsm::gprsEnabled"
+    },
+    {
+      "name": "CMS",
+      "type": "info",
+      "subtype": "binary",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "CMSActiveChannels"
     },
     {
       "name": "Ethernet",

@@ -8,8 +8,6 @@
         "Mode local": "Lokalbetrieb",
         "Aucun": "Keiner",
         "SIA via démon": "SIA über Daemon",
-        "SIA via MQTT": "SIA über MQTT",
-        "Topic racine": "Root-Thema",
         "Configuration SIA": "SIA-Konfiguration",
         "Port": "Hafen",
         "Compte": "Konto",
@@ -86,9 +84,6 @@
         "Aucune méthode correspondante à : ": "Keine Methode entsprechend:"
     },
     "plugins\/ajaxSystem\/core\/class\/ajaxSystem.class.php": {
-        "Erreur renvoyé par MQTT : ": "Von MQTT zurückgegebener Fehler:",
-        "Le plugin MQTT Manager n\\'est pas installé": "Das MQTT Manager-Plugin ist nicht installiert",
-        "Le démon MQTT Manager n\\'est pas démarré": "Der MQTT-Manager-Daemon ist nicht gestartet",
         "Veuillez vérifier la configuration": "Bitte überprüfen Sie die Konfiguration",
         "Erreur lors de la requete à Ajax System : ": "Fehler beim Anfordern von Ajax System:",
         "Erreur lors de la mise à jour des données de :": "Fehler beim Aktualisieren der Daten von:",

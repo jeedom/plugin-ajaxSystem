@@ -8,8 +8,6 @@
         "Mode local": "Mode local",
         "Aucun": "Aucun",
         "SIA via démon": "SIA via démon",
-        "SIA via MQTT": "SIA via MQTT",
-        "Topic racine": "Topic racine",
         "Configuration SIA": "Configuration SIA",
         "Port": "Port",
         "Compte": "Compte",
@@ -86,9 +84,6 @@
         "Aucune méthode correspondante à : ": "Aucune méthode correspondante à :"
     },
     "plugins\/ajaxSystem\/core\/class\/ajaxSystem.class.php": {
-        "Erreur renvoyé par MQTT : ": "Erreur renvoyé par MQTT :",
-        "Le plugin MQTT Manager n\\'est pas installé": "Le plugin MQTT Manager n\\'est pas installé",
-        "Le démon MQTT Manager n\\'est pas démarré": "Le démon MQTT Manager n\\'est pas démarré",
         "Veuillez vérifier la configuration": "Veuillez vérifier la configuration",
         "Erreur lors de la requete à Ajax System : ": "Erreur lors de la requete à Ajax System :",
         "Erreur lors de la mise à jour des données de :": "Erreur lors de la mise à jour des données de :",
