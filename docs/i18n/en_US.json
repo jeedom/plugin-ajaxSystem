@@ -2,6 +2,10 @@
     "changelog.md": {
         "Changelog Ajax Systems": "Changelog Ajax Systems",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "As a reminder, if there is no information on the update, it is because it concerns only the update of documentation, translation or text",
+        "03\/01\/2024": "03\/01\/2024",
+        "Préparation pour jeedom 4.4": "Preparing for jeedom 4.4",
+        "Amélioration de la gestion du SIA": "Improved SIA management",
+        "Correction de bug": "Bug fix",
         "06\/06\/2023": "06\/06\/2023",
         "Ajout hub fibra": "Add fibra hub",
         "23\/08\/2022": "08\/23\/2022",
