@@ -2,6 +2,7 @@
     "changelog.md": {
         "Changelog Ajax Systems": "Sistemas Ajax de registro de mudanças",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Recorde-se que, se não existe informação sobre a atualização, é porque se trata apenas de atualização de documentação, tradução ou texto",
+        "Meilleurs gestion des evenements (si la source est l'utilisateur et non le hub": "Melhor gerenciamento de eventos (se a origem for o usuário e não o hub",
         "06\/01\/2024": "01\/06\/2024",
         "Correction d'un soucis sur l'installation des dépendances": "Corrigido problema com instalação de dependências",
         "03\/01\/2024": "01\/03\/2024",

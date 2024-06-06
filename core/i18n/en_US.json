@@ -68,8 +68,8 @@
         "Afficher": "Display",
         "Historiser": "Historize",
         "Inverser": "Reverse",
-        "Min.": "Min.",
-        "Max.": "Max.",
+        "Min.": "Low",
+        "Max.": "High",
         "Unité": "Unit"
     },
     "plugins\/ajaxSystem\/core\/php\/jeeAjaxSystem.php": {

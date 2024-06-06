@@ -2,6 +2,7 @@
     "changelog.md": {
         "Changelog Ajax Systems": "Änderungsprotokoll Ajax-Systeme",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Zur Erinnerung: Wenn keine Informationen zur Aktualisierung vorliegen, liegt dies daran, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt",
+        "Meilleurs gestion des evenements (si la source est l'utilisateur et non le hub": "Bessere Ereignisverwaltung (wenn die Quelle der Benutzer und nicht der Hub ist)",
         "06\/01\/2024": "01.06.2024",
         "Correction d'un soucis sur l'installation des dépendances": "Ein Problem bei der Installation von Abhängigkeiten wurde behoben",
         "03\/01\/2024": "01.03.2024",
