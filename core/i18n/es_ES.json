@@ -5,14 +5,6 @@
         "Se connecter": "Conectarse",
         "Synchronisation": "Sincronización",
         "Synchroniser mes équipements": "Sincronizar mi equipo",
-        "Mode local": "Modo local",
-        "Aucun": "Ninguna",
-        "SIA via démon": "SIA a través de un demonio",
-        "Configuration SIA": "Configuración SIA",
-        "Port": "Puerto",
-        "Compte": "Cuenta",
-        "Clé de cryptage (longueur : 16)": "Clave de cifrado (longitud: 16)",
-        "Connexion à Ajax Systeme": "Conexión a Ajax Systeme",
         "Synchronisation réussie": "Sincronización exitosa"
     },
     "plugins\/ajaxSystem\/desktop\/modal\/login.php": {
@@ -76,22 +68,14 @@
         "Vous n\\'etes pas autorisé à effectuer cette action. Clef API invalide.": "No está autorizado para realizar esta acción. Clave de API no válida",
         "Configuration OK": "Configuración OK"
     },
-    "plugins\/ajaxSystem\/core\/php\/jeeAjaxSystemSia.php": {
-        "Vous n\\'etes pas autorisé à effectuer cette action": "No estás autorizado para realizar esta acción"
-    },
     "plugins\/ajaxSystem\/core\/ajax\/ajaxSystem.ajax.php": {
         "401 - Accès non autorisé": "401 - Acceso no autorizado",
         "Aucune méthode correspondante à : ": "Ningún método correspondiente a:"
     },
     "plugins\/ajaxSystem\/core\/class\/ajaxSystem.class.php": {
-        "Veuillez vérifier la configuration": "Por favor revise la configuración",
         "Erreur lors de la requete à Ajax System : ": "Error al solicitar el sistema Ajax:",
         "Erreur lors de la mise à jour des données de :": "Error al actualizar datos de:",
-        "Impossible de mettre à jour les tokens d\\'accès, refresh token vide : ": "No se pueden actualizar los tokens de acceso, el token de actualización está vacío:",
-        "SIA code": "Código SIA",
-        "SIA Type": "Tipo de SIA",
-        "SIA description": "Descripción SIA",
-        "SIA concerns": "Preocupaciones de la SIA"
+        "Impossible de mettre à jour les tokens d\\'accès, refresh token vide : ": "No se pueden actualizar los tokens de acceso, el token de actualización está vacío:"
     },
     "info.json": {
         "Plugin servant à se connecter à une alarme Ajax": "Complemento utilizado para conectarse a una alarma Ajax"

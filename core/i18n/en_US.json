@@ -5,14 +5,6 @@
         "Se connecter": "To log in",
         "Synchronisation": "Synchronization",
         "Synchroniser mes équipements": "Synchronize my equipment",
-        "Mode local": "Local Mode",
-        "Aucun": "None",
-        "SIA via démon": "SIA via daemon",
-        "Configuration SIA": "SIA configuration",
-        "Port": "Harbor",
-        "Compte": "Account",
-        "Clé de cryptage (longueur : 16)": "Encryption key (length: 16)",
-        "Connexion à Ajax Systeme": "Connection to Ajax Systeme",
         "Synchronisation réussie": "Synchronization successful"
     },
     "plugins\/ajaxSystem\/desktop\/modal\/login.php": {
@@ -76,22 +68,14 @@
         "Vous n\\'etes pas autorisé à effectuer cette action. Clef API invalide.": "You are not authorized to perform this action. Invalid API key",
         "Configuration OK": "Setup OK"
     },
-    "plugins\/ajaxSystem\/core\/php\/jeeAjaxSystemSia.php": {
-        "Vous n\\'etes pas autorisé à effectuer cette action": "You are not authorized to perform this action"
-    },
     "plugins\/ajaxSystem\/core\/ajax\/ajaxSystem.ajax.php": {
         "401 - Accès non autorisé": "401 - Unauthorized Access",
         "Aucune méthode correspondante à : ": "No method corresponding to:"
     },
     "plugins\/ajaxSystem\/core\/class\/ajaxSystem.class.php": {
-        "Veuillez vérifier la configuration": "Please check the configuration",
         "Erreur lors de la requete à Ajax System : ": "Error when requesting Ajax System:",
         "Erreur lors de la mise à jour des données de :": "Error updating data from:",
-        "Impossible de mettre à jour les tokens d\\'accès, refresh token vide : ": "Unable to update access tokens, refresh token empty:",
-        "SIA code": "SIA code",
-        "SIA Type": "AIS Type",
-        "SIA description": "AIS description",
-        "SIA concerns": "SIA concerns"
+        "Impossible de mettre à jour les tokens d\\'accès, refresh token vide : ": "Unable to update access tokens, refresh token empty:"
     },
     "info.json": {
         "Plugin servant à se connecter à une alarme Ajax": "Plugin used to connect to an Ajax alarm"
