@@ -149,24 +149,6 @@
       "isVisible": 0,
       "isHistorized": 0,
       "logicalId": "muteFireDetectors"
-    },
-    {
-      "name": "Intrusion",
-      "type": "info",
-      "subtype": "binary",
-      "isVisible": 1,
-      "isHistorized": 1,
-      "logicalId": "sia_state_intrusion",
-      "generic_type": "ALARM_STATE",
-      "configuration": {
-        "repeatEventManagement": "always",
-        "returnStateValue" : 0,
-        "returnStateTime" : 1
-      },
-      "template":{
-        "dashboard" : "alert",
-        "mobile" : "alert"
-      }
     }
   ]
 }

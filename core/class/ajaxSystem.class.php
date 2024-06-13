@@ -21,70 +21,10 @@ require_once __DIR__  . '/../../../../core/php/core.inc.php';
 
 class ajaxSystem extends eqLogic {
   /*     * *************************Attributs****************************** */
-  public static $_SIA_GLOBALS = array('CL', 'OP', 'NL', 'BR', 'BA', 'KA', 'FA', 'GA', 'WA', 'PA');
-
-  public static $_SIA_CONVERT = array(
-    'CF' => array(array('cmd' => 'state', 'value' => 'ARMED')),
-    'NF' => array(array('cmd' => 'state', 'value' => 'ARMED')),
-    'CG' => array(array('cmd' => 'state', 'value' => 'ARMED')),
-    'OG' => array(array('cmd' => 'state', 'value' => 'DISARMED')),
-    'NF' => array(array('cmd' => 'state', 'value' => 'NIGHT_MODE')),
-    'CL' => array(array('cmd' => 'state', 'value' => 'ARMED', 'hubOnly' => true)),
-    'OP' => array(array('cmd' => 'state', 'value' => 'DISARMED', 'hubOnly' => true)),
-    'NL' => array(array('cmd' => 'state', 'value' => 'NIGHT_MODE', 'hubOnly' => true)),
-    'PA' => array(array('cmd' => 'state', 'value' => 'PANIC', 'hubOnly' => true)),
-    'BA' => array(array('cmd' => 'sia_state', 'value' => 1), array('cmd' => 'reedClosed', 'value' => 1)), array('cmd' => 'sia_state_intrusion', 'value' => 1),
-    'TA' => array(array('cmd' => 'sia_state_masking', 'value' => 1)),
-    'TR' => array(array('cmd' => 'sia_state_masking', 'value' => 0)),
-    'BR' => array(array('cmd' => 'sia_state', 'value' => 0), array('cmd' => 'reedClosed', 'value' => 1), array('cmd' => 'sia_state_intrusion', 'value' => 1)),
-    'HA' => array(array('cmd' => 'sia_state', 'value' => 1)),
-    'FA' => array(array('cmd' => 'sia_state', 'value' => 1)),
-    'MA' => array(array('cmd' => 'sia_state', 'value' => 1)),
-    'GA' => array(array('cmd' => 'sia_state', 'value' => 1)),
-    'KA' => array(array('cmd' => 'sia_state', 'value' => 1)),
-    'GH' => array(array('cmd' => 'sia_state', 'value' => 0)),
-    'FH' => array(array('cmd' => 'sia_state', 'value' => 0)),
-    'KH' => array(array('cmd' => 'sia_state', 'value' => 0)),
-    'YP' => array(array('cmd' => 'externallyPowered', 'value' => 1)),
-    'YQ' => array(array('cmd' => 'externallyPowered', 'value' => 0)),
-    'WA' => array(array('cmd' => 'leakDetected', 'value' => 1)),
-    'WH' => array(array('cmd' => 'leakDetected', 'value' => 1)),
-    'AT' => array(array('cmd' => 'externallyPowered', 'value' => 0)),
-    'AR' => array(array('cmd' => 'externallyPowered', 'value' => 1)),
-    'BV' => array(array('cmd' => 'sia_state_intrusion', 'value' => 1)),
-    'HV' => array(array('cmd' => 'sia_state_intrusion', 'value' => 1))
-  );
-
 
   /*     * ***********************Methode static*************************** */
 
-  public static function postConfig_local_mode($_value) {
-    $plugin = plugin::byId('ajaxSystem');
-    switch ($_value) {
-      case 'none':
-        $plugin->dependancy_changeAutoMode(0);
-        $plugin->deamon_info(0);
-        break;
-      case 'sia':
-        $plugin->dependancy_changeAutoMode(1);
-        $plugin->deamon_info(1);
-        break;
-    }
-  }
-
-
-  public static function dependancy_info() {
-    $return = array();
-    $return['log'] = 'ajaxSystem_update';
-    $return['progress_file'] = '/tmp/dependancy_ajaxSystem_in_progress';
-    $return['state'] = 'ok';
-    return $return;
-  }
-
-  public static function dependancy_install() {
-    log::remove(__CLASS__ . '_update');
-    return array('script' => dirname(__FILE__) . '/../../resources/install_#stype#.sh ' . jeedom::getTmpFolder('ajaxSystem') . '/dependance', 'log' => log::getPathToLog(__CLASS__ . '_update'));
-  }
+  
 
   public static function templateWidget() {
     $return = array('info' => array('string' => array()));
@@ -99,75 +39,6 @@ class ajaxSystem extends eqLogic {
       )
     );
     return $return;
-  }
-
-  public static function deamon_info() {
-    $return = array();
-    $return['log'] = 'ajaxSystem';
-    $return['state'] = 'nok';
-    $pid_file = jeedom::getTmpFolder('ajaxSystem') . '/deamon.pid';
-    if (file_exists($pid_file)) {
-      if (@posix_getsid(trim(file_get_contents($pid_file)))) {
-        $return['state'] = 'ok';
-      } else {
-        shell_exec(system::getCmdSudo() . 'rm -rf ' . $pid_file . ' 2>&1 > /dev/null');
-      }
-    }
-    $return['launchable'] = 'ok';
-    return $return;
-  }
-
-  public static function deamon_start() {
-    log::remove(__CLASS__ . '_update');
-    self::deamon_stop();
-    $deamon_info = self::deamon_info();
-    if ($deamon_info['launchable'] != 'ok') {
-      throw new Exception(__('Veuillez vérifier la configuration', __FILE__));
-    }
-    if (config::byKey('sia::key', 'ajaxSystem') == '') {
-      config::save('sia::key', mb_strtolower(config::genKey(16)), 'ajaxSystem');
-    }
-    if (config::byKey('sia::account', 'ajaxSystem') == '') {
-      config::save('sia::account', rand(11111, 99999), 'ajaxSystem');
-    }
-    $ajaxSystem_path = realpath(dirname(__FILE__) . '/../../resources/ajaxSystemd');
-    chdir($ajaxSystem_path);
-    $cmd = '/usr/bin/python3 ' . $ajaxSystem_path . '/ajaxSystemd.py';
-    $cmd .= ' --loglevel ' . log::convertLogLevel(log::getLogLevel('ajaxSystem'));
-    $cmd .= ' --siaport ' . config::byKey('sia::port', 'ajaxSystem');
-    $cmd .= ' --account ' . config::byKey('sia::account', 'ajaxSystem');
-    $cmd .= ' --key ' . config::byKey('sia::key', 'ajaxSystem');
-    $cmd .= ' --callback ' . network::getNetworkAccess('internal', 'http:127.0.0.1:port:comp') . '/plugins/ajaxSystem/core/php/jeeAjaxSystemSia.php';
-    $cmd .= ' --apikey ' . jeedom::getApiKey('ajaxSystem');
-    $cmd .= ' --cycle ' . config::byKey('cycle', 'ajaxSystem');
-    $cmd .= ' --pid ' . jeedom::getTmpFolder('ajaxSystem') . '/deamon.pid';
-    log::add('ajaxSystem', 'info', 'Lancement démon ajaxSystem : ' . $cmd);
-    exec($cmd . ' >> ' . log::getPathToLog('ajaxSystemd') . ' 2>&1 &');
-    $i = 0;
-    while ($i < 30) {
-      $deamon_info = self::deamon_info();
-      if ($deamon_info['state'] == 'ok') {
-        break;
-      }
-      sleep(1);
-      $i++;
-    }
-    if ($i >= 30) {
-      log::add('ajaxSystem', 'error', 'Impossible de lancer le démon ajaxSystemd, vérifiez le log', 'unableStartDeamon');
-      return false;
-    }
-    message::removeAll('ajaxSystem', 'unableStartDeamon');
-    return true;
-  }
-
-  public static function deamon_stop() {
-    $pid_file = jeedom::getTmpFolder('ajaxSystem') . '/deamon.pid';
-    if (file_exists($pid_file)) {
-      $pid = intval(trim(file_get_contents($pid_file)));
-      system::kill($pid);
-    }
-    system::kill('ajaxSystemd.py');
-    system::fuserk(config::byKey('socketport', 'ajaxSystem'));
   }
 
   public static function request($_path, $_data = null, $_type = 'GET') {
@@ -363,55 +234,24 @@ class ajaxSystem extends eqLogic {
       $this->applyModuleConfiguration();
     }
     $cmd = $this->getCmd(null, 'sia_code');
-    if (!is_object($cmd)) {
-      $cmd = new ajaxSystemCmd();
-      $cmd->setLogicalId('sia_code');
-      $cmd->setName(__('SIA code', __FILE__));
+    if (is_object($cmd)) {
+      $cmd->remove();
     }
-    $cmd->setType('info');
-    $cmd->setSubType('string');
-    $cmd->setConfiguration('repeatEventManagement', 'always');
-    $cmd->setEqLogic_id($this->getId());
-    $cmd->save();
-
 
     $cmd = $this->getCmd(null, 'sia_type');
-    if (!is_object($cmd)) {
-      $cmd = new ajaxSystemCmd();
-      $cmd->setLogicalId('sia_type');
-      $cmd->setName(__('SIA Type', __FILE__));
+    if (is_object($cmd)) {
+      $cmd->remove();
     }
-    $cmd->setType('info');
-    $cmd->setSubType('string');
-    $cmd->setConfiguration('repeatEventManagement', 'always');
-    $cmd->setEqLogic_id($this->getId());
-    $cmd->save();
-
-
+    
     $cmd = $this->getCmd(null, 'sia_description');
-    if (!is_object($cmd)) {
-      $cmd = new ajaxSystemCmd();
-      $cmd->setLogicalId('sia_description');
-      $cmd->setName(__('SIA description', __FILE__));
+    if (is_object($cmd)) {
+      $cmd->remove();
     }
-    $cmd->setType('info');
-    $cmd->setSubType('string');
-    $cmd->setConfiguration('repeatEventManagement', 'always');
-    $cmd->setEqLogic_id($this->getId());
-    $cmd->save();
-
 
     $cmd = $this->getCmd(null, 'sia_concerns');
-    if (!is_object($cmd)) {
-      $cmd = new ajaxSystemCmd();
-      $cmd->setLogicalId('sia_concerns');
-      $cmd->setName(__('SIA concerns', __FILE__));
+    if (is_object($cmd)) {
+      $cmd->remove();
     }
-    $cmd->setType('info');
-    $cmd->setSubType('string');
-    $cmd->setConfiguration('repeatEventManagement', 'always');
-    $cmd->setEqLogic_id($this->getId());
-    $cmd->save();
   }
 
   public function applyModuleConfiguration() {

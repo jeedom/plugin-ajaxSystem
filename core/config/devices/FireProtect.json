@@ -76,17 +76,6 @@
       "isHistorized": 0,
       "logicalId": "signalLevel"
     },
-    {
-      "name": "Fumée",
-      "type": "info",
-      "subtype": "binary",
-      "isVisible": 1,
-      "isHistorized": 0,
-      "logicalId": "sia_state",
-      "generic_type": "SMOKE",
-      "configuration": {
-        "repeatEventManagement": "always"
-      },
       "template":{
         "dashboard" : "heat",
         "mobile" : "heat"

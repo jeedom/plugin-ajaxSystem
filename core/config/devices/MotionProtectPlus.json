@@ -75,24 +75,6 @@
       "isVisible": 1,
       "isHistorized": 0,
       "logicalId": "signalLevel"
-    },
-    {
-      "name": "Mouvement",
-      "type": "info",
-      "subtype": "binary",
-      "isVisible": 1,
-      "isHistorized": 0,
-      "logicalId": "sia_state",
-      "generic_type": "MOTION",
-      "configuration" : {
-        "repeatEventManagement": "always",
-        "returnStateValue" : 0,
-        "returnStateTime" : 1
-      },
-      "template" : {
-        "dashboard" : "presence",
-        "mobile" : "presence"
-      }
     }
   ]
 }
