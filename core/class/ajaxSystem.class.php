@@ -268,6 +268,12 @@ class ajaxSystem extends eqLogic {
   }
 
   public function getImage() {
+    if(method_exists($this,'getCustomImage')){
+         $customImage = $this->getCustomImage();
+         if($customImage !== null){
+            return $customImage;
+         }
+      }
     if (file_exists(__DIR__ . '/../config/devices/' .  $this->getConfiguration('device') . '_' . strtolower($this->getConfiguration('color')) . '.png')) {
       return 'plugins/ajaxSystem/core/config/devices/' .  $this->getConfiguration('device') . '_' . strtolower($this->getConfiguration('color')) . '.png';
     }
