@@ -5,6 +5,7 @@
         "Se connecter": "To log in",
         "Synchronisation": "Synchronization",
         "Synchroniser mes équipements": "Synchronize my equipment",
+        "Connexion à Ajax Systeme": "Connection to Ajax System",
         "Synchronisation réussie": "Synchronization successful"
     },
     "plugins\/ajaxSystem\/desktop\/modal\/login.php": {
