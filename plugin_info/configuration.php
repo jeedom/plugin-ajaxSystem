@@ -41,6 +41,12 @@ if (!isConnect()) {
 </form>
 
 <script>
+  $('#bt_loginToAjaxSystem').off('click').on('click', function() {
+    $('#md_modal').dialog({
+      title: "{{Connexion à Ajax Systeme}}"
+    }).load('index.php?v=d&modal=login&plugin=ajaxSystem').dialog('open')
+  })
+  
   $('#bt_syncWithAjaxSystem').on('click', function() {
     $.ajax({
       type: "POST",
