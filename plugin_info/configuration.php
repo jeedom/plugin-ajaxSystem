@@ -42,7 +42,7 @@ if (!isConnect()) {
 
 <script>
   $('#bt_loginToAjaxSystem').off('click').on('click', function() {
-    $('#md_modal').dialog({
+    $('#md_modal2').dialog({
       title: "{{Connexion à Ajax Systeme}}"
     }).load('index.php?v=d&modal=login&plugin=ajaxSystem').dialog('open')
   })
