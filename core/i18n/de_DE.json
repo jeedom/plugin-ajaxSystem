@@ -5,14 +5,7 @@
         "Se connecter": "Einloggen",
         "Synchronisation": "Synchronisation",
         "Synchroniser mes équipements": "Synchronisiere meine Ausrüstung",
-        "Mode local": "Lokalbetrieb",
-        "Aucun": "Keiner",
-        "SIA via démon": "SIA über Daemon",
-        "Configuration SIA": "SIA-Konfiguration",
-        "Port": "Hafen",
-        "Compte": "Konto",
-        "Clé de cryptage (longueur : 16)": "Verschlüsselungsschlüssel (Länge: 16)",
-        "Connexion à Ajax Systeme": "Verbindung zu Ajax Systeme",
+        "Connexion à Ajax Systeme": "Verbindung zum Ajax-System",
         "Synchronisation réussie": "Synchronisation erfolgreich"
     },
     "plugins\/ajaxSystem\/desktop\/modal\/login.php": {
@@ -76,22 +69,14 @@
         "Vous n\\'etes pas autorisé à effectuer cette action. Clef API invalide.": "Sie sind nicht berechtigt, diese Aktion auszuführen. Ungültiger API-Schlüssel",
         "Configuration OK": "Konfiguration OK"
     },
-    "plugins\/ajaxSystem\/core\/php\/jeeAjaxSystemSia.php": {
-        "Vous n\\'etes pas autorisé à effectuer cette action": "Sie sind nicht berechtigt, diese Aktion auszuführen"
-    },
     "plugins\/ajaxSystem\/core\/ajax\/ajaxSystem.ajax.php": {
         "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
         "Aucune méthode correspondante à : ": "Keine Methode entsprechend:"
     },
     "plugins\/ajaxSystem\/core\/class\/ajaxSystem.class.php": {
-        "Veuillez vérifier la configuration": "Bitte überprüfen Sie die Konfiguration",
         "Erreur lors de la requete à Ajax System : ": "Fehler beim Anfordern von Ajax System:",
         "Erreur lors de la mise à jour des données de :": "Fehler beim Aktualisieren der Daten von:",
-        "Impossible de mettre à jour les tokens d\\'accès, refresh token vide : ": "Zugriffstoken können nicht aktualisiert werden, Aktualisierungstoken leer:",
-        "SIA code": "SIA-Code",
-        "SIA Type": "SIA-Typ",
-        "SIA description": "SIA-Beschreibung",
-        "SIA concerns": "SIA-Anliegen"
+        "Impossible de mettre à jour les tokens d\\'accès, refresh token vide : ": "Zugriffstoken können nicht aktualisiert werden, Aktualisierungstoken leer:"
     },
     "info.json": {
         "Plugin servant à se connecter à une alarme Ajax": "Plugin zum Herstellen einer Verbindung mit einem Ajax-Alarm"

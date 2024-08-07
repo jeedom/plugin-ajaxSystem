@@ -37,54 +37,16 @@ if (!isConnect()) {
         <a class="btn btn-default" id="bt_syncWithAjaxSystem"><i class="fas fa-sync"></i> {{Synchroniser mes équipements}}</a>
       </div>
     </div>
-
-    <div class="form-group">
-      <label class="col-lg-3 control-label">{{Mode local}}</label>
-      <div class="col-lg-4">
-        <select id="sel_ajaxSystemLocalMode" class="configKey form-control" data-l1key="local_mode">
-          <option value="none">{{Aucun}}</option>
-          <option value="sia">{{SIA via démon}}</option>
-        </select>
-      </div>
-    </div>
-    <div class="local_mode sia" style="display:none;">
-      <legend>{{Configuration SIA}}</legend>
-      <div class="form-group">
-        <label class="col-lg-3 control-label">{{Port}}</label>
-        <div class="col-md-2">
-          <input class="configKey form-control" data-l1key="sia::port" />
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-lg-3 control-label">{{Compte}}</label>
-        <div class="col-md-2">
-          <input class="configKey form-control" data-l1key="sia::account" />
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-lg-3 control-label">{{Clé de cryptage (longueur : 16)}}</label>
-        <div class="col-md-2">
-          <input class="configKey form-control" data-l1key="sia::key" />
-        </div>
-      </div>
-    </div>
   </fieldset>
 </form>
 
 <script>
-  $('#sel_ajaxSystemLocalMode').off('change').on('change', function() {
-    $('.local_mode').hide();
-    if ($(this).value() != '') {
-      $('.local_mode.' + $(this).value()).show();
-    }
-  })
-
   $('#bt_loginToAjaxSystem').off('click').on('click', function() {
-    $('#md_modal').dialog({
+    $('#md_modal2').dialog({
       title: "{{Connexion à Ajax Systeme}}"
     }).load('index.php?v=d&modal=login&plugin=ajaxSystem').dialog('open')
   })
-
+  
   $('#bt_syncWithAjaxSystem').on('click', function() {
     $.ajax({
       type: "POST",

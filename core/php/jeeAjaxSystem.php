@@ -84,6 +84,9 @@ foreach ($datas['data'] as $data) {
       continue;
     }
     $ajaxSystem = ajaxSystem::byLogicalId($data['event']['sourceObjectId'], 'ajaxSystem');
+    if (!is_object($ajaxSystem) && isset($data['event']['hubId'])) {
+      $ajaxSystem = ajaxSystem::byLogicalId($data['event']['hubId'], 'ajaxSystem');
+    }
     if (!is_object($ajaxSystem)) {
       continue;
     }
