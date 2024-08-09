@@ -44,7 +44,7 @@ if (!isConnect()) {
   $('#bt_loginToAjaxSystem').off('click').on('click', function() {
      jeeDialog.dialog({
               id: 'jee_AjaxModal',
-              title: '{{Equipement MQTT transmis}}',
+              title: '{{Connexion de Jeedom à Ajax}}',
               width: '85vw',
               height: '51vw',
               top: '8vh',
