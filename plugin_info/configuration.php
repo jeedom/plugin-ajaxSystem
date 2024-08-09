@@ -42,9 +42,14 @@ if (!isConnect()) {
 
 <script>
   $('#bt_loginToAjaxSystem').off('click').on('click', function() {
-    $('#md_modal2').dialog({
-      title: "{{Connexion à Ajax Systeme}}"
-    }).load('index.php?v=d&modal=login&plugin=ajaxSystem').dialog('open')
+     jeeDialog.dialog({
+              id: 'jee_AjaxModal',
+              title: '{{Equipement MQTT transmis}}',
+              width: '85vw',
+              height: '51vw',
+              top: '8vh',
+              contentUrl: 'index.php?v=d&modal=login&plugin=ajaxSystem'
+      }) 
   })
   
   $('#bt_syncWithAjaxSystem').on('click', function() {
