@@ -2,6 +2,7 @@
     "changelog.md": {
         "Changelog Ajax Systems": "Changelog Ajax Systems",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "As a reminder, if there is no information on the update, it is because it concerns only the update of documentation, translation or text",
+        "07\/08\/2024": "07\/08\/2024",
         "Meilleurs gestion des evenements (si la source est l'utilisateur et non le hub": "Better event management (if the source is the user and not the hub",
         "Suppression de la partie SIA (trop compliqué a maintenir et marche que trop rarement": "Deletion of the SIA part (too complicated to maintain and only works too rarely",
         "Ajout support du module MotionCamPhod": "Added support for the MotionCamPhod module",

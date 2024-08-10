@@ -5,7 +5,7 @@
         "Se connecter": "Conectarse",
         "Synchronisation": "Sincronización",
         "Synchroniser mes équipements": "Sincronizar mi equipo",
-        "Connexion à Ajax Systeme": "Conexión al sistema Ajax",
+        "Connexion de Jeedom à Ajax": "Conectando Jeedom con Ajax",
         "Synchronisation réussie": "Sincronización exitosa"
     },
     "plugins\/ajaxSystem\/desktop\/modal\/login.php": {
