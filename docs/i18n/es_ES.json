@@ -2,6 +2,8 @@
     "changelog.md": {
         "Changelog Ajax Systems": "Registro de cambios de sistemas Ajax",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Como recordatorio, si no hay información sobre la actualización es porque se trata solo de la actualización de la documentación, la traducción o el texto",
+        "10\/08\/2024": "10\/08\/2024",
+        "Correction d'un soucis avec la fenetre de connexion à Ajax qui pouvait desfois apparaitre en dessous de la fenetre de configuration du plugin": "Se solucionó un problema con la ventana de conexión Ajax que a veces podía aparecer debajo de la ventana de configuración del complemento",
         "07\/08\/2024": "08\/07\/2024",
         "Meilleurs gestion des evenements (si la source est l'utilisateur et non le hub": "Mejor gestión de eventos (si la fuente es el usuario y no el centro)",
         "Suppression de la partie SIA (trop compliqué a maintenir et marche que trop rarement": "Eliminación de la parte SIA (demasiado complicada de mantener y sólo funciona muy raramente)",
