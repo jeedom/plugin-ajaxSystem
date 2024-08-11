@@ -233,24 +233,10 @@ class ajaxSystem extends eqLogic {
     if ($this->getConfiguration('applyDevice') != $this->getConfiguration('device')) {
       $this->applyModuleConfiguration();
     }
-    $cmd = $this->getCmd(null, 'sia_code');
-    if (is_object($cmd)) {
-      $cmd->remove();
-    }
-
-    $cmd = $this->getCmd(null, 'sia_type');
-    if (is_object($cmd)) {
-      $cmd->remove();
-    }
-    
-    $cmd = $this->getCmd(null, 'sia_description');
-    if (is_object($cmd)) {
-      $cmd->remove();
-    }
-
-    $cmd = $this->getCmd(null, 'sia_concerns');
-    if (is_object($cmd)) {
-      $cmd->remove();
+    foreach ($this->getCmd() as $cmd) {
+      if(strpos($cmd->getLogicalId(),'sia') !== false){
+        $cmd->remove();
+      }
     }
   }
 
