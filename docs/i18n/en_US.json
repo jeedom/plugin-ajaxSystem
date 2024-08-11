@@ -2,6 +2,7 @@
     "changelog.md": {
         "Changelog Ajax Systems": "Changelog Ajax Systems",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "As a reminder, if there is no information on the update, it is because it concerns only the update of documentation, translation or text",
+        "Meilleur nettoyage des commandes SIA": "Better cleaning of SIA controls",
         "10\/08\/2024": "10\/08\/2024",
         "Correction d'un soucis avec la fenetre de connexion à Ajax qui pouvait desfois apparaitre en dessous de la fenetre de configuration du plugin": "Fixed an issue with the Ajax login window that could sometimes appear below the plugin configuration window",
         "07\/08\/2024": "07\/08\/2024",
