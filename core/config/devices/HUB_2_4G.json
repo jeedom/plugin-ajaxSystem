@@ -56,7 +56,7 @@
       "isHistorized": 0,
       "logicalId": "gsmNetworkStatus"
     },
-	{
+	  {
       "name": "Intensité du signal cellulaire",
       "type": "info",
       "subtype": "string",
@@ -64,7 +64,7 @@
       "isHistorized": 0,
       "logicalId": "gsm::signalLevel"
     },
-	{
+	  {
       "name": "Type réseau GSM",
       "type": "info",
       "subtype": "string",
@@ -72,7 +72,7 @@
       "isHistorized": 0,
       "logicalId": "gsm::networkStatus"
     },
-	{
+	  {
       "name": "Données cellulaires actives",
       "type": "info",
       "subtype": "binary",
@@ -110,7 +110,7 @@
         "repeatEventManagement": "always"
       }
     },
-	{
+	  {
       "name": "Etat de la batterie",
       "type": "info",
       "subtype": "string",
@@ -121,7 +121,7 @@
         "repeatEventManagement": "always"
       }
     },
-	{
+	  {
       "name": "Batterie",
       "type": "info",
       "subtype": "numeric",
