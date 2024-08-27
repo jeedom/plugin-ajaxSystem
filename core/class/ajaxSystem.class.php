@@ -164,6 +164,7 @@ class ajaxSystem extends eqLogic {
       $eqLogic->setConfiguration('firmware', $hub_info['firmware']['version']);
       $eqLogic->setLogicalId($hub['hubId']);
       $eqLogic->save();
+      $eqLogic->refreshData();
 
       $devices = self::request('/user/{userId}/hubs/' . $hub['hubId'] . '/devices');
       log::add('ajaxSystem', 'debug', json_encode($devices));
@@ -185,6 +186,7 @@ class ajaxSystem extends eqLogic {
         $eqLogic->setConfiguration('firmware', $device_info['firmwareVersion']);
         $eqLogic->setLogicalId($device['id']);
         $eqLogic->save();
+        $eqLogic->refreshData();
       }
 
       $groups = self::request('/user/{userId}/hubs/' . $hub['hubId'] . '/groups');
@@ -204,6 +206,7 @@ class ajaxSystem extends eqLogic {
         $eqLogic->setConfiguration('device', 'group');
         $eqLogic->setLogicalId($group['id']);
         $eqLogic->save();
+        $eqLogic->refreshData();
       }
     }
   }
