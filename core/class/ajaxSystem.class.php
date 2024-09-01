@@ -164,6 +164,7 @@ class ajaxSystem extends eqLogic {
       $eqLogic->setConfiguration('firmware', $hub_info['firmware']['version']);
       $eqLogic->setLogicalId($hub['hubId']);
       $eqLogic->save();
+      $eqLogic->refreshData();
 
       $devices = self::request('/user/{userId}/hubs/' . $hub['hubId'] . '/devices');
       log::add('ajaxSystem', 'debug', json_encode($devices));
@@ -185,6 +186,7 @@ class ajaxSystem extends eqLogic {
         $eqLogic->setConfiguration('firmware', $device_info['firmwareVersion']);
         $eqLogic->setLogicalId($device['id']);
         $eqLogic->save();
+        $eqLogic->refreshData();
       }
 
       $groups = self::request('/user/{userId}/hubs/' . $hub['hubId'] . '/groups');
@@ -204,6 +206,7 @@ class ajaxSystem extends eqLogic {
         $eqLogic->setConfiguration('device', 'group');
         $eqLogic->setLogicalId($group['id']);
         $eqLogic->save();
+        $eqLogic->refreshData();
       }
     }
   }
@@ -233,24 +236,10 @@ class ajaxSystem extends eqLogic {
     if ($this->getConfiguration('applyDevice') != $this->getConfiguration('device')) {
       $this->applyModuleConfiguration();
     }
-    $cmd = $this->getCmd(null, 'sia_code');
-    if (is_object($cmd)) {
-      $cmd->remove();
-    }
-
-    $cmd = $this->getCmd(null, 'sia_type');
-    if (is_object($cmd)) {
-      $cmd->remove();
-    }
-    
-    $cmd = $this->getCmd(null, 'sia_description');
-    if (is_object($cmd)) {
-      $cmd->remove();
-    }
-
-    $cmd = $this->getCmd(null, 'sia_concerns');
-    if (is_object($cmd)) {
-      $cmd->remove();
+    foreach ($this->getCmd() as $cmd) {
+      if(strpos($cmd->getLogicalId(),'sia') !== false){
+        $cmd->remove();
+      }
     }
   }
 
@@ -292,7 +281,7 @@ class ajaxSystem extends eqLogic {
     }
     if (isset($datas['firmwareVersion']) && $datas['firmwareVersion'] != $this->getConfiguration('firmware')) {
       $this->setConfiguration('firmware', $datas['firmwareVersion']);
-      $this->save();
+      $this->save(true);
     }
     foreach ($this->getCmd('info') as $cmd) {
       $paths = explode('::', $cmd->getLogicalId());
@@ -305,7 +294,6 @@ class ajaxSystem extends eqLogic {
       }
       $this->checkAndUpdateCmd($cmd, $value);
     }
-
     //Refresh batterie depuis trame de synchronisation / refresh
     $batteryChargeLevel = '-1';
     if (isset($datas['batteryChargeLevelPercentage'])) {
@@ -314,17 +302,11 @@ class ajaxSystem extends eqLogic {
     if (isset($datas['battery']) && isset($datas['battery']['chargeLevelPercentage'])) {
       $batteryChargeLevel = $datas['battery']['chargeLevelPercentage'];
     }
-
     //Si niveau de charge numérique disponible, mise à jour de l'information
     if($batteryChargeLevel != '-1'){
       //Au niveau de l'équipement
       $this->batteryStatus($batteryChargeLevel);
-
-      //Au niveau de la commande spécifique si elle existe
-      $batteryCmd = $this->getCmd('info', 'battery::chargeLevelPercentage');
-      if(is_object($batteryCmd)){
-        $this->checkAndUpdateCmd('battery::chargeLevelPercentage', $value);
-      }
+      $this->checkAndUpdateCmd('battery::chargeLevelPercentage', $value);
     }
   }
 
