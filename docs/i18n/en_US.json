@@ -2,6 +2,7 @@
     "changelog.md": {
         "Changelog Ajax Systems": "Changelog Ajax Systems",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "As a reminder, if there is no information on the update, it is because it concerns only the update of documentation, translation or text",
+        "01\/09\/2024": "01\/09\/2024",
         "Meilleur nettoyage des commandes SIA": "Better cleaning of SIA controls",
         "Meilleur gestion des evénements (les évenements de type alarm sont maintenant remonté sur le hub": "Better event management (alarm type events are now sent to the hub",
         "10\/08\/2024": "10\/08\/2024",
