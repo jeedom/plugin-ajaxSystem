@@ -2,6 +2,9 @@
     "changelog.md": {
         "Changelog Ajax Systems": "Sistemas Ajax de registro de mudanças",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Recorde-se que, se não existe informação sobre a atualização, é porque se trata apenas de atualização de documentação, tradução ou texto",
+        "07\/09\/2024": "09\/07\/2024",
+        "Version minimal du core 4.4": "Versão mínima do núcleo 4.4",
+        "Correction de bug sur certaine configuration d'équipement": "Correção de bug em determinadas configurações de equipamentos",
         "01\/09\/2024": "01\/09\/2024",
         "Meilleur nettoyage des commandes SIA": "Melhor limpeza dos pedidos da SIA",
         "Meilleur gestion des evénements (les évenements de type alarm sont maintenant remonté sur le hub": "Melhor gerenciamento de eventos (os eventos do tipo alarme agora são relatados no hub",
