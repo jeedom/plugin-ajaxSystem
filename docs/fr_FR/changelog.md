@@ -7,6 +7,7 @@
 # 07/09/2024
 
 - Version minimal du core 4.4
+- Correction de bug sur certaine configuration d'équipement
 
 # 01/09/2024
 
