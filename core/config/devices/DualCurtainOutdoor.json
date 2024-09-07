@@ -78,13 +78,7 @@
       "type": "info",
       "subtype": "string",
       "isVisible": 1,
-      "isHistorized": 0,
-      "logicalId": "signalLevel"
-    },
-      "template" : {
-        "dashboard" : "presence",
-        "mobile" : "presence"
-      }
+      "isHistorized": 0
     }
   ]
 }

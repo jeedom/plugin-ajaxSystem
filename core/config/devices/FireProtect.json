@@ -75,11 +75,6 @@
       "isVisible": 0,
       "isHistorized": 0,
       "logicalId": "signalLevel"
-    },
-      "template":{
-        "dashboard" : "heat",
-        "mobile" : "heat"
-      }
     }
   ]
 }
