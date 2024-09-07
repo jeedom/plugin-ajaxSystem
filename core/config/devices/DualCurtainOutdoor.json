@@ -79,8 +79,7 @@
       "subtype": "string",
       "isVisible": 1,
       "isHistorized": 0,
-      "logicalId": "signalLevel"
-    },
+      "logicalId": "signalLevel",
       "template" : {
         "dashboard" : "presence",
         "mobile" : "presence"
