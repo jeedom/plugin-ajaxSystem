@@ -1,0 +1,45 @@
+{
+    "name" : "Water stop",
+    "commands" : [
+        {
+            "name": "Source evenement",
+            "type": "info",
+            "subtype": "string",
+            "isVisible": 0,
+            "isHistorized": 0,
+            "logicalId": "sourceObjectName"
+        },
+        {
+            "name": "Evenement",
+            "type": "info",
+            "subtype": "string",
+            "isVisible": 0,
+            "isHistorized": 0,
+            "logicalId": "event"
+        },
+        {
+            "name": "Code evenement",
+            "type": "info",
+            "subtype": "string",
+            "isVisible": 0,
+            "isHistorized": 0,
+            "logicalId": "eventCode"
+        },
+        {
+            "name": "On",
+            "type": "action",
+            "subtype": "other",
+            "isVisible": 1,
+            "isHistorized": 0,
+            "logicalId": "SWITCH_ON"
+        },
+        {
+            "name": "Off",
+            "type": "action",
+            "subtype": "other",
+            "isVisible": 1,
+            "isHistorized": 0,
+            "logicalId": "SWITCH_OFF"
+        }
+    ]
+  }

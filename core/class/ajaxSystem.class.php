@@ -67,12 +67,14 @@ class ajaxSystem extends eqLogic {
     if ($_type == 'PUT') {
       $request_http->setPut(json_encode($_data));
     }
-    $return = json_decode($request_http->exec(30, 1), true);
+    $return = json_decode($request_http->exec(60, 3), true);
     $return = is_json($return, $return);
-    if (isset($return['error'])) {
-      throw new \Exception(__('Erreur lors de la requete à Ajax System : ', __FILE__) . json_encode($return));
+    if (isset($return['error']) || isset($return['errors'])) {
+      sleep(rand(1,30));
+      $return = json_decode($request_http->exec(60, 3), true);
+      $return = is_json($return, $return);
     }
-    if (isset($return['errors'])) {
+    if (isset($return['error']) || isset($return['errors'])) {
       throw new \Exception(__('Erreur lors de la requete à Ajax System : ', __FILE__) . json_encode($return));
     }
     if (isset($return['body'])) {
