@@ -1,0 +1,176 @@
+{
+  "name" : "Superior Hub Hybrid (4G)",
+  "commands" : [
+    {
+      "name": "Etat",
+      "type": "info",
+      "subtype": "string",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "state",
+      "template":{
+        "dashboard":"ajaxSystem::state",
+        "mobile":"ajaxSystem::state"
+      }
+    },
+    {
+      "name": "Source evenement",
+      "type": "info",
+      "subtype": "string",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "sourceObjectName"
+    },
+    {
+      "name": "Evenement",
+      "type": "info",
+      "subtype": "string",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "event"
+    },
+    {
+      "name": "Code evenement",
+      "type": "info",
+      "subtype": "string",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "eventCode"
+    },
+    {
+      "name": "Trafiqué",
+      "type": "info",
+      "subtype": "binary",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "tampered",
+      "configuration": {
+        "repeatEventManagement": "always"
+      }
+    },
+    {
+      "name": "GSM",
+      "type": "info",
+      "subtype": "binary",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "gsmNetworkStatus"
+    },
+	{
+      "name": "Intensité du signal cellulaire",
+      "type": "info",
+      "subtype": "string",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "gsm::signalLevel"
+    },
+	{
+      "name": "Type réseau GSM",
+      "type": "info",
+      "subtype": "string",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "gsm::networkStatus"
+    },
+	{
+      "name": "Données cellulaires actives",
+      "type": "info",
+      "subtype": "binary",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "gsm::gprsEnabled"
+    },
+    {
+      "name": "CMS",
+      "type": "info",
+      "subtype": "binary",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "CMSActiveChannels"
+    },
+    {
+      "name": "Ethernet",
+      "type": "info",
+      "subtype": "binary",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "ethernet::enabled",
+      "configuration": {
+        "repeatEventManagement": "always"
+      }
+    },
+    {
+      "name": "Alimentation secteur",
+      "type": "info",
+      "subtype": "binary",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "externallyPowered",
+      "configuration": {
+        "repeatEventManagement": "always"
+      }
+    },
+	{
+      "name": "Etat de la batterie",
+      "type": "info",
+      "subtype": "string",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "battery::state",
+      "configuration": {
+        "repeatEventManagement": "always"
+      }
+    },
+	{
+      "name": "Batterie",
+      "type": "info",
+      "subtype": "numeric",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "battery::chargeLevelPercentage",
+      "configuration": {
+        "repeatEventManagement": "always"
+      }
+    },
+    {
+      "name": "Armement",
+      "type": "action",
+      "subtype": "other",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "ARM"
+    },
+    {
+      "name": "Mode nuit",
+      "type": "action",
+      "subtype": "other",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "NIGHT_MODE"
+    }, 
+    {
+      "name": "Desarmement",
+      "type": "action",
+      "subtype": "other",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "logicalId": "DISARM"
+    },
+    {
+      "name": "Panic",
+      "type": "action",
+      "subtype": "other",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "PANIC"
+    },
+    {
+      "name": "Arret detection incendie",
+      "type": "action",
+      "subtype": "other",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "muteFireDetectors"
+    }
+  ]
+}
