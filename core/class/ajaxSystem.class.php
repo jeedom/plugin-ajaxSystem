@@ -33,8 +33,11 @@ class ajaxSystem extends eqLogic {
       'test' => array(
         array('operation' => '#value# == "ARMED"', 'state_light' => '<i class="fas fa-lock"></i>'),
         array('operation' => '#value# == "DISARMED"', 'state_light' => '<i class="fas fa-lock-open"></i>'),
+        array('operation' => '#value# == "ARMED_NIGHT_MODE_OFF"', 'state_light' => '<i class="fas fa-lock"></i>'),
+        array('operation' => '#value# == "DISARMED_NIGHT_MODE_ON"', 'state_light' => '<i class="fas fa-moon"></i>'),
         array('operation' => '#value# == "DISARMED_NIGHT_MODE_OFF"', 'state_light' => '<i class="fas fa-lock-open"></i>'),
         array('operation' => '#value# == "NIGHT_MODE"', 'state_light' => '<i class="fas fa-moon"></i>'),
+        array('operation' => '#value# == "ARMED_NIGHT_MODE_ON"', 'state_light' => '<i class="fas fa-lock"></i>'),
         array('operation' => '#value# == "PANIC"', 'state_light' => '<i class="fas fa-exclamation-circle"></i>')
       )
     );
