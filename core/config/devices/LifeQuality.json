@@ -1,6 +1,59 @@
 {
-    "name" : "Life Quality",
-    "commands" : [
-       
-    ]
-  }
+  "name": "Life Quality",
+  "commands": [
+    {
+      "name": "Temperature",
+      "type": "info",
+      "subtype": "numeric",
+      "isVisible": 1,
+      "isHistorized": 1,
+      "unite": "°C",
+      "generic_type": "TEMPERATURE",
+      "logicalId": "actualTemperature",
+      "configuration": {
+        "calculValueOffset": "#value# / 10"
+      }
+    },
+    {
+      "name": "Humidity",
+      "type": "info",
+      "subtype": "numeric",
+      "isVisible": 1,
+      "isHistorized": 1,
+      "unite": "%",
+      "generic_type": "HUMIDITY",
+      "logicalId": "actualHumidity",
+      "configuration": {
+        "calculValueOffset": "#value# / 10"
+      }
+    },
+    {
+      "name": "CO2",
+      "type": "info",
+      "subtype": "numeric",
+      "isVisible": 1,
+      "isHistorized": 1,
+      "unite": "ppm",
+      "generic_type": "CO2",
+      "logicalId": "actualCO2"
+    },
+    {
+      "name": "Battery",
+      "type": "info",
+      "subtype": "numeric",
+      "isVisible": 1,
+      "isHistorized": 0,
+      "unite": "%",
+      "generic_type": "BATTERY",
+      "logicalId": "batteryChargeLevelPercentage"
+    },
+    {
+      "name": "Signal",
+      "type": "info",
+      "subtype": "string",
+      "isVisible": 0,
+      "isHistorized": 0,
+      "logicalId": "signalLevel"
+    }
+  ]
+}
