@@ -64,7 +64,7 @@
         "Ajax Système": "Ajax Système",
         "Configuration": "Configuration",
         "IMPORTANT": "IMPORTANT",
-        "Pour avoir une remontée en temps réel il faut ABSOLUMENT que votre Jeedom soit accessible de l'extérieure (URL d'accès externe utilisée": "Pour avoir une remontée en temps réel il faut ABSOLUMENT que votre Jeedom soit accessible de l'extérieure (URL d'accès externe utilisée",
+        "Pour avoir une remontée en temps réel il faut ABSOLUMENT que votre Jeedom soit accessible de l'extérieure (URL d'accès externe utilisée) en HTTPS avec un certificat valide": "Pour avoir une remontée en temps réel il faut ABSOLUMENT que votre Jeedom soit accessible de l'extérieure (URL d'accès externe utilisée) en HTTPS avec un certificat valide",
         "La configuration du plugin est très simple et se deroule en 2 étapes": "La configuration du plugin est très simple et se deroule en 2 étapes",
         "mise en place du lien entre votre jeedom et votre alarme": "mise en place du lien entre votre jeedom et votre alarme",
         "ajout d'un partage par mail pour la remontée des événements": "ajout d'un partage par mail pour la remontée des événements",

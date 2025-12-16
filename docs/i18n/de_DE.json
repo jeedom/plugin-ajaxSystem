@@ -2,7 +2,7 @@
     "changelog.md": {
         "Changelog Ajax Systems": "Änderungsprotokoll Ajax-Systeme",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Zur Erinnerung: Wenn keine Informationen zur Aktualisierung vorliegen, liegt dies daran, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt",
-        "25\/11\/2025": "",
+        "25\/11\/2025": "25\/11\/2025",
         "Ajout du Fire Protect 2": "Ajout du Fire Protect 2",
         "Ajout du Fire Protect 2 plus": "Ajout du Fire Protect 2 plus",
         "02\/07\/2025": "02\/07\/2025",
@@ -68,7 +68,7 @@
     },
     "index.md": {
         "Ajax Système": "Ajax-System",
-        "Pour avoir une remontée en temps réel il faut ABSOLUMENT que votre Jeedom soit accessible de l'extérieure (URL d'accès externe utilisée": "Um ein Echtzeit-Feedback zu erhalten, ist es UNBEDINGT notwendig, dass Ihr Jeedom von außen zugänglich ist (externe Zugriffs-URL verwendet .)",
+        "Pour avoir une remontée en temps réel il faut ABSOLUMENT que votre Jeedom soit accessible de l'extérieure (URL d'accès externe utilisée) en HTTPS avec un certificat valide": "",
         "La configuration du plugin est très simple et se deroule en 2 étapes": "Die Konfiguration des Plugins ist sehr einfach und erfolgt in 2 Schritten",
         "mise en place du lien entre votre jeedom et votre alarme": "Herstellen der Verbindung zwischen Ihrer Freiheit und Ihrem Alarm",
         "ajout d'un partage par mail pour la remontée des événements": "Hinzufügen einer E-Mail-Freigabe zum Melden von Ereignissen",
