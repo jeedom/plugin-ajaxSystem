@@ -180,7 +180,11 @@ class ajaxSystem extends eqLogic {
           $eqLogic = new ajaxSystem();
           $eqLogic->setEqType_name('ajaxSystem');
           $eqLogic->setIsEnable(1);
-          $eqLogic->setName($device_info['deviceName']);
+          if($device_info['deviceName'] == ''){
+             $eqLogic->setName($device_info['deviceType'].' - '.config::genKey(24));
+          }else{
+             $eqLogic->setName($device_info['deviceName']);
+          }
           $eqLogic->setCategory('security', 1);
           $eqLogic->setIsVisible(1);
         }
@@ -202,6 +206,11 @@ class ajaxSystem extends eqLogic {
           $eqLogic = new ajaxSystem();
           $eqLogic->setEqType_name('ajaxSystem');
           $eqLogic->setIsEnable(1);
+           if($group['groupName'] == ''){
+             $eqLogic->setName('Groupe - '.config::genKey(24));
+          }else{
+             $eqLogic->setName($group['groupName']);
+          }
           $eqLogic->setName($group['groupName']);
           $eqLogic->setCategory('security', 1);
           $eqLogic->setIsVisible(1);
