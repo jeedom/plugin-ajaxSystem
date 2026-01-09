@@ -175,16 +175,15 @@ class ajaxSystem extends eqLogic {
       log::add('ajaxSystem', 'debug', json_encode($devices));
       foreach ($devices as $device) {
         $device_info = self::request('/user/{userId}/hubs/' . $hub['hubId'] . '/devices/' . $device['id']);
+        if($device_info['deviceName'] == ''){
+          continue;
+        }
         $eqLogic = eqLogic::byLogicalId($device['id'], 'ajaxSystem');
         if (!is_object($eqLogic)) {
           $eqLogic = new ajaxSystem();
           $eqLogic->setEqType_name('ajaxSystem');
           $eqLogic->setIsEnable(1);
-          if($device_info['deviceName'] == ''){
-             $eqLogic->setName($device_info['deviceType'].' - '.config::genKey(24));
-          }else{
-             $eqLogic->setName($device_info['deviceName']);
-          }
+          $eqLogic->setName($device_info['deviceName']);
           $eqLogic->setCategory('security', 1);
           $eqLogic->setIsVisible(1);
         }
@@ -201,16 +200,14 @@ class ajaxSystem extends eqLogic {
       $groups = self::request('/user/{userId}/hubs/' . $hub['hubId'] . '/groups');
       log::add('ajaxSystem', 'debug', json_encode($groups));
       foreach ($groups as $group) {
+        if($group['groupName'] == ''){
+          continue;
+        }
         $eqLogic = eqLogic::byLogicalId($group['id'], 'ajaxSystem');
         if (!is_object($eqLogic)) {
           $eqLogic = new ajaxSystem();
           $eqLogic->setEqType_name('ajaxSystem');
           $eqLogic->setIsEnable(1);
-           if($group['groupName'] == ''){
-             $eqLogic->setName('Groupe - '.config::genKey(24));
-          }else{
-             $eqLogic->setName($group['groupName']);
-          }
           $eqLogic->setName($group['groupName']);
           $eqLogic->setCategory('security', 1);
           $eqLogic->setIsVisible(1);
