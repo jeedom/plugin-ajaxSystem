@@ -174,11 +174,15 @@ class ajaxSystem extends eqLogic {
       $devices = self::request('/user/{userId}/hubs/' . $hub['hubId'] . '/devices');
       log::add('ajaxSystem', 'debug', json_encode($devices));
       foreach ($devices as $device) {
-        $device_info = self::request('/user/{userId}/hubs/' . $hub['hubId'] . '/devices/' . $device['id']);
-        if($device_info['deviceName'] == ''){
-          continue;
+        if (!isset($device['id'])) {
+              continue;
         }
         $eqLogic = eqLogic::byLogicalId($device['id'], 'ajaxSystem');
+        $device_info = self::request('/user/{userId}/hubs/' . $hub['hubId'] . '/devices/' . $device['id']);
+        usleep(200000);
+        if(!isset($device_info['deviceName']) || $device_info['deviceName'] == ''){
+          continue;
+        }
         if (!is_object($eqLogic)) {
           $eqLogic = new ajaxSystem();
           $eqLogic->setEqType_name('ajaxSystem');
@@ -194,7 +198,7 @@ class ajaxSystem extends eqLogic {
         $eqLogic->setConfiguration('firmware', $device_info['firmwareVersion']);
         $eqLogic->setLogicalId($device['id']);
         $eqLogic->save();
-        $eqLogic->refreshData();
+        $eqLogic->refreshData($device_info);
       }
 
       $groups = self::request('/user/{userId}/hubs/' . $hub['hubId'] . '/groups');
@@ -217,7 +221,7 @@ class ajaxSystem extends eqLogic {
         $eqLogic->setConfiguration('device', 'group');
         $eqLogic->setLogicalId($group['id']);
         $eqLogic->save();
-        $eqLogic->refreshData();
+        $eqLogic->refreshData($group);
       }
     }
   }
@@ -283,12 +287,16 @@ class ajaxSystem extends eqLogic {
     return false;
   }
 
-  public function refreshData() {
-    if ($this->getConfiguration('type') == 'hub') {
-      $datas = self::request('/user/{userId}/hubs/' . $this->getLogicalId());
-    }
-    if ($this->getConfiguration('type') == 'device') {
-      $datas = self::request('/user/{userId}/hubs/' . $this->getConfiguration('hub_id') . '/devices/' . $this->getLogicalId());
+  public function refreshData($_data = null) {
+    if($_data == null){
+      if ($this->getConfiguration('type') == 'hub') {
+        $datas = self::request('/user/{userId}/hubs/' . $this->getLogicalId());
+      }
+      if ($this->getConfiguration('type') == 'device') {
+        $datas = self::request('/user/{userId}/hubs/' . $this->getConfiguration('hub_id') . '/devices/' . $this->getLogicalId());
+      }
+    }else{
+      $datas = $_data;
     }
     if (isset($datas['firmwareVersion']) && $datas['firmwareVersion'] != $this->getConfiguration('firmware')) {
       $this->setConfiguration('firmware', $datas['firmwareVersion']);
