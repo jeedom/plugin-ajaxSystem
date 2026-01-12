@@ -2,8 +2,9 @@
     "changelog.md": {
         "Changelog Ajax Systems": "Registro de cambios de sistemas Ajax",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Como recordatorio, si no hay información sobre la actualización es porque se trata solo de la actualización de la documentación, la traducción o el texto",
-        "Ajout du Fire Protect 2": "",
-        "Ajout du Fire Protect 2 plus": "",
+        "25\/11\/2025": "25\/11\/2025",
+        "Ajout du Fire Protect 2": "Ajout du Fire Protect 2",
+        "Ajout du Fire Protect 2 plus": "Ajout du Fire Protect 2 plus",
         "02\/07\/2025": "02\/07\/2025",
         "Ajout du hub Superior Hub Hybrid (4G": "Ajout du hub Superior Hub Hybrid (4G",
         "17\/06\/2025": "17\/06\/2025",
@@ -67,7 +68,7 @@
     },
     "index.md": {
         "Ajax Système": "Sistema Ajax",
-        "Pour avoir une remontée en temps réel il faut ABSOLUMENT que votre Jeedom soit accessible de l'extérieure (URL d'accès externe utilisée": "Para tener una retroalimentación en tiempo real, es ABSOLUTAMENTE necesario que su Jeedom sea accesible desde el exterior (URL de acceso externo utilizada",
+        "Pour avoir une remontée en temps réel il faut ABSOLUMENT que votre Jeedom soit accessible de l'extérieure (URL d'accès externe utilisée) en HTTPS avec un certificat valide": "Pour avoir une remontée en temps réel il faut ABSOLUMENT que votre Jeedom soit accessible de l'extérieure (URL d'accès externe utilisée) en HTTPS avec un certificat valide",
         "La configuration du plugin est très simple et se deroule en 2 étapes": "La configuración del complemento es muy simple y se realiza en 2 pasos",
         "mise en place du lien entre votre jeedom et votre alarme": "configurando el enlace entre tu libertad y tu alarma",
         "ajout d'un partage par mail pour la remontée des événements": "adición de un correo electrónico para compartir para informar eventos",
