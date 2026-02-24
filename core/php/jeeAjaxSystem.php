@@ -70,6 +70,26 @@ foreach ($datas['data'] as $data) {
       if ($convert_key == 'realState') {
         $value = ($value == 0) ? 1 : 0;
       }
+      if($ajaxSystem->getConfiguration('device') == 'LightSwitchTwoWay' && $key == 'channelStatus'){
+          switch ($value) {
+              case 0:
+                  $ajaxSystem->checkAndUpdateCmd('channelStatus_1', 0);
+                  $ajaxSystem->checkAndUpdateCmd('channelStatus_2', 0);
+                  break;
+              case 1:
+                  $ajaxSystem->checkAndUpdateCmd('channelStatus_1', 1);
+                  $ajaxSystem->checkAndUpdateCmd('channelStatus_2', 0);
+                  break;
+              case 2:
+                  $ajaxSystem->checkAndUpdateCmd('channelStatus_1', 0);
+                  $ajaxSystem->checkAndUpdateCmd('channelStatus_2', 1);
+                  break;
+              case 3:
+                  $ajaxSystem->checkAndUpdateCmd('channelStatus_1', 1);
+                  $ajaxSystem->checkAndUpdateCmd('channelStatus_2', 1);
+                  break;
+          }
+      }
       $ajaxSystem->checkAndUpdateCmd($convert_key, $value);
       if ($ajaxSystem->getConfiguration('device') == 'Socket') {
         $current = $ajaxSystem->getCmd('info', 'currentMA');
