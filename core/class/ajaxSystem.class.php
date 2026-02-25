@@ -385,6 +385,10 @@ class ajaxSystemCmd extends cmd {
         'command' => $this->getLogicalId(),
         'deviceType' => $eqLogic->getConfiguration('device')
       );
+      if($this->getConfiguration('AdditionalParam',null) != null){
+        $command['AdditionalParam'] = $this->getConfiguration('AdditionalParam',null);
+      }
+      log::add('ajaxSystem','debug','Command send to ajax : '.json_encode($command));
       ajaxSystem::request('/user/{userId}/hubs/' . $eqLogic->getConfiguration('hub_id') . '/devices/' . $eqLogic->getLogicalId() . '/command', $command, 'POST');
     } else if ($eqLogic->getConfiguration('type') == 'group') {
       if ($this->getLogicalId() == 'ARM') {
