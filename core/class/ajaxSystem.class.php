@@ -391,6 +391,12 @@ class ajaxSystemCmd extends cmd {
       if(!isset($command['command']) || $command['command'] == ''){
         $command['command'] = $this->getLogicalId();
       }
+      if(isset(explode(" ", $this->getLogicalId())[1]) && explode(" ", $this->getLogicalId())[1] != ""){
+          if(!isset($command['AdditionalParam'])){
+            $command['AdditionalParam'] = array();
+          }
+          $command['AdditionalParam']['ChannelsAdditionalParam'] = "CHANNEL_".explode(" ", $this->getLogicalId())[1];
+      }
       log::add('ajaxSystem','debug','Command send to ajax : '.json_encode($command));
       ajaxSystem::request('/user/{userId}/hubs/' . $eqLogic->getConfiguration('hub_id') . '/devices/' . $eqLogic->getLogicalId() . '/command', $command, 'POST');
     } else if ($eqLogic->getConfiguration('type') == 'group') {

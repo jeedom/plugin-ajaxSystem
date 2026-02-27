@@ -88,11 +88,6 @@
         "template":{
           "dashboard" : "prise",
           "mobile" : "prise"
-        },
-        "configuration" :{
-          "AdditionalParam" : {
-            "ChannelsAdditionalParam" : "CHANNEL_2"
-          }
         }
       },
       {
@@ -106,11 +101,6 @@
         "template":{
           "dashboard" : "prise",
           "mobile" : "prise"
-        },
-        "configuration" :{
-          "AdditionalParam" : {
-            "ChannelsAdditionalParam" : "CHANNEL_2"
-          }
         }
       }
     ]
