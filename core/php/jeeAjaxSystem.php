@@ -70,7 +70,7 @@ foreach ($datas['data'] as $data) {
       if ($convert_key == 'realState') {
         $value = ($value == 0) ? 1 : 0;
       }
-      if($ajaxSystem->getConfiguration('device') == 'LightSwitchTwoChannelTwoWay' && $key == 'channelStatus'){
+      if(in_array($ajaxSystem->getConfiguration('device'),array('LightSwitchTwoChannelTwoWay','LightSwitchTwoGang'))  && $key == 'channelStatus'){
           switch ($value) {
               case 0:
                   $ajaxSystem->checkAndUpdateCmd('channelStatus_1', 0);
