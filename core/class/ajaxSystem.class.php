@@ -395,7 +395,7 @@ class ajaxSystemCmd extends cmd {
           if(!isset($command['AdditionalParam'])){
             $command['AdditionalParam'] = array();
           }
-          $command['AdditionalParam'][] = array(
+          $command['AdditionalParam'] = array(
             'additionalParamType' => 'CHANNELS',
             'channels' => array("CHANNEL_".explode(" ", $this->getLogicalId())[1])
           );
