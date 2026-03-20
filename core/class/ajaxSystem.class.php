@@ -203,25 +203,40 @@ class ajaxSystem extends eqLogic {
 
       $groups = self::request('/user/{userId}/hubs/' . $hub['hubId'] . '/groups');
       log::add('ajaxSystem', 'debug', json_encode($groups));
-      foreach ($groups as $group) {
-        if($group['groupName'] == ''){
-          continue;
+      if (!is_array($groups)) {
+        log::add('ajaxSystem', 'warning', __('Impossible de récupérer les groupes pour le hub ', __FILE__) . $hub['hubId'] . ' : ' . json_encode($groups));
+      } else {
+        foreach ($groups as $group) {
+          if($group['groupName'] == ''){
+            continue;
+          }
+          $groupLogicalId = $hub['hubId'] . '_' . $group['id'];
+          $eqLogic = eqLogic::byLogicalId($groupLogicalId, 'ajaxSystem');
+          // Migration: check for old-style logicalId without hub prefix
+          if (!is_object($eqLogic)) {
+            $eqLogic = eqLogic::byLogicalId($group['id'], 'ajaxSystem');
+            if (is_object($eqLogic) && $eqLogic->getConfiguration('type') == 'group') {
+              log::add('ajaxSystem', 'info', __('Migration du groupe ', __FILE__) . $group['groupName'] . ' vers le nouveau logicalId ' . $groupLogicalId);
+            } else {
+              $eqLogic = null;
+            }
+          }
+          if (!is_object($eqLogic)) {
+            $eqLogic = new ajaxSystem();
+            $eqLogic->setEqType_name('ajaxSystem');
+            $eqLogic->setIsEnable(1);
+            $eqLogic->setName($group['groupName']);
+            $eqLogic->setCategory('security', 1);
+            $eqLogic->setIsVisible(1);
+          }
+          $eqLogic->setConfiguration('hub_id', $hub['hubId']);
+          $eqLogic->setConfiguration('type', 'group');
+          $eqLogic->setConfiguration('device', 'group');
+          $eqLogic->setConfiguration('group_id', $group['id']);
+          $eqLogic->setLogicalId($groupLogicalId);
+          $eqLogic->save();
+          $eqLogic->refreshData($group);
         }
-        $eqLogic = eqLogic::byLogicalId($group['id'], 'ajaxSystem');
-        if (!is_object($eqLogic)) {
-          $eqLogic = new ajaxSystem();
-          $eqLogic->setEqType_name('ajaxSystem');
-          $eqLogic->setIsEnable(1);
-          $eqLogic->setName($group['groupName']);
-          $eqLogic->setCategory('security', 1);
-          $eqLogic->setIsVisible(1);
-        }
-        $eqLogic->setConfiguration('hub_id', $hub['hubId']);
-        $eqLogic->setConfiguration('type', 'group');
-        $eqLogic->setConfiguration('device', 'group');
-        $eqLogic->setLogicalId($group['id']);
-        $eqLogic->save();
-        $eqLogic->refreshData($group);
       }
     }
   }
@@ -294,6 +309,22 @@ class ajaxSystem extends eqLogic {
       }
       if ($this->getConfiguration('type') == 'device') {
         $datas = self::request('/user/{userId}/hubs/' . $this->getConfiguration('hub_id') . '/devices/' . $this->getLogicalId());
+      }
+      if ($this->getConfiguration('type') == 'group') {
+        $groupId = $this->getConfiguration('group_id', $this->getLogicalId());
+        $allGroups = self::request('/user/{userId}/hubs/' . $this->getConfiguration('hub_id') . '/groups');
+        $datas = null;
+        if (is_array($allGroups)) {
+          foreach ($allGroups as $g) {
+            if (isset($g['id']) && $g['id'] == $groupId) {
+              $datas = $g;
+              break;
+            }
+          }
+        }
+        if ($datas === null) {
+          return;
+        }
       }
     }else{
       $datas = $_data;
@@ -403,12 +434,13 @@ class ajaxSystemCmd extends cmd {
       log::add('ajaxSystem','debug','Command send to ajax : '.json_encode($command));
       ajaxSystem::request('/user/{userId}/hubs/' . $eqLogic->getConfiguration('hub_id') . '/devices/' . $eqLogic->getLogicalId() . '/command', $command, 'POST');
     } else if ($eqLogic->getConfiguration('type') == 'group') {
+      $groupId = $eqLogic->getConfiguration('group_id', $eqLogic->getLogicalId());
       if ($this->getLogicalId() == 'ARM') {
-        ajaxSystem::request('/user/{userId}/hubs/' . $eqLogic->getConfiguration('hub_id') . '/groups/' . $eqLogic->getLogicalId()  . '/commands/arming', array('command' => 'ARM', 'ignoreProblems' => true), 'PUT');
+        ajaxSystem::request('/user/{userId}/hubs/' . $eqLogic->getConfiguration('hub_id') . '/groups/' . $groupId  . '/commands/arming', array('command' => 'ARM', 'ignoreProblems' => true), 'PUT');
       } else if ($this->getLogicalId() == 'DISARM') {
-        ajaxSystem::request('/user/{userId}/hubs/' . $eqLogic->getConfiguration('hub_id') . '/groups/' . $eqLogic->getLogicalId() . '/commands/arming', array('command' => 'DISARM', 'ignoreProblems' => true), 'PUT');
+        ajaxSystem::request('/user/{userId}/hubs/' . $eqLogic->getConfiguration('hub_id') . '/groups/' . $groupId . '/commands/arming', array('command' => 'DISARM', 'ignoreProblems' => true), 'PUT');
       } else if ($this->getLogicalId() == 'NIGHT_MODE') {
-        ajaxSystem::request('/user/{userId}/hubs/' . $eqLogic->getConfiguration('hub_id') . '/groups/' . $eqLogic->getLogicalId() . '/commands/arming', array('command' => 'NIGHT_MODE_ON', 'ignoreProblems' => true), 'PUT');
+        ajaxSystem::request('/user/{userId}/hubs/' . $eqLogic->getConfiguration('hub_id') . '/groups/' . $groupId . '/commands/arming', array('command' => 'NIGHT_MODE_ON', 'ignoreProblems' => true), 'PUT');
       }
     }
   }
