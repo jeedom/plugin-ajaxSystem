@@ -1,0 +1,107 @@
+{
+    "name" : "Interrupteur double va et vient",
+    "commands" : [
+      {
+        "name": "Etat 1",
+        "type": "info",
+        "subtype": "binary",
+        "isVisible": 0,
+        "isHistorized": 0,
+        "logicalId": "channelStatus_1"
+      },
+      {
+        "name": "Etat 2",
+        "type": "info",
+        "subtype": "binary",
+        "isVisible": 0,
+        "isHistorized": 0,
+        "logicalId": "channelStatus_2"
+      },
+      {
+        "name": "Source evenement",
+        "type": "info",
+        "subtype": "string",
+        "isVisible": 0,
+        "isHistorized": 0,
+        "logicalId": "sourceObjectName"
+      },
+      {
+        "name": "Evenement",
+        "type": "info",
+        "subtype": "string",
+        "isVisible": 0,
+        "isHistorized": 0,
+        "logicalId": "event"
+      },
+      {
+        "name": "Code evenement",
+        "type": "info",
+        "subtype": "string",
+        "isVisible": 0,
+        "isHistorized": 0,
+        "logicalId": "eventCode"
+      },
+      {
+        "name": "On 1",
+        "type": "action",
+        "subtype": "other",
+        "isVisible": 1,
+        "isHistorized": 0,
+        "logicalId": "SWITCH_ON 1",
+        "value" :"Etat 1",
+        "template":{
+          "dashboard" : "prise",
+          "mobile" : "prise"
+        },
+        "configuration" :{
+          "AdditionalParam" : {
+            "ChannelsAdditionalParam" : "CHANNEL_1"
+          }
+        }
+      },
+      {
+        "name": "Off 1",
+        "type": "action",
+        "subtype": "other",
+        "isVisible": 1,
+        "isHistorized": 0,
+        "logicalId": "SWITCH_OFF 1",
+        "value" :"Etat 1",
+        "template":{
+          "dashboard" : "prise",
+          "mobile" : "prise"
+        },
+        "configuration" :{
+          "AdditionalParam" : {
+            "ChannelsAdditionalParam" : "CHANNEL_1"
+          }
+        }
+      },
+      {
+        "name": "On 2",
+        "type": "action",
+        "subtype": "other",
+        "isVisible": 1,
+        "isHistorized": 0,
+        "logicalId": "SWITCH_ON 2",
+        "value" :"Etat 2",
+        "template":{
+          "dashboard" : "prise",
+          "mobile" : "prise"
+        }
+      },
+      {
+        "name": "Off 2",
+        "type": "action",
+        "subtype": "other",
+        "isVisible": 1,
+        "isHistorized": 0,
+        "logicalId": "SWITCH_OFF 2",
+        "value" :"Etat 2",
+        "template":{
+          "dashboard" : "prise",
+          "mobile" : "prise"
+        }
+      }
+    ]
+  }

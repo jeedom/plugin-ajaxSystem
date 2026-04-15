@@ -4,7 +4,7 @@
 
 >**IMPORTANT**
 >
->To have a real-time feedback, it is ABSOLUTELY necessary that your Jeedom be accessible from the outside (external access URL used)
+>Pour avoir une remontée en temps réel il faut ABSOLUMENT que votre Jeedom soit accessible de l'extérieure (URL d'accès externe utilisée) en HTTPS avec un certificat valide
 
 The configuration of the plugin is very simple and takes place in 2 steps : 
 
@@ -34,14 +34,6 @@ To set up the link between your Jeedom and your Ajax alarm, go to "Plugin" -> "P
 >**NOTE**
 >
 > Once the link is made all the requests go through our cloud but at no time does the cloud store your access token, so it is not possible with only the jeedom cloud to act on your alarm. For any action on this, you absolutely need the combination of your Jeedom's access token and a key known only to our cloud 
-
-### Configuration of event reporting
-
-From the Ajax application, go to the hub then in settings (small cogwheel at the top right) go to user and add the user : ajax@jeedom.com
-
->**NOTE**
->
->The invitation remains and will always remain pending, this is normal
 
 ## Equipment 
 
