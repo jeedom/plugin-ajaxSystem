@@ -6,7 +6,9 @@
     "plugins\/ajaxSystem\/core\/class\/ajaxSystem.class.php": {
         "Erreur lors de la mise à jour des données de :": "Erreur lors de la mise à jour des données de :",
         "Erreur lors de la requete à Ajax System : ": "Erreur lors de la requete à Ajax System :",
-        "Impossible de mettre à jour les tokens d\\'accès, refresh token vide : ": "Impossible de mettre à jour les tokens d\\'accès, refresh token vide :"
+        "Impossible de mettre à jour les tokens d\\'accès, refresh token vide : ": "Impossible de mettre à jour les tokens d\\'accès, refresh token vide :",
+        "Impossible de récupérer les groupes pour le hub ": "Impossibile recuperare i gruppi per l'hub ",
+        "Migration du groupe ": "Migrazione del gruppo "
     },
     "plugins\/ajaxSystem\/core\/php\/jeeAjaxSystem.php": {
         "Configuration OK": "Configuration OK",
