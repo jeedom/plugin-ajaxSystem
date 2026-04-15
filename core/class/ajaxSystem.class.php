@@ -382,9 +382,22 @@ class ajaxSystemCmd extends cmd {
       }
     } else if ($eqLogic->getConfiguration('type') == 'device') {
       $command = array(
-        'command' => $this->getLogicalId(),
+        'command' => explode(" ", $this->getLogicalId())[0],
         'deviceType' => $eqLogic->getConfiguration('device')
       );
+      if($this->getConfiguration('AdditionalParam',null) != null){
+        $command['AdditionalParam'] = $this->getConfiguration('AdditionalParam',null);
+      }
+      if(!isset($command['command']) || $command['command'] == ''){
+        $command['command'] = $this->getLogicalId();
+      }
+      if(isset(explode(" ", $this->getLogicalId())[1]) && explode(" ", $this->getLogicalId())[1] != ""){
+          $command['additionalParam'] = array(
+            'additionalParamType' => 'CHANNELS',
+            'channels' => array("CHANNEL_".explode(" ", $this->getLogicalId())[1])
+          );
+      }
+      log::add('ajaxSystem','debug','Command send to ajax : '.json_encode($command));
       ajaxSystem::request('/user/{userId}/hubs/' . $eqLogic->getConfiguration('hub_id') . '/devices/' . $eqLogic->getLogicalId() . '/command', $command, 'POST');
     } else if ($eqLogic->getConfiguration('type') == 'group') {
       if ($this->getLogicalId() == 'ARM') {
