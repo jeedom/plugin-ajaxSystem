@@ -4,11 +4,17 @@
         "Aucune méthode correspondante à : ": "Ningún método correspondiente a:"
     },
     "plugins\/ajaxSystem\/core\/class\/ajaxSystem.class.php": {
+        "Connexion Ajax absente. Reconnectez-vous au compte Ajax depuis la configuration du plugin.": "No hay conexión con Ajax. Vuelve a iniciar sesión en la cuenta de Ajax desde la configuración del complemento.",
+        "Echec de la requête à Ajax System : ": "Error en la solicitud al sistema Ajax: ",
         "Erreur lors de la mise à jour des données de :": "Error al actualizar datos de:",
         "Erreur lors de la requete à Ajax System : ": "Error al solicitar el sistema Ajax:",
-        "Impossible de mettre à jour les tokens d\\'accès, refresh token vide : ": "No se pueden actualizar los tokens de acceso, el token de actualización está vacío:",
         "Impossible de récupérer les groupes pour le hub ": "No se pueden recuperar los grupos para el concentrador ",
-        "Migration du groupe ": "Migración del grupo "
+        "Impossible de verrouiller la session Ajax": "No se puede bloquear la sesión de Ajax",
+        "Migration du groupe ": "Migración del grupo ",
+        "Réponse Ajax incomplète : jetons de connexion invalides. Réessayez de vous connecter depuis la configuration du plugin.": "Respuesta incompleta de Ajax: tokens de conexión no válidos. Vuelve a intentar iniciar sesión desde la configuración del complemento.",
+        "Réponse JSON invalide pour la requête à Ajax System : ": "Respuesta JSON no válida para la solicitud enviada a Ajax System: ",
+        "Session Ajax expirée ou révoquée. Reconnectez-vous au compte Ajax depuis la configuration du plugin.": "La sesión de Ajax ha caducado o ha sido revocada. Vuelve a iniciar sesión en la cuenta de Ajax desde la configuración del complemento.",
+        "Une connexion Ajax est déjà en cours. Réessayez dans quelques instants.": "Ya hay una conexión Ajax en curso. Vuelve a intentarlo dentro de unos instantes."
     },
     "plugins\/ajaxSystem\/core\/php\/jeeAjaxSystem.php": {
         "Configuration OK": "Configuración OK",

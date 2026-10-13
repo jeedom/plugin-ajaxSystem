@@ -6,12 +6,8 @@
 		"en_US": "Plugin used to connect to an Ajax alarm",
 		"es_ES": "Complemento utilizado para conectarse a una alarma Ajax",
 		"de_DE": "Plugin zum Herstellen einer Verbindung mit einem Ajax-Alarm",
-		"ru_RU": "Plugin servant a se connecter a une alarme Ajax",
-		"id_ID": "Plugin servant a se connecter a une alarme Ajax",
 		"it_IT": "Plugin servant a se connecter a une alarme Ajax",
-		"ja_JP": "Plugin servant a se connecter a une alarme Ajax",
-		"pt_PT": "Plugin usado para conectar a um alarme Ajax",
-		"tr": "Plugin servant a se connecter a une alarme Ajax"
+		"pt_PT": "Plugin usado para conectar a um alarme Ajax"
 	},
 	"licence": "AGPL",
 	"author": "Jeedom SAS",
