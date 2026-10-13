@@ -1,0 +1,28 @@
+name: Ajax session tests
+
+on:
+  pull_request:
+    branches: [beta, master]
+  push:
+    branches: [beta]
+
+permissions:
+  contents: read
+
+jobs:
+  sessions:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['7.3', '8.3']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: pcntl
+          coverage: none
+      - name: Check PHP syntax
+        run: find . -name '*.php' -not -path './vendor/*' -print0 | xargs -0 -n 1 php -l
+      - name: Test session handling
+        run: php tests/session.php
