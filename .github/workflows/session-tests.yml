@@ -22,4 +22,7 @@ jobs:
           php-version: ${{ matrix.php }}
           extensions: pcntl
           coverage: none
-      - run: php tests/session.php
+      - name: Check PHP syntax
+        run: find . -name '*.php' -not -path './vendor/*' -print0 | xargs -0 -n 1 php -l
+      - name: Test session handling
+        run: php tests/session.php
