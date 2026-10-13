@@ -5,6 +5,8 @@
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte
 
 - Meilleure gestion des groupes en multi-hub
+- Correction du renouvellement des sessions Ajax lors de requêtes simultanées et après un refus du jeton de session
+- Meilleur diagnostic des erreurs de connexion, sans afficher les jetons dans les logs
 
 # 15/04/2026
 
@@ -106,3 +108,4 @@
 # 19/08/2021
 
 - Decalage aléatoire du cron de refresh pour essayer de corriger le soucis "You have exceeded the limit in 100 requests per minute"
+

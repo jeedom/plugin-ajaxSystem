@@ -45,45 +45,146 @@ class ajaxSystem extends eqLogic {
   }
 
   public static function request($_path, $_data = null, $_type = 'GET') {
-    $url = config::byKey('service::cloud::url') . '/service/ajaxSystem';
-    $url .= '?path=' . urlencode(str_replace('{userId}', config::byKey('userId', 'ajaxSystem'), $_path));
-    if ($_path != '/login' && $_path != '/refresh') {
-      $mc = cache::byKey('ajaxSystem::sessionToken');
-      $sessionToken = $mc->getValue();
-      if (trim($mc->getValue()) == '') {
-        $sessionToken = self::refreshToken();
+    $authenticated = ($_path != '/login' && $_path != '/refresh');
+    $session = $authenticated ? self::getSession() : null;
+    for ($attempt = 0; $attempt < 2; $attempt++) {
+      $path = str_replace('{userId}', $authenticated ? $session['userId'] : '', $_path);
+      $url = config::byKey('service::cloud::url') . '/service/ajaxSystem?path=' . urlencode($path);
+      // Never include tokens in the debug log or in com_http's own error log.
+      log::add('ajaxSystem', 'debug', '[request] ' . $_type . ' ' . $path . ' => ' . json_encode(self::redactSecrets($_data)));
+      if ($authenticated) {
+        $url .= '&session_token=' . urlencode($session['sessionToken']);
       }
-      $url .= '&session_token=' . $sessionToken;
-    }
-    if ($_data !== null && $_type == 'GET') {
-      $url .= '&options=' . urlencode(json_encode($_data));
-    }
-    $request_http = new com_http($url);
-    $request_http->setHeader(array(
-      'Content-Type: application/json',
-      'Autorization: ' . sha512(mb_strtolower(config::byKey('market::username')) . ':' . config::byKey('market::password'))
-    ));
-    log::add('ajaxSystem', 'debug', '[request] ' . $url . ' => ' . json_encode($_data));
-    if ($_type == 'POST') {
-      $request_http->setPost(json_encode($_data));
-    }
-    if ($_type == 'PUT') {
-      $request_http->setPut(json_encode($_data));
-    }
-    $return = json_decode($request_http->exec(60, 3), true);
-    $return = is_json($return, $return);
-    if (isset($return['error']) || isset($return['errors'])) {
-      sleep(rand(1,30));
-      $return = json_decode($request_http->exec(60, 3), true);
+      if ($_data !== null && $_type == 'GET') {
+        $url .= '&options=' . urlencode(json_encode($_data));
+      }
+      $request_http = new com_http($url);
+      $request_http->setLogError(false);
+      $request_http->setHeader(array(
+        'Content-Type: application/json',
+        'Autorization: ' . sha512(mb_strtolower(config::byKey('market::username')) . ':' . config::byKey('market::password'))
+      ));
+      if ($_type == 'POST') {
+        $request_http->setPost(json_encode($_data));
+      }
+      if ($_type == 'PUT') {
+        $request_http->setPut(json_encode($_data));
+      }
+      try {
+        // A timed-out POST/PUT may already have rotated tokens or executed a command.
+        $response = $request_http->exec(60, $_type == 'GET' ? 3 : 1);
+      } catch (\Exception $e) {
+        $message = $e->getMessage();
+        foreach (array($authenticated ? $session['sessionToken'] : '', isset($_data['refreshToken']) ? $_data['refreshToken'] : '', isset($_data['passwordHash']) ? $_data['passwordHash'] : '') as $secret) {
+          if (is_string($secret) && $secret !== '') {
+            $message = str_replace(array($secret, urlencode($secret)), '[masqué]', $message);
+          }
+        }
+        throw new \Exception(__('Echec de la requête à Ajax System : ', __FILE__) . $path . ' : ' . $message);
+      }
+      if ($response === '') {
+        return null;
+      }
+      $return = json_decode($response, true);
+      if (json_last_error() !== JSON_ERROR_NONE) {
+        throw new \Exception(__('Réponse JSON invalide pour la requête à Ajax System : ', __FILE__) . $path);
+      }
       $return = is_json($return, $return);
+      if (is_array($return) && (isset($return['error']) || isset($return['errors']) || (isset($return['state']) && $return['state'] == 'nok'))) {
+        if ($authenticated && $attempt == 0 && self::isSessionError($return)) {
+          log::add('ajaxSystem', 'debug', '[request] Session refusée, renouvellement avant une nouvelle tentative');
+          $session = self::getSession($session['sessionToken']);
+          continue;
+        }
+        throw new \Exception(__('Erreur lors de la requete à Ajax System : ', __FILE__) . $path . ' : ' . json_encode(self::redactSecrets($return)));
+      }
+      if (is_array($return) && isset($return['body'])) {
+        return $return['body'];
+      }
+      return $return;
     }
-    if (isset($return['error']) || isset($return['errors'])) {
-      throw new \Exception(__('Erreur lors de la requete à Ajax System : ', __FILE__) . json_encode($return));
+  }
+
+  private static function redactSecrets($_data) {
+    if (!is_array($_data)) {
+      return $_data;
     }
-    if (isset($return['body'])) {
-      return $return['body'];
+    foreach ($_data as $key => $value) {
+      $_data[$key] = preg_match('/password|token|apikey|authorization|autorization/i', (string) $key) ? '[masqué]' : self::redactSecrets($value);
     }
-    return $return;
+    return $_data;
+  }
+
+  private static function isSessionError($_error) {
+    foreach (array('code', 'status', 'statusCode', 'httpCode') as $key) {
+      if (isset($_error[$key]) && is_numeric($_error[$key]) && (int) $_error[$key] == 401) {
+        return true;
+      }
+    }
+    $message = json_encode($_error);
+    foreach (array('Wrong session token', 'Invalid session token', 'Session token is invalid', 'Session token expired', 'Session token has expired', 'Session token is expired', 'User is not authorized') as $error) {
+      if (stripos($message, $error) !== false) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private static function lockSession() {
+    $lock = fopen(jeedom::getTmpFolder('ajaxSystem') . '/session.lock', 'c');
+    if ($lock === false) {
+      throw new \Exception(__('Impossible de verrouiller la session Ajax', __FILE__));
+    }
+    $deadline = microtime(true) + 70;
+    do {
+      if (flock($lock, LOCK_EX | LOCK_NB)) {
+        return $lock;
+      }
+      usleep(100000);
+    } while (microtime(true) < $deadline);
+    fclose($lock);
+    throw new \Exception(__('Une connexion Ajax est déjà en cours. Réessayez dans quelques instants.', __FILE__));
+  }
+
+  private static function getSession($_rejectedToken = null) {
+    $lock = self::lockSession();
+    try {
+      // Reload both cache and persistent configuration after waiting for another process.
+      $sessionToken = cache::byKey('ajaxSystem::sessionToken')->getValue('');
+      $userId = config::byKey('userId', 'ajaxSystem', '', true);
+      if (is_string($sessionToken) && trim($sessionToken) !== '' && $sessionToken !== $_rejectedToken && $userId !== '') {
+        return array('userId' => $userId, 'sessionToken' => $sessionToken);
+      }
+      cache::delete('ajaxSystem::sessionToken');
+      $refreshToken = config::byKey('refreshToken', 'ajaxSystem', '', true);
+      if (trim($userId) === '' || trim($refreshToken) === '') {
+        throw new \Exception(__('Connexion Ajax absente. Reconnectez-vous au compte Ajax depuis la configuration du plugin.', __FILE__));
+      }
+      try {
+        $data = self::request('/refresh', array('userId' => $userId, 'refreshToken' => $refreshToken), 'POST');
+      } catch (\Exception $e) {
+        if (self::isSessionError(array('error' => $e->getMessage())) || preg_match('/wrong session refresh token|invalid refresh token|refresh token.*expired/i', $e->getMessage())) {
+          throw new \Exception(__('Session Ajax expirée ou révoquée. Reconnectez-vous au compte Ajax depuis la configuration du plugin.', __FILE__) . ' ' . $e->getMessage());
+        }
+        throw $e;
+      }
+      self::validateSession($data);
+      config::save('refreshToken', $data['refreshToken'], 'ajaxSystem');
+      cache::set('ajaxSystem::sessionToken', $data['sessionToken'], 60 * 14);
+      log::add('ajaxSystem', 'debug', '[refreshToken] Session Ajax renouvelée');
+      return array('userId' => $userId, 'sessionToken' => $data['sessionToken']);
+    } finally {
+      flock($lock, LOCK_UN);
+      fclose($lock);
+    }
+  }
+
+  private static function validateSession($_data, $_login = false) {
+    foreach ($_login ? array('userId', 'refreshToken', 'sessionToken') : array('refreshToken', 'sessionToken') as $key) {
+      if (!isset($_data[$key]) || !is_string($_data[$key]) || trim($_data[$key]) === '') {
+        throw new \Exception(__('Réponse Ajax incomplète : jetons de connexion invalides. Réessayez de vous connecter depuis la configuration du plugin.', __FILE__));
+      }
+    }
   }
 
   public static function start() {
@@ -111,40 +212,29 @@ class ajaxSystem extends eqLogic {
     if (trim(network::getNetworkAccess('external')) == '') {
       throw new Exception(__('URL d\'accès externe de votre Jeedom invalide. Merci de la configurer dans Réglage -> Système -> Configuration puis onglet Réseaux'));
     }
-    $data = self::request('/login', array(
-      'login' => $_username,
-      'passwordHash' => $_password,
-      'userRole' => 'USER',
-      'apikey' => jeedom::getApiKey('ajaxSystem'),
-      'url' => network::getNetworkAccess('external')
-    ), 'POST');
-    log::add('ajaxSystem', 'debug', '[login] ' . json_encode($data));
-    config::save('refreshToken', $data['refreshToken'], 'ajaxSystem');
-    config::save('userId', $data['userId'], 'ajaxSystem');
-    cache::set('ajaxSystem::sessionToken', $data['sessionToken'], 60 * 14);
+    $lock = self::lockSession();
+    try {
+      $data = self::request('/login', array(
+        'login' => $_username,
+        'passwordHash' => $_password,
+        'userRole' => 'USER',
+        'apikey' => jeedom::getApiKey('ajaxSystem'),
+        'url' => network::getNetworkAccess('external')
+      ), 'POST');
+      self::validateSession($data, true);
+      config::save('refreshToken', $data['refreshToken'], 'ajaxSystem');
+      config::save('userId', $data['userId'], 'ajaxSystem');
+      cache::set('ajaxSystem::sessionToken', $data['sessionToken'], 60 * 14);
+      log::add('ajaxSystem', 'debug', '[login] Session Ajax enregistrée');
+    } finally {
+      flock($lock, LOCK_UN);
+      fclose($lock);
+    }
   }
 
   public static function refreshToken() {
-    $data = self::request('/refresh', array(
-      'userId' => config::byKey('userId', 'ajaxSystem'),
-      'refreshToken' => config::byKey('refreshToken', 'ajaxSystem')
-    ), 'POST');
-    log::add('ajaxSystem', 'debug', '[refreshToken] ' . json_encode($data));
-    if ($data['refreshToken'] == '') {
-      log::add('ajaxSystem', 'debug', '[refreshToken] Empty refresh token, retry in 5s');
-      sleep(5);
-      $data = self::request('/refresh', array(
-        'userId' => config::byKey('userId', 'ajaxSystem'),
-        'refreshToken' => config::byKey('refreshToken', 'ajaxSystem')
-      ), 'POST');
-      log::add('ajaxSystem', 'debug', '[refreshToken] ' . json_encode($data));
-    }
-    if ($data['refreshToken'] == '') {
-      throw new Exception(__('Impossible de mettre à jour les tokens d\'accès, refresh token vide : ', __FILE__) . json_encode($data));
-    }
-    config::save('refreshToken', $data['refreshToken'], 'ajaxSystem');
-    cache::set('ajaxSystem::sessionToken', $data['sessionToken'], 60 * 14);
-    return $data['sessionToken'];
+    $session = self::getSession();
+    return $session['sessionToken'];
   }
 
   public static function sync() {
@@ -444,3 +534,4 @@ class ajaxSystemCmd extends cmd {
 
   /*     * **********************Getteur Setteur*************************** */
 }
+
