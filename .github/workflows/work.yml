@@ -12,9 +12,7 @@ name : 'Test Plugin Jeedom'
 
 jobs:
   codeLintGlobal:
-    uses: jeedom/workflows/.github/workflows/codeLintGlobal.yml@main
-  php74:
-    uses: jeedom/workflows/.github/workflows/lint_Php74.yml@main
+    uses: jeedom/workflows/.github/workflows/codeLintGlobal.yml@9e169a6105c07e7edbc4bb9f33f541dffe1a0021
   php:
-    uses: jeedom/workflows/.github/workflows/php.yml@main
+    uses: jeedom/workflows/.github/workflows/php.yml@9e169a6105c07e7edbc4bb9f33f541dffe1a0021
 
