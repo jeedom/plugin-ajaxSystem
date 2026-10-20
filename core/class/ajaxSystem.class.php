@@ -446,7 +446,7 @@ class ajaxSystem extends eqLogic {
     if($batteryChargeLevel != '-1'){
       //Au niveau de l'équipement
       $this->batteryStatus($batteryChargeLevel);
-      $this->checkAndUpdateCmd('battery::chargeLevelPercentage', $value);
+      $this->checkAndUpdateCmd('battery::chargeLevelPercentage', $batteryChargeLevel);
     }
   }
 
