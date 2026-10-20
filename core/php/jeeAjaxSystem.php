@@ -38,7 +38,15 @@ foreach ($datas['data'] as $data) {
     if (!isset($data['id'])) {
       continue;
     }
-    $ajaxSystem = ajaxSystem::byLogicalId($data['id'], 'ajaxSystem');
+    $type = strtoupper($data['type']);
+    if ($type == 'GROUP') {
+      if (!isset($data['hubId'])) {
+        continue;
+      }
+      $ajaxSystem = ajaxSystem::byGroupId($data['hubId'], $data['id']);
+    } else {
+      $ajaxSystem = ajaxSystem::byLogicalId($data['id'], 'ajaxSystem');
+    }
     if (!is_object($ajaxSystem)) {
       continue;
     }
@@ -54,7 +62,7 @@ foreach ($datas['data'] as $data) {
               $ajaxSystem->checkAndUpdateCmd('battery::chargeLevelPercentage', $value);
         }
       }
-      if (in_array($data['type'], array('HUB', 'GROUP')) && $key == 'state') {
+      if (in_array($type, array('HUB', 'GROUP')) && $key == 'state') {
         if ($value == 0) {
           $value = 'DISARMED';
         } elseif ($value == 1) {

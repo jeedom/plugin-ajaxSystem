@@ -26,3 +26,5 @@ jobs:
         run: find . -name '*.php' -not -path './vendor/*' -print0 | xargs -0 -n 1 php -l
       - name: Test session handling
         run: php tests/session.php
+      - name: Test group synchronization and callbacks
+        run: php tests/groups.php
