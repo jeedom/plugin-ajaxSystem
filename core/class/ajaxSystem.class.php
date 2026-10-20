@@ -237,6 +237,18 @@ class ajaxSystem extends eqLogic {
     return $session['sessionToken'];
   }
 
+  public static function byGroupId($_hubId, $_groupId) {
+    $eqLogic = eqLogic::byLogicalId($_hubId . '_' . $_groupId, 'ajaxSystem');
+    if (is_object($eqLogic)) {
+      return $eqLogic;
+    }
+    $eqLogic = eqLogic::byLogicalId($_groupId, 'ajaxSystem');
+    if (is_object($eqLogic) && $eqLogic->getConfiguration('type') == 'group' && $eqLogic->getConfiguration('hub_id') == $_hubId) {
+      return $eqLogic;
+    }
+    return null;
+  }
+
   public static function sync() {
     $hubs = self::request('/user/{userId}/hubs');
     log::add('ajaxSystem', 'debug', json_encode($hubs));
@@ -301,15 +313,9 @@ class ajaxSystem extends eqLogic {
             continue;
           }
           $groupLogicalId = $hub['hubId'] . '_' . $group['id'];
-          $eqLogic = eqLogic::byLogicalId($groupLogicalId, 'ajaxSystem');
-          // Migration: check for old-style logicalId without hub prefix
-          if (!is_object($eqLogic)) {
-            $eqLogic = eqLogic::byLogicalId($group['id'], 'ajaxSystem');
-            if (is_object($eqLogic) && $eqLogic->getConfiguration('type') == 'group') {
-              log::add('ajaxSystem', 'info', __('Migration du groupe ', __FILE__) . $group['groupName'] . ' vers le nouveau logicalId ' . $groupLogicalId);
-            } else {
-              $eqLogic = null;
-            }
+          $eqLogic = self::byGroupId($hub['hubId'], $group['id']);
+          if (is_object($eqLogic) && $eqLogic->getLogicalId() != $groupLogicalId) {
+            log::add('ajaxSystem', 'info', __('Migration du groupe ', __FILE__) . $group['groupName'] . ' vers le nouveau logicalId ' . $groupLogicalId);
           }
           if (!is_object($eqLogic)) {
             $eqLogic = new ajaxSystem();
