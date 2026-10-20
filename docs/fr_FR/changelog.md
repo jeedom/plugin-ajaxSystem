@@ -4,6 +4,7 @@
 >
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte
 
+- Correction du niveau de batterie du hub affiché à 1 % après un rafraîchissement
 - Meilleure gestion des groupes en multi-hub
 - Correction du renouvellement des sessions Ajax lors de requêtes simultanées et après un refus du jeton de session
 - Meilleur diagnostic des erreurs de connexion, sans afficher les jetons dans les logs
