@@ -4,11 +4,17 @@
         "Aucune méthode correspondante à : ": "Keine Methode entsprechend:"
     },
     "plugins\/ajaxSystem\/core\/class\/ajaxSystem.class.php": {
+        "Connexion Ajax absente. Reconnectez-vous au compte Ajax depuis la configuration du plugin.": "Keine Ajax-Verbindung. Stellen Sie über die Plugin-Einstellungen erneut eine Verbindung zu Ihrem Ajax-Konto her.",
+        "Echec de la requête à Ajax System : ": "Fehler bei der Anfrage an das Ajax-System: ",
         "Erreur lors de la mise à jour des données de :": "Fehler beim Aktualisieren der Daten von:",
         "Erreur lors de la requete à Ajax System : ": "Fehler beim Anfordern von Ajax System:",
-        "Impossible de mettre à jour les tokens d\\'accès, refresh token vide : ": "Zugriffstoken können nicht aktualisiert werden, Aktualisierungstoken leer:",
         "Impossible de récupérer les groupes pour le hub ": "Die Gruppen für den Hub können nicht abgerufen werden ",
-        "Migration du groupe ": "Migration der Gruppe "
+        "Impossible de verrouiller la session Ajax": "Die Ajax-Sitzung kann nicht gesperrt werden",
+        "Migration du groupe ": "Migration der Gruppe ",
+        "Réponse Ajax incomplète : jetons de connexion invalides. Réessayez de vous connecter depuis la configuration du plugin.": "Unvollständige Ajax-Antwort: ungültige Anmelde-Token. Versuchen Sie erneut, sich über die Plugin-Einstellungen anzumelden.",
+        "Réponse JSON invalide pour la requête à Ajax System : ": "Ungültige JSON-Antwort auf die Anfrage an das Ajax-System: ",
+        "Session Ajax expirée ou révoquée. Reconnectez-vous au compte Ajax depuis la configuration du plugin.": "Die Ajax-Sitzung ist abgelaufen oder wurde widerrufen. Melden Sie sich über die Plugin-Einstellungen erneut bei Ihrem Ajax-Konto an.",
+        "Une connexion Ajax est déjà en cours. Réessayez dans quelques instants.": "Eine Ajax-Verbindung ist bereits im Gange. Bitte versuchen Sie es in wenigen Augenblicken erneut."
     },
     "plugins\/ajaxSystem\/core\/php\/jeeAjaxSystem.php": {
         "Configuration OK": "Konfiguration OK",

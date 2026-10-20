@@ -4,11 +4,17 @@
         "Aucune méthode correspondante à : ": "Aucune méthode correspondante à :"
     },
     "plugins\/ajaxSystem\/core\/class\/ajaxSystem.class.php": {
+        "Connexion Ajax absente. Reconnectez-vous au compte Ajax depuis la configuration du plugin.": "Connessione Ajax assente. Riconnettiti all'account Ajax dalla configurazione del plugin.",
+        "Echec de la requête à Ajax System : ": "Errore nella richiesta al sistema Ajax: ",
         "Erreur lors de la mise à jour des données de :": "Erreur lors de la mise à jour des données de :",
         "Erreur lors de la requete à Ajax System : ": "Erreur lors de la requete à Ajax System :",
-        "Impossible de mettre à jour les tokens d\\'accès, refresh token vide : ": "Impossible de mettre à jour les tokens d\\'accès, refresh token vide :",
         "Impossible de récupérer les groupes pour le hub ": "Impossibile recuperare i gruppi per l'hub ",
-        "Migration du groupe ": "Migrazione del gruppo "
+        "Impossible de verrouiller la session Ajax": "Impossibile bloccare la sessione Ajax",
+        "Migration du groupe ": "Migrazione del gruppo ",
+        "Réponse Ajax incomplète : jetons de connexion invalides. Réessayez de vous connecter depuis la configuration du plugin.": "Risposta Ajax incompleta: token di connessione non validi. Riprovare ad accedere dalla configurazione del plugin.",
+        "Réponse JSON invalide pour la requête à Ajax System : ": "Risposta JSON non valida per la richiesta inviata ad Ajax System: ",
+        "Session Ajax expirée ou révoquée. Reconnectez-vous au compte Ajax depuis la configuration du plugin.": "Sessione Ajax scaduta o revocata. Effettua nuovamente l'accesso all'account Ajax dalle impostazioni del plugin.",
+        "Une connexion Ajax est déjà en cours. Réessayez dans quelques instants.": "È già in corso una connessione Ajax. Riprovare tra qualche istante."
     },
     "plugins\/ajaxSystem\/core\/php\/jeeAjaxSystem.php": {
         "Configuration OK": "Configuration OK",
