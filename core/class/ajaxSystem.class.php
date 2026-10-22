@@ -22,6 +22,9 @@ require_once __DIR__  . '/../../../../core/php/core.inc.php';
 class ajaxSystem extends eqLogic {
   /*     * *************************Attributs****************************** */
 
+  // Base delay in seconds before retrying a rate-limited request (5, 10 then 15 s).
+  public static $rateLimitDelay = 5;
+
   /*     * ***********************Methode static*************************** */
 
   
@@ -47,6 +50,7 @@ class ajaxSystem extends eqLogic {
   public static function request($_path, $_data = null, $_type = 'GET') {
     $authenticated = ($_path != '/login' && $_path != '/refresh');
     $session = $authenticated ? self::getSession() : null;
+    $rateLimited = 0;
     for ($attempt = 0; $attempt < 2; $attempt++) {
       $path = str_replace('{userId}', $authenticated ? $session['userId'] : '', $_path);
       $url = config::byKey('service::cloud::url') . '/service/ajaxSystem?path=' . urlencode($path);
@@ -85,8 +89,17 @@ class ajaxSystem extends eqLogic {
       if ($response === '') {
         return null;
       }
+      // Ajax answers a plain-text "Too many requests" when its quota is exceeded: wait, then retry without consuming a session attempt.
+      if ($_type == 'GET' && $rateLimited < 3 && stripos($response, 'Too many requests') !== false) {
+        $rateLimited++;
+        log::add('ajaxSystem', 'debug', '[request] ' . $path . ' : ' . __('limite de requêtes Ajax atteinte, nouvelle tentative dans ', __FILE__) . (self::$rateLimitDelay * $rateLimited) . 's');
+        sleep(self::$rateLimitDelay * $rateLimited);
+        $attempt--;
+        continue;
+      }
       $return = json_decode($response, true);
       if (json_last_error() !== JSON_ERROR_NONE) {
+        log::add('ajaxSystem', 'debug', '[request] ' . $path . ' : ' . json_last_error_msg() . ' (' . strlen($response) . ' octets) => ' . substr($response, 0, 200));
         throw new \Exception(__('Réponse JSON invalide pour la requête à Ajax System : ', __FILE__) . $path);
       }
       $return = is_json($return, $return);
@@ -252,87 +265,108 @@ class ajaxSystem extends eqLogic {
   public static function sync() {
     $hubs = self::request('/user/{userId}/hubs');
     log::add('ajaxSystem', 'debug', json_encode($hubs));
+    $failures = 0;
     foreach ($hubs as $hub) {
-      $hub_info = self::request('/user/{userId}/hubs/' . $hub['hubId']);
-      log::add('ajaxSystem', 'debug', json_encode($hub_info));
-      $eqLogic = eqLogic::byLogicalId($hub['hubId'], 'ajaxSystem');
+      try {
+        self::syncHub($hub, $failures);
+      } catch (\Exception $e) {
+        log::add('ajaxSystem', 'warning', __('Synchronisation interrompue pour le hub ', __FILE__) . $hub['hubId'] . ' : ' . $e->getMessage());
+        $failures++;
+      }
+    }
+    if ($failures > 0) {
+      throw new \Exception(__('Synchronisation terminée avec des erreurs, voir le log ajaxSystem. Nombre d\'erreurs : ', __FILE__) . $failures);
+    }
+  }
+
+  // $_failures is passed by reference so device failures are still counted when the hub itself fails afterwards.
+  private static function syncHub($hub, &$_failures) {
+    $hub_info = self::request('/user/{userId}/hubs/' . $hub['hubId']);
+    log::add('ajaxSystem', 'debug', json_encode($hub_info));
+    $eqLogic = eqLogic::byLogicalId($hub['hubId'], 'ajaxSystem');
+    if (!is_object($eqLogic)) {
+      $eqLogic = new ajaxSystem();
+      $eqLogic->setEqType_name('ajaxSystem');
+      $eqLogic->setIsEnable(1);
+      $eqLogic->setName($hub_info['name']);
+      $eqLogic->setCategory('security', 1);
+      $eqLogic->setIsVisible(1);
+    }
+    $eqLogic->setConfiguration('type', 'hub');
+    $eqLogic->setConfiguration('color', $hub_info['color']);
+    $eqLogic->setConfiguration('device', $hub_info['hubSubtype']);
+    $eqLogic->setConfiguration('ip', $hub_info['ethernet']['ip']);
+    $eqLogic->setConfiguration('firmware', $hub_info['firmware']['version']);
+    $eqLogic->setLogicalId($hub['hubId']);
+    $eqLogic->save();
+    $eqLogic->refreshData();
+
+    $devices = self::request('/user/{userId}/hubs/' . $hub['hubId'] . '/devices');
+    log::add('ajaxSystem', 'debug', json_encode($devices));
+    foreach ($devices as $device) {
+      if (!isset($device['id'])) {
+            continue;
+      }
+      $eqLogic = eqLogic::byLogicalId($device['id'], 'ajaxSystem');
+      try {
+        $device_info = self::request('/user/{userId}/hubs/' . $hub['hubId'] . '/devices/' . $device['id']);
+      } catch (\Exception $e) {
+        // One unreadable device must not stop the synchronization of the remaining devices, groups and hubs.
+        log::add('ajaxSystem', 'warning', __('Impossible de récupérer l\'équipement ', __FILE__) . $device['id'] . (isset($device['deviceName']) ? ' (' . $device['deviceName'] . ')' : '') . ' : ' . $e->getMessage());
+        $device_info = null;
+        $_failures++;
+      }
+      usleep(200000);
+      if(!isset($device_info['deviceName']) || $device_info['deviceName'] == ''){
+        continue;
+      }
       if (!is_object($eqLogic)) {
         $eqLogic = new ajaxSystem();
         $eqLogic->setEqType_name('ajaxSystem');
         $eqLogic->setIsEnable(1);
-        $eqLogic->setName($hub_info['name']);
+        $eqLogic->setName($device_info['deviceName']);
         $eqLogic->setCategory('security', 1);
         $eqLogic->setIsVisible(1);
       }
-      $eqLogic->setConfiguration('type', 'hub');
-      $eqLogic->setConfiguration('color', $hub_info['color']);
-      $eqLogic->setConfiguration('device', $hub_info['hubSubtype']);
-      $eqLogic->setConfiguration('ip', $hub_info['ethernet']['ip']);
-      $eqLogic->setConfiguration('firmware', $hub_info['firmware']['version']);
-      $eqLogic->setLogicalId($hub['hubId']);
+      $eqLogic->setConfiguration('hub_id', $hub['hubId']);
+      $eqLogic->setConfiguration('type', 'device');
+      $eqLogic->setConfiguration('color', $device_info['color']);
+      $eqLogic->setConfiguration('device', $device_info['deviceType']);
+      $eqLogic->setConfiguration('firmware', $device_info['firmwareVersion']);
+      $eqLogic->setLogicalId($device['id']);
       $eqLogic->save();
-      $eqLogic->refreshData();
+      $eqLogic->refreshData($device_info);
+    }
 
-      $devices = self::request('/user/{userId}/hubs/' . $hub['hubId'] . '/devices');
-      log::add('ajaxSystem', 'debug', json_encode($devices));
-      foreach ($devices as $device) {
-        if (!isset($device['id'])) {
-              continue;
-        }
-        $eqLogic = eqLogic::byLogicalId($device['id'], 'ajaxSystem');
-        $device_info = self::request('/user/{userId}/hubs/' . $hub['hubId'] . '/devices/' . $device['id']);
-        usleep(200000);
-        if(!isset($device_info['deviceName']) || $device_info['deviceName'] == ''){
+    $groups = self::request('/user/{userId}/hubs/' . $hub['hubId'] . '/groups');
+    log::add('ajaxSystem', 'debug', json_encode($groups));
+    if (!is_array($groups)) {
+      log::add('ajaxSystem', 'warning', __('Impossible de récupérer les groupes pour le hub ', __FILE__) . $hub['hubId'] . ' : ' . json_encode($groups));
+    } else {
+      foreach ($groups as $group) {
+        if($group['groupName'] == ''){
           continue;
+        }
+        $groupLogicalId = $hub['hubId'] . '_' . $group['id'];
+        $eqLogic = self::byGroupId($hub['hubId'], $group['id']);
+        if (is_object($eqLogic) && $eqLogic->getLogicalId() != $groupLogicalId) {
+          log::add('ajaxSystem', 'info', __('Migration du groupe ', __FILE__) . $group['groupName'] . ' vers le nouveau logicalId ' . $groupLogicalId);
         }
         if (!is_object($eqLogic)) {
           $eqLogic = new ajaxSystem();
           $eqLogic->setEqType_name('ajaxSystem');
           $eqLogic->setIsEnable(1);
-          $eqLogic->setName($device_info['deviceName']);
+          $eqLogic->setName($group['groupName']);
           $eqLogic->setCategory('security', 1);
           $eqLogic->setIsVisible(1);
         }
         $eqLogic->setConfiguration('hub_id', $hub['hubId']);
-        $eqLogic->setConfiguration('type', 'device');
-        $eqLogic->setConfiguration('color', $device_info['color']);
-        $eqLogic->setConfiguration('device', $device_info['deviceType']);
-        $eqLogic->setConfiguration('firmware', $device_info['firmwareVersion']);
-        $eqLogic->setLogicalId($device['id']);
+        $eqLogic->setConfiguration('type', 'group');
+        $eqLogic->setConfiguration('device', 'group');
+        $eqLogic->setConfiguration('group_id', $group['id']);
+        $eqLogic->setLogicalId($groupLogicalId);
         $eqLogic->save();
-        $eqLogic->refreshData($device_info);
-      }
-
-      $groups = self::request('/user/{userId}/hubs/' . $hub['hubId'] . '/groups');
-      log::add('ajaxSystem', 'debug', json_encode($groups));
-      if (!is_array($groups)) {
-        log::add('ajaxSystem', 'warning', __('Impossible de récupérer les groupes pour le hub ', __FILE__) . $hub['hubId'] . ' : ' . json_encode($groups));
-      } else {
-        foreach ($groups as $group) {
-          if($group['groupName'] == ''){
-            continue;
-          }
-          $groupLogicalId = $hub['hubId'] . '_' . $group['id'];
-          $eqLogic = self::byGroupId($hub['hubId'], $group['id']);
-          if (is_object($eqLogic) && $eqLogic->getLogicalId() != $groupLogicalId) {
-            log::add('ajaxSystem', 'info', __('Migration du groupe ', __FILE__) . $group['groupName'] . ' vers le nouveau logicalId ' . $groupLogicalId);
-          }
-          if (!is_object($eqLogic)) {
-            $eqLogic = new ajaxSystem();
-            $eqLogic->setEqType_name('ajaxSystem');
-            $eqLogic->setIsEnable(1);
-            $eqLogic->setName($group['groupName']);
-            $eqLogic->setCategory('security', 1);
-            $eqLogic->setIsVisible(1);
-          }
-          $eqLogic->setConfiguration('hub_id', $hub['hubId']);
-          $eqLogic->setConfiguration('type', 'group');
-          $eqLogic->setConfiguration('device', 'group');
-          $eqLogic->setConfiguration('group_id', $group['id']);
-          $eqLogic->setLogicalId($groupLogicalId);
-          $eqLogic->save();
-          $eqLogic->refreshData($group);
-        }
+        $eqLogic->refreshData($group);
       }
     }
   }

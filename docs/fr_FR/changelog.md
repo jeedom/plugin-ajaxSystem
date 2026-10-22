@@ -7,6 +7,8 @@
 - Correction du niveau de batterie du hub affiché à 1 % après un rafraîchissement
 - Meilleure gestion des groupes en multi-hub
 - Correction des mises à jour en temps réel des groupes et de leur migration sur les installations multi-hubs
+- La synchronisation continue malgré un équipement ou un hub illisible, et la réponse invalide est tracée dans le log
+- Attente puis nouvelle tentative quand Ajax limite le nombre de requêtes (« Too many requests ») pendant la synchronisation
 - Correction du renouvellement des sessions Ajax lors de requêtes simultanées et après un refus du jeton de session
 - Meilleur diagnostic des erreurs de connexion, sans afficher les jetons dans les logs
 

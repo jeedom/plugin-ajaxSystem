@@ -71,6 +71,7 @@ class log {
 }
 class com_http {
   public static $responses = array();
+  public static $rawResponses = array();
   public static $requests = array();
   private $path;
   private $method = 'GET';
@@ -84,6 +85,11 @@ class com_http {
   public function setPut($value) { $this->method = 'PUT'; $this->body = json_decode($value, true); }
   public function exec($timeout, $retries) {
     self::$requests[] = array($this->path, $this->method, $this->body);
+    // A raw response may be a list consumed one call at a time, then the JSON fixture answers.
+    if (array_key_exists($this->path, self::$rawResponses)) {
+      if (!is_array(self::$rawResponses[$this->path])) { return self::$rawResponses[$this->path]; }
+      if (count(self::$rawResponses[$this->path]) > 0) { return array_shift(self::$rawResponses[$this->path]); }
+    }
     if (!array_key_exists($this->path, self::$responses)) { throw new Exception('Unexpected API path: ' . $this->path); }
     return json_encode(self::$responses[$this->path]);
   }
@@ -112,6 +118,8 @@ function resetFixtures() {
   eqLogic::$objects = array();
   log::$entries = array();
   com_http::$requests = array();
+  com_http::$rawResponses = array();
+  ajaxSystem::$rateLimitDelay = 0;
   com_http::$responses = array('/user/fixture/hubs' => array(array('hubId' => 'HUBA'), array('hubId' => 'HUBB')));
   foreach (array('HUBA', 'HUBB') as $hubId) {
     $path = '/user/fixture/hubs/' . $hubId;
@@ -186,6 +194,54 @@ $tests['callbacks route prefixed and legacy groups to the correct hub'] = functi
   check(isset($b->values['state']) && $b->values['state'] === 'DISARMED', 'Hub B group callback must be applied independently');
   check($legacy->values['state'] === 'NIGHT_MODE', 'Legacy group must accept only its own hub\'s callbacks');
   check($device->values['state'] === 7, 'Device callbacks must keep working');
+};
+function syncError() {
+  try { ajaxSystem::sync(); } catch (Exception $e) { return $e->getMessage(); }
+  return null;
+}
+function logged($level, $text) {
+  return count(array_filter(log::$entries, function ($entry) use ($level, $text) { return $entry[0] === $level && strpos($entry[1], $text) !== false; }));
+}
+$tests['unreadable device does not stop the synchronization'] = function () {
+  resetFixtures();
+  com_http::$responses['/user/fixture/hubs/HUBA/devices'] = array(array('id' => 'BROKEN', 'deviceName' => 'Fuite'), array('id' => 'GOOD', 'deviceName' => 'Porte'));
+  com_http::$rawResponses['/user/fixture/hubs/HUBA/devices/BROKEN'] = '<html>Bad gateway</html>';
+  com_http::$responses['/user/fixture/hubs/HUBA/devices/GOOD'] = array('deviceName' => 'Porte', 'color' => 'WHITE', 'deviceType' => 'DoorProtect', 'firmwareVersion' => '1');
+  $error = syncError();
+  check(is_object(eqLogic::byLogicalId('GOOD', 'ajaxSystem')), 'Devices after an unreadable one must still be synchronized');
+  check(!is_object(eqLogic::byLogicalId('BROKEN', 'ajaxSystem')), 'An unreadable device must not be created');
+  check(is_object(eqLogic::byLogicalId('HUBA_00000001', 'ajaxSystem')) && is_object(eqLogic::byLogicalId('HUBB_00000001', 'ajaxSystem')), 'Groups of every hub must still be synchronized');
+  check(logged('warning', 'BROKEN (Fuite)') === 1, 'The unreadable device must be identified in a warning');
+  check(logged('debug', '<html>Bad gateway</html>') === 1, 'The start of the invalid response must be logged');
+  check($error !== null && substr($error, -3) === ': 1', 'The synchronization must still report its error count');
+};
+$tests['failure of one hub does not stop the other hubs'] = function () {
+  resetFixtures();
+  com_http::$responses['/user/fixture/hubs/HUBA/devices'] = array(array('id' => 'BROKEN', 'deviceName' => 'Fuite'));
+  com_http::$rawResponses['/user/fixture/hubs/HUBA/devices/BROKEN'] = 'not json';
+  com_http::$rawResponses['/user/fixture/hubs/HUBA/groups'] = 'not json';
+  $error = syncError();
+  check(is_object(eqLogic::byLogicalId('HUBB_00000001', 'ajaxSystem')), 'The next hub must still be synchronized');
+  check(logged('warning', 'Synchronisation interrompue pour le hub HUBA') === 1, 'The failing hub must be identified in a warning');
+  check($error !== null && substr($error, -3) === ': 2', 'Device failures must still be counted when their hub fails afterwards');
+};
+$tests['rate-limited requests are retried after a pause'] = function () {
+  resetFixtures();
+  com_http::$responses['/user/fixture/hubs/HUBA/devices'] = array(array('id' => 'GOOD', 'deviceName' => 'Porte'));
+  com_http::$responses['/user/fixture/hubs/HUBA/devices/GOOD'] = array('deviceName' => 'Porte', 'color' => 'WHITE', 'deviceType' => 'DoorProtect', 'firmwareVersion' => '1');
+  com_http::$rawResponses['/user/fixture/hubs/HUBA/devices/GOOD'] = array('Too many requests, please try again later.', 'Too many requests, please try again later.');
+  com_http::$rawResponses['/user/fixture/hubs/HUBB/groups'] = array('Too many requests, please try again later.');
+  check(syncError() === null, 'Temporary rate limiting must not fail the synchronization');
+  check(is_object(eqLogic::byLogicalId('GOOD', 'ajaxSystem')) && is_object(eqLogic::byLogicalId('HUBB_00000001', 'ajaxSystem')), 'Rate-limited requests must eventually succeed');
+  check(logged('debug', 'limite de requêtes Ajax atteinte') === 3, 'Each pause must be logged');
+};
+$tests['persistent rate limiting gives up after three pauses'] = function () {
+  resetFixtures();
+  com_http::$rawResponses['/user/fixture/hubs/HUBA/groups'] = 'Too many requests, please try again later.';
+  $error = syncError();
+  $calls = count(array_filter(com_http::$requests, function ($request) { return $request[0] === '/user/fixture/hubs/HUBA/groups'; }));
+  check($calls === 4, 'A rate-limited request must be sent at most four times, got ' . $calls);
+  check($error !== null && is_object(eqLogic::byLogicalId('HUBB_00000001', 'ajaxSystem')), 'The failure must be reported without blocking the next hub');
 };
 
 $results = array();
