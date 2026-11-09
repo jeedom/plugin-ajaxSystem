@@ -10,6 +10,7 @@
         "Erreur lors de la requete à Ajax System : ": "Erro ao solicitar Sistema Ajax:",
         "Impossible de récupérer les groupes pour le hub ": "Não é possível recuperar os grupos para o hub ",
         "Impossible de verrouiller la session Ajax": "Não é possível bloquear a sessão Ajax",
+        "Le service Cloud doit utiliser HTTPS.": "O serviço na nuvem deve utilizar HTTPS.",
         "Migration du groupe ": "Migração do grupo ",
         "Réponse Ajax incomplète : jetons de connexion invalides. Réessayez de vous connecter depuis la configuration du plugin.": "Resposta Ajax incompleta: tokens de ligação inválidos. Tente voltar a iniciar sessão a partir da configuração do plugin.",
         "Réponse JSON invalide pour la requête à Ajax System : ": "Resposta JSON inválida para o pedido ao Ajax System: ",
